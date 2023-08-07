@@ -14,11 +14,11 @@ const searchGetMemberCuration = async (nickname) => {
   return searchGetMemberCuration;
 };
 
-const searchGetSearch = (category, word) => {
+const searchGetSearch = async (category, word) => {
   const jwt = sessionStorage.getItem("accessToken");
   console.log(category, word);
   try {
-    const response = useAxiosInstance
+    const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/search?category=${category}&word=${word}`);
     console.log(response.data);

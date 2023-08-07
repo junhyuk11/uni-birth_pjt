@@ -113,7 +113,7 @@ const membersDeleteMember = async () => {
 
 const membersPostCheckNickname = async (nickname) => {
   try {
-    const response = await useAxiosInstance.authApiClient.post(
+    const response = await useAxiosInstance.apiClient.post(
       `/members/check/nickname`,
       nickname,
     );
@@ -125,7 +125,7 @@ const membersPostCheckNickname = async (nickname) => {
 
 const membersPostCheckEmail = async (email) => {
   try {
-    const response = await useAxiosInstance.authApiClient.post(
+    const response = await useAxiosInstance.apiClient.post(
       `/members/check/email`,
       email,
     );
