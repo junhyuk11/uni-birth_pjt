@@ -32,9 +32,10 @@ import DetailStar from "./components/Star/screens/DetailStar";
 import SearchCommon from "./common/screens/SearchCommon";
 import SearchQuration from "./common/screens/SearchQuration";
 import { Canvas } from "@react-three/fiber";
-import { Background } from "./components/Background/Background";
+import Background from "./common/atoms/GradientBackground";
 import { useRecoilValue } from "recoil";
-import { backgroundflagState } from "./recoil/atom";
+import { backgroundflagState } from "./recoil/atoms";
+
 const App = () => {
   const backgroundflag = useRecoilValue(backgroundflagState);
   return (
