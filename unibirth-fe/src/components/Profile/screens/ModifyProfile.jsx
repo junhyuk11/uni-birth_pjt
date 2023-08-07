@@ -8,6 +8,9 @@ import Button2 from "../../../common/atoms/Button2";
 import InputImage from "../../Member/atoms/InputImage";
 import InputBox from "../../../common/atoms/InputBox";
 import useMemberApi from "../../../api/useMemberApi";
+import { Canvas } from "@react-three/fiber";
+import GradientBackground from "../../../common/atoms/GradientBackground";
+import CanvasBg from "../../../common/atoms/CanvasBg";
 
 const ModifyProfile = () => {
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
@@ -70,20 +73,28 @@ const ModifyProfile = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-5">
-      <Header1 buttons={buttonsHeader} />
-      <form className="flex flex-col items-center justify-center space-y-10">
-        <InputImage
-          value={imageUrl}
-          onChange={(e) => setImage(e.target.value)}
-        />
-        <InputBox
-          value="자기소개  "
-          placeholder={introduction}
-          onChange={(e) => setIntro(e.target.value)}
-        />
-        <Footer1 buttons={buttonsFooter} />
-      </form>
+    <div className="relative h-screen w-screen">
+      <div className="absolute flex h-full w-full flex-row flex-wrap justify-center">
+        <Canvas>
+          <GradientBackground />
+          <CanvasBg />
+        </Canvas>
+      </div>
+      <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2 text-white">
+        <Header1 buttons={buttonsHeader} />
+        <form className="flex flex-col items-center justify-center space-y-10">
+          <InputImage
+            value={imageUrl}
+            onChange={(e) => setImage(e.target.value)}
+          />
+          <InputBox
+            value="자기소개  "
+            placeholder={introduction}
+            onChange={(e) => setIntro(e.target.value)}
+          />
+          <Footer1 buttons={buttonsFooter} />
+        </form>
+      </div>
     </div>
   );
 };

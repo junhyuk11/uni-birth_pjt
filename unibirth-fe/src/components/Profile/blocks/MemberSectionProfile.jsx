@@ -68,7 +68,7 @@ const ConstellationSectionProfile = () => {
         </div>
       )}
 
-      <div className="flex items-center justify-center space-x-4 bg-blue-500">
+      <div className="flex items-center justify-center space-x-4 bg-blue-500 text-white">
         <Button1
           value="수정"
           className="font-TAEBAEKmilkyway"

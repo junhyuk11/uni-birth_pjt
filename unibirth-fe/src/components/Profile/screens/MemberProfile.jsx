@@ -9,6 +9,10 @@ import { useNavigation } from "../../../hooks/useNavigation";
 import MemberSectionProfile from "../blocks/MemberSectionProfile";
 import ConstellationSectionProfile from "../blocks/ConstellationSectionProfile";
 import useMemberApi from "../../../api/useMemberApi";
+// Bg
+import { Canvas } from "@react-three/fiber";
+import GradientBackground from "../../../common/atoms/GradientBackground";
+import CanvasBg from "../../../common/atoms/CanvasBg";
 
 const MemberProfile = () => {
   const {
@@ -98,27 +102,35 @@ const MemberProfile = () => {
   };
 
   return (
-    <div>
-      <Header1 buttons={buttonsHeader} />
-      <h1>회원 프로필 화면입니다.</h1>
-      <MemberSectionProfile />
-      <ConstellationSectionProfile />
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-gray-800 opacity-50"></div>
-          <div className="z-10 rounded bg-white p-4 shadow-md">
-            <Header1 buttons={modalButtons} />
-            <div className="mt-4 flex justify-center">
-              <button
-                className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-                onClick={handleCloseModal}
-              >
-                창 닫기
-              </button>
+    <div className="relative h-screen w-screen">
+      <div className="absolute flex h-full w-full flex-row flex-wrap justify-center">
+        <Canvas>
+          <GradientBackground />
+          <CanvasBg />
+        </Canvas>
+      </div>
+      <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2 text-white">
+        <Header1 buttons={buttonsHeader} />
+        <h1>회원 프로필 화면입니다.</h1>
+        <MemberSectionProfile />
+        <ConstellationSectionProfile />
+        {isModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <div className="absolute inset-0 bg-gray-800 opacity-50"></div>
+            <div className="z-10 rounded bg-white p-4 shadow-md">
+              <Header1 buttons={modalButtons} />
+              <div className="mt-4 flex justify-center">
+                <button
+                  className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                  onClick={handleCloseModal}
+                >
+                  창 닫기
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

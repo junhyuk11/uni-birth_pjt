@@ -9,6 +9,9 @@ import { useNavigation } from "../../../hooks/useNavigation";
 import useProfileApi from "../../../api/useProfileApi";
 import { useRecoilState } from "recoil";
 import { targetNicknameState } from "../../../recoil/atoms";
+import { Canvas } from "@react-three/fiber";
+import GradientBackground from "../../../common/atoms/GradientBackground";
+import CanvasBg from "../../../common/atoms/CanvasBg";
 
 const Followers = () => {
   const {
@@ -66,28 +69,36 @@ const Followers = () => {
   }, [targetNickname]);
 
   return (
-    <div>
-      <Header2 buttons={buttonsHeader} />
-      <Header1 buttons={buttonsHeader2} />
-      <h1> {targetNickname}의 팔로워 리스트입니다..</h1>
-      <div className="flex flex-col items-center">
-        {followerList.map((user) => (
-          <div key={user.nickname} className="my-4">
-            <img src={user.imageUrl} className="avatar" alt="User Avatar" />
-            <div>
-              <p>{user.nickname}</p>
-              <button onClick={() => nicknameClick(user.nickname)}>
-                프로필 조회하기
+    <div className="relative h-screen w-screen">
+      <div className="absolute flex h-full w-full flex-row flex-wrap justify-center">
+        <Canvas>
+          <GradientBackground />
+          <CanvasBg />
+        </Canvas>
+      </div>
+      <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2 text-white">
+        <Header2 buttons={buttonsHeader} />
+        <Header1 buttons={buttonsHeader2} />
+        <h1> {targetNickname}의 팔로워 리스트입니다..</h1>
+        <div className="flex flex-col items-center">
+          {followerList.map((user) => (
+            <div key={user.nickname} className="my-4">
+              <img src={user.imageUrl} className="avatar" alt="User Avatar" />
+              <div>
+                <p>{user.nickname}</p>
+                <button onClick={() => nicknameClick(user.nickname)}>
+                  프로필 조회하기
+                </button>
+              </div>
+              <button
+                className="flex h-32 w-48 items-center "
+                onClick={navigateToDirectMessage}
+              >
+                <CiLocationArrow1 />
               </button>
             </div>
-            <button
-              className="flex h-32 w-48 items-center "
-              onClick={navigateToDirectMessage}
-            >
-              <CiLocationArrow1 />
-            </button>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
