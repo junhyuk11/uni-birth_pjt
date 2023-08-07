@@ -80,3 +80,9 @@ export const StartPlanets = atom({
   default: { x: 0, y: 0, z: 0 },
   effects_UNSTABLE: [persistAtom],
 });
+
+export const backgroundflagState = atom({
+  key: "backgroundflagState",
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+});
