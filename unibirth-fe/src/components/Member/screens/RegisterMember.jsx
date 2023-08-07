@@ -61,7 +61,7 @@ const RegisterMember = () => {
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
+      value: "",
       onClick: navigateToBack,
       icon: <BiArrowBack />,
     },
@@ -76,36 +76,38 @@ const RegisterMember = () => {
   ];
 
   return (
-    <div className="items-cneter flex flex-col justify-center space-y-5">
-      <Header1 buttons={buttonsHeader} />
-      <form>
-        <SignupFormMember
-          nickname={nickname}
-          setNickname={setNickname}
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          confirmPassword={confirmPassword}
-          setConfirmPassword={setConfirmPassword}
-          birthdate={birthdate}
-          setBirthdate={setBirthdate}
-          image={image}
-          setImage={setImage}
-          content={content}
-          setContent={setContent}
-          jodiacname={jodiacname}
-          setJodiacname={setJodiacname}
-        />
-        <Footer1
-          buttons={buttonsFooter}
-          nickname={nickname}
-          email={email}
-          password={password}
-          confirmPassword={confirmPassword}
-          joinMember={joinMember}
-        />
-      </form>
+    <div className="h-screen">
+      <div>
+        <Header1 buttons={buttonsHeader} />
+        <form className="justify-center">
+          <SignupFormMember
+            nickname={nickname}
+            setNickname={setNickname}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            confirmPassword={confirmPassword}
+            setConfirmPassword={setConfirmPassword}
+            birthdate={birthdate}
+            setBirthdate={setBirthdate}
+            image={image}
+            setImage={setImage}
+            content={content}
+            setContent={setContent}
+            jodiacname={jodiacname}
+            setJodiacname={setJodiacname}
+          />
+          <Footer1
+            buttons={buttonsFooter}
+            nickname={nickname}
+            email={email}
+            password={password}
+            confirmPassword={confirmPassword}
+            joinMember={joinMember}
+          />
+        </form>
+      </div>
     </div>
   );
 };

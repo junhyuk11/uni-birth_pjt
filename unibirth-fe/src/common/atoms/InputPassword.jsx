@@ -2,7 +2,7 @@ import React from "react";
 
 const InputPassword = ({ onChange }) => {
   return (
-    <div className="font-Pretendard flex w-full items-center justify-center">
+    <div className="flex w-full items-center justify-center font-Pretendard">
       <div className="w-full">
         <label
           htmlFor="password"
@@ -14,7 +14,7 @@ const InputPassword = ({ onChange }) => {
           <input
             className="w-full flex-1 border-b-2 border-gray-400 py-2 text-gray-600 
           placeholder-gray-400 outline-none
-          focus:border-green-400"
+          focus:border-yellow-200"
             type="password"
             id="password"
             name="password"

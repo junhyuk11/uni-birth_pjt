@@ -49,7 +49,7 @@ const LoginMember = () => {
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
+      value: "",
       onClick: navigateToBack,
       icon: <BiArrowBack />,
     },
@@ -70,17 +70,21 @@ const LoginMember = () => {
     },
   ];
   return (
-    <div>
-      <Header1 buttons={buttonsHeader} />
-      <form>
-        <LoginFormMember
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-        />
-      </form>
-      <Footer1 buttons={buttonsFooter} email={email} password={password} />
+    <div className="h-screen">
+      <div>
+        <Header1 buttons={buttonsHeader} />
+        <form className="justify-center">
+          <LoginFormMember
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+          />
+        </form>
+      </div>
+      <div>
+        <Footer1 buttons={buttonsFooter} email={email} password={password} />
+      </div>
     </div>
   );
 };
