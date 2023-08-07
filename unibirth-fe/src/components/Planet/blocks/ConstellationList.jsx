@@ -233,7 +233,7 @@ const StarCanvas = () => {
   ${tooltipStyle.display === "none" ? "hidden" : ""}`}
           style={{ left: tooltipStyle.left, top: tooltipStyle.top }}
         >
-          <div className="flex flex-col font-TAEBAEKmilkyway">
+          <div className="flex flex-col ">
             <p className="font-bold">{boxtitle}</p>
             <p>{boxcontent}</p>
           </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 const InputBox = ({ onChange, value, placeholder }) => {
   return (
-    <div className="flex h-40 w-80 flex-row justify-center font-TAEBAEKmilkyway">
+    <div className="flex h-40 w-80 flex-row justify-center">
       <div className="flex flex-row">
         <label htmlFor="text">{value} : </label>
         <input

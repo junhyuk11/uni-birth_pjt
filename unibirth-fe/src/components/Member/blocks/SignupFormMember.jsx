@@ -134,7 +134,7 @@ const MemberRegistrationForm = ({
       />
       <Button1
         value="닉네임 중복확인"
-        className="font-TAEBAEKmilkyway"
+        className=""
         onClick={(event) => {
           event.preventDefault();
           duplicateCheck("Nickname", nickname, "닉네임을 입력해주세요.");
@@ -147,7 +147,7 @@ const MemberRegistrationForm = ({
       />
       <Button1
         value="이메일 중복확인"
-        className="font-TAEBAEKmilkyway"
+        className=""
         onClick={(event) => {
           event.preventDefault();
           duplicateCheck("Email", email, "이메일을 입력해주세요.");

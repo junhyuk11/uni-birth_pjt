@@ -24,7 +24,7 @@ const Followers = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "뒤로가기",
       onClick: navigateToBack,
       icon: <IoIosArrowBack />,
@@ -34,13 +34,13 @@ const Followers = () => {
   const buttonsHeader2 = [
     {
       component: Button4,
-      className: "font-TAEBAEKmilkyway bg-white",
+      className: " bg-white",
       value: "팔로잉",
       onClick: navigateToFollowings,
     },
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "팔로워",
     },
   ];

@@ -78,7 +78,7 @@ const RegisterStar = (event) => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "뒤로가기",
       onClick: navigateToBack,
       icon: <BiSearch />,
@@ -88,7 +88,7 @@ const RegisterStar = (event) => {
   const buttonsFooter = [
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "별 생성하기",
       onClick: createStar,
     },
@@ -98,7 +98,7 @@ const RegisterStar = (event) => {
     <div className="flex flex-col space-y-1">
       <div className="my-3 flex flex-row items-center space-x-5">
         <Header1 buttons={buttonsHeader} />
-        <p className="flex justify-center font-TAEBAEKmilkyway">별띄우기</p>
+        <p className="flex justify-center ">별띄우기</p>
       </div>
       <div className="flex flex-col justify-center px-10">
         <BodyRegisterStar

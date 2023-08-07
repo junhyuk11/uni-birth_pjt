@@ -5,6 +5,7 @@ module.exports = {
     fontFamily: {
       TAEBAEKmilkyway: ["TAEBAEKmilkyway"],
       GoryeongStrawberry: ["GoryeongStrawberry"],
+      Pretendard: ["Pretendard"],
     },
   },
   plugins: [],

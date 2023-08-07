@@ -255,14 +255,10 @@ const GridCustomConstellation = ({
   return (
     <div>
       <div>
-        <p className="font-TAEBAEKmilkyway">지금 행성명: {planetId}</p>
-        <p className="font-TAEBAEKmilkyway">
-          지금 별자리명: {constellationName}
-        </p>
-        <p className="font-TAEBAEKmilkyway">
-          지금 별자리설명: {constellationDescp}
-        </p>
-        <p className="font-TAEBAEKmilkyway">지금 보드사이즈: {boardSize}</p>
+        <p className="">지금 행성명: {planetId}</p>
+        <p className="">지금 별자리명: {constellationName}</p>
+        <p className="">지금 별자리설명: {constellationDescp}</p>
+        <p className="">지금 보드사이즈: {boardSize}</p>
       </div>
       <div
         className={`flex h-full w-full items-center justify-center ${containerStyle}`}
@@ -313,23 +309,19 @@ const GridCustomConstellation = ({
           </Layer>
         </Stage>
       </div>
+      <Button1 className="" value="초기화" onClick={handleResetClick}></Button1>
       <Button1
-        className="font-TAEBAEKmilkyway"
-        value="초기화"
-        onClick={handleResetClick}
-      ></Button1>
-      <Button1
-        className="font-TAEBAEKmilkyway"
+        className=""
         value="직전으로 돌아가기"
         onClick={handleBeforeClick}
       ></Button1>
       <Button1
-        className="font-TAEBAEKmilkyway"
+        className=""
         value="저장하기"
         onClick={handleSaveClick}
       ></Button1>
       <Button1
-        className="font-TAEBAEKmilkyway"
+        className=""
         value="콘솔에 띄우기"
         onClick={handelConsoleClick}
       ></Button1>

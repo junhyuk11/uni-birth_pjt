@@ -30,7 +30,7 @@ const Login = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <h1>Login</h1>
+      <h1 class = "">Login</h1>
       <img
         src={Earth}
         alt="Earth"

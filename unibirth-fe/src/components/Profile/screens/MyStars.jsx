@@ -16,14 +16,14 @@ const MyStars = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "뒤로가기",
       onClick: navigateToBack,
       icon: <IoIosArrowBack />,
     },
     {
       component: Button3,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "띄운 별",
     },
   ];

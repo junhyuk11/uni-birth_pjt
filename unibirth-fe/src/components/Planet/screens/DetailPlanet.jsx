@@ -20,7 +20,7 @@ const DetailPlanet = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "뒤로가기",
       onClick: navigateToMainPlanet,
       icon: <BiSearch />,
@@ -29,7 +29,7 @@ const DetailPlanet = () => {
   const buttonsFooter = [
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "별자리 만들기",
       onClick: navigateToRegisterConstellation,
     },

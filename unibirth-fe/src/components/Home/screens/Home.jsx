@@ -12,13 +12,13 @@ const Home = () => {
   const buttons = [
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "시작하기",
       onClick: navigateToMainPlanet,
     },
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "로그인",
       onClick: navigateToLoginMember,
     },
@@ -26,10 +26,10 @@ const Home = () => {
 
   return (
     <div className="relative h-screen w-screen">
-      <p className="absolute left-1/3 top-10 z-10 font-TAEBAEKmilkyway text-2xl text-white">
+      <p className="absolute left-1/3 top-10 z-10  text-2xl text-white">
         세상에서 가장 빛나는 너의 별
       </p>
-      <p className="absolute left-1/3 top-20 z-10 font-TAEBAEKmilkyway text-4xl text-white">
+      <p className="absolute left-1/3 top-20 z-10  text-4xl text-white">
         uni-Birth
       </p>
       <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform">

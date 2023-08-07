@@ -23,14 +23,14 @@ const DrawingConstellation = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "뒤로가기",
       onClick: navigateToBack,
       icon: <BiSearch />,
     },
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "템플릿",
       onClick: handleModalOpen,
     },
@@ -52,12 +52,12 @@ const DrawingConstellation = () => {
   const buttonsFooter = [
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "초기화",
     },
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "완료하기",
       onClick: handleSubmit,
     },
@@ -65,7 +65,7 @@ const DrawingConstellation = () => {
   return (
     <div>
       <Header1 buttons={buttonsHeader} />
-      <p className="lg-10 my-5 flex justify-center font-TAEBAEKmilkyway text-4xl">
+      <p className="lg-10 my-5 flex justify-center  text-4xl">
         별자리 그리기 예시.
       </p>
       <GridCustomConstellation

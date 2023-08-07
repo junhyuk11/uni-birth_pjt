@@ -10,7 +10,7 @@ const DirectMessage = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "뒤로가기",
       onClick: navigateToBack,
       icon: <IoIosArrowBack />,
@@ -26,7 +26,7 @@ const DirectMessage = () => {
     },
     {
       component: Button3,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "감자123",
     },
   ];

@@ -9,7 +9,7 @@ const Footer1 = ({ buttons }) => {
           return (
             <ButtonComponent
               key={index}
-              className="font-TAEBAEKmilkyway"
+              className=""
               value={button.value}
               onClick={button.onClick}
               icon={button.icon}

@@ -31,7 +31,7 @@ const ModifyProfile = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "뒤로가기",
       onClick: navigateToBack,
       icon: <BiSearch />,
@@ -63,7 +63,7 @@ const ModifyProfile = () => {
   const buttonsFooter = [
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "완료하기",
       onClick: handleClick,
     },

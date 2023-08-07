@@ -48,7 +48,7 @@ const LoginMember = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "font-Pretendard",
       value: "뒤로가기",
       onClick: navigateToBack,
       icon: <BiArrowBack />,
@@ -57,14 +57,14 @@ const LoginMember = () => {
   const buttonsFooter = [
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "로그인",
       onClick: handleLogin,
       icon: <BiLogInCircle />,
     },
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "회원가입",
       onClick: navigateToRegisterMember,
     },

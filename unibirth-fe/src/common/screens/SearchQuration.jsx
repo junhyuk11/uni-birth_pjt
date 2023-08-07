@@ -48,7 +48,7 @@ const DetailConstellation = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "뒤로가기",
       onClick: navigateToBack,
       icon: <BiSearch />,
@@ -89,7 +89,7 @@ const DetailConstellation = () => {
           </div>
         ))}
         <div className="loading" ref={loader}>
-          <p className="font-TAEBAEKmilkyway text-2xl">Load More...</p>
+          <p className="text-2xl">Load More...</p>
         </div>
       </div>
       <Footer1 className="z-50" buttons={buttonsFooter} />

@@ -26,7 +26,7 @@ const Header3 = ({ buttons }) => {
           return (
             <ButtonComponent
               key={index}
-              className="font-TAEBAEKmilkyway"
+              className=""
               value={button.value}
               onClick={button.onClick}
               icon={button.icon}
@@ -34,14 +34,14 @@ const Header3 = ({ buttons }) => {
           );
         })}
       <input
-        className="font-TAEBAEKmilkyway"
+        className=""
         type="text"
         placeholder="검색어를 입력하세요"
         value={query}
         onChange={handleSearchInputChange}
       />
       <InputDropdown planetname={categoryname} setPlanetname={setategoryname} />
-      <button className="font-TAEBAEKmilkyway" onClick={handleSearch}>
+      <button className="" onClick={handleSearch}>
         <BiSearchAlt />
       </button>
     </div>

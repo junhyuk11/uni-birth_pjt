@@ -43,7 +43,7 @@ const RegistConstellation = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "뒤로가기",
       onClick: navigateToBack,
       icon: <BiSearch />,
@@ -52,7 +52,7 @@ const RegistConstellation = () => {
   const buttonsFooter = [
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "별자리 그리기",
       onClick: handleSubmit,
     },
@@ -67,14 +67,14 @@ const RegistConstellation = () => {
           alt="행성1 이미지 예시"
           className="flex items-center justify-center"
         />
-        <p className="font-TAEBAEKmilkyway">행성 명</p>
+        <p className="">행성 명</p>
         <InputDropdown planetId={planetId} setPlanetId={setPlanetId} />
-        <p className="font-TAEBAEKmilkyway">별자리 명</p>
+        <p className="">별자리 명</p>
         <InputStella
           constellationName={constellationName}
           setConstellationName={setConstellationName}
         />
-        <p className="font-TAEBAEKmilkyway">별자리 설명</p>
+        <p className="">별자리 설명</p>
         <InputDescription
           constellationDescp={constellationDescp}
           setConstellationDescp={setConstellationDescp}

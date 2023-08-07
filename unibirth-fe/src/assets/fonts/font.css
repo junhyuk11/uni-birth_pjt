@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'CustomFont'; /* 폰트 이름 지정 */
+    src: url('./Pretendard-Black.woff') format('woff');
+  }
+  
+  /* 폰트 클래스를 적용 */
+  .custom-font {
+    font-family: 'CustomFont'; /* CSS에서 지정한 폰트 이름 */
+  }
+  

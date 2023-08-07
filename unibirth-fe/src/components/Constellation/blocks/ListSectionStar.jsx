@@ -187,7 +187,7 @@ const ListSectionStar = () => {
             // top: tooltipStyle.top,
           }
         >
-          <div className="relative flex flex-col font-TAEBAEKmilkyway">
+          <div className="relative flex flex-col ">
             <button
               className="absolute right-0 top-0 rounded-lg font-bold"
               onClick={() =>

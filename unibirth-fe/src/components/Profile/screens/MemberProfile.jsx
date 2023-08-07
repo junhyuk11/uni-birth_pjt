@@ -47,26 +47,26 @@ const MemberProfile = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "뒤로가기",
       onClick: navigateToMainPlanet,
       icon: <IoIosArrowBack />,
     },
     {
       component: Button3,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "사용자의 프로필",
       onClick: navigateToModifyProfile,
     },
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       onClick: navigateToMessageBox,
       icon: <LuMessagesSquare />,
     },
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       onClick: () => setIsModalOpen(true),
       icon: <IoMdMenu />,
     },
@@ -75,19 +75,19 @@ const MemberProfile = () => {
   const modalButtons = [
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "회원정보 수정",
       onClick: navigateToModifyMember,
     },
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "로그아웃",
       onClick: handleLogout,
     },
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "회원 탈퇴",
       onClick: handleSignout,
     },

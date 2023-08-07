@@ -39,14 +39,10 @@ const ConstellationSectionProfile = () => {
       <div className="flex flex-row items-center justify-center space-x-4 bg-red-500">
         <Button1
           value="참여한 별자리"
-          className="font-TAEBAEKmilkyway"
+          className=""
           onClick={handleParticipateClick}
         />
-        <Button1
-          value="핀한 별자리"
-          className="font-TAEBAEKmilkyway"
-          onClick={handlePinClick}
-        />
+        <Button1 value="핀한 별자리" className="" onClick={handlePinClick} />
       </div>
       <div className="flex flex-row flex-wrap justify-center bg-red-400">
         {images.map((img) => (

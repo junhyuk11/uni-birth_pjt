@@ -36,14 +36,14 @@ const MainPlanet = () => {
   const buttonsFooter = [
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "별자리검색",
       onClick: navigateToSearchQuration,
       icon: <BiSearch />,
     },
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "홈",
       onClick: refreshPage,
       icon: <BiHomeAlt />,
@@ -53,7 +53,7 @@ const MainPlanet = () => {
   if (token === null) {
     buttonsFooter.push({
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "로그인",
       onClick: navigateToLoginMember,
       icon: <BiLogInCircle />,
@@ -61,7 +61,7 @@ const MainPlanet = () => {
   } else {
     buttonsFooter.push({
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "",
       value: "마이페이지",
       onClick: mypageClick,
       icon: <CgProfile />,

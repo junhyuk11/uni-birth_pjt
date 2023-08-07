@@ -69,11 +69,7 @@ const ConstellationSectionProfile = () => {
       )}
 
       <div className="flex items-center justify-center space-x-4 bg-blue-500">
-        <Button1
-          value="수정"
-          className="font-TAEBAEKmilkyway"
-          onClick={navigateToModifyProfile}
-        />
+        <Button1 value="수정" className="" onClick={navigateToModifyProfile} />
       </div>
     </div>
   );
