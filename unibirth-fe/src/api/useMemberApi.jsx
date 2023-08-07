@@ -114,7 +114,8 @@ const membersDeleteMember = async () => {
 const membersPostCheckNickname = async (nickname) => {
   try {
     const response = await useAxiosInstance.authApiClient.post(
-      `/members/check/nickname?nickname=${nickname}`,
+      `/members/check/nickname`,
+      nickname,
     );
     return response.data;
   } catch (e) {
@@ -125,7 +126,8 @@ const membersPostCheckNickname = async (nickname) => {
 const membersPostCheckEmail = async (email) => {
   try {
     const response = await useAxiosInstance.authApiClient.post(
-      `/members/check/email?email=${email}`,
+      `/members/check/email`,
+      email,
     );
     return response.data;
   } catch (e) {
