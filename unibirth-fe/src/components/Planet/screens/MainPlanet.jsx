@@ -5,7 +5,7 @@ import Button2 from "../../../common/atoms/Button2";
 import { BiSearch, BiHomeAlt, BiLogInCircle } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { useNavigation } from "../../../hooks/useNavigation";
-import ListSectionPlanet from "../blocks/ListSectionPlanet";
+// import ListSectionPlanet from "../blocks/ListSectionPlanet";
 import CanvasPlanet from "../blocks/CanvasPlanet";
 
 import { useRecoilValue, useRecoilState } from "recoil";
@@ -71,7 +71,7 @@ const MainPlanet = () => {
   return (
     <div className="relative h-screen w-screen">
       <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2 -translate-y-1/2 transform">
-        <ListSectionPlanet />
+        {/* <ListSectionPlanet /> */}
       </div>
       <CanvasPlanet navigateToDetailPlanet={navigateToDetailPlanet} />
       <div className="absolute bottom-20 left-5 z-10">

@@ -74,3 +74,9 @@ export const DetailStellaNumstate = atom({
   default: 0,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const StartPlanets = atom({
+  key: "StartPlanets",
+  default: { x: 0, y: 0, z: 0 },
+  effects_UNSTABLE: [persistAtom],
+});

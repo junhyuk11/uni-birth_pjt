@@ -87,6 +87,9 @@ const ListSectionPlanet = ({ navigateToDetailPlanet }) => {
           ref={controlsRef}
           args={[cameraRef.current]}
           enabled={true}
+          rotateSpeed={-0.5}
+          enablePan={false}
+
           // autoRotate={true}
           // autoRotateSpeed={0.5}
         />
