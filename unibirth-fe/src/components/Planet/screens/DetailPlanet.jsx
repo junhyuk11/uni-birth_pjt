@@ -8,7 +8,7 @@ import { BiSearch } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
 // import { Canvas } from "@react-three/fiber";
 // import Space from "../../Home/blocks/Space";
-// import ConstellationList from "../blocks/ConstellationList";
+import ConstellationList from "../blocks/ConstellationList";
 import ListConstellation from "../blocks/ListConstellation";
 
 const DetailPlanet = () => {
@@ -52,7 +52,7 @@ const DetailPlanet = () => {
         constellationList={constellationList}
         setConstellationList={setConstellationList}
       />
-      {/* <ConstellationList /> */}
+      <ConstellationList />
     </div>
   );
 };

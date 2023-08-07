@@ -8,8 +8,11 @@ import InputDropdown from "../atoms/InputDropdown";
 import InputStella from "../atoms/InputStella";
 import InputDescription from "../atoms/InputDescription";
 import { useNavigation } from "../../../hooks/useNavigation";
-
+import { Canvas } from "@react-three/fiber";
+import GradientBackground from "../../../common/atoms/GradientBackground";
+import CanvasBg from "../../../common/atoms/CanvasBg";
 import planet1 from "../../../assets/images/planet1.png";
+
 const RegistConstellation = () => {
   const [planetId, setPlanetId] = useState("1");
   const [constellationName, setConstellationName] = useState("");
@@ -59,33 +62,41 @@ const RegistConstellation = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-10 py-10">
-      <Header1 buttons={buttonsHeader} />
-      <div className="flex flex-col items-center justify-center space-y-5">
-        <img
-          src={planet1}
-          alt="행성1 이미지 예시"
-          className="flex items-center justify-center"
-        />
-        <p className="font-TAEBAEKmilkyway">행성 명</p>
-        <InputDropdown planetId={planetId} setPlanetId={setPlanetId} />
-        <p className="font-TAEBAEKmilkyway">별자리 명</p>
-        <InputStella
-          constellationName={constellationName}
-          setConstellationName={setConstellationName}
-        />
-        <p className="font-TAEBAEKmilkyway">별자리 설명</p>
-        <InputDescription
+    <div className="relative h-screen w-screen">
+      <div className="absolute flex h-full w-full flex-row flex-wrap justify-center">
+        <Canvas>
+          <GradientBackground />
+          <CanvasBg />
+        </Canvas>
+      </div>
+      <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2">
+        <Header1 buttons={buttonsHeader} />
+        <div className="flex flex-col items-center justify-center space-y-5">
+          <img
+            src={planet1}
+            alt="행성1 이미지 예시"
+            className="flex items-center justify-center"
+          />
+          <p className="font-TAEBAEKmilkyway text-white">행성 명</p>
+          <InputDropdown planetId={planetId} setPlanetId={setPlanetId} />
+          <p className="font-TAEBAEKmilkyway text-white">별자리 명</p>
+          <InputStella
+            constellationName={constellationName}
+            setConstellationName={setConstellationName}
+          />
+          <p className="font-TAEBAEKmilkyway">별자리 설명</p>
+          <InputDescription
+            constellationDescp={constellationDescp}
+            setConstellationDescp={setConstellationDescp}
+          />
+        </div>
+        <Footer1
+          buttons={buttonsFooter}
+          planetId={planetId}
           constellationDescp={constellationDescp}
-          setConstellationDescp={setConstellationDescp}
+          constellationName={constellationName}
         />
       </div>
-      <Footer1
-        buttons={buttonsFooter}
-        planetId={planetId}
-        constellationDescp={constellationDescp}
-        constellationName={constellationName}
-      />
     </div>
   );
 };

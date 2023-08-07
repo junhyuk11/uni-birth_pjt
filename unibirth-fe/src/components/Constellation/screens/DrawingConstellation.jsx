@@ -8,6 +8,10 @@ import { useNavigation } from "../../../hooks/useNavigation";
 import GridCustomConstellation from "../blocks/GridCustomConstellation";
 import ListTemplateModalConstellation from "../blocks/ListTemplateModalConstellation";
 import { useLocation } from "react-router";
+import { Canvas } from "@react-three/fiber";
+import GradientBackground from "../../../common/atoms/GradientBackground";
+import CanvasBg from "../../../common/atoms/CanvasBg";
+
 const DrawingConstellation = () => {
   const location = useLocation();
   const { planetId, constellationName, constellationDescp } = location.state;
@@ -63,26 +67,32 @@ const DrawingConstellation = () => {
     },
   ];
   return (
-    <div>
-      <Header1 buttons={buttonsHeader} />
-      <p className="lg-10 my-5 flex justify-center font-TAEBAEKmilkyway text-4xl">
-        별자리 그리기 예시.
-      </p>
-      <GridCustomConstellation
-        planetId={planetId}
-        constellationName={constellationName}
-        constellationDescp={constellationDescp}
-        pointList={pointList}
-        lineList={lineList}
-      />
-      {isModalOpen && (
-        <ListTemplateModalConstellation
-          setIsModalOpen={setIsModalOpen}
-          setPointList={setPointList}
-          setLineList={setLineList}
+    <div className="relative h-screen w-screen">
+      <Canvas>
+        <GradientBackground />
+        <CanvasBg />
+      </Canvas>
+      <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2">
+        <Header1 buttons={buttonsHeader} />
+        <p className="lg-10 my-5 flex justify-center font-TAEBAEKmilkyway text-4xl text-white">
+          별자리 그리기 예시.
+        </p>
+        <GridCustomConstellation
+          planetId={planetId}
+          constellationName={constellationName}
+          constellationDescp={constellationDescp}
+          pointList={pointList}
+          lineList={lineList}
         />
-      )}
-      <Footer1 buttons={buttonsFooter} />
+        {isModalOpen && (
+          <ListTemplateModalConstellation
+            setIsModalOpen={setIsModalOpen}
+            setPointList={setPointList}
+            setLineList={setLineList}
+          />
+        )}
+        <Footer1 buttons={buttonsFooter} />
+      </div>
     </div>
   );
 };
