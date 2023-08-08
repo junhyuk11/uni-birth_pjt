@@ -8,6 +8,7 @@ const LoginForm = ({ email, setEmail, password, setPassword }) => {
       <InputEmail
         type="email"
         value={email}
+        className="w-full"
         onChange={(e) => setEmail(e.target.value)}
       />
       <InputPassword

@@ -48,7 +48,7 @@ const LoginMember = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "font-Pretendard",
       value: "",
       onClick: navigateToBack,
       icon: <BiArrowBack />,
@@ -57,20 +57,20 @@ const LoginMember = () => {
   const buttonsFooter = [
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "font-Pretendard",
       value: "로그인",
       onClick: handleLogin,
       icon: <BiLogInCircle />,
     },
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "font-Pretendard",
       value: "회원가입",
       onClick: navigateToRegisterMember,
     },
   ];
   return (
-    <div className="h-screen">
+    <div className="mx-auto h-screen max-w-screen-sm">
       <div>
         <Header1 buttons={buttonsHeader} />
         <form className="justify-center">

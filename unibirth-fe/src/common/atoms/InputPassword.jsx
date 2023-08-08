@@ -8,7 +8,7 @@ const InputPassword = ({ onChange }) => {
           htmlFor="password"
           className="inline-block w-20 font-bold text-gray-600"
         >
-          Password
+          비밀번호
         </label>
         <div className="mt-2 w-full">
           <input

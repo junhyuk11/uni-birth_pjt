@@ -135,7 +135,7 @@ const MemberRegistrationForm = ({
         />
         <Button1
           value="확인"
-          className="font-Pretendard"
+          className="w-16 font-Pretendard"
           onClick={(event) => {
             event.preventDefault();
             duplicateCheck("Nickname", nickname, "닉네임을 입력해주세요.");
@@ -145,12 +145,13 @@ const MemberRegistrationForm = ({
       <div className="flex">
         <InputEmail
           type="email"
+          className="w-100"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <Button1
           value="확인"
-          className="font-Pretendard"
+          className="w-16 font-Pretendard"
           onClick={(event) => {
             event.preventDefault();
             duplicateCheck("Email", email, "이메일을 입력해주세요.");
