@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import planetsGetStarList from "../../../api/usePlanetBestLikes";
+import planetsGetStarList from "../../../api/usePlanetApi";
 
 const ListBestStars = () => {
   useEffect(() => {
