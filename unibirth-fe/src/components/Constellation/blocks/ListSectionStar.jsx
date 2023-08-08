@@ -39,6 +39,8 @@ const ListSectionStar = () => {
   const changeColor = (event) => {
     setSphereColor(event.target.value);
   };
+  // 김민섭
+  const [brightness, setBrightness] = useState(0);
 
   // tooltip
   const [tooltipStyle, setTooltipStyle] = useState({ display: "none" });
@@ -66,6 +68,7 @@ const ListSectionStar = () => {
     setBoxurl(starListIndex[index]?.imageUrl);
     setBoxid(starListIndex[index]?.starId);
     setBoxcreated(starListIndex[index]?.createdAt);
+    setBrightness(starListIndex[index]?.brightness);
     console.log("boxid:", boxid);
     console.log("boxurl:", boxurl);
   };
@@ -214,6 +217,7 @@ const ListSectionStar = () => {
                 className="h-10 w-10 rounded-full"
               />
             </div>
+            현재 빛남 : {brightness}
             <button
               className="rounded-lg bg-red-500 text-white"
               onClick={() => navigateToDetailStar(boxid)}
