@@ -158,14 +158,16 @@ const MemberRegistrationForm = ({
           }}
         />
       </div>
-      <InputPassword
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <InputPasswordConfirm
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
+      <div className="flex flex-row">
+        <InputPassword
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <InputPasswordConfirm
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+      </div>
     </div>
   );
 };
