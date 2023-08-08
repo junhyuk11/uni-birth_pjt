@@ -6,11 +6,13 @@ import Footer1 from "../../../common/blocks/Footer1";
 import SignupFormMember from "../blocks/SignupFormMember";
 import { BiArrowBack } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { useRecoilState } from "recoil";
-import { nicknameState } from "../../../recoil/atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { nicknameState, backgroundflagState } from "../../../recoil/atoms";
 import useMemberApi from "../../../api/useMemberApi";
 
 const RegisterMember = () => {
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  backgroundflag(true);
   const [nickname, setNickname] = useRecoilState(nicknameState);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

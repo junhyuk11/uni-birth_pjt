@@ -8,8 +8,12 @@ import { BiArrowBack } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useMemberApi from "../../../api/useMemberApi";
 import earth from "../../../assets/images/earth.png";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 
 const RegisterMember = () => {
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  backgroundflag(true);
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

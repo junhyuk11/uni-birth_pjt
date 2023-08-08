@@ -10,11 +10,12 @@ import MemberSectionProfile from "../blocks/MemberSectionProfile";
 import ConstellationSectionProfile from "../blocks/ConstellationSectionProfile";
 import useMemberApi from "../../../api/useMemberApi";
 // Bg
-import { Canvas } from "@react-three/fiber";
-import GradientBackground from "../../../common/atoms/GradientBackground";
-import CanvasBg from "../../../common/atoms/CanvasBg";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 
 const MemberProfile = () => {
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  backgroundflag(true);
   const {
     navigateToMessageBox,
     navigateToModifyProfile,
@@ -102,13 +103,7 @@ const MemberProfile = () => {
   };
 
   return (
-    <div className="relative h-screen w-screen">
-      <div className="absolute flex h-full w-full flex-row flex-wrap justify-center">
-        <Canvas>
-          <GradientBackground />
-          <CanvasBg />
-        </Canvas>
-      </div>
+    <div>
       <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2 text-white">
         <Header1 buttons={buttonsHeader} />
         <h1>회원 프로필 화면입니다.</h1>

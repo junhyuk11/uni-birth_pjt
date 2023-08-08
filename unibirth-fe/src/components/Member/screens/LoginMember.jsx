@@ -5,12 +5,18 @@ import Header1 from "../../../common/blocks/Header1";
 import Footer1 from "../../../common/blocks/Footer1";
 import { BiArrowBack, BiLogInCircle } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { useRecoilState } from "recoil";
-import { nicknameState, boardSizeState } from "../../../recoil/atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  nicknameState,
+  boardSizeState,
+  backgroundflagState,
+} from "../../../recoil/atoms";
 import LoginFormMember from "../blocks/LoginFormMember";
 import useMemberApi from "../../../api/useMemberApi";
 
 const LoginMember = () => {
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  backgroundflag(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // eslint-disable-next-line no-unused-vars

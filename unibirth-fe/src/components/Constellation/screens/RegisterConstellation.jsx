@@ -12,8 +12,12 @@ import { Canvas } from "@react-three/fiber";
 import GradientBackground from "../../../common/atoms/GradientBackground";
 import CanvasBg from "../../../common/atoms/CanvasBg";
 import planet1 from "../../../assets/images/planet1.png";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 
 const RegistConstellation = () => {
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  backgroundflag(true);
   const [planetId, setPlanetId] = useState("1");
   const [constellationName, setConstellationName] = useState("");
   const [constellationDescp, setConstellationDescp] = useState("");

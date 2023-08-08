@@ -6,8 +6,12 @@ import { useNavigation } from "../../../hooks/useNavigation";
 import Footer1 from "../../../common/blocks/Footer1";
 import Button1 from "../../../common/atoms/Button1";
 import Header2 from "../../../common/blocks/Header2";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 
 const DetailConstellation = () => {
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  backgroundflag(true);
   const { navigateToBack, navigateToRegisterStar } = useNavigation();
   const buttonsHeader = [
     {

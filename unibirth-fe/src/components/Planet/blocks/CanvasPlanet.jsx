@@ -8,8 +8,14 @@ import MeshPlanet from "../atoms/MeshPlanet";
 import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
 import { gsap } from "gsap";
 import GradientBackground from "../../../common/atoms/GradientBackground";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 
 const ListSectionPlanet = ({ navigateToDetailPlanet }) => {
+  const setBackgroundflag = useSetRecoilState(backgroundflagState);
+  useEffect(() => {
+    setBackgroundflag(false);
+  }, []);
   const controlsRef = useRef();
   const cameraRef = useRef();
   const [cameraState, setCameraState] = useState(true);

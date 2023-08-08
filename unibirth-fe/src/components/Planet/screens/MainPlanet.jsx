@@ -7,6 +7,8 @@ import { CgProfile } from "react-icons/cg";
 import { useNavigation } from "../../../hooks/useNavigation";
 import ListSectionPlanet from "../blocks/ListSectionPlanet";
 import CanvasPlanet from "../blocks/CanvasPlanet";
+// import { useRecoilValue, useRecoilState } from "recoil";
+// import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
 
 import { useRecoilValue, useRecoilState } from "recoil";
 import { nicknameState, targetNicknameState } from "../../../recoil/atoms";

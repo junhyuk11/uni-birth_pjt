@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { OrbitControls, Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import {
@@ -11,8 +11,14 @@ import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { gsap } from "gsap";
 import GradientBackground from "../../../common/atoms/GradientBackground";
 import MeshHtml from "../atoms/MeshHtml";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 
 const Scene = ({ constellationList }) => {
+  const setBackgroundflag = useSetRecoilState(backgroundflagState);
+  useEffect(() => {
+    setBackgroundflag(false);
+  }, []);
   const controlsRef = useRef();
   const [isOrbitActive, setOrbitActive] = useState(true);
 

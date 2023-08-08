@@ -11,8 +11,12 @@ import { useLocation } from "react-router";
 import { Canvas } from "@react-three/fiber";
 import GradientBackground from "../../../common/atoms/GradientBackground";
 import CanvasBg from "../../../common/atoms/CanvasBg";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 
 const DrawingConstellation = () => {
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  backgroundflag(true);
   const location = useLocation();
   const { planetId, constellationName, constellationDescp } = location.state;
   const { navigateToBack } = useNavigation();
