@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useThree } from "@react-three/fiber";
-import { Stars } from "@react-three/drei";
 import * as THREE from "three";
+import { OrbitControls, Stars } from "@react-three/drei";
 
-function GradientBackground() {
+function GradientBackground({ controlsRef }) {
   const { scene } = useThree();
 
   useEffect(() => {
@@ -49,6 +49,14 @@ function GradientBackground() {
 function Scene() {
   return (
     <>
+      <OrbitControls
+        rotateSpeed={-0.5}
+        autoRotate={true}
+        autoRotateSpeed={0.5}
+        enablePan={false}
+        enableDamping={true}
+        dampingFactor={0.05}
+      />
       <GradientBackground />
       <Stars
         radius={100}
@@ -58,7 +66,6 @@ function Scene() {
         saturation={3}
         fade
       />
-      {/* <color attach="background" args={["black"]} /> */}
     </>
   );
 }

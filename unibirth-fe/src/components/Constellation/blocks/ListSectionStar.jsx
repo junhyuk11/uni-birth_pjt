@@ -4,7 +4,7 @@ import useConstellationApi from "../../../api/useConstellationApi";
 import { useParams } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-import { OrbitControls, Line, Stars } from "@react-three/drei";
+import { Line } from "@react-three/drei";
 import {
   starListState,
   boxcontentState,
@@ -17,6 +17,7 @@ import {
 import { useRecoilState, useSetRecoilState } from "recoil";
 import * as THREE from "three";
 import GradientBackground from "../../../common/atoms/GradientBackground";
+import Background from "../../../common/atoms/Background";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -112,13 +113,7 @@ const ListSectionStar = () => {
   return (
     <div className="relative bottom-0 h-screen">
       <Canvas camera={{ position: [0, 0, 70] }}>
-        <OrbitControls
-          autoRotate={true}
-          autoRotateSpeed={0.5}
-          enableDamping
-          dampingFactor={0.05}
-          enabled={true}
-        />
+        <Background />
         <axesHelper scale={5} />
         <EffectComposer>
           <Bloom mipmapBlur luminanceThreshold={1} radius={0.7} />
@@ -158,14 +153,6 @@ const ListSectionStar = () => {
             ))}
           </group>
         ))}
-        <Stars
-          radius={100} // Radius of the inner sphere (default=100)
-          depth={50} // Depth of area where stars should fit (default=50)
-          count={5000} // Amount of stars (default=5000)
-          factor={4} // Size factor (default=4)
-          saturation={0} // Saturation (default=0)
-          fade // Faded dots (default=false)
-        />
       </Canvas>
       <div>
         {/* 별을 클릭했을 때 위치 조정 필요 */}

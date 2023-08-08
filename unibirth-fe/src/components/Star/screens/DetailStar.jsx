@@ -5,8 +5,15 @@ import { BiSearch } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useStarApi from "../../../api/useStarApi";
 import { useParams } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 
 const DetailStar = () => {
+  const [ddd, setBackgroundflag] = useRecoilState(backgroundflagState);
+  useEffect(() => {
+    setBackgroundflag(false);
+    console.log("flag:", ddd);
+  }, []);
   const { navigateToBack } = useNavigation();
   const { starId } = useParams();
   const [star, setStar] = useState({

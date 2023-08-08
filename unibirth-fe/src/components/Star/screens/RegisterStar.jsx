@@ -6,13 +6,16 @@ import Footer1 from "../../../common/blocks/Footer1";
 import { BiSearch } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
 import BodyRegisterStar from "../blocks/BodyRegisterStar";
-import { useRecoilValue } from "recoil";
-import { StellaIdState } from "../../../recoil/atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { StellaIdState, backgroundflagState } from "../../../recoil/atoms";
 import useStarApi from "../../../api/useStarApi";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../api/useFirebaseApi";
 
 const RegisterStar = (event) => {
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  backgroundflag(true);
+
   const { navigateToBack } = useNavigation(); // navigateToDetailConstellation
   console.log(event);
   const constellationId = useRecoilValue(StellaIdState);

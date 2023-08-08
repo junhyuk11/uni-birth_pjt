@@ -254,7 +254,7 @@ const GridCustomConstellation = ({
 
   return (
     <div>
-      <div>
+      <div className="text-white">
         <p className="font-TAEBAEKmilkyway">지금 행성명: {planetId}</p>
         <p className="font-TAEBAEKmilkyway">
           지금 별자리명: {constellationName}

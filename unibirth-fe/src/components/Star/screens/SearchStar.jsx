@@ -5,15 +5,14 @@ import { BiSearch } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
 import Footer1 from "../../../common/blocks/Footer1";
 import Button1 from "../../../common/atoms/Button1";
-import ListSectionStar from "../blocks/ListSectionStar";
+import Header2 from "../../../common/blocks/Header2";
 import { useSetRecoilState } from "recoil";
 import { backgroundflagState } from "../../../recoil/atoms";
 
 const DetailConstellation = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
-  backgroundflag(false);
+  backgroundflag(true);
   const { navigateToBack, navigateToRegisterStar } = useNavigation();
-
   const buttonsHeader = [
     {
       component: Button2,
@@ -31,19 +30,14 @@ const DetailConstellation = () => {
       onClick: navigateToRegisterStar,
     },
   ];
-
   return (
-    <div>
-      <div className="absolute left-1/3 top-20 z-10 flex flex-col space-y-2 space-y-5 p-4">
+    <div className="flex flex-col justify-center">
+      <div className="flex flex-row justify-center space-x-10">
         <Header1 buttons={buttonsHeader} />
+        <Header2 />
       </div>
-      <ListSectionStar className="relative left-0 top-0 z-0 h-full w-full" />
-      <div className="absolute bottom-20 left-1/3 z-10 flex flex-col space-y-2 space-y-5 p-4">
-        <Footer1
-          className="absolute right-1/2 top-0 z-10 flex flex-col space-y-2 space-y-5 p-4"
-          buttons={buttonsFooter}
-        />
-      </div>
+      <h1 className="flex justify-center">별자리 검색 화면입니다.</h1>
+      <Footer1 buttons={buttonsFooter} />
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { CgProfile } from "react-icons/cg";
 import { useNavigation } from "../../../hooks/useNavigation";
 import ListSectionPlanet from "../blocks/ListSectionPlanet";
 import CanvasPlanet from "../blocks/CanvasPlanet";
+import ListBestStars from "../blocks/ListBestStars";
 
 import { useRecoilValue, useRecoilState } from "recoil";
 import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
@@ -73,6 +74,7 @@ const MainPlanet = () => {
       <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2 -translate-y-1/2 transform">
         <ListSectionPlanet />
       </div>
+      <ListBestStars />
       <CanvasPlanet navigateToDetailPlanet={navigateToDetailPlanet} />
       <div className="absolute bottom-20 left-5 z-10">
         <Footer1 buttons={buttonsFooter} />

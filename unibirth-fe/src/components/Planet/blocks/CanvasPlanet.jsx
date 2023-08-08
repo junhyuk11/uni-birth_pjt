@@ -8,8 +8,14 @@ import MeshPlanet from "../atoms/MeshPlanet";
 import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
 import { gsap } from "gsap";
 import GradientBackground from "../../../common/atoms/GradientBackground";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 
 const ListSectionPlanet = ({ navigateToDetailPlanet }) => {
+  const setBackgroundflag = useSetRecoilState(backgroundflagState);
+  useEffect(() => {
+    setBackgroundflag(false);
+  }, []);
   const controlsRef = useRef();
   const cameraRef = useRef();
   const [cameraState, setCameraState] = useState(true);
@@ -87,6 +93,9 @@ const ListSectionPlanet = ({ navigateToDetailPlanet }) => {
           ref={controlsRef}
           args={[cameraRef.current]}
           enabled={true}
+          rotateSpeed={-0.5}
+          enablePan={false}
+
           // autoRotate={true}
           // autoRotateSpeed={0.5}
         />
@@ -113,7 +122,6 @@ const ListSectionPlanet = ({ navigateToDetailPlanet }) => {
           fade
         />
       </Canvas>
-      <span className="text-white">Planet</span>
     </div>
   );
 };
