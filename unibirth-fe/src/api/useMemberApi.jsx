@@ -52,10 +52,12 @@ const membersPostLogin = async (member) => {
 
 const membersGetDetail = async (nickname) => {
   try {
+    console.log(nickname);
     const jwt = sessionStorage.getItem("accessToken");
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/members/detail/${nickname}`);
+    console.log(response);
     return response.data;
   } catch (e) {
     console.log(e);
