@@ -1,50 +1,29 @@
-import React, { useRef, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-// import { OrbitControls } from "@react-three/drei";
 
 function Space() {
-  const starsRef = useRef();
-
-  const [starGeo, starMaterial] = useMemo(() => {
-    const starGeo = new THREE.SphereGeometry(1, 8, 8);
-    const vertices = [];
-    const velocity = [];
-    const acceleration = [];
-
+  const stars = useMemo(() => {
+    const spheres = [];
     for (let i = 0; i < 1000; i++) {
-      vertices.push(
+      const position = new THREE.Vector3(
         Math.random() * 600 - 300,
         Math.random() * 600 - 300,
         Math.random() * 600 - 300,
       );
-      velocity.push(0);
-      acceleration.push(0.003);
+      const brightness = Math.random();
+      const color = new THREE.Color(
+        Math.random(),
+        Math.random(),
+        Math.random(),
+      );
+
+      spheres.push({ position, brightness, color });
     }
-
-    starGeo.setAttribute(
-      "position",
-      new THREE.Float32BufferAttribute(vertices, 3),
-    );
-    starGeo.setAttribute(
-      "velocity",
-      new THREE.Float32BufferAttribute(velocity, 1),
-    );
-    starGeo.setAttribute(
-      "acceleration",
-      new THREE.Float32BufferAttribute(acceleration, 0.5),
-    );
-
-    const starMaterial = new THREE.MeshBasicMaterial({
-      color: new THREE.Color(Math.random(), Math.random(), Math.random()),
-      // transparent: true,
-      // blending: THREE.MultiplyBlending,
-    });
-
-    return [starGeo, starMaterial];
+    return spheres;
   }, []);
 
-  useFrame(({ camera }) => {
+  useFrame(({ starsRef, camera }) => {
     const position = starsRef.current.geometry.attributes.position;
     const velocity = starsRef.current.geometry.attributes.velocity;
     const acceleration = starsRef.current.geometry.attributes.acceleration;
@@ -81,11 +60,16 @@ function Space() {
   return (
     <>
       <axesHelper scale={5} />
-      {/* <OrbitControls /> */}
-      <group ref={starsRef}>
-        <sphereGeometry attach="geometry" {...starGeo} />
-        <pointsMaterial attach="material" {...starMaterial} />
-      </group>
+      {stars.map((star, index) => (
+        <mesh position={star.position} key={index}>
+          <sphereGeometry args={[1, 32, 32]} />
+          <meshStandardMaterial
+            color={star.color}
+            emissive={star.color}
+            emissiveIntensity={star.brightness + 1 || 0.04}
+          />
+        </mesh>
+      ))}
     </>
   );
 }
