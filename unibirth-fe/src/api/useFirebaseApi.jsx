@@ -1,10 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getStorage } from "firebase/storage";
+import { getDatabase, ref, push, onChildAdded, set } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCyOsqoZjmx3f75EIqqrrcFQrN2XsDZbeQ",
   authDomain: "uni-birth.firebaseapp.com",
+  databaseURL: "https://uni-birth-default-rtdb.firebaseio.com",
   projectId: "uni-birth",
   storageBucket: "uni-birth.appspot.com",
   messagingSenderId: "157033568661",
@@ -15,5 +17,31 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const storage = getStorage(app);
+const database = getDatabase(app);
 
-export { app, analytics, storage };
+function sendMessage(message, sender) {
+  const chatRef = ref(database, "chats");
+  const newMessageRef = push(chatRef);
+
+  const messageData = {
+    text: message,
+    sender: sender,
+    timestamp: Date.now(),
+  };
+
+  set(newMessageRef, messageData);
+}
+
+function listenForMessages(callback) {
+  const chatRef = ref(database, "chats");
+  const offChildAdded = onChildAdded(chatRef, (snapshot) => {
+    const newMessage = snapshot.val();
+    callback(newMessage);
+  });
+
+  return () => {
+    offChildAdded();
+  };
+}
+
+export { app, analytics, storage, database, sendMessage, listenForMessages };
