@@ -31,6 +31,14 @@ const MemberRegistrationForm = ({
   const [content, setContent] = useState(
     "생년월일을 입력하시면 별자리가 자동으로 설정됩니다.",
   );
+  const isNicknameValid = (nickname) => {
+    const regex = /^[a-zA-Z0-9가-힣]+$/;
+    return regex.test(nickname);
+  };
+  const isEmailValid = (email) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
+  };
 
   const [jodiacname, setJodiacname] = useState("당신의 별자리는?");
   const duplicateCheck = useCallback(async (type, value, emptyMessage) => {
@@ -143,6 +151,10 @@ const MemberRegistrationForm = ({
         className="font-TAEBAEKmilkyway"
         onClick={(event) => {
           event.preventDefault();
+          if (!isNicknameValid(nickname)) {
+            alert("닉네임 형식이 올바르지 않습니다.");
+            return;
+          }
           duplicateCheck("Nickname", nickname, "닉네임을 입력해주세요.");
         }}
       />
@@ -156,6 +168,10 @@ const MemberRegistrationForm = ({
         className="font-TAEBAEKmilkyway"
         onClick={(event) => {
           event.preventDefault();
+          if (!isEmailValid(email)) {
+            alert("유효한 이메일 형식을 입력해주세요.");
+            return;
+          }
           duplicateCheck("Email", email, "이메일을 입력해주세요.");
         }}
       />
