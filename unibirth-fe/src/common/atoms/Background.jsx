@@ -59,9 +59,9 @@ function Scene() {
       />
       <GradientBackground />
       <Stars
-        radius={100}
+        radius={50}
         depth={50}
-        count={10000}
+        count={400}
         factor={4}
         saturation={3}
         fade
