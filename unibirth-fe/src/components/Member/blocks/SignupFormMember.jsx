@@ -34,27 +34,13 @@ const MemberRegistrationForm = ({
       alert(emptyMessage);
       return;
     }
-    // if (type === "Email") {
-    //   const response = await useMemberApi.membersPostCheckEmail(value);
-    //   alert(
-    //     response.status === 200
-    //       ? `사용 가능한 ${type}입니다.`
-    //       : `이미 사용중인 ${type}입니다.`,
-    //   );
-    // } else {
-    //   const response = await useMemberApi.membersPostCheckNickname(value);
-    //   alert(
-    //     response.status === 200
-    //       ? `사용 가능한 ${type}입니다.`
-    //       : `이미 사용중인 ${type}입니다.`,
-    //   );
-    // }
-
     const checkFunc =
       type === "Email"
         ? useMemberApi.membersPostCheckEmail
         : useMemberApi.membersPostCheckNickname;
-    const response = await checkFunc(value);
+    const param = type === "Email" ? { email: value } : { nickname: value };
+
+    const response = await checkFunc(param);
     alert(
       response.status === 200
         ? `사용 가능한 ${type}입니다.`

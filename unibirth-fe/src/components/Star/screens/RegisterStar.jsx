@@ -47,7 +47,9 @@ const RegisterStar = (event) => {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          // Progress function
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Upload is ${progress}% done.`);
         },
         (error) => {
           // Error handling

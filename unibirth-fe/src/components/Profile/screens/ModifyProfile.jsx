@@ -42,17 +42,10 @@ const ModifyProfile = () => {
 
   const handleCompleteClick = async (e) => {
     e.preventDefault();
-    const firebaseImageUrl = imageUrl.current.toDataUrl();
-    const [header, data] = firebaseImageUrl.split(",");
-    const mimeType = header.split(";")[0].split(":")[1];
-    const binary = atob(data);
-    const array = Uint8Array.from(binary, (byte) => byte.charCodeAt(0));
-    const imageName = `constellation-${new Date().getTime()}.png`;
-    const storageRef = ref(storage, `images/${imageName}`);
-    const uploadTask = uploadBytesResumable(storageRef, array, {
-      contentType: mimeType,
-    });
-    console.log("uploadTask:", uploadTask);
+    console.log("imageUrl:", imageUrl);
+    console.log(imageUrl.name);
+    const storageRef = ref(storage, `images/${imageUrl.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, imageUrl);
     uploadTask.on(
       "state_changed",
       (snapshot) => {
