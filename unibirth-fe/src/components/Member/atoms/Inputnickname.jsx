@@ -7,7 +7,7 @@ const Inputnickname = ({ onChange }) => {
         <label htmlFor="nickname">Nickname</label>
         <div className="mt-2 flex-row">
           <input
-            className="w-full flex-1 flex-row border-b-2 border-gray-400 py-2 text-gray-600 
+            className="flex-1 flex-row border-b-2 border-gray-400 py-2 text-gray-600 
         placeholder-gray-400 outline-none
         focus:border-yellow-200"
             type="text"

@@ -3,8 +3,8 @@ import Footer1 from "../../../common/blocks/Footer1";
 import Button1 from "../../../common/atoms/Button1";
 // import useConstellationApi from "../../../api/useConstellationApi";
 import { useNavigation } from "../../../hooks/useNavigation";
-import Space from "../blocks/Space";
-import { Canvas } from "@react-three/fiber";
+// import Space from "../blocks/Space";
+// import { Canvas } from "@react-three/fiber";
 
 const Home = () => {
   const { navigateToMainPlanet, navigateToLoginMember } = useNavigation();
@@ -36,10 +36,10 @@ const Home = () => {
         <Footer1 buttons={buttons} />
       </div>
       <div className="absolute top-0 z-0 h-full w-full">
-        <Canvas camera={{ position: [0, -50, 0] }}>
+        {/* <Canvas camera={{ position: [0, -50, 0] }}>
           <color attach="background" args={["black"]} />
           <Space />
-        </Canvas>
+        </Canvas> */}
       </div>
     </div>
   );
