@@ -54,6 +54,8 @@ function Scene() {
         autoRotate={true}
         autoRotateSpeed={0.5}
         enablePan={false}
+        enableDamping={true}
+        dampingFactor={0.05}
       />
       <GradientBackground />
       <Stars
