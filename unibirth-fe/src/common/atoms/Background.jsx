@@ -3,7 +3,7 @@ import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { OrbitControls, Stars } from "@react-three/drei";
 
-function GradientBackground() {
+function GradientBackground({ controlsRef }) {
   const { scene } = useThree();
 
   useEffect(() => {

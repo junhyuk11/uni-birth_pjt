@@ -122,7 +122,6 @@ const ListSectionPlanet = ({ navigateToDetailPlanet }) => {
           fade
         />
       </Canvas>
-      <span className="text-white">Planet</span>
     </div>
   );
 };
