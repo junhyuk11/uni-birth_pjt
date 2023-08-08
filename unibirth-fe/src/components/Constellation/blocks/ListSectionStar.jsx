@@ -111,7 +111,7 @@ const ListSectionStar = () => {
   // console.log("starPosition:", starPotisions);
 
   return (
-    <div className="relative bottom-0 h-screen">
+    <div className="relative bottom-0 h-screen w-screen">
       <Canvas camera={{ position: [0, 0, 70] }}>
         <Background />
         <axesHelper scale={5} />
