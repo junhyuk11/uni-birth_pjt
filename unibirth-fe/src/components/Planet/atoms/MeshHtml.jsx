@@ -1,12 +1,30 @@
-import React from "react";
+import React from "react"; // useState, useEffect
 import { Html } from "@react-three/drei";
 import { useNavigation } from "../../../hooks/useNavigation";
+// import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
+// import useConstellationApi from "../../../api/useConstellationApi";
 
 const MeshHtml = ({ constellationList, moveNum, xdamper }) => {
   const handleBoxClick = () => (event, constellation) => {
     console.log("event:", event);
     console.log("constellation:", constellation);
   };
+
+  // useEffect(() => {
+  //   getConstellationPin(constellationList.constellationId);
+  // }, [constellationList.constellationId]);
+
+  // const getConstellationPin = async (constellationId) => {
+  //   try {
+  //     const response = await useConstellationApi.constellationsGetPin(
+  //       constellationId,
+  //     );
+  //     console.log("별자리 핀: ", response);
+  //     setConstellationPin(response.resultData);
+  //   } catch (error) {
+  //     console.error("Failed to get constellation pin:", error);
+  //   }
+  // };
 
   const { navigateToDetailConstellation } = useNavigation();
 
@@ -44,6 +62,7 @@ const MeshHtml = ({ constellationList, moveNum, xdamper }) => {
                 >
                   별자리 이동하기
                 </button>
+
                 <img src={constellation.imageUrl} />
               </div>
             </div>
