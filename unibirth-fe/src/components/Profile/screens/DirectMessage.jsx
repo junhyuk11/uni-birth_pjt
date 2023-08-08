@@ -3,7 +3,7 @@ import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
 import { IoIosArrowBack } from "react-icons/io";
 import { useRecoilValue } from "recoil";
-import { nicknameState } from "../../../recoil/atoms";
+import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
 import { useNavigation } from "../../../hooks/useNavigation";
 import { sendMessage, listenForMessages } from "../../../api/useFirebaseApi";
 
@@ -11,6 +11,7 @@ const DirectMessage = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const nickname = useRecoilValue(nicknameState);
+  const targetNickname = useRecoilValue(targetNicknameState);
   const { navigateToBack } = useNavigation();
 
   const buttonsHeader = [
@@ -35,21 +36,32 @@ const DirectMessage = () => {
       setMessages((prevMessages) => [...prevMessages, message]);
     };
 
-    const detachListener = listenForMessages(addNewMessage);
+    const detachListener = listenForMessages(
+      addNewMessage,
+      nickname,
+      targetNickname,
+    );
 
     return () => {
       detachListener();
     };
-  }, []);
-
-  useEffect(scrollToBottom, [messages]);
+  }, [nickname, targetNickname]);
 
   const handleSend = () => {
     if (newMessage.trim()) {
-      sendMessage(newMessage, nickname);
+      sendMessage(newMessage, nickname, targetNickname);
       setNewMessage("");
     }
   };
+
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    return `${hours}:${minutes}`;
+  };
+
+  useEffect(scrollToBottom, [messages]);
 
   return (
     <div>
@@ -59,14 +71,20 @@ const DirectMessage = () => {
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`${
-                message.sender === nickname ? "outgoing" : "incoming"
-              } mt-2 rounded-md bg-gray-800 p-2`} // bg-gray-800 and rounded-md added for styling
+              className={`
+              mt-2 flex justify-between rounded-md bg-gray-800 p-2 
+              ${message.sender === nickname ? "ml-auto" : ""} 
+              ${message.sender === targetNickname ? "mr-auto" : ""} 
+            `}
             >
-              <p className="text-white">{message.text}</p>
+              <div className="flex-grow">
+                <p className="text-white">{message.text}</p>
+              </div>
+              <span className="ml-2 text-sm text-gray-500">
+                {formatDate(message.timestamp)}
+              </span>
             </div>
           ))}
-
           <div ref={messagesEndRef} />
         </div>
 

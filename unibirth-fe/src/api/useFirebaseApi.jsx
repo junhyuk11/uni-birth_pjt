@@ -19,8 +19,9 @@ const analytics = getAnalytics(app);
 const storage = getStorage(app);
 const database = getDatabase(app);
 
-function sendMessage(message, sender) {
-  const chatRef = ref(database, "chats");
+function sendMessage(message, sender, target) {
+  const chatRoomId = [sender, target].sort().join("_");
+  const chatRef = ref(database, `chats/${chatRoomId}`);
   const newMessageRef = push(chatRef);
 
   const messageData = {
@@ -32,8 +33,9 @@ function sendMessage(message, sender) {
   set(newMessageRef, messageData);
 }
 
-function listenForMessages(callback) {
-  const chatRef = ref(database, "chats");
+function listenForMessages(callback, sender, target) {
+  const chatRoomId = [sender, target].sort().join("_");
+  const chatRef = ref(database, `chats/${chatRoomId}`);
   const offChildAdded = onChildAdded(chatRef, (snapshot) => {
     const newMessage = snapshot.val();
     callback(newMessage);
