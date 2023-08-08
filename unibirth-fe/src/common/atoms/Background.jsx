@@ -56,12 +56,13 @@ function Scene() {
         enablePan={false}
         enableDamping={true}
         dampingFactor={0.05}
+        // enabled={false}
       />
       <GradientBackground />
       <Stars
         radius={50}
         depth={50}
-        count={400}
+        count={1000}
         factor={4}
         saturation={3}
         fade
