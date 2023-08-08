@@ -258,7 +258,7 @@ const GridCustomConstellation = ({
     {
       component: Button1,
       className: "font-TAEBAEKmilkyway",
-      value: "다시 그리기",
+      value: "초기화",
       onClick: handleResetClick,
     },
     {
@@ -268,8 +268,9 @@ const GridCustomConstellation = ({
       onClick: handleSaveClick,
     },
   ];
+
   return (
-    <div className="flex flex-col">
+    <div className="mt-8 flex flex-col">
       <div>
         <DrawingBackButton
           className="font-TAEBAEKmilkyway"
@@ -328,7 +329,7 @@ const GridCustomConstellation = ({
           </Layer>
         </Stage>
       </div>
-      <div className="mb-8">
+      <div>
         <Footer1 buttons={buttonsFooter} />
       </div>
     </div>
