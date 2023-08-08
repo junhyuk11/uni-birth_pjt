@@ -6,20 +6,20 @@ const InputEmail = ({ onChange }) => {
         <label
           htmlFor="email"
           className="inline-block w-20 
-          font-bold text-gray-600"
+          font-bold text-gray-100"
         >
-          Email
+          이메일
         </label>
         <div className="mt-2 w-full">
           <input
-            className="flex-1 border-b-2 border-gray-400 py-2 text-gray-600 
+            className="w-full flex-1 border-b-2 border-gray-400 bg-transparent py-2 text-yellow-200 
             placeholder-gray-400 outline-none
             focus:border-yellow-200"
             type="email"
             id="email"
             name="email"
             onChange={onChange}
-            placeholder="email을 입력하세요"
+            placeholder="이메일을 입력하세요"
             autoComplete="off"
           />
         </div>

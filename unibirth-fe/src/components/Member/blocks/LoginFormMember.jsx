@@ -1,6 +1,6 @@
 import React from "react";
 import InputEmail from "../../../common/atoms/InputEmail";
-import InputPassword from "../../../common/atoms/InputPassword";
+import InputPassword from "../../../common/atoms/InputLoginPassword";
 
 const LoginForm = ({ email, setEmail, password, setPassword }) => {
   return (

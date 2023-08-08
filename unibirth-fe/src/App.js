@@ -52,7 +52,7 @@ const App = () => {
           </Canvas>
         </div>
       )}
-      <div className="absolute left-1/2 z-10 z-10 -translate-x-1/2 ">
+      <div className="absolute w-screen ">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/members/login" element={<LoginMember />} />

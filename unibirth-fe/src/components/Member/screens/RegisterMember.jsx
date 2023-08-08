@@ -4,10 +4,10 @@ import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
 import Footer1 from "../../../common/blocks/Footer1";
 import SignupFormMember from "../blocks/SignupFormMember";
-import { BiArrowBack } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useMemberApi from "../../../api/useMemberApi";
 import earth from "../../../assets/images/earth.png";
+import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const RegisterMember = () => {
   const [nickname, setNickname] = useState("");
@@ -61,7 +61,7 @@ const RegisterMember = () => {
       className: "font-TAEBAEKmilkyway",
       value: "",
       onClick: navigateToBack,
-      icon: <BiArrowBack />,
+      icon: <LeftArrow />,
     },
   ];
   const buttonsFooter = [

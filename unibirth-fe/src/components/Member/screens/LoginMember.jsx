@@ -3,7 +3,6 @@ import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
 import Footer1 from "../../../common/blocks/Footer1";
-import { BiArrowBack, BiLogInCircle } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
@@ -13,6 +12,7 @@ import {
 } from "../../../recoil/atoms";
 import LoginFormMember from "../blocks/LoginFormMember";
 import useMemberApi from "../../../api/useMemberApi";
+import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const LoginMember = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -54,19 +54,18 @@ const LoginMember = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
+      className: "font-Pretendard",
+      value: "",
       onClick: navigateToBack,
-      icon: <BiArrowBack />,
+      icon: <LeftArrow />,
     },
   ];
   const buttonsFooter = [
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "font-Pretendard",
       value: "로그인",
       onClick: handleLogin,
-      icon: <BiLogInCircle />,
     },
     {
       component: Button1,
@@ -88,7 +87,7 @@ const LoginMember = () => {
           />
         </form>
       </div>
-      <div>
+      <div className="mx-10">
         <Footer1 buttons={buttonsFooter} email={email} password={password} />
       </div>
     </div>
