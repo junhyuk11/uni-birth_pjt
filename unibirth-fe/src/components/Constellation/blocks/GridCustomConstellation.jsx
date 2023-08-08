@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Stage, Layer, Rect, Line, Circle } from "react-konva";
+import { Stage, Layer, Rect, Line, Star } from "react-konva";
 import Button1 from "../../../common/atoms/Button1";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../api/useFirebaseApi";
@@ -270,15 +270,18 @@ const GridCustomConstellation = ({
         <Stage width={stageSize} height={stageSize}>
           <Layer ref={linesAndPointsLayerRef}>
             {points.map((point, y) => (
-              <Circle
+              <Star
                 key={y}
                 x={point.centerX}
                 y={point.centerY}
-                radius={5}
-                fillRadialGradientStartRadius={0}
-                fillRadialGradientEndRadius={5}
-                fillRadialGradientColorStops={[0, "#FFD700", 1, "#FFFFFF"]}
+                rotation={107}
+                numPoints={5}
+                innerRadius={10}
+                outerRadius={5}
+                fill="#FFD700"
+                shadowColor="#FFD700"
                 shadowBlur={5}
+                shadowOpacity={0.6}
               />
             ))}
 
@@ -286,7 +289,7 @@ const GridCustomConstellation = ({
               <Line
                 key={y}
                 points={[line[1], line[0], line[3], line[2]]}
-                stroke="#8B8680"
+                stroke="#ffe970"
                 shadowColor="#FFFFFF"
                 shadowBlur={5}
                 tension={1}
@@ -306,6 +309,7 @@ const GridCustomConstellation = ({
                     stroke="#DDDDDD"
                     strokeWidth={1}
                     onTap={() => handleGridClick(y, x)}
+                    onClick={() => handleGridClick(y, x)}
                     zIndex={2}
                   />
                 )),
