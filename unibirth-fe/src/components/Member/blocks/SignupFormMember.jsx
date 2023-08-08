@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import InputPassword from "../../../common/atoms/InputPassword";
 import Inputnickname from "../atoms/Inputnickname";
 import InputPasswordConfirm from "../atoms/InputPasswordConfirm";
@@ -8,6 +8,8 @@ import useMemberApi from "../../../api/useMemberApi";
 import InPutZodiac from "../atoms/InputZodiac";
 import { debounce } from "lodash";
 import { Jodiac } from "../../../constants/zodiac";
+import { PLANET_LIST } from "../../../constants/constants";
+
 const MemberRegistrationForm = ({
   nickname,
   setNickname,
@@ -23,11 +25,14 @@ const MemberRegistrationForm = ({
   setBirthdate,
   image,
   setImage,
-  content,
-  setContent,
-  jodiacname,
-  setJodiacname,
+  interest,
+  setInterest,
 }) => {
+  const [content, setContent] = useState(
+    "생년월일을 입력하시면 별자리가 자동으로 설정됩니다.",
+  );
+
+  const [jodiacname, setJodiacname] = useState("당신의 별자리는?");
   const duplicateCheck = useCallback(async (type, value, emptyMessage) => {
     console.log(type, value, emptyMessage);
     if (value === "") {
@@ -110,7 +115,6 @@ const MemberRegistrationForm = ({
         setJodiacname(Jodiac[0].name);
       }
     }, 300),
-
     [],
   );
 
@@ -155,6 +159,15 @@ const MemberRegistrationForm = ({
           duplicateCheck("Email", email, "이메일을 입력해주세요.");
         }}
       />
+      <div className="flex flex-col items-center justify-center rounded-lg border-double font-TAEBAEKmilkyway">
+        <select value={interest} onChange={(e) => setInterest(e.target.value)}>
+          {PLANET_LIST.map((interest) => (
+            <option key={interest.name} value={interest.name}>
+              {interest.name}
+            </option>
+          ))}
+        </select>
+      </div>
       <InputPassword
         value={password}
         onChange={(e) => setPassword(e.target.value)}

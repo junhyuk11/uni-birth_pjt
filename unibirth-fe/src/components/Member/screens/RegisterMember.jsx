@@ -19,12 +19,9 @@ const RegisterMember = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [birthdate, setBirthdate] = useState("");
-  const { navigateToBack, navigateToLoginMember } = useNavigation();
+  const [interest, setInterest] = useState([]);
   const [image, setImage] = useState(`${earth}`);
-  const [content, setContent] = useState(
-    "생년월일을 입력하시면 별자리가 자동으로 설정됩니다.",
-  );
-  const [jodiacname, setJodiacname] = useState("당신의 별자리는?");
+  const { navigateToBack, navigateToLoginMember } = useNavigation();
 
   const joinMember = async (e) => {
     e.preventDefault();
@@ -37,7 +34,11 @@ const RegisterMember = () => {
       nickname,
       email,
       password,
+      birthdate,
+      imageUrl: image,
+      interest,
     };
+    console.log(member);
     try {
       const response = await useMemberApi.membersPostRegister(member);
       updateimage();
@@ -96,10 +97,8 @@ const RegisterMember = () => {
           setBirthdate={setBirthdate}
           image={image}
           setImage={setImage}
-          content={content}
-          setContent={setContent}
-          jodiacname={jodiacname}
-          setJodiacname={setJodiacname}
+          interest={interest}
+          setInterest={setInterest}
         />
         <Footer1
           buttons={buttonsFooter}
