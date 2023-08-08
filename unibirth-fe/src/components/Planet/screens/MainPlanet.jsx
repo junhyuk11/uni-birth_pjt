@@ -2,7 +2,7 @@ import React from "react";
 import Footer1 from "../../../common/blocks/Footer1";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
-import { BiSearch, BiHomeAlt, BiLogInCircle } from "react-icons/bi";
+import { BiSearch, BiHomeAlt } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { useNavigation } from "../../../hooks/useNavigation";
 import ListSectionPlanet from "../blocks/ListSectionPlanet";
@@ -36,15 +36,12 @@ const MainPlanet = () => {
   const buttonsFooter = [
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
-      value: "별자리검색",
+      className: "font-Pretendard",
       onClick: navigateToSearchQuration,
       icon: <BiSearch />,
     },
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
-      value: "홈",
       onClick: refreshPage,
       icon: <BiHomeAlt />,
     },
@@ -53,16 +50,14 @@ const MainPlanet = () => {
   if (token === null) {
     buttonsFooter.push({
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "font-Pretendard",
       value: "로그인",
       onClick: navigateToLoginMember,
-      icon: <BiLogInCircle />,
     });
   } else {
     buttonsFooter.push({
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
-      value: "마이페이지",
+      className: "font-Pretendard",
       onClick: mypageClick,
       icon: <CgProfile />,
     });

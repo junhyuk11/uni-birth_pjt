@@ -46,7 +46,7 @@ const App = () => {
   return (
     <div className="relative h-screen w-screen">
       {backgroundflag && (
-        <div className="absolute z-0 h-screen w-screen">
+        <div className="fixed z-0 h-screen w-screen">
           <Canvas>
             <Background />
           </Canvas>

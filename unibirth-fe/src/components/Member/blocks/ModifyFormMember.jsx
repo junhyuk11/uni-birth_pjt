@@ -31,27 +31,31 @@ const MemberModifyForm = ({
   }, []);
 
   return (
-    <div className="items-cneter flex flex-col justify-center space-y-5">
-      <Inputnickname
-        value={nickname}
-        onChange={(e) => setNickname(e.target.value)}
-      />
-      <Button1
-        value="닉네임 중복확인"
-        className="font-TAEBAEKmilkyway"
-        onClick={(event) => {
-          event.preventDefault();
-          duplicateCheck("Nickname", nickname, "닉네임을 입력해주세요.");
-        }}
-      />
-      <InputPassword
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <InputPasswordConfirm
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
+    <div className="mx-10 mb-10 mt-72 flex-col items-center justify-center space-y-5">
+      <div className="flex">
+        <Inputnickname
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+        />
+        <Button1
+          value="확인"
+          className="w-16 font-Pretendard"
+          onClick={(event) => {
+            event.preventDefault();
+            duplicateCheck("Nickname", nickname, "닉네임을 입력해주세요.");
+          }}
+        />
+      </div>
+      <div className="flex flex-row">
+        <InputPassword
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <InputPasswordConfirm
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+      </div>
     </div>
   );
 };

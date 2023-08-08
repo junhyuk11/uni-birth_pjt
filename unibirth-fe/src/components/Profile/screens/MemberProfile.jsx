@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
-import Button3 from "../../../common/atoms/Button3";
-import Header1 from "../../../common/blocks/Header1";
-import { IoIosArrowBack, IoMdMenu } from "react-icons/io";
 import { LuMessagesSquare } from "react-icons/lu";
 import { useNavigation } from "../../../hooks/useNavigation";
 import MemberSectionProfile from "../blocks/MemberSectionProfile";
 import ConstellationSectionProfile from "../blocks/ConstellationSectionProfile";
 import useMemberApi from "../../../api/useMemberApi";
+import LeftArrow from "../../../assets/icons/js/leftArrow";
+import ThreeDots from "../../../assets/icons/js/threeDots";
+import Header3 from "../../../common/blocks/Header3";
+import Close from "../../../assets/icons/js/close";
+import Header4 from "../../../common/blocks/Header4";
 
 const MemberProfile = () => {
-  const {
-    navigateToMessageBox,
-    navigateToModifyProfile,
-    navigateToMainPlanet,
-    navigateToModifyMember,
-  } = useNavigation();
+  const { navigateToMessageBox, navigateToMainPlanet, navigateToModifyMember } =
+    useNavigation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -47,35 +45,31 @@ const MemberProfile = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
+      value: "",
       onClick: navigateToMainPlanet,
-      icon: <IoIosArrowBack />,
-    },
-    {
-      component: Button3,
-      className: "font-TAEBAEKmilkyway",
-      value: "사용자의 프로필",
-      onClick: navigateToModifyProfile,
+      icon: <LeftArrow />,
     },
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "font-Pretendard",
       onClick: navigateToMessageBox,
       icon: <LuMessagesSquare />,
     },
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "w-10 h-10",
       onClick: () => setIsModalOpen(true),
-      icon: <IoMdMenu />,
+      icon: <ThreeDots />,
     },
   ];
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const modalButtons = [
     {
       component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      className: "font-TAEBAEKmilkyway m-10 p-10",
       value: "회원정보 수정",
       onClick: navigateToModifyMember,
     },
@@ -91,34 +85,30 @@ const MemberProfile = () => {
       value: "회원 탈퇴",
       onClick: handleSignout,
     },
+    {
+      component: Button1,
+      className: "font-TAEBAEKmilkyway h-10 w-10",
+      onClick: handleCloseModal,
+      icon: <Close />,
+    },
   ];
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
-    <div>
-      <Header1 buttons={buttonsHeader} />
-      <h1>회원 프로필 화면입니다.</h1>
-      <MemberSectionProfile />
-      <ConstellationSectionProfile />
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-gray-800 opacity-50"></div>
-          <div className="z-10 rounded bg-white p-4 shadow-md">
-            <Header1 buttons={modalButtons} />
-            <div className="mt-4 flex justify-center">
-              <button
-                className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-                onClick={handleCloseModal}
-              >
-                창 닫기
-              </button>
+    <div className="mx-auto h-screen max-w-screen-sm">
+      <div>
+        <Header3 buttons={buttonsHeader} />
+        <h1>회원 프로필 화면입니다.</h1>
+        <MemberSectionProfile />
+        <ConstellationSectionProfile />
+        {isModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <div className="absolute inset-0 bg-gray-800 opacity-50"></div>
+            <div className="z-10 rounded border-2 border-yellow-200 border-opacity-25 bg-slate-800 p-4 shadow-md">
+              <Header4 buttons={modalButtons} />
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import Header1 from "../../../common/blocks/Header1";
 import Footer1 from "../../../common/blocks/Footer1";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { BiSearch } from "react-icons/bi";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import InputImage from "../../Member/atoms/InputImage";
 import InputBox from "../../../common/atoms/InputBox";
 import useMemberApi from "../../../api/useMemberApi";
-
+import LeftArrow from "../../../assets/icons/js/leftArrow";
 const ModifyProfile = () => {
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
   const [imageUrl, setImage] = useState("");
@@ -32,9 +31,8 @@ const ModifyProfile = () => {
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
       onClick: navigateToBack,
-      icon: <BiSearch />,
+      icon: <LeftArrow />,
     },
   ];
 
@@ -70,7 +68,7 @@ const ModifyProfile = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-5">
+    <div className="mx-auto h-screen max-w-screen-sm">
       <Header1 buttons={buttonsHeader} />
       <form className="flex flex-col items-center justify-center space-y-10">
         <InputImage

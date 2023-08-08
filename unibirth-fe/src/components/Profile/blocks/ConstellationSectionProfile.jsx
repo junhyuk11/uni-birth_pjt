@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Button1 from "../../../common/atoms/Button1";
+// import Button1 from "../../../common/atoms/Button1";
 // import { useNavigation } from "../../../hooks/useNavigation";
 import useConstellationApi from "../../../api/useConstellationApi";
 import { useRecoilValue } from "recoil";
 import { targetNicknameState } from "../../../recoil/atoms";
+import Button3 from "../../../common/atoms/Button3";
 
 const ConstellationSectionProfile = () => {
   // const { navigateToListConstellation } = useNavigation();
@@ -38,21 +39,20 @@ const ConstellationSectionProfile = () => {
   }, [images]);
 
   return (
-    <div className="space-x-4 bg-red-200">
-      <h1>별자리 섹션 프로필 화면입니다. </h1>
-      <div className="flex flex-row items-center justify-center space-x-4 bg-red-500">
-        <Button1
+    <div className="space-x-4">
+      <div className="mx-auto flex flex-row items-center justify-between border-y-2 border-yellow-100 bg-slate-950 bg-opacity-70 text-yellow-50">
+        <Button3
           value="참여한 별자리"
-          className="font-TAEBAEKmilkyway"
+          className="mx-auto  w-full border-r-2 border-yellow-100 font-Pretendard text-yellow-50"
           onClick={handleParticipateClick}
         />
-        <Button1
+        <Button3
           value="핀한 별자리"
-          className="font-TAEBAEKmilkyway"
+          className="mx-auto w-full font-Pretendard text-yellow-50"
           onClick={handlePinClick}
         />
       </div>
-      <div className="flex flex-row flex-wrap justify-center bg-red-400">
+      <div className="flex flex-row flex-wrap justify-center">
         {images.map((img) => (
           <div key={img.constellationId} className="my-4">
             <img src={img.imageUrl} className="avatar" alt="User Avatar" />
