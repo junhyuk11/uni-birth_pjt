@@ -5,12 +5,12 @@ const InputImage = ({ onChange }) => {
     <div className="flex flex-col content-center items-center justify-center space-y-2 pl-10 font-TAEBAEKmilkyway">
       <label htmlFor="profileimage">프로필 이미지</label>
       <input
-        className=" w-30 border border-gray-300"
+        className="w-30 border border-gray-300"
         type="file"
         name="profileimage"
         id="profileimage"
         accept="image/*"
-        onChange={onChange}
+        onChange={(e) => onChange(e.target.files[0])} // 파일 객체 전달
       />
     </div>
   );

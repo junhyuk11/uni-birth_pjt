@@ -42,7 +42,7 @@ const ModifyProfile = () => {
 
   const handleCompleteClick = async (e) => {
     e.preventDefault();
-    console.log("imageUrl:", imageUrl);
+    console.log("imageUrl:");
     console.log(imageUrl.name);
     const storageRef = ref(storage, `images/${imageUrl.name}`);
     const uploadTask = uploadBytesResumable(storageRef, imageUrl);
@@ -94,8 +94,7 @@ const ModifyProfile = () => {
       <Header1 buttons={buttonsHeader} />
       <form className="flex flex-col items-center justify-center space-y-10">
         <InputImage
-          value={imageUrl}
-          onChange={(e) => setImage(e.target.value)}
+          onChange={(file) => setImage(file)} // 파일 객체 저장
         />
         <InputBox
           value="자기소개  "
