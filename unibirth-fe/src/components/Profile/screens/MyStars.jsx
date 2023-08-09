@@ -13,6 +13,18 @@ const MyStars = () => {
 
   const targetNickname = useRecoilValue(targetNicknameState);
 
+  function formatDate(dateString) {
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
+
   const buttonsHeader = [
     {
       component: Button2,
@@ -43,14 +55,20 @@ const MyStars = () => {
   return (
     <div>
       <Header2 buttons={buttonsHeader} />
-      <h1> 띄운별 리스트입니다..</h1>
+      <h1>띄운별 리스트입니다..</h1>
       <div className="flex flex-col items-center">
         {starList.map((star) => (
-          <div key={star.starId} className="my-4">
-            <img src={star.imageUrl} className="avatar" alt="User Avatar" />
-            <p>{star.title} 자리</p>
-            <p>{star.content}</p>
-            <p>{star.createdAt}</p>
+          <div key={star.starId} className="my-4 flex items-center">
+            <img
+              src={star.imageUrl}
+              className="avatar mr-4 h-32 w-32 object-cover"
+              alt="User Avatar"
+            />
+            <div className="text-white">
+              <p>{star.title} 자리</p>
+              <p>{star.content}</p>
+              <p>{formatDate(star.createdAt)}</p>
+            </div>
           </div>
         ))}
       </div>

@@ -43,14 +43,10 @@ const MessageBox = () => {
     const chatRef = ref(database, "chats");
     const handleNewChatRoom = (snapshot) => {
       const allChats = snapshot.val();
-      const userChats = Object.entries(allChats || {}).filter(
-        ([chatId, chatData]) => {
-          return Object.values(chatData).some(
-            (message) =>
-              message.sender === nickname || message.target === nickname,
-          );
-        },
-      );
+      const userChats = Object.entries(allChats || {}).filter(([chatId]) => {
+        const [sender, target] = chatId.split("_");
+        return sender === nickname || target === nickname;
+      });
       setChatRooms(userChats);
     };
 
