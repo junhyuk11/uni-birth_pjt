@@ -1,15 +1,15 @@
 import React from "react";
 
-const Header1 = ({ buttons }) => {
+const Header4 = ({ buttons }) => {
   return (
-    <div className=" h-flex flex-row space-x-4 px-4 py-4">
+    <div className="flex flex-col px-4 py-4">
       {buttons &&
         buttons.map((button, index) => {
           const ButtonComponent = button.component;
           return (
             <ButtonComponent
               key={index}
-              className="w-10 font-Pretendard hover:bg-yellow-500"
+              className="m-2 w-40 p-2 font-Pretendard hover:bg-yellow-500"
               value={button.value}
               onClick={button.onClick}
               icon={button.icon}
@@ -20,4 +20,4 @@ const Header1 = ({ buttons }) => {
   );
 };
 
-export default Header1;
+export default Header4;

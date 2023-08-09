@@ -4,10 +4,10 @@ import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
 import Footer1 from "../../../common/blocks/Footer1";
 import SignupFormMember from "../blocks/SignupFormMember";
-import { BiArrowBack } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useMemberApi from "../../../api/useMemberApi";
 import earth from "../../../assets/images/earth.png";
+import LeftArrow from "../../../assets/icons/js/leftArrow";
 import { useSetRecoilState } from "recoil";
 import { backgroundflagState } from "../../../recoil/atoms";
 
@@ -66,9 +66,9 @@ const RegisterMember = () => {
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
+      value: "",
       onClick: navigateToBack,
-      icon: <BiArrowBack />,
+      icon: <LeftArrow />,
     },
   ];
   const buttonsFooter = [
@@ -81,34 +81,36 @@ const RegisterMember = () => {
   ];
 
   return (
-    <div className="items-cneter flex flex-col justify-center space-y-5">
-      <Header1 buttons={buttonsHeader} />
-      <form>
-        <SignupFormMember
-          nickname={nickname}
-          setNickname={setNickname}
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          confirmPassword={confirmPassword}
-          setConfirmPassword={setConfirmPassword}
-          birthdate={birthdate}
-          setBirthdate={setBirthdate}
-          image={image}
-          setImage={setImage}
-          interest={interest}
-          setInterest={setInterest}
-        />
-        <Footer1
-          buttons={buttonsFooter}
-          nickname={nickname}
-          email={email}
-          password={password}
-          confirmPassword={confirmPassword}
-          joinMember={joinMember}
-        />
-      </form>
+    <div className="mx-auto h-screen max-w-screen-sm">
+      <div>
+        <Header1 buttons={buttonsHeader} />
+        <form className="justify-center">
+          <SignupFormMember
+            nickname={nickname}
+            setNickname={setNickname}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            confirmPassword={confirmPassword}
+            setConfirmPassword={setConfirmPassword}
+            birthdate={birthdate}
+            setBirthdate={setBirthdate}
+            image={image}
+            setImage={setImage}
+            interest={interest}
+            setInterest={setInterest}
+          />
+          <Footer1
+            buttons={buttonsFooter}
+            nickname={nickname}
+            email={email}
+            password={password}
+            confirmPassword={confirmPassword}
+            joinMember={joinMember}
+          />
+        </form>
+      </div>
     </div>
   );
 };

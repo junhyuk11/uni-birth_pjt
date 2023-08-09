@@ -1,6 +1,6 @@
 import React from "react";
 
-const Inputnickname = ({ onChange }) => {
+const InputReadOnlyNickname = () => {
   return (
     <div className="w-full flex-initial items-center justify-center font-Pretendard">
       <div className="w-full flex-row">
@@ -10,17 +10,16 @@ const Inputnickname = ({ onChange }) => {
         >
           닉네임
         </label>
-        <div className="mt-2 flex-row">
+        <div className="mt-2 w-full flex-row">
           <input
-            className="flex-1 flex-row border-b-2 border-gray-400 bg-transparent py-2 text-yellow-200 
+            className="w-full flex-1 flex-row border-b-2 border-gray-400 bg-transparent py-2 text-yellow-200 
         placeholder-gray-400 outline-none
         focus:border-yellow-200"
             type="text"
             name="nickname"
-            onChange={onChange}
-            placeholder="닉네임을 입력하세요"
             autoComplete="off"
             id="nickname"
+            readOnly
           />
         </div>
       </div>
@@ -28,4 +27,4 @@ const Inputnickname = ({ onChange }) => {
   );
 };
 
-export default Inputnickname;
+export default InputReadOnlyNickname;

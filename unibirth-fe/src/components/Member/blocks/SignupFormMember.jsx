@@ -71,55 +71,55 @@ const MemberRegistrationForm = ({
       const birthdateAsNumber = parseInt(month + day, 10);
       if (birthdateAsNumber <= 120) {
         setImage(Jodiac[0].image);
-        setContent(Jodiac[0].content);
+        setContent("");
         setJodiacname(Jodiac[0].name);
       } else if (birthdateAsNumber <= 218) {
         setImage(Jodiac[1].image);
-        setContent(Jodiac[1].content);
+        setContent("");
         setJodiacname(Jodiac[1].name);
       } else if (birthdateAsNumber <= 320) {
         setImage(Jodiac[2].image);
-        setContent(Jodiac[2].content);
+        setContent("");
         setJodiacname(Jodiac[2].name);
       } else if (birthdateAsNumber <= 419) {
         setImage(Jodiac[3].image);
-        setContent(Jodiac[3].content);
+        setContent("");
         setJodiacname(Jodiac[3].name);
       } else if (birthdateAsNumber <= 520) {
         setImage(Jodiac[4].image);
-        setContent(Jodiac[4].content);
+        setContent("");
         setJodiacname(Jodiac[4].name);
       } else if (birthdateAsNumber <= 621) {
         setImage(Jodiac[5].image);
-        setContent(Jodiac[5].content);
+        setContent("");
         setJodiacname(Jodiac[5].name);
       } else if (birthdateAsNumber <= 722) {
         setImage(Jodiac[6].image);
-        setContent(Jodiac[6].content);
+        setContent("");
         setJodiacname(Jodiac[6].name);
       } else if (birthdateAsNumber <= 822) {
         setImage(Jodiac[7].image);
-        setContent(Jodiac[7].content);
+        setContent("");
         setJodiacname(Jodiac[7].name);
       } else if (birthdateAsNumber <= 922) {
         setImage(Jodiac[8].image);
-        setContent(Jodiac[8].content);
+        setContent("");
         setJodiacname(Jodiac[8].name);
       } else if (birthdateAsNumber <= 1023) {
         setImage(Jodiac[9].image);
-        setContent(Jodiac[9].content);
+        setContent("");
         setJodiacname(Jodiac[9].name);
       } else if (birthdateAsNumber <= 1122) {
         setImage(Jodiac[10].image);
-        setContent(Jodiac[10].content);
+        setContent("");
         setJodiacname(Jodiac[10].name);
       } else if (birthdateAsNumber <= 1221) {
         setImage(Jodiac[11].image);
-        setContent(Jodiac[11].content);
+        setContent("");
         setJodiacname(Jodiac[11].name);
       } else if (birthdateAsNumber <= 1231) {
         setImage(Jodiac[0].image);
-        setContent(Jodiac[0].content);
+        setContent("");
         setJodiacname(Jodiac[0].name);
       }
     }, 300),
@@ -127,7 +127,7 @@ const MemberRegistrationForm = ({
   );
 
   return (
-    <div className="items-cneter flex flex-col justify-center space-y-5">
+    <div className="mx-10 flex-col items-center justify-center space-y-5">
       <InPutZodiac
         onChange={(e) => {
           setBirthdate(e.target.value);
@@ -142,56 +142,66 @@ const MemberRegistrationForm = ({
         setContent={setContent}
         jodiacname={jodiacname}
       />
-      <Inputnickname
-        value={nickname}
-        onChange={(e) => setNickname(e.target.value)}
-      />
-      <Button1
-        value="닉네임 중복확인"
-        className="font-TAEBAEKmilkyway"
-        onClick={(event) => {
-          event.preventDefault();
-          if (!isNicknameValid(nickname)) {
-            alert("닉네임 형식이 올바르지 않습니다.");
-            return;
-          }
-          duplicateCheck("Nickname", nickname, "닉네임을 입력해주세요.");
-        }}
-      />
-      <InputEmail
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Button1
-        value="이메일 중복확인"
-        className="font-TAEBAEKmilkyway"
-        onClick={(event) => {
-          event.preventDefault();
-          if (!isEmailValid(email)) {
-            alert("유효한 이메일 형식을 입력해주세요.");
-            return;
-          }
-          duplicateCheck("Email", email, "이메일을 입력해주세요.");
-        }}
-      />
-      <div className="flex flex-col items-center justify-center rounded-lg border-double font-TAEBAEKmilkyway">
-        <select value={interest} onChange={(e) => setInterest(e.target.value)}>
-          {PLANET_LIST.map((interest) => (
-            <option key={interest.name} value={interest.name}>
-              {interest.name}
-            </option>
-          ))}
-        </select>
+      <div className="flex">
+        <Inputnickname
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+        />
+        <Button1
+          value="확인"
+          className="w-16 font-Pretendard"
+          onClick={(event) => {
+            event.preventDefault();
+            if (!isNicknameValid(nickname)) {
+              alert("닉네임 형식이 올바르지 않습니다.");
+              return;
+            }
+            duplicateCheck("Nickname", nickname, "닉네임을 입력해주세요.");
+          }}
+        />
       </div>
-      <InputPassword
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <InputPasswordConfirm
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
+      <div className="flex">
+        <InputEmail
+          type="email"
+          className="w-100"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Button1
+          value="확인"
+          className="w-16 font-Pretendard"
+          onClick={(event) => {
+            event.preventDefault();
+            if (!isEmailValid(email)) {
+              alert("유효한 이메일 형식을 입력해주세요.");
+              return;
+            }
+            duplicateCheck("Email", email, "이메일을 입력해주세요.");
+          }}
+        />
+        <div className="flex flex-col items-center justify-center rounded-lg border-double font-TAEBAEKmilkyway">
+          <select
+            value={interest}
+            onChange={(e) => setInterest(e.target.value)}
+          >
+            {PLANET_LIST.map((interest) => (
+              <option key={interest.name} value={interest.name}>
+                {interest.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+      <div className="flex flex-row">
+        <InputPassword
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <InputPasswordConfirm
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+      </div>
     </div>
   );
 };

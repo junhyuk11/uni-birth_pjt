@@ -8,15 +8,17 @@ const MemberModifyForm = ({
   setConfirmPassword,
 }) => {
   return (
-    <div className="items-cneter flex flex-col justify-center space-y-5">
-      <InputPassword
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <InputPasswordConfirm
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
+    <div className="mx-10 mb-10 mt-72 flex-col items-center justify-center space-y-5">
+      <div className="flex flex-row">
+        <InputPassword
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <InputPasswordConfirm
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+      </div>
     </div>
   );
 };

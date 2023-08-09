@@ -4,11 +4,11 @@ import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
 import Footer1 from "../../../common/blocks/Footer1";
 import ModifyFormMember from "../blocks/ModifyFormMember";
-import { BiArrowBack } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
-import useMemberApi from "../../../api/useMemberApi";
-import { backgroundflagState } from "../../../recoil/atoms";
 import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
+import useMemberApi from "../../../api/useMemberApi";
+import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const RegisterMember = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -43,9 +43,8 @@ const RegisterMember = () => {
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
       onClick: navigateToBack,
-      icon: <BiArrowBack />,
+      icon: <LeftArrow />,
     },
   ];
   const buttonsFooter = [
@@ -58,22 +57,26 @@ const RegisterMember = () => {
   ];
 
   return (
-    <div className="items-cneter flex flex-col justify-center space-y-5">
-      <Header1 buttons={buttonsHeader} />
-      <form>
-        <ModifyFormMember
-          password={password}
-          setPassword={setPassword}
-          confirmPassword={confirmPassword}
-          setConfirmPassword={setConfirmPassword}
-        />
+    <div className="mx-auto h-screen max-w-screen-sm">
+      <div>
+        <Header1 buttons={buttonsHeader} />
+        <form className="justify-center">
+          <ModifyFormMember
+            password={password}
+            setPassword={setPassword}
+            confirmPassword={confirmPassword}
+            setConfirmPassword={setConfirmPassword}
+          />
+        </form>
+      </div>
+      <div className="mx-10">
         <Footer1
           buttons={buttonsFooter}
           password={password}
           confirmPassword={confirmPassword}
           joinMember={modifyMember}
         />
-      </form>
+      </div>
     </div>
   );
 };
