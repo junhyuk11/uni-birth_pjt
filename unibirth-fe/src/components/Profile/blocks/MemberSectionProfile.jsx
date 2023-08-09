@@ -5,6 +5,7 @@ import useMemberApi from "../../../api/useMemberApi";
 import useProfileApi from "../../../api/useProfileApi";
 import { useRecoilValue } from "recoil";
 import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
+import star from "../../../assets/images/star.png";
 
 const ConstellationSectionProfile = () => {
   const {
@@ -17,6 +18,8 @@ const ConstellationSectionProfile = () => {
   const [memberData, setMemberData] = useState();
   const targetNickname = useRecoilValue(targetNicknameState);
   const nickname = useRecoilValue(nicknameState);
+
+  const defaultImageUrl = star;
 
   const handleFollow = async (e) => {
     e.preventDefault();
@@ -68,7 +71,7 @@ const ConstellationSectionProfile = () => {
       {memberData && (
         <div className="flex items-start space-x-4">
           <img
-            src={memberData.resultData.imageUrl}
+            src={memberData.resultData.imageUrl || defaultImageUrl}
             className="h-32 w-32 rounded-full"
             alt="Round image"
           />

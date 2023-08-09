@@ -1,22 +1,21 @@
 import React from "react";
-import Upload from "../../../assets/icons/js/upload";
 
 const InputImage = ({ onChange }) => {
   return (
-    <div className="flex flex-col content-center items-center justify-center space-y-2 pl-10 font-TAEBAEKmilkyway">
+    <div className="flex flex-col content-center items-center justify-center font-Pretendard">
+      <input
+        type="file"
+        name="profileimage"
+        id="profileimage"
+        accept="image/*"
+        onChange={onChange}
+        style={{ display: "none" }}
+      />
       <label
         htmlFor="profileimage"
-        className="flex cursor-pointer items-center rounded px-4 py-2 text-white"
+        className="mx-auto flex cursor-pointer items-center rounded  text-blue-600"
       >
-        <input
-          className="hidden"
-          type="file"
-          name="profileimage"
-          id="profileimage"
-          accept="image/*"
-          onChange={onChange}
-        />
-        <Upload className="mr-2" />
+        프로필 이미지 변경
       </label>
     </div>
   );
