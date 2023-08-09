@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Footer1 from "../../../common/blocks/Footer1";
 import Button1 from "../../../common/atoms/Button1";
-import Button2 from "../../../common/atoms/Button2";
 import { BiSearch, BiHomeAlt } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { useNavigation } from "../../../hooks/useNavigation";
@@ -15,6 +13,7 @@ import {
   backgroundflagState,
   currentplanetState,
 } from "../../../recoil/atoms";
+import Footer2 from "../../../common/blocks/Footer2";
 
 const MainPlanet = () => {
   const [, setBackgroundflag] = useRecoilState(backgroundflagState);
@@ -58,7 +57,7 @@ const MainPlanet = () => {
       icon: <BiSearch />,
     },
     {
-      component: Button2,
+      component: Button1,
       onClick: refreshPage,
       icon: <BiHomeAlt />,
     },
@@ -94,8 +93,8 @@ const MainPlanet = () => {
         setCurrentPlanet={setCurrentPlanet}
         navigateToDetailPlanet={navigateToDetailPlanet}
       />
-      <div className="absolute bottom-20 left-5 z-10">
-        <Footer1 buttons={buttonsFooter} />
+      <div className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2 space-x-4">
+        <Footer2 buttons={buttonsFooter} />
       </div>
     </div>
   );

@@ -66,13 +66,13 @@ const Scene = ({ constellationList }) => {
   return (
     <>
       <button
-        className="absolute left-10 top-1/2 z-10 flex flex-col text-6xl text-white"
+        className="absolute left-4 top-1/2 z-10 flex flex-col text-4xl text-white opacity-50"
         onClick={handleLeftClick}
       >
         <BiSolidLeftArrow />
       </button>
       <button
-        className="absolute right-10 top-1/2 z-10 flex flex-col text-6xl text-white"
+        className="absolute right-4 top-1/2 z-10 flex flex-col text-4xl text-white opacity-50"
         onClick={handleRightClick}
       >
         <BiSolidRightArrow />

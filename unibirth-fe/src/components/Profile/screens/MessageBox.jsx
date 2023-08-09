@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
-import { IoIosArrowBack } from "react-icons/io";
 import { useNavigation } from "../../../hooks/useNavigation";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { database, ref, onValue, off } from "../../../api/useFirebaseApi";
 import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
+import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const MessageBox = () => {
   const nickname = useRecoilValue(nicknameState);
@@ -23,9 +23,8 @@ const MessageBox = () => {
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
       onClick: handleBackClick,
-      icon: <IoIosArrowBack />,
+      icon: <LeftArrow />,
     },
   ];
 
@@ -62,34 +61,36 @@ const MessageBox = () => {
   }, [nickname]);
 
   return (
-    <div className="text-xs text-white">
-      <Header2 buttons={buttonsHeader} />
-      <ul>
-        {chatRooms.map(([chatId, chatData]) => {
-          const [sender, target] = chatId.split("_");
-          const otherNickname = sender === nickname ? target : sender;
+    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+      <div>
+        <Header2 buttons={buttonsHeader} />
+        <ul>
+          {chatRooms.map(([chatId, chatData]) => {
+            const [sender, target] = chatId.split("_");
+            const otherNickname = sender === nickname ? target : sender;
 
-          const messages = Object.values(chatData);
-          const lastMessage = messages[messages.length - 1];
+            const messages = Object.values(chatData);
+            const lastMessage = messages[messages.length - 1];
 
-          return (
-            <li key={chatId} className="mb-2">
-              <strong className="text-base">닉네임 :</strong> {otherNickname}
-              <button
-                onClick={() => handleNavigateToChat(chatId)}
-                className="ml-2 rounded bg-gray-500 px-2 py-1 text-xs"
-              >
-                채팅방 이동
-              </button>
-              {lastMessage && (
-                <div className="text-xs">
-                  <strong className="text-base"></strong> {lastMessage.text}
-                </div>
-              )}
-            </li>
-          );
-        })}
-      </ul>
+            return (
+              <li key={chatId} className="mb-2">
+                <strong className="text-base">닉네임 :</strong> {otherNickname}
+                <button
+                  onClick={() => handleNavigateToChat(chatId)}
+                  className="ml-2 rounded bg-gray-500 px-2 py-1 text-xs"
+                >
+                  채팅방 이동
+                </button>
+                {lastMessage && (
+                  <div className="text-xs">
+                    <strong className="text-base"></strong> {lastMessage.text}
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 };

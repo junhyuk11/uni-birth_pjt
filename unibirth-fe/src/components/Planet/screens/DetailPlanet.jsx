@@ -4,9 +4,9 @@ import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
 import Footer1 from "../../../common/blocks/Footer1";
 import ListSectionConstellation from "../blocks/ListSectionConstellation";
-import { BiSearch } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
 import ListConstellation from "../blocks/ListConstellation";
+import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const DetailPlanet = () => {
   const [constellationList, setConstellationList] = useState({
@@ -18,9 +18,8 @@ const DetailPlanet = () => {
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
       onClick: navigateToMainPlanet,
-      icon: <BiSearch />,
+      icon: <LeftArrow />,
     },
   ];
   const buttonsFooter = [
@@ -33,11 +32,11 @@ const DetailPlanet = () => {
   ];
   return (
     <div>
-      <div className="relative h-screen w-screen">
+      <div className="absolute z-50 max-w-screen-sm">
+        <Header1 buttons={buttonsHeader} />
+      </div>
+      <div className="h-screen w-screen">
         <div className="absolute left-1/2 top-20 z-10 z-10 -translate-x-1/2 -translate-y-1/2">
-          <div>
-            <Header1 buttons={buttonsHeader} />
-          </div>
           <ListSectionConstellation
             constellationList={constellationList}
             setConstellationList={setConstellationList}

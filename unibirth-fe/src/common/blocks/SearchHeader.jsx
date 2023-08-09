@@ -17,14 +17,14 @@ const SearchHeader = ({ buttons, category, setCategory, query, setQuery }) => {
   };
 
   return (
-    <div className="flex flex-row items-center justify-center space-x-4">
+    <div className="flex justify-between space-x-4 px-4 py-4">
       {buttons &&
         buttons.map((button, index) => {
           const ButtonComponent = button.component;
           return (
             <ButtonComponent
               key={index}
-              className="font-TAEBAEKmilkyway"
+              className="font-Pretendard"
               value={button.value}
               onClick={button.onClick}
               icon={button.icon}
@@ -32,7 +32,7 @@ const SearchHeader = ({ buttons, category, setCategory, query, setQuery }) => {
           );
         })}
       <input
-        className="font-TAEBAEKmilkyway"
+        className="font-Pretendard "
         type="text"
         placeholder="검색어를 입력하세요"
         value={query}
@@ -47,7 +47,7 @@ const SearchHeader = ({ buttons, category, setCategory, query, setQuery }) => {
           ))}
         </select>
       </div>
-      <button className="font-TAEBAEKmilkyway" onClick={handleSearch}>
+      <button className="font-Pretendard" onClick={handleSearch}>
         <BiSearchAlt />
       </button>
     </div>

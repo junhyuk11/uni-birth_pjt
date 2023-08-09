@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
-import { IoIosArrowBack } from "react-icons/io";
 import { useRecoilValue } from "recoil";
 import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
 import { useNavigation } from "../../../hooks/useNavigation";
 import { sendMessage, listenForMessages } from "../../../api/useFirebaseApi";
+import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const DirectMessage = () => {
   const [messages, setMessages] = useState([]);
@@ -18,9 +18,8 @@ const DirectMessage = () => {
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
       onClick: navigateToBack,
-      icon: <IoIosArrowBack />,
+      icon: <LeftArrow />,
     },
   ];
 

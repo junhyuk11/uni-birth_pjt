@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Button2 from "../atoms/Button2";
-import { BiSearch } from "react-icons/bi";
 import { useNavigation } from "../../hooks/useNavigation";
-import Footer1 from "../blocks/Footer1";
-import { BsPinAngle } from "react-icons/bs";
+import Footer3 from "../blocks/Footer3";
 import Button1 from "../atoms/Button1";
 import SearchHeader from "../blocks/SearchHeader";
 import QurationStar from "../blocks/QurationStar";
 import { useSetRecoilState } from "recoil";
 import { backgroundflagState } from "../../recoil/atoms";
+import LeftArrow from "../../assets/icons/js/leftArrow";
 
 const DetailConstellation = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -22,9 +21,8 @@ const DetailConstellation = () => {
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
       onClick: navigateToBack,
-      icon: <BiSearch />,
+      icon: <LeftArrow />,
     },
   ];
 
@@ -36,13 +34,12 @@ const DetailConstellation = () => {
     {
       component: Button1,
       value: "찜하기",
-      icon: <BsPinAngle />,
     },
   ];
 
   return (
-    <div className="">
-      <div className="flex flex-row justify-center space-x-10">
+    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+      <div>
         <SearchHeader
           buttons={buttonsHeader}
           category={category}
@@ -50,14 +47,14 @@ const DetailConstellation = () => {
           query={query}
           setQuery={setQuery}
         />
+        <div className="flex flex-col items-center justify-center">
+          <p>별자리 상세 페이지</p>
+          <p>현재 카테고리 {category}</p>
+          <p>현재 검색어 {query}</p>
+        </div>
+        <QurationStar />
+        <Footer3 buttons={buttonsFooter} />
       </div>
-      <div className="flex flex-col items-center justify-center">
-        <p>별자리 상세 페이지</p>
-        <p>현재 카테고리 {category}</p>
-        <p>현재 검색어 {query}</p>
-      </div>
-      <QurationStar />
-      <Footer1 className="z-50" buttons={buttonsFooter} />
     </div>
   );
 };

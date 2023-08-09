@@ -13,30 +13,34 @@ const Header2 = ({ buttons }) => {
   };
 
   return (
-    <div className="flex flex-row items-center justify-center space-x-4">
-      {buttons &&
-        buttons.map((button, index) => {
-          const ButtonComponent = button.component;
-          return (
-            <ButtonComponent
-              key={index}
-              className="font-TAEBAEKmilkyway"
-              value={button.value}
-              onClick={button.onClick}
-              icon={button.icon}
-            />
-          );
-        })}
-      <input
-        className="font-TAEBAEKmilkyway"
-        type="text"
-        placeholder="검색어를 입력하세요"
-        value={searchKeyword}
-        onChange={handleSearchInputChange}
-      />
-      <button className="font-TAEBAEKmilkyway" onClick={handleSearch}>
-        <BiSearchAlt />
-      </button>
+    <div className="flex justify-between space-x-4 px-4 py-4">
+      <div className="flex items-center">
+        {buttons &&
+          buttons.map((button, index) => {
+            const ButtonComponent = button.component;
+            return (
+              <ButtonComponent
+                key={index}
+                className="font-Pretendard"
+                value={button.value}
+                onClick={button.onClick}
+                icon={button.icon}
+              />
+            );
+          })}
+      </div>
+      <div className="flex items-center space-x-4">
+        <input
+          className="font-Pretendard"
+          type="text"
+          placeholder="검색어를 입력하세요"
+          value={searchKeyword}
+          onChange={handleSearchInputChange}
+        />
+        <button onClick={handleSearch}>
+          <BiSearchAlt />
+        </button>
+      </div>
     </div>
   );
 };

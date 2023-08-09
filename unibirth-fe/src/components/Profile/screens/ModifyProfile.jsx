@@ -8,7 +8,6 @@ import InputImage from "../../Member/atoms/InputImage";
 import useMemberApi from "../../../api/useMemberApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import InputIntroduction from "../atoms/InputIntroduction";
-import star from "../../../assets/images/star.png";
 import { storage } from "../../../api/useFirebaseApi";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
@@ -17,7 +16,7 @@ const ModifyProfile = () => {
   const [imageUrl, setImage] = useState("");
   const [introduction, setIntro] = useState("");
   const [nickname, setNickname] = useState("");
-
+  console.log(imageUrl);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,8 +30,6 @@ const ModifyProfile = () => {
     };
     fetchData();
   }, []);
-
-  const defaultImageUrl = star;
 
   const saveImgFile = (event) => {
     const file = event.target.files[0];
@@ -105,7 +102,7 @@ const ModifyProfile = () => {
       <Header1 buttons={buttonsHeader} />
       <form className="flex flex-col items-center justify-center space-y-10">
         <img
-          src={imageUrl || defaultImageUrl}
+          src={imageUrl}
           alt="프로필 이미지"
           className="h-32 w-32 rounded-full object-cover"
         />
