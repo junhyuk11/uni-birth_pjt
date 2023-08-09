@@ -21,8 +21,6 @@ const RegisterMember = () => {
   const [birthdate, setBirthdate] = useState("");
   const [interest, setInterest] = useState([]);
   const [image, setImage] = useState(`${earth}`);
-  // const [content, setContent] = useState("");
-  // const [jodiacname, setJodiacname] = useState("당신의 별자리는?");
   const { navigateToBack, navigateToLoginMember } = useNavigation();
 
   const joinMember = async (e) => {

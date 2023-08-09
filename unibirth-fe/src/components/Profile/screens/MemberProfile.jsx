@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
-import { LuMessagesSquare } from "react-icons/lu";
+import { LuMessagesSquare, LuSend } from "react-icons/lu";
 import { useNavigation } from "../../../hooks/useNavigation";
 import MemberSectionProfile from "../blocks/MemberSectionProfile";
 import ConstellationSectionProfile from "../blocks/ConstellationSectionProfile";
@@ -11,17 +11,25 @@ import ThreeDots from "../../../assets/icons/js/threeDots";
 import Header3 from "../../../common/blocks/Header3";
 import Close from "../../../assets/icons/js/close";
 import Header4 from "../../../common/blocks/Header4";
-import { useSetRecoilState } from "recoil";
-import { backgroundflagState } from "../../../recoil/atoms";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import {
+  backgroundflagState,
+  nicknameState,
+  targetNicknameState,
+} from "../../../recoil/atoms";
 
 const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
   backgroundflag(true);
+
+  const nickname = useRecoilValue(nicknameState);
+  const targetNickname = useRecoilValue(targetNicknameState);
   const {
     navigateToMessageBox,
     // navigateToModifyProfile,
     navigateToMainPlanet,
     navigateToModifyMember,
+    navigateToDirectMessage,
   } = useNavigation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,9 +67,12 @@ const MemberProfile = () => {
     },
     {
       component: Button2,
-      className: "font-Pretendard",
-      onClick: navigateToMessageBox,
-      icon: <LuMessagesSquare />,
+      className: "font-TAEBAEKmilkyway",
+      onClick:
+        nickname === targetNickname
+          ? navigateToMessageBox
+          : navigateToDirectMessage,
+      icon: nickname === targetNickname ? <LuMessagesSquare /> : <LuSend />,
     },
     {
       component: Button2,

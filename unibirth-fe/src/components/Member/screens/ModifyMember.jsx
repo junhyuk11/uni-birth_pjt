@@ -5,8 +5,8 @@ import Header1 from "../../../common/blocks/Header1";
 import Footer1 from "../../../common/blocks/Footer1";
 import ModifyFormMember from "../blocks/ModifyFormMember";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { nicknameState, backgroundflagState } from "../../../recoil/atoms";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 import useMemberApi from "../../../api/useMemberApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 
@@ -16,7 +16,6 @@ const RegisterMember = () => {
     backgroundflag(true);
   }, []);
 
-  const [nickname, setNickname] = useRecoilState(nicknameState);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
@@ -27,24 +26,17 @@ const RegisterMember = () => {
       return;
     }
 
-    const member = {
-      nickname,
-      password,
-    };
     try {
-      const response = await useMemberApi.membersPutUpdate(member);
+      const response = await useMemberApi.membersPutUpdate(password);
       console.log(response);
-      setNickname(member.nickname);
-      alert("회원정보 수정이 완료되었습니다..");
+      alert("비밀번호 변경이 완료되었습니다..");
       navigateToMemberProfile();
     } catch (e) {
       console.log(e);
-      alert("회원정보 수정에 실패하였습니다.");
+      alert("비밀번호 변경에 실패하였습니다.");
     }
 
-    console.log(
-      `Nickname: ${nickname}, Password: ${password}, confirmPassword: ${confirmPassword}`,
-    );
+    console.log(`Password: ${password}, confirmPassword: ${confirmPassword}`);
   };
 
   const buttonsHeader = [
@@ -59,7 +51,7 @@ const RegisterMember = () => {
     {
       component: Button1,
       className: "font-TAEBAEKmilkyway",
-      value: "회원정보 수정",
+      value: "비밀번호 변경",
       onClick: modifyMember,
     },
   ];
@@ -70,8 +62,6 @@ const RegisterMember = () => {
         <Header1 buttons={buttonsHeader} />
         <form className="justify-center">
           <ModifyFormMember
-            nickname={nickname}
-            setNickname={setNickname}
             password={password}
             setPassword={setPassword}
             confirmPassword={confirmPassword}
@@ -82,7 +72,6 @@ const RegisterMember = () => {
       <div className="mx-10">
         <Footer1
           buttons={buttonsFooter}
-          nickname={nickname}
           password={password}
           confirmPassword={confirmPassword}
           joinMember={modifyMember}

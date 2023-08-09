@@ -50,7 +50,11 @@ const App = () => {
           </Canvas>
         </div>
       )}
+<<<<<<< HEAD
       <div className="absolute w-screen">
+=======
+      <div className="fixed left-1/2 z-10 -translate-x-1/2">
+>>>>>>> 0742cd87884f6b166099f15c5c064790561ffc00
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/members/login" element={<LoginMember />} />

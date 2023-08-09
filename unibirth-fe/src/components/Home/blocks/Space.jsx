@@ -15,6 +15,7 @@ import * as THREE from "three";
 //   const starsRef = useRef();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //   const texture = useLoader(THREE.TextureLoader, Star);
 
 //   const [starGeo, starMaterial] = useMemo(() => {
@@ -23,6 +24,8 @@ import * as THREE from "three";
 //     const velocity = [];
 //     const acceleration = [];
 =======
+=======
+>>>>>>> 0742cd87884f6b166099f15c5c064790561ffc00
   const [starGeo, starMaterial] = useMemo(() => {
     const starGeo = new THREE.SphereGeometry(1, 8, 8);
     const vertices = [];
@@ -54,6 +57,7 @@ import * as THREE from "three";
 //     );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //     const starMaterial = new THREE.PointsMaterial({
 //       color: 0xaaaaaa,
 //       size: 1.2,
@@ -65,6 +69,8 @@ import * as THREE from "three";
 //     return [starGeo, starMaterial];
 //   }, [texture]);
 =======
+=======
+>>>>>>> 0742cd87884f6b166099f15c5c064790561ffc00
     const starMaterial = new THREE.MeshBasicMaterial({
       color: new THREE.Color(Math.random(), Math.random(), Math.random()),
       // transparent: true,
@@ -73,7 +79,10 @@ import * as THREE from "three";
 
     return [starGeo, starMaterial];
   }, []);
+<<<<<<< HEAD
 >>>>>>> bacd14141adc64fdba12f1530f9fa1aff8f98b57
+=======
+>>>>>>> 0742cd87884f6b166099f15c5c064790561ffc00
 
 //   useFrame(({ camera }) => {
 //     const position = starsRef.current.geometry.attributes.position;
