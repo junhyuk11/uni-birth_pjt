@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button2 from "../atoms/Button2";
 import { BiSearch } from "react-icons/bi";
 import { useNavigation } from "../../hooks/useNavigation";
@@ -7,8 +7,14 @@ import { BsPinAngle } from "react-icons/bs";
 import Button1 from "../atoms/Button1";
 import SearchHeader from "../blocks/SearchHeader";
 import QurationStar from "../blocks/QurationStar";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../recoil/atoms";
 
 const DetailConstellation = () => {
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  useEffect(() => {
+    backgroundflag(true);
+  }, []);
   const { navigateToBack } = useNavigation();
   const [category, setCategory] = useState("all");
   const [query, setQuery] = useState("");

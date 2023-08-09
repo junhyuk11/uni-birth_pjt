@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import useSearchApi from "../../api/useSearchApi";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../recoil/atoms";
 
 const SearchCommon = () => {
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  useEffect(() => {
+    backgroundflag(true);
+  }, []);
   const location = useLocation();
   const query = location.state.query;
   const category = location.state.categoryName;
