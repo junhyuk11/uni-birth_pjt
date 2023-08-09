@@ -9,6 +9,8 @@ import useMemberApi from "../../../api/useMemberApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import InputIntroduction from "../atoms/InputIntroduction";
 import star from "../../../assets/images/star.png";
+import { storage } from "../../../api/useFirebaseApi";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const ModifyProfile = () => {
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
@@ -16,7 +18,6 @@ const ModifyProfile = () => {
   const [introduction, setIntro] = useState("");
   const [nickname, setNickname] = useState("");
 
-  // useEffect를 사용하여 데이터가 불러와진 후에 상태를 설정합니다.
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,26 +51,44 @@ const ModifyProfile = () => {
     },
   ];
 
-  const handleClick = async (e) => {
+  const handleCompleteClick = async (e) => {
     e.preventDefault();
-    const member = {
-      introduction,
-      imageUrl,
-    };
-    console.log("image:", imageUrl);
-    console.log("intro:", introduction);
-    try {
-      const response = await useMemberApi.membersPutProfiles(member);
-      if (response.status === 200) {
-        alert("수정이 완료되었습니다.");
-        navigateToMemberProfile();
-      } else {
-        alert("오류 발생.");
-      }
-    } catch (e) {
-      console.log(e);
-      alert("오류가 발생.");
-    }
+    console.log("imageUrl:");
+    console.log(imageUrl.name);
+    const storageRef = ref(storage, `images/${imageUrl.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, imageUrl);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(`Upload is ${progress}% done.`);
+      },
+      (error) => {
+        console.log(error);
+      },
+      async () => {
+        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+        console.log("downloadURL:", downloadURL);
+        const member = {
+          introduction,
+          imageUrl: downloadURL,
+        };
+        console.log("member:", member);
+        try {
+          const response = await useMemberApi.membersPutProfiles(member);
+          if (response.status === 200) {
+            alert("수정이 완료되었습니다.");
+            navigateToMemberProfile();
+          } else {
+            alert("오류 발생.");
+          }
+        } catch (e) {
+          console.log(e);
+          alert("오류가 발생.");
+        }
+      },
+    );
   };
 
   const buttonsFooter = [
@@ -77,7 +96,7 @@ const ModifyProfile = () => {
       component: Button1,
       className: "font-TAEBAEKmilkyway",
       value: "완료하기",
-      onClick: handleClick,
+      onClick: handleCompleteClick,
     },
   ];
 
@@ -95,7 +114,7 @@ const ModifyProfile = () => {
           <div className="w-full flex-row">
             <label
               htmlFor="nickname"
-              className="inline-block w-24 font-bold text-gray-100"
+              className="inline-block w-24 font-bold text-gray-200"
             >
               닉네임
             </label>

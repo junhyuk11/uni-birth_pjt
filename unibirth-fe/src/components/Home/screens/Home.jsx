@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Footer1 from "../../../common/blocks/Footer1";
 import Button1 from "../../../common/atoms/Button1";
-// import useConstellationApi from "../../../api/useConstellationApi";
 import { useNavigation } from "../../../hooks/useNavigation";
-// import Space from "../blocks/Space";
+import { useRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 // import { Canvas } from "@react-three/fiber";
+// // import Space from "../blocks/Space";
 
 const Home = () => {
+  const [, setBackgroundflag] = useRecoilState(backgroundflagState);
+  useEffect(() => {
+    setBackgroundflag(true);
+  }, []);
   const { navigateToMainPlanet, navigateToLoginMember } = useNavigation();
 
   const buttons = [
@@ -34,12 +39,6 @@ const Home = () => {
       </p>
       <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform">
         <Footer1 buttons={buttons} />
-      </div>
-      <div className="absolute top-0 z-0 h-full w-full">
-        {/* <Canvas camera={{ position: [0, -50, 0] }}>
-          <color attach="background" args={["black"]} />
-          <Space />
-        </Canvas> */}
       </div>
     </div>
   );

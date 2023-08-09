@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Stage, Layer, Rect, Line, Star } from "react-konva";
 import Button1 from "../../../common/atoms/Button1";
-import Footer1 from "../../../common/blocks/Footer1";
-import DrawingBackButton from "../atoms/DrawingBackButton";
+// import Footer1 from "../../../common/blocks/Footer1";
+// import DrawingBackButton from "../atoms/DrawingBackButton";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../api/useFirebaseApi";
 import useConstellationApi from "../../../api/useConstellationApi";
@@ -240,11 +240,11 @@ const GridCustomConstellation = ({
     setGrid(tempGrid);
   }
 
-  // const handelConsoleClick = () => {
-  //   const [uniquePoints, uniqueLines] = removeDuplicate(lines);
-  //   console.log(uniquePoints);
-  //   console.log(uniqueLines);
-  // };
+  const handelConsoleClick = () => {
+    const [uniquePoints, uniqueLines] = removeDuplicate(lines);
+    console.log(uniquePoints);
+    console.log(uniqueLines);
+  };
 
   const handleResetClick = () => {
     setPoints([]);
@@ -254,29 +254,32 @@ const GridCustomConstellation = ({
     setShouldDeduplicate(false);
   };
 
-  const buttonsFooter = [
-    {
-      component: Button1,
-      className: "font-TAEBAEKmilkyway",
-      value: "초기화",
-      onClick: handleResetClick,
-    },
-    {
-      component: Button1,
-      className: "font-TAEBAEKmilkyway",
-      value: "완료하기",
-      onClick: handleSaveClick,
-    },
-  ];
+  // const buttonsFooter = [
+  //   {
+  //     component: Button1,
+  //     className: "font-TAEBAEKmilkyway",
+  //     value: "초기화",
+  //     onClick: handleResetClick,
+  //   },
+  //   {
+  //     component: Button1,
+  //     className: "font-TAEBAEKmilkyway",
+  //     value: "완료하기",
+  //     onClick: handleSaveClick,
+  //   },
+  // ];
 
   return (
-    <div className="mt-8 flex flex-col">
-      <div>
-        <DrawingBackButton
-          className="font-TAEBAEKmilkyway"
-          value="직전으로 돌아가기"
-          onClick={handleBeforeClick}
-        ></DrawingBackButton>
+    <div>
+      <div className="text-white">
+        <p className="font-TAEBAEKmilkyway">지금 행성명: {planetId}</p>
+        <p className="font-TAEBAEKmilkyway">
+          지금 별자리명: {constellationName}
+        </p>
+        <p className="font-TAEBAEKmilkyway">
+          지금 별자리설명: {constellationDescp}
+        </p>
+        <p className="font-TAEBAEKmilkyway">지금 보드사이즈: {boardSize}</p>
       </div>
       <div className={`items-center justify-center ${containerStyle}`}>
         <Stage width={stageSize} height={stageSize}>
@@ -330,7 +333,26 @@ const GridCustomConstellation = ({
         </Stage>
       </div>
       <div>
-        <Footer1 buttons={buttonsFooter} />
+        <Button1
+          className="font-TAEBAEKmilkyway"
+          value="초기화"
+          onClick={handleResetClick}
+        ></Button1>
+        <Button1
+          className="font-TAEBAEKmilkyway"
+          value="직전으로 돌아가기"
+          onClick={handleBeforeClick}
+        ></Button1>
+        <Button1
+          className="font-TAEBAEKmilkyway"
+          value="저장하기"
+          onClick={handleSaveClick}
+        ></Button1>
+        <Button1
+          className="font-TAEBAEKmilkyway"
+          value="콘솔에 띄우기"
+          onClick={handelConsoleClick}
+        ></Button1>
       </div>
     </div>
   );

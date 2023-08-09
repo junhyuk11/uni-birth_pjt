@@ -6,7 +6,7 @@ const InputPasswordConfirm = ({ onChange }) => {
       <div className="w-full">
         <label
           htmlFor="confirmPassword"
-          className="inline-block w-24 font-bold text-gray-100"
+          className="inline-block w-24 font-bold text-gray-200"
         >
           비밀번호 확인
         </label>

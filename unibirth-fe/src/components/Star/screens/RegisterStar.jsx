@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
@@ -6,15 +6,19 @@ import Footer1 from "../../../common/blocks/Footer1";
 import { BiSearch } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
 import BodyRegisterStar from "../blocks/BodyRegisterStar";
-import { useRecoilValue } from "recoil";
-import { StellaIdState } from "../../../recoil/atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { StellaIdState, backgroundflagState } from "../../../recoil/atoms";
 import useStarApi from "../../../api/useStarApi";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../api/useFirebaseApi";
 
-const RegisterStar = (event) => {
-  const { navigateToBack } = useNavigation(); // navigateToDetailConstellation
-  console.log(event);
+const RegisterStar = () => {
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  useEffect(() => {
+    backgroundflag(true);
+  }, []);
+
+  const { navigateToBack, navigateToDetailConstellation } = useNavigation(); // navigateToDetailConstellation
   const constellationId = useRecoilValue(StellaIdState);
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -25,54 +29,56 @@ const RegisterStar = (event) => {
     const storageRef = ref(storage, `images/${imageUrl.name}`);
     const uploadTask = uploadBytesResumable(storageRef, imageUrl);
 
-    const data = {
-      constellationId,
-      title,
-      imageUrl,
-      content,
-    };
-
-    try {
-      if (title.trim() === "") {
-        alert("이름을 입력해주세요");
-        return;
-      } else if (content.trim() === "") {
-        alert("내용을 입력해주세요");
-        return;
-      } else if (!imageUrl) {
-        alert("이미지를 넣어주세요");
-        return;
-      }
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          // Progress function
-        },
-        (error) => {
-          // Error handling
-          console.log(error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref)
-            // 2. 받은 URL back 서버에 저장
-            .then(async (downloadURL) => {
-              // Removed the extra arrow function
-              setImageUrl(downloadURL);
-              console.log("data", data);
-              const response = await useStarApi.starsPostStar(data);
-              // navigateToDetailConstellation(constellationId);
-              console.log(response);
-            })
-            .catch((error) => {
-              console.log("Failed to get download url", error);
-            });
-        },
-      );
-    } catch (e) {
-      console.log(e);
-      alert("별 생성에 실패하였습니다. 다시 입력해주세요");
+    if (title.trim() === "") {
+      alert("이름을 입력해주세요");
+      return;
+    } else if (content.trim() === "") {
+      alert("내용을 입력해주세요");
+      return;
+    } else if (!imageUrl) {
+      alert("이미지를 넣어주세요");
+      return;
     }
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(`Upload is ${progress}% done.`);
+      },
+      (error) => {
+        // Error handling
+        console.log(error);
+      },
+      async () => {
+        try {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          // 2. 받은 URL back 서버에 저장
+          // Removed the extra arrow function
+          console.log(downloadURL);
+          setImageUrl(downloadURL);
+          const data = {
+            constellationId,
+            title,
+            imageUrl: downloadURL,
+            content,
+          };
+          const response = await useStarApi.starsPostStar(data);
+          navigateToDetailConstellation(constellationId);
+          console.log("response:", response);
+          console.log("data:", data);
+          if (response.status === 200) {
+            alert("별 생성에 성공하였습니다.");
+            // navigateToDetailConstellation(constellationId);
+          } else {
+            alert("별 생성에 실패하였습니다. 다시 입력해주세요");
+          }
+        } catch (error) {
+          console.log("Failed to get download url", error);
+        }
+      },
+    );
   };
 
   const buttonsHeader = [

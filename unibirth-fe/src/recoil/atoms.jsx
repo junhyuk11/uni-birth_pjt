@@ -86,3 +86,9 @@ export const backgroundflagState = atom({
   default: false,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const currentplanetState = atom({
+  key: "currentplanetState",
+  default: 0,
+  effects_UNSTABLE: [persistAtom],
+});

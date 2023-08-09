@@ -4,7 +4,7 @@ import useConstellationApi from "../../../api/useConstellationApi";
 import { useParams } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-import { OrbitControls, Line, Stars } from "@react-three/drei";
+import { Line } from "@react-three/drei";
 import {
   starListState,
   boxcontentState,
@@ -17,6 +17,7 @@ import {
 import { useRecoilState, useSetRecoilState } from "recoil";
 import * as THREE from "three";
 import GradientBackground from "../../../common/atoms/GradientBackground";
+import Background from "../../../common/atoms/Background";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -38,6 +39,8 @@ const ListSectionStar = () => {
   const changeColor = (event) => {
     setSphereColor(event.target.value);
   };
+  // 김민섭
+  const [brightness, setBrightness] = useState(0);
 
   // tooltip
   const [tooltipStyle, setTooltipStyle] = useState({ display: "none" });
@@ -65,6 +68,7 @@ const ListSectionStar = () => {
     setBoxurl(starListIndex[index]?.imageUrl);
     setBoxid(starListIndex[index]?.starId);
     setBoxcreated(starListIndex[index]?.createdAt);
+    setBrightness(starListIndex[index]?.brightness);
     console.log("boxid:", boxid);
     console.log("boxurl:", boxurl);
   };
@@ -110,15 +114,9 @@ const ListSectionStar = () => {
   // console.log("starPosition:", starPotisions);
 
   return (
-    <div className="relative bottom-0 h-screen">
+    <div className="relative bottom-0 h-screen w-screen">
       <Canvas camera={{ position: [0, 0, 70] }}>
-        <OrbitControls
-          autoRotate={true}
-          autoRotateSpeed={0.5}
-          enableDamping
-          dampingFactor={0.05}
-          enabled={true}
-        />
+        <Background />
         <axesHelper scale={5} />
         <EffectComposer>
           <Bloom mipmapBlur luminanceThreshold={1} radius={0.7} />
@@ -158,14 +156,6 @@ const ListSectionStar = () => {
             ))}
           </group>
         ))}
-        <Stars
-          radius={100} // Radius of the inner sphere (default=100)
-          depth={50} // Depth of area where stars should fit (default=50)
-          count={5000} // Amount of stars (default=5000)
-          factor={4} // Size factor (default=4)
-          saturation={0} // Saturation (default=0)
-          fade // Faded dots (default=false)
-        />
       </Canvas>
       <div>
         {/* 별을 클릭했을 때 위치 조정 필요 */}
@@ -227,6 +217,7 @@ const ListSectionStar = () => {
                 className="h-10 w-10 rounded-full"
               />
             </div>
+            현재 빛남 : {brightness}
             <button
               className="rounded-lg bg-red-500 text-white"
               onClick={() => navigateToDetailStar(boxid)}

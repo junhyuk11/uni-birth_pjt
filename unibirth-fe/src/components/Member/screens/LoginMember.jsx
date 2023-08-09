@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
@@ -16,7 +16,9 @@ import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const LoginMember = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
-  backgroundflag(true);
+  useEffect(() => {
+    backgroundflag(true);
+  }, []);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // eslint-disable-next-line no-unused-vars

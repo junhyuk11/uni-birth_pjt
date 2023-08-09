@@ -8,17 +8,22 @@ import { useNavigation } from "../../../hooks/useNavigation";
 import useMemberApi from "../../../api/useMemberApi";
 import earth from "../../../assets/images/earth.png";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 
 const RegisterMember = () => {
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  backgroundflag(true);
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [birthdate, setBirthdate] = useState("");
-  const { navigateToBack, navigateToLoginMember } = useNavigation();
+  const [interest, setInterest] = useState([]);
   const [image, setImage] = useState(`${earth}`);
-  const [content, setContent] = useState("");
-  const [jodiacname, setJodiacname] = useState("당신의 별자리는?");
+  // const [content, setContent] = useState("");
+  // const [jodiacname, setJodiacname] = useState("당신의 별자리는?");
+  const { navigateToBack, navigateToLoginMember } = useNavigation();
 
   const joinMember = async (e) => {
     e.preventDefault();
@@ -31,7 +36,11 @@ const RegisterMember = () => {
       nickname,
       email,
       password,
+      birthdate,
+      imageUrl: image,
+      interest,
     };
+    console.log(member);
     try {
       const response = await useMemberApi.membersPostRegister(member);
       updateimage();
@@ -91,10 +100,8 @@ const RegisterMember = () => {
             setBirthdate={setBirthdate}
             image={image}
             setImage={setImage}
-            content={content}
-            setContent={setContent}
-            jodiacname={jodiacname}
-            setJodiacname={setJodiacname}
+            interest={interest}
+            setInterest={setInterest}
           />
           <Footer1
             buttons={buttonsFooter}

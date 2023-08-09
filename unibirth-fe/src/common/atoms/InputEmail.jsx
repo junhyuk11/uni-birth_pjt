@@ -6,7 +6,7 @@ const InputEmail = ({ onChange }) => {
         <label
           htmlFor="email"
           className="inline-block w-20 
-          font-bold text-gray-100"
+          font-bold text-gray-200"
         >
           이메일
         </label>

@@ -7,10 +7,15 @@ import { IoIosArrowBack } from "react-icons/io";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useProfileApi from "../../../api/useProfileApi";
-import { useRecoilState } from "recoil";
-import { targetNicknameState } from "../../../recoil/atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  targetNicknameState,
+  backgroundflagState,
+} from "../../../recoil/atoms";
 
 const Followers = () => {
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  backgroundflag(true);
   const {
     navigateToMemberProfile,
     navigateToBack,

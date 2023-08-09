@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer1 from "../../../common/blocks/Footer1";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import { BiSearch, BiHomeAlt } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { useNavigation } from "../../../hooks/useNavigation";
-import ListSectionPlanet from "../blocks/ListSectionPlanet";
+// import ListSectionPlanet from "../blocks/ListSectionPlanet";
 import CanvasPlanet from "../blocks/CanvasPlanet";
-
+import ListBestStars from "../blocks/ListBestStars";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
+import {
+  nicknameState,
+  targetNicknameState,
+  backgroundflagState,
+  currentplanetState,
+} from "../../../recoil/atoms";
 
 const MainPlanet = () => {
+  const [, setBackgroundflag] = useRecoilState(backgroundflagState);
+  useEffect(() => {
+    setBackgroundflag(false);
+  }, []);
+
   const {
     navigateToLoginMember,
     refreshPage,
@@ -20,12 +30,19 @@ const MainPlanet = () => {
     navigateToDetailPlanet,
   } = useNavigation();
 
+  // 행성 처음 위치
+  const currentPlanetId = useRecoilValue(currentplanetState);
+  const [currentPlanet, setCurrentPlanet] = useState(currentPlanetId % 8);
+
+  // 1. 케로셀 플래닛 아이디 전달 완료
+  // 버튼 누르면 setplanetPosition바뀌도록
+  // 처음 위치를 시작으로 버튼을 클릭할 때마다 인덱스 변경
+
   const nickname = useRecoilValue(nicknameState);
   const [targetNickname, setTargetNickname] =
     useRecoilState(targetNicknameState);
 
   const token = sessionStorage.getItem("accessToken");
-
   console.log(targetNickname);
 
   const mypageClick = () => {
@@ -66,9 +83,17 @@ const MainPlanet = () => {
   return (
     <div className="relative h-screen w-screen">
       <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2 -translate-y-1/2 transform">
-        <ListSectionPlanet />
+        {/* <ListSectionPlanet /> */}
       </div>
-      <CanvasPlanet navigateToDetailPlanet={navigateToDetailPlanet} />
+      <ListBestStars
+        currentPlanet={currentPlanet}
+        // setPlanetPosition={setPlanetPosition} 삭제 해야 할 것
+      />
+      <CanvasPlanet
+        currentPlanet={currentPlanet}
+        setCurrentPlanet={setCurrentPlanet}
+        navigateToDetailPlanet={navigateToDetailPlanet}
+      />
       <div className="absolute bottom-20 left-5 z-10">
         <Footer1 buttons={buttonsFooter} />
       </div>

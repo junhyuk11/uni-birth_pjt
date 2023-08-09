@@ -52,10 +52,12 @@ const membersPostLogin = async (member) => {
 
 const membersGetDetail = async (nickname) => {
   try {
+    console.log(nickname);
     const jwt = sessionStorage.getItem("accessToken");
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/members/detail/${nickname}`);
+    console.log(response);
     return response.data;
   } catch (e) {
     console.log(e);
@@ -113,8 +115,9 @@ const membersDeleteMember = async () => {
 
 const membersPostCheckNickname = async (nickname) => {
   try {
-    const response = await useAxiosInstance.authApiClient.post(
-      `/members/check/nickname?nickname=${nickname}`,
+    const response = await useAxiosInstance.apiClient.post(
+      `/members/check/nickname`,
+      nickname,
     );
     return response.data;
   } catch (e) {
@@ -124,8 +127,9 @@ const membersPostCheckNickname = async (nickname) => {
 
 const membersPostCheckEmail = async (email) => {
   try {
-    const response = await useAxiosInstance.authApiClient.post(
-      `/members/check/email?email=${email}`,
+    const response = await useAxiosInstance.apiClient.post(
+      `/members/check/email`,
+      email,
     );
     return response.data;
   } catch (e) {

@@ -11,10 +11,18 @@ import ThreeDots from "../../../assets/icons/js/threeDots";
 import Header3 from "../../../common/blocks/Header3";
 import Close from "../../../assets/icons/js/close";
 import Header4 from "../../../common/blocks/Header4";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 
 const MemberProfile = () => {
-  const { navigateToMessageBox, navigateToMainPlanet, navigateToModifyMember } =
-    useNavigation();
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  backgroundflag(true);
+  const {
+    navigateToMessageBox,
+    // navigateToModifyProfile,
+    navigateToMainPlanet,
+    navigateToModifyMember,
+  } = useNavigation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 

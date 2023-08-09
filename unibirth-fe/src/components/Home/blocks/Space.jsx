@@ -1,12 +1,20 @@
+<<<<<<< HEAD
 // import React, { useRef, useMemo } from "react";
 // import { useFrame, useLoader } from "@react-three/fiber";
 // import * as THREE from "three";
 // import Star from "../../../assets/images/star.png";
 // // import { OrbitControls } from "@react-three/drei";
+=======
+import React, { useRef, useMemo } from "react";
+import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+// import { OrbitControls } from "@react-three/drei";
+>>>>>>> bacd14141adc64fdba12f1530f9fa1aff8f98b57
 
 // function Space() {
 //   const starsRef = useRef();
 
+<<<<<<< HEAD
 //   const texture = useLoader(THREE.TextureLoader, Star);
 
 //   const [starGeo, starMaterial] = useMemo(() => {
@@ -14,6 +22,13 @@
 //     const vertices = [];
 //     const velocity = [];
 //     const acceleration = [];
+=======
+  const [starGeo, starMaterial] = useMemo(() => {
+    const starGeo = new THREE.SphereGeometry(1, 8, 8);
+    const vertices = [];
+    const velocity = [];
+    const acceleration = [];
+>>>>>>> bacd14141adc64fdba12f1530f9fa1aff8f98b57
 
 //     for (let i = 0; i < 1000; i++) {
 //       vertices.push(
@@ -38,6 +53,7 @@
 //       new THREE.Float32BufferAttribute(acceleration, 0.5),
 //     );
 
+<<<<<<< HEAD
 //     const starMaterial = new THREE.PointsMaterial({
 //       color: 0xaaaaaa,
 //       size: 1.2,
@@ -48,6 +64,16 @@
 
 //     return [starGeo, starMaterial];
 //   }, [texture]);
+=======
+    const starMaterial = new THREE.MeshBasicMaterial({
+      color: new THREE.Color(Math.random(), Math.random(), Math.random()),
+      // transparent: true,
+      // blending: THREE.MultiplyBlending,
+    });
+
+    return [starGeo, starMaterial];
+  }, []);
+>>>>>>> bacd14141adc64fdba12f1530f9fa1aff8f98b57
 
 //   useFrame(({ camera }) => {
 //     const position = starsRef.current.geometry.attributes.position;
@@ -83,6 +109,7 @@
 //     starsRef.current.rotation.y += 0.002;
 //   });
 
+<<<<<<< HEAD
 //   return (
 //     <>
 //       <axesHelper scale={5} />
@@ -94,5 +121,18 @@
 //     </>
 //   );
 // }
+=======
+  return (
+    <>
+      <axesHelper scale={5} />
+      {/* <OrbitControls /> */}
+      <group ref={starsRef}>
+        <sphereGeometry attach="geometry" {...starGeo} />
+        <pointsMaterial attach="material" {...starMaterial} />
+      </group>
+    </>
+  );
+}
+>>>>>>> bacd14141adc64fdba12f1530f9fa1aff8f98b57
 
 // export default Space;

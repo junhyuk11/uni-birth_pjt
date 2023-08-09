@@ -37,7 +37,7 @@ const QurationStar = () => {
         현재 starId : {qurationStar.starId}
       </p>
       <p className="my-4 flex justify-center font-TAEBAEKmilkyway">
-        현재 writer : {qurationStar.writer}
+        현재 nickname : {qurationStar.nickname}
       </p>
       <p className="my-4 flex justify-center font-TAEBAEKmilkyway">
         현재 imageUrl : {qurationStar.imageUrl}

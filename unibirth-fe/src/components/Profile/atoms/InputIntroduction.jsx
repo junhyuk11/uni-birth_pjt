@@ -6,7 +6,7 @@ const InputIntroduction = ({ onChange }) => {
         <label
           htmlFor="introduction"
           className="inline-block w-20 
-          font-bold text-gray-100"
+          font-bold text-gray-200"
         >
           소개
         </label>

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import InputPassword from "../../../common/atoms/InputPassword";
 import Inputnickname from "../atoms/Inputnickname";
 import InputPasswordConfirm from "../atoms/InputPasswordConfirm";
@@ -8,6 +8,8 @@ import useMemberApi from "../../../api/useMemberApi";
 import InPutZodiac from "../atoms/InputZodiac";
 import { debounce } from "lodash";
 import { Jodiac } from "../../../constants/zodiac";
+import { PLANET_LIST } from "../../../constants/constants";
+
 const MemberRegistrationForm = ({
   nickname,
   setNickname,
@@ -23,11 +25,22 @@ const MemberRegistrationForm = ({
   setBirthdate,
   image,
   setImage,
-  content,
-  setContent,
-  jodiacname,
-  setJodiacname,
+  interest,
+  setInterest,
 }) => {
+  const [content, setContent] = useState(
+    "생년월일을 입력하시면 별자리가 자동으로 설정됩니다.",
+  );
+  const isNicknameValid = (nickname) => {
+    const regex = /^[a-zA-Z0-9가-힣]+$/;
+    return regex.test(nickname);
+  };
+  const isEmailValid = (email) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
+  };
+
+  const [jodiacname, setJodiacname] = useState("당신의 별자리는?");
   const duplicateCheck = useCallback(async (type, value, emptyMessage) => {
     console.log(type, value, emptyMessage);
     if (value === "") {
@@ -38,7 +51,9 @@ const MemberRegistrationForm = ({
       type === "Email"
         ? useMemberApi.membersPostCheckEmail
         : useMemberApi.membersPostCheckNickname;
-    const response = await checkFunc(value);
+    const param = type === "Email" ? { email: value } : { nickname: value };
+
+    const response = await checkFunc(param);
     alert(
       response.status === 200
         ? `사용 가능한 ${type}입니다.`
@@ -108,7 +123,6 @@ const MemberRegistrationForm = ({
         setJodiacname(Jodiac[0].name);
       }
     }, 300),
-
     [],
   );
 
@@ -138,6 +152,10 @@ const MemberRegistrationForm = ({
           className="w-16 font-Pretendard"
           onClick={(event) => {
             event.preventDefault();
+            if (!isNicknameValid(nickname)) {
+              alert("닉네임 형식이 올바르지 않습니다.");
+              return;
+            }
             duplicateCheck("Nickname", nickname, "닉네임을 입력해주세요.");
           }}
         />
@@ -154,9 +172,25 @@ const MemberRegistrationForm = ({
           className="w-16 font-Pretendard"
           onClick={(event) => {
             event.preventDefault();
+            if (!isEmailValid(email)) {
+              alert("유효한 이메일 형식을 입력해주세요.");
+              return;
+            }
             duplicateCheck("Email", email, "이메일을 입력해주세요.");
           }}
         />
+        <div className="flex flex-col items-center justify-center rounded-lg border-double font-TAEBAEKmilkyway">
+          <select
+            value={interest}
+            onChange={(e) => setInterest(e.target.value)}
+          >
+            {PLANET_LIST.map((interest) => (
+              <option key={interest.name} value={interest.name}>
+                {interest.name}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
       <div className="flex flex-row">
         <InputPassword
