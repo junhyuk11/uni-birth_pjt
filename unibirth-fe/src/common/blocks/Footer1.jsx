@@ -6,6 +6,7 @@ const Footer1 = ({ buttons }) => {
       {buttons &&
         buttons.map((button, index) => {
           const ButtonComponent = button.component;
+
           return (
             <ButtonComponent
               key={index}
