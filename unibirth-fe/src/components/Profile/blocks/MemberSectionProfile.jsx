@@ -6,7 +6,7 @@ import useProfileApi from "../../../api/useProfileApi";
 import { useRecoilValue } from "recoil";
 import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
 
-const ConstellationSectionProfile = () => {
+const MemberSectionProfile = () => {
   const {
     navigateToModifyProfile,
     navigateToFollowings,
@@ -114,4 +114,4 @@ const ConstellationSectionProfile = () => {
   );
 };
 
-export default ConstellationSectionProfile;
+export default MemberSectionProfile;
