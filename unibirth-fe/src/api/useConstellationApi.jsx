@@ -64,6 +64,7 @@ const constellationsGetPinList = async (nickname) => {
 };
 
 const constellationsPostConstellation = async (constellation) => {
+  console.log("api입니다", constellation);
   try {
     const jwt = sessionStorage.getItem("accessToken");
     const response = await useAxiosInstance
