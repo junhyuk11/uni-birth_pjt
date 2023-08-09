@@ -1,103 +1,90 @@
-import React from "react";
-import Button2 from "../../../common/atoms/Button2";
+import React, { useEffect, useState } from "react";
 import Header2 from "../../../common/blocks/Header2";
+import Button2 from "../../../common/atoms/Button2";
 import { IoIosArrowBack } from "react-icons/io";
-import { CiLocationArrow1 } from "react-icons/ci";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { Canvas } from "@react-three/fiber";
-import GradientBackground from "../../../common/atoms/GradientBackground";
-import CanvasBg from "../../../common/atoms/CanvasBg";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { database, ref, onValue, off } from "../../../api/useFirebaseApi";
+import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
 
 const MessageBox = () => {
-  const { navigateToBack } = useNavigation();
-  const { navigateToDirectMessage } = useNavigation();
+  const nickname = useRecoilValue(nicknameState);
+  const [targetNickname, setTargetNickname] =
+    useRecoilState(targetNicknameState);
+  const [chatRooms, setChatRooms] = useState([]);
+  const { navigateToMemberProfile, navigateToDirectMessage } = useNavigation();
+
   const buttonsHeader = [
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
       value: "뒤로가기",
-      onClick: navigateToBack,
+      onClick: navigateToMemberProfile,
       icon: <IoIosArrowBack />,
     },
   ];
-  const users = [
-    {
-      id: 1,
-      name: "김민섭",
-      profileImageUrl: "https://picsum.photos/200",
-    },
-    {
-      id: 2,
-      name: "정준혁",
-      profileImageUrl: "https://picsum.photos/190",
-    },
-    {
-      id: 3,
-      name: "이성섭",
-      profileImageUrl: "https://picsum.photos/21",
-    },
-    {
-      id: 1,
-      name: "김민섭",
-      profileImageUrl: "https://picsum.photos/200",
-    },
-    {
-      id: 2,
-      name: "정준혁",
-      profileImageUrl: "https://picsum.photos/190",
-    },
-    {
-      id: 3,
-      name: "이성섭",
-      profileImageUrl: "https://picsum.photos/21",
-    },
-    {
-      id: 1,
-      name: "김민섭",
-      profileImageUrl: "https://picsum.photos/200",
-    },
-    {
-      id: 2,
-      name: "정준혁",
-      profileImageUrl: "https://picsum.photos/190",
-    },
-    {
-      id: 3,
-      name: "이성섭",
-      profileImageUrl: "https://picsum.photos/21",
-    },
-  ];
+
+  const handleNavigateToChat = (chatId) => {
+    const [sender, target] = chatId.split("_");
+    const otherNickname = sender === nickname ? target : sender;
+    console.log(targetNickname);
+
+    setTargetNickname(otherNickname); // recoil 상태 설정
+
+    navigateToDirectMessage(chatId); // 해당 페이지로 이동
+  };
+
+  useEffect(() => {
+    const chatRef = ref(database, "chats");
+    const handleNewChatRoom = (snapshot) => {
+      const allChats = snapshot.val();
+      const userChats = Object.entries(allChats || {}).filter(
+        ([chatId, chatData]) => {
+          return Object.values(chatData).some(
+            (message) =>
+              message.sender === nickname || message.target === nickname,
+          );
+        },
+      );
+      setChatRooms(userChats);
+    };
+
+    onValue(chatRef, handleNewChatRoom);
+
+    return () => {
+      off(chatRef, "value", handleNewChatRoom);
+    };
+  }, [nickname]);
 
   return (
-    <div className="relative h-screen w-screen">
-      <div className="absolute flex h-full w-full flex-row flex-wrap justify-center">
-        <Canvas>
-          <GradientBackground />
-          <CanvasBg />
-        </Canvas>
-      </div>
-      <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2 text-white">
-        <Header2 buttons={buttonsHeader} />
-        <h1>메시지 박스입니다..</h1>
-        {users.map((user) => (
-          <div key={user.id} className="flex items-start space-x-4">
-            <img
-              src={user.profileImageUrl}
-              className="h-32 w-32 rounded-full"
-              alt="Round image"
-            />
-            <div className="flex h-32 items-center">
-              <p className="text-lg font-bold ">{user.name}</p>
-            </div>
-            <button
-              className="flex h-32 w-48 items-center "
-              onClick={navigateToDirectMessage}
-            >
-              <CiLocationArrow1 />
-            </button>
-          </div>
-        ))}
-      </div>
+    <div className="text-xs text-white">
+      <Header2 buttons={buttonsHeader} />
+      <ul>
+        {chatRooms.map(([chatId, chatData]) => {
+          const [sender, target] = chatId.split("_");
+          const otherNickname = sender === nickname ? target : sender;
+
+          const messages = Object.values(chatData);
+          const lastMessage = messages[messages.length - 1];
+
+          return (
+            <li key={chatId} className="mb-2">
+              <strong className="text-base">닉네임 :</strong> {otherNickname}
+              <button
+                onClick={() => handleNavigateToChat(chatId)}
+                className="ml-2 rounded bg-gray-500 px-2 py-1 text-xs"
+              >
+                채팅방 이동
+              </button>
+              {lastMessage && (
+                <div className="text-xs">
+                  <strong className="text-base"></strong> {lastMessage.text}
+                </div>
+              )}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };

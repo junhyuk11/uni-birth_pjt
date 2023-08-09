@@ -4,23 +4,31 @@ import Button2 from "../../../common/atoms/Button2";
 import Button3 from "../../../common/atoms/Button3";
 import Header1 from "../../../common/blocks/Header1";
 import { IoIosArrowBack, IoMdMenu } from "react-icons/io";
-import { LuMessagesSquare } from "react-icons/lu";
+import { LuMessagesSquare, LuSend } from "react-icons/lu";
 import { useNavigation } from "../../../hooks/useNavigation";
 import MemberSectionProfile from "../blocks/MemberSectionProfile";
 import ConstellationSectionProfile from "../blocks/ConstellationSectionProfile";
 import useMemberApi from "../../../api/useMemberApi";
 // Bg
-import { useSetRecoilState } from "recoil";
-import { backgroundflagState } from "../../../recoil/atoms";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import {
+  backgroundflagState,
+  nicknameState,
+  targetNicknameState,
+} from "../../../recoil/atoms";
 
 const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
   backgroundflag(true);
+
+  const nickname = useRecoilValue(nicknameState);
+  const targetNickname = useRecoilValue(targetNicknameState);
   const {
     navigateToMessageBox,
     navigateToModifyProfile,
     navigateToMainPlanet,
     navigateToModifyMember,
+    navigateToDirectMessage,
   } = useNavigation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -66,8 +74,11 @@ const MemberProfile = () => {
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      onClick: navigateToMessageBox,
-      icon: <LuMessagesSquare />,
+      onClick:
+        nickname === targetNickname
+          ? navigateToMessageBox
+          : navigateToDirectMessage,
+      icon: nickname === targetNickname ? <LuMessagesSquare /> : <LuSend />,
     },
     {
       component: Button2,
@@ -81,7 +92,7 @@ const MemberProfile = () => {
     {
       component: Button1,
       className: "font-TAEBAEKmilkyway",
-      value: "회원정보 수정",
+      value: "비밀번호 변경",
       onClick: navigateToModifyMember,
     },
     {

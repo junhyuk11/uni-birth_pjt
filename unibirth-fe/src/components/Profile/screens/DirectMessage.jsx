@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
-import Button3 from "../../../common/atoms/Button3";
-import Header1 from "../../../common/blocks/Header1";
 import { IoIosArrowBack } from "react-icons/io";
+import { useRecoilValue } from "recoil";
+import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { useSetRecoilState } from "recoil";
-import { backgroundflagState } from "../../../recoil/atoms";
+import { sendMessage, listenForMessages } from "../../../api/useFirebaseApi";
 
 const DirectMessage = () => {
-  const backgroundflag = useSetRecoilState(backgroundflagState);
-  backgroundflag(true);
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+  const nickname = useRecoilValue(nicknameState);
+  const targetNickname = useRecoilValue(targetNicknameState);
   const { navigateToBack } = useNavigation();
+
   const buttonsHeader = [
     {
       component: Button2,
@@ -19,27 +22,88 @@ const DirectMessage = () => {
       onClick: navigateToBack,
       icon: <IoIosArrowBack />,
     },
-    {
-      component: () => (
-        <img
-          src="https://picsum.photos/200"
-          className="h-12 w-12 rounded-full"
-          alt="Round image"
-        />
-      ),
-    },
-    {
-      component: Button3,
-      className: "font-TAEBAEKmilkyway",
-      value: "감자123",
-    },
   ];
+
+  // DOM ref를 사용하여 스크롤 관리
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    const addNewMessage = (message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    };
+
+    const detachListener = listenForMessages(
+      addNewMessage,
+      nickname,
+      targetNickname,
+    );
+
+    return () => {
+      detachListener();
+    };
+  }, [nickname, targetNickname]);
+
+  const handleSend = () => {
+    if (newMessage.trim()) {
+      sendMessage(newMessage, nickname, targetNickname);
+      setNewMessage("");
+    }
+  };
+
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    return `${hours}:${minutes}`;
+  };
+
+  useEffect(scrollToBottom, [messages]);
 
   return (
     <div>
-      <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2 text-white">
-        <Header1 buttons={buttonsHeader} />
-        <h1>1대1 메시지 공간입니다..</h1>
+      <Header2 buttons={buttonsHeader} />
+      <div className="chat-container">
+        <div className="messages flex flex-col">
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`
+              mt-2 flex justify-between rounded-md bg-gray-800 p-2 
+              ${message.sender === nickname ? "ml-auto" : ""} 
+              ${message.sender === targetNickname ? "mr-auto" : ""} 
+            `}
+            >
+              <div className="flex-grow">
+                <p className="text-white">{message.text}</p>
+              </div>
+              <div className="flex flex-col items-end justify-end">
+                <span className="ml-2 text-xs text-gray-500">
+                  {formatDate(message.timestamp)}
+                </span>
+              </div>
+            </div>
+          ))}
+          <div ref={messagesEndRef} />
+        </div>
+
+        <div className="flex items-center border-t border-gray-200 p-4">
+          <input
+            className="mr-4 flex-grow rounded-md border p-2"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            placeholder="메시지 입력..."
+          />
+          <button
+            className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
+            onClick={handleSend}
+          >
+            전송
+          </button>
+        </div>
       </div>
     </div>
   );
