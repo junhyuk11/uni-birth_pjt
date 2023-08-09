@@ -7,7 +7,7 @@ import { useRecoilValue } from "recoil";
 import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
 import star from "../../../assets/images/star.png";
 
-const ConstellationSectionProfile = () => {
+const MemberSectionProfile = () => {
   const {
     navigateToModifyProfile,
     navigateToFollowings,
@@ -117,4 +117,4 @@ const ConstellationSectionProfile = () => {
   );
 };
 
-export default ConstellationSectionProfile;
+export default MemberSectionProfile;
