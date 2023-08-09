@@ -34,23 +34,27 @@ const DetailPlanet = () => {
   return (
     <div>
       <div className="relative h-screen w-screen">
-        <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2 -translate-y-1/2 transform">
-          <Header1 buttons={buttonsHeader} />
+        <div className="absolute left-1/2 top-20 z-10 z-10 -translate-x-1/2 -translate-y-1/2">
+          <div>
+            <Header1 buttons={buttonsHeader} />
+          </div>
           <ListSectionConstellation
             constellationList={constellationList}
             setConstellationList={setConstellationList}
             className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform"
           />
           <h1 className="text-white">별자리 리스트 화면입니다.</h1>
+          {/* <ConstellationList /> */}
+        </div>
+        <div className="w- absolute top-0 h-screen w-screen">
           <ListConstellation
             constellationList={constellationList}
             setConstellationList={setConstellationList}
           />
-          {/* <ConstellationList /> */}
         </div>
-      </div>
-      <div className="mx-auto h-screen max-w-screen-sm">
-        <Footer1 buttons={buttonsFooter} />
+        <div className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2">
+          <Footer1 buttons={buttonsFooter} />
+        </div>
       </div>
     </div>
   );
