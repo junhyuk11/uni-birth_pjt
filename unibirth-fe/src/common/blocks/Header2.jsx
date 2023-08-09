@@ -21,7 +21,7 @@ const Header2 = ({ buttons }) => {
             return (
               <ButtonComponent
                 key={index}
-                className="font-Pretendard"
+                className="w-10 font-Pretendard"
                 value={button.value}
                 onClick={button.onClick}
                 icon={button.icon}
