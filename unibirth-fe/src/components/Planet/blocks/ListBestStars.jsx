@@ -20,17 +20,17 @@ const Carousel = ({ Lists }) => {
   };
 
   return (
-    <div className="absolute left-1/2 top-4 z-20 h-48 w-60 -translate-x-1/2 rounded-lg">
-      <div className="relative">
+    <div className="absolute left-1/2 top-4 z-10 h-48 w-60 -translate-x-1/2 rounded-lg">
+      <div className="relative h-40 w-52 overflow-hidden rounded-lg">
         <Slider {...settings}>
           {Lists?.map((List, index) => (
-            <div key={index} className="flex flex-col rounded-lg">
+            <div key={index} className="max-h-full rounded-full">
               <img
-                className="flex rounded-lg"
+                className=" z-0 min-w-full"
                 src={List.imageUrl}
                 alt={`Slide ${index}`}
               />
-              <div>
+              <div className="absolute z-10">
                 <div className="text-1xl text-bold bottom-2 flex font-TAEBAEKmilkyway text-white">
                   닉네임: {List.nickname}
                 </div>
