@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import useSearchApi from "../../api/useSearchApi";
 
-function SearchCommon() {
+const SearchCommon = () => {
   const location = useLocation();
   const query = location.state.query;
   const category = location.state.categoryName;
@@ -61,6 +61,6 @@ function SearchCommon() {
         ))}
     </div>
   );
-}
+};
 
 export default SearchCommon;
