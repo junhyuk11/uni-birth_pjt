@@ -3,6 +3,7 @@ import usePlanetApi from "../../../api/usePlanetApi";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { useNavigation } from "../../../hooks/useNavigation";
 
 const Carousel = ({ Lists }) => {
   const settings = {
@@ -14,35 +15,38 @@ const Carousel = ({ Lists }) => {
     autoplay: true,
     autoplaySpeed: 3000,
   };
+  const { navigateToDetailStar } = useNavigation();
 
   const handleMoveClick = (List) => {
-    console.log("List:", List);
+    navigateToDetailStar(List.starId);
   };
 
   return (
-    <div className="absolute left-1/2 top-4 z-10 h-48 w-60 -translate-x-1/2 rounded-lg">
-      <div className="relative h-40 w-52 overflow-hidden rounded-lg">
+    <div className="absolute left-1/2 top-4 z-20 h-48 w-60 -translate-x-1/2 rounded-lg">
+      <div className="relative rounded-lg">
         <Slider {...settings}>
           {Lists?.map((List, index) => (
-            <div key={index} className="max-h-full rounded-full">
+            <div key={index} className="h-40 overflow-hidden rounded-lg">
               <img
-                className=" z-0 min-w-full"
+                className="rounded-lg"
                 src={List.imageUrl}
                 alt={`Slide ${index}`}
               />
-              <div className="absolute z-10">
-                <div className="text-1xl text-bold bottom-2 flex font-TAEBAEKmilkyway text-white">
+              <div>
+                <div className="text-1xl text-bold absolute bottom-2 flex font-TAEBAEKmilkyway text-white">
                   닉네임: {List.nickname}
                 </div>
-                <div className="text-1xl top-4 flex bg-red-500 font-TAEBAEKmilkyway">
+                <div className="text-1xl absolute top-4 flex bg-red-500 font-TAEBAEKmilkyway">
                   밝기: {List.brightness}
                 </div>
-                <button
-                  className="bottom-4 w-24 rounded-full bg-blue-500"
-                  onClick={() => handleMoveClick(List)}
-                >
-                  이동하기
-                </button>
+                <div className="flex justify-center">
+                  <button
+                    className="absolute bottom-4 w-24 rounded-full bg-blue-500 text-white"
+                    onClick={() => handleMoveClick(List)}
+                  >
+                    이동하기
+                  </button>
+                </div>
               </div>
             </div>
           ))}
