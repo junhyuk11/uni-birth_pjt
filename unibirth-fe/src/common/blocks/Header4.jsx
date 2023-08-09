@@ -1,23 +1,23 @@
 import React from "react";
 
-const Footer1 = ({ buttons }) => {
+const Header4 = ({ buttons }) => {
   return (
-    <footer className="mt-16 flex flex-row items-center justify-between ">
+    <div className="flex flex-col px-4 py-4">
       {buttons &&
         buttons.map((button, index) => {
           const ButtonComponent = button.component;
           return (
             <ButtonComponent
               key={index}
-              className="w-36 font-Pretendard"
+              className="m-2 w-40 p-2 font-Pretendard hover:bg-yellow-500"
               value={button.value}
               onClick={button.onClick}
               icon={button.icon}
             />
           );
         })}
-    </footer>
+    </div>
   );
 };
 
-export default Footer1;
+export default Header4;

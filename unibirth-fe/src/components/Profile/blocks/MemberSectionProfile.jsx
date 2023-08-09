@@ -5,6 +5,7 @@ import useMemberApi from "../../../api/useMemberApi";
 import useProfileApi from "../../../api/useProfileApi";
 import { useRecoilValue } from "recoil";
 import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
+import star from "../../../assets/images/star.png";
 
 const ConstellationSectionProfile = () => {
   const {
@@ -17,6 +18,8 @@ const ConstellationSectionProfile = () => {
   const [memberData, setMemberData] = useState();
   const targetNickname = useRecoilValue(targetNicknameState);
   const nickname = useRecoilValue(nicknameState);
+
+  const defaultImageUrl = star;
 
   const handleFollow = async (e) => {
     e.preventDefault();
@@ -64,30 +67,30 @@ const ConstellationSectionProfile = () => {
   }, [targetNickname]);
 
   return (
-    <div className="space-x-4 bg-blue-200">
+    <div className="space-x-4 bg-slate-950 bg-opacity-60">
       {memberData && (
         <div className="flex items-start space-x-4">
           <img
-            src={memberData.resultData.imageUrl}
+            src={memberData.resultData.imageUrl || defaultImageUrl}
             className="h-32 w-32 rounded-full"
             alt="Round image"
           />
           <div>
-            <p className="text-lg font-bold">
+            <p className="text-lg font-bold text-yellow-100">
               {memberData.resultData.nickname}
             </p>
-            <p onClick={navigateToMyStars}>
+            <p onClick={navigateToMyStars} className="text-yellow-100">
               띄운 별: {memberData.resultData.starCount}
             </p>
-            <p onClick={navigateToFollowings}>
+            <p onClick={navigateToFollowings} className="text-yellow-100">
               팔로잉: {memberData.resultData.followingCount}
             </p>
-            <p onClick={navigateToFollowers}>
+            <p onClick={navigateToFollowers} className="text-yellow-100">
               팔로워: {memberData.resultData.followerCount}
             </p>
           </div>
           <div>
-            <p className="text-lg font-bold">
+            <p className="text-lg font-bold text-yellow-100">
               <p>상태 메시지 :</p>
               {memberData.resultData.introduction}
             </p>
@@ -95,17 +98,17 @@ const ConstellationSectionProfile = () => {
         </div>
       )}
 
-      <div className="flex items-center justify-center space-x-4 bg-blue-500">
+      <div className="flex items-center justify-center space-x-4 bg-slate-950 bg-opacity-60">
         {nickname === targetNickname ? (
           <Button1
             value="수정"
-            className="font-TAEBAEKmilkyway"
+            className="w-20 font-TAEBAEKmilkyway"
             onClick={navigateToModifyProfile}
           />
         ) : (
           <Button1
             value="팔로우"
-            className="font-TAEBAEKmilkyway"
+            className="w-20 font-TAEBAEKmilkyway"
             onClick={handleFollow}
           />
         )}
