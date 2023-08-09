@@ -6,7 +6,7 @@ import useProfileApi from "../../../api/useProfileApi";
 import { useRecoilValue } from "recoil";
 import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
 
-const ConstellationSectionProfile = () => {
+const MemberSectionProfile = () => {
   const {
     navigateToModifyProfile,
     navigateToFollowings,
@@ -35,7 +35,24 @@ const ConstellationSectionProfile = () => {
       }
     } catch (e) {
       console.log(e);
-      alert("아무튼 큰일났습니다.");
+      alert("팔로우 버튼 클릭했는데 큰일났습니다.");
+    }
+  };
+
+  const handleUnfollow = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await useProfileApi.profilesDeleteFollow(targetNickname);
+      if (response.status === 200) {
+        alert("언팔로우 완료!");
+        window.location.reload();
+      } else {
+        alert("이미 언팔로우한 상대입니다!");
+        window.location.reload();
+      }
+    } catch (e) {
+      console.log(e);
+      alert("언팔로우 버튼 클릭했는데 큰일났습니다.");
     }
   };
 
@@ -53,10 +70,8 @@ const ConstellationSectionProfile = () => {
           response = await useMemberApi.membersGetProfiles();
         }
         console.log("membersection 리스폰스", response);
-        console.log("membersection 리스폰스", response);
         setMemberData(response);
       } catch (error) {
-        console.error("멤버 데이터를 가져오는데 에러 발생:", error);
         console.error("멤버 데이터를 가져오는데 에러 발생:", error);
       }
     };
@@ -102,6 +117,12 @@ const ConstellationSectionProfile = () => {
             className="w-20 font-TAEBAEKmilkyway"
             onClick={navigateToModifyProfile}
           />
+        ) : memberData?.resultData?.follow ? (
+          <Button1
+            value="언팔로우"
+            className="font-TAEBAEKmilkyway"
+            onClick={handleUnfollow} // 이 함수를 정의해야 함
+          />
         ) : (
           <Button1
             value="팔로우"
@@ -114,4 +135,4 @@ const ConstellationSectionProfile = () => {
   );
 };
 
-export default ConstellationSectionProfile;
+export default MemberSectionProfile;
