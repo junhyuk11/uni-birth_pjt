@@ -14,12 +14,17 @@ const MessageBox = () => {
   const [chatRooms, setChatRooms] = useState([]);
   const { navigateToMemberProfile, navigateToDirectMessage } = useNavigation();
 
+  const handleBackClick = () => {
+    setTargetNickname(nickname);
+    navigateToMemberProfile();
+  };
+
   const buttonsHeader = [
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
       value: "뒤로가기",
-      onClick: navigateToMemberProfile,
+      onClick: handleBackClick,
       icon: <IoIosArrowBack />,
     },
   ];
