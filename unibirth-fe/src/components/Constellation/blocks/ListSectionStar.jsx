@@ -34,11 +34,6 @@ const ListSectionStar = () => {
   const [boxurl, setBoxurl] = useRecoilState(boxurlState);
   const [boxid, setBoxid] = useRecoilState(boxidState);
   const [boxcreated, setBoxcreated] = useRecoilState(boxcreatedState);
-  // Sphere Color change
-  const [sphereColor, setSphereColor] = useState("#00ffff");
-  const changeColor = (event) => {
-    setSphereColor(event.target.value);
-  };
   // 김민섭
   const [brightness, setBrightness] = useState(0);
 
@@ -136,8 +131,8 @@ const ListSectionStar = () => {
             >
               <sphereGeometry args={[1, 32, 32]} />
               <meshStandardMaterial
-                color={sphereColor}
-                emissive={sphereColor}
+                color={starList.color ? starList.color : "#ffffff"}
+                emissive={starList.color ? starList.color : "#ffffff"}
                 // emissive="#fbf59b"
                 // emissiveMap={material}
                 emissiveIntensity={starListIndex[index]?.brightness + 1 || 0.04}
@@ -204,18 +199,6 @@ const ListSectionStar = () => {
                 <p>{boxcontent}</p>
                 <p></p>
               </div>
-            </div>
-            <div className="flex flex-row items-center justify-between">
-              <label htmlFor="colorPicker" className="flex">
-                Change Color:
-              </label>
-              <input
-                id="colorPicker"
-                type="color"
-                value={sphereColor}
-                onChange={changeColor}
-                className="h-10 w-10 rounded-full"
-              />
             </div>
             현재 빛남 : {brightness}
             <button

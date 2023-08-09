@@ -9,6 +9,7 @@ import useConstellationApi from "../../../api/useConstellationApi";
 import { useRecoilState } from "recoil";
 import { boardSizeState } from "../../../recoil/atoms";
 import { useNavigation } from "../../../hooks/useNavigation";
+import PickConstellationColor from "../atoms/PickConstellationColor";
 
 const GridCustomConstellation = ({
   planetId,
@@ -16,6 +17,8 @@ const GridCustomConstellation = ({
   constellationDescp,
   pointList,
   lineList,
+  constellationColor,
+  setconstellationColor,
 }) => {
   const [points, setPoints] = useState([]);
   const [lines, setLines] = useState([]);
@@ -187,6 +190,7 @@ const GridCustomConstellation = ({
             pointList: uniquePoints,
             imageUrl: downloadURL,
             boardSize: boardSize[0],
+            color: constellationColor,
           };
           console.log(constellation);
           const response =
@@ -271,15 +275,25 @@ const GridCustomConstellation = ({
 
   return (
     <div>
-      <div className="text-white">
-        <p className="font-TAEBAEKmilkyway">지금 행성명: {planetId}</p>
-        <p className="font-TAEBAEKmilkyway">
-          지금 별자리명: {constellationName}
-        </p>
-        <p className="font-TAEBAEKmilkyway">
-          지금 별자리설명: {constellationDescp}
-        </p>
-        <p className="font-TAEBAEKmilkyway">지금 보드사이즈: {boardSize}</p>
+      <div className="flex flex-row text-white">
+        <div className="flex flex-col">
+          <p className="font-TAEBAEKmilkyway">지금 행성명: {planetId}</p>
+          <p className="font-TAEBAEKmilkyway">
+            지금 별자리명: {constellationName}
+          </p>
+          <p className="font-TAEBAEKmilkyway">
+            지금 별자리설명: {constellationDescp}
+          </p>
+          <p className="font-TAEBAEKmilkyway">지금 보드사이즈: {boardSize}</p>
+        </div>
+        <div className="flex w-28 items-center justify-center">
+          <div className="flex">
+            <PickConstellationColor
+              setconstellationColor={setconstellationColor}
+              constellationColor={constellationColor}
+            />
+          </div>
+        </div>
       </div>
       <div className={`items-center justify-center ${containerStyle}`}>
         <Stage width={stageSize} height={stageSize}>

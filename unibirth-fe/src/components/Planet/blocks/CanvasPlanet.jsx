@@ -50,9 +50,9 @@ function CameraController({ planet, zoomed }) {
 
     gsap.to(startPosition, {
       duration: 2, // duration in seconds
-      x: targetPosition.x,
-      y: targetPosition.y,
-      z: targetPosition.z,
+      x: -targetPosition.x,
+      y: -targetPosition.y,
+      z: -targetPosition.z,
       onUpdate: updateCameraPosition,
       ease: "power1.inOut", // easing function for smooth transition
     });

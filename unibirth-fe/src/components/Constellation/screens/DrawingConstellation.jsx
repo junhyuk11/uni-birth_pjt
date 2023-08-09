@@ -22,9 +22,11 @@ const DrawingConstellation = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pointList, setPointList] = useState([]);
   const [lineList, setLineList] = useState([]);
+  const [constellationColor, setconstellationColor] = useState("#00ffff");
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
+    console.log(constellationColor);
   };
 
   const buttonsHeader = [
@@ -60,6 +62,8 @@ const DrawingConstellation = () => {
           constellationDescp={constellationDescp}
           pointList={pointList}
           lineList={lineList}
+          constellationColor={constellationColor}
+          setconstellationColor={setconstellationColor}
         />
         {isModalOpen && (
           <ListTemplateModalConstellation
