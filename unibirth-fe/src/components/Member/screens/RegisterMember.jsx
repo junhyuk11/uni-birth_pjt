@@ -19,7 +19,7 @@ const RegisterMember = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [birthdate, setBirthdate] = useState("");
-  const [interest, setInterest] = useState([]);
+  const [interest, setInterest] = useState(1);
   const [image, setImage] = useState(`${earth}`);
   const { navigateToBack, navigateToLoginMember } = useNavigation();
 
