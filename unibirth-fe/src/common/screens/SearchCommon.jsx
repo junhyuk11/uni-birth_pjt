@@ -41,7 +41,8 @@ const SearchCommon = () => {
   }, []);
 
   return (
-    <div>
+    // 글자색 초록색
+    <div className="text-sky-500">
       <p>검색어: {query}</p>
       <p>카테고리: {category}</p>
       <p>별자리 리스트</p>
