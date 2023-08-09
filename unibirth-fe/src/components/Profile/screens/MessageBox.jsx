@@ -81,14 +81,12 @@ const MessageBox = () => {
             const lastMessage = messages[messages.length - 1];
 
             return (
-              <li key={chatId} className="mb-2">
+              <li
+                key={chatId}
+                className="border-t px-4 py-4"
+                onClick={() => handleNavigateToChat(chatId)}
+              >
                 <strong className="text-base">닉네임 :</strong> {otherNickname}
-                <button
-                  onClick={() => handleNavigateToChat(chatId)}
-                  className="ml-2 rounded bg-gray-500 px-2 py-1 text-xs"
-                >
-                  채팅방 이동
-                </button>
                 {lastMessage && (
                   <div className="text-xs">
                     <strong className="text-base"></strong> {lastMessage.text}
@@ -97,6 +95,7 @@ const MessageBox = () => {
               </li>
             );
           })}
+          <li className="border-t"></li>
         </ul>
       </div>
     </div>

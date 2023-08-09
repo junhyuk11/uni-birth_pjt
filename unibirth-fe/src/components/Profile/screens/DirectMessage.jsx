@@ -63,46 +63,47 @@ const DirectMessage = () => {
   useEffect(scrollToBottom, [messages]);
 
   return (
-    <div>
+    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
       <Header2 buttons={buttonsHeader} />
-      <div className="chat-container">
-        <div className="messages flex flex-col">
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`
+      <div className="px-4">
+        <div className="chat-container">
+          <div className="messages flex flex-col">
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`
               mt-2 flex justify-between rounded-md bg-gray-800 p-2 
               ${message.sender === nickname ? "ml-auto" : ""} 
               ${message.sender === targetNickname ? "mr-auto" : ""} 
             `}
-            >
-              <div className="flex-grow">
-                <p className="text-white">{message.text}</p>
+              >
+                <div className="flex-grow">
+                  <p className="text-white">{message.text}</p>
+                </div>
+                <div className="flex flex-col items-end justify-end">
+                  <span className="ml-2 text-xs text-gray-500">
+                    {formatDate(message.timestamp)}
+                  </span>
+                </div>
               </div>
-              <div className="flex flex-col items-end justify-end">
-                <span className="ml-2 text-xs text-gray-500">
-                  {formatDate(message.timestamp)}
-                </span>
-              </div>
-            </div>
-          ))}
-          <div ref={messagesEndRef} />
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
         </div>
-
-        <div className="flex items-center border-t border-gray-200 p-4">
-          <input
-            className="mr-4 flex-grow rounded-md border p-2"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="메시지 입력..."
-          />
-          <button
-            className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
-            onClick={handleSend}
-          >
-            전송
-          </button>
-        </div>
+      </div>
+      <div className="fixed bottom-0 mx-auto flex w-full max-w-screen-sm items-center border-t border-gray-200 bg-slate-200 p-4 ">
+        <input
+          className="mr-4 flex-grow rounded-md border p-2"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder="메시지 입력..."
+        />
+        <button
+          className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
+          onClick={handleSend}
+        >
+          전송
+        </button>
       </div>
     </div>
   );
