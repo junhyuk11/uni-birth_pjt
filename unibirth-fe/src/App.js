@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 // Home
@@ -25,43 +25,32 @@ import ModifyProfile from "./components/Profile/screens/ModifyProfile";
 import DirectMessage from "./components/Profile/screens/DirectMessage";
 import MessageBox from "./components/Profile/screens/MessageBox";
 import MyStars from "./components/Profile/screens/MyStars";
+
 // Star
 import RegisterStar from "./components/Star/screens/RegisterStar";
 import DetailStar from "./components/Star/screens/DetailStar";
+
 // Search
 import SearchCommon from "./common/screens/SearchCommon";
 import SearchQuration from "./common/screens/SearchQuration";
 import { Canvas } from "@react-three/fiber";
 import Background from "./common/atoms/Background";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { backgroundflagState } from "./recoil/atoms";
 
 const App = () => {
-  const [backgroundflag, setBackgroundflag] =
-    useRecoilState(backgroundflagState);
-  const [height, setHeight] = useState(window.innerHeight);
-
-  // Update the height whenever the window is resized
-  useEffect(() => {
-    setBackgroundflag(true);
-    const handleResize = () => setHeight(window.innerHeight);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-  console.log(backgroundflag);
+  const backgroundflag = useRecoilValue(backgroundflagState);
+  console.log("App플래그:", backgroundflag);
   return (
-    <div className="relative w-screen" style={{ height: `${height}px` }}>
+    <div className="">
       {backgroundflag && (
-        <div
-          className="fixed left-0 top-0 z-0 w-screen"
-          style={{ height: `${height}px` }}
-        >
+        <div className="fixed z-0 h-screen w-screen">
           <Canvas>
             <Background />
           </Canvas>
         </div>
       )}
-      <div className="absolute left-1/2 z-10 z-10 -translate-x-1/2 ">
+      <div className="fixed left-1/2 z-10 -translate-x-1/2">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/members/login" element={<LoginMember />} />

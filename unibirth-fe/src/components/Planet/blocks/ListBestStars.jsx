@@ -8,27 +8,41 @@ const Carousel = ({ Lists }) => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
     autoplaySpeed: 3000,
   };
 
+  const handleMoveClick = (List) => {
+    console.log("List:", List);
+  };
+
   return (
-    <div className="absolute left-1/2 top-4 z-20 w-60 -translate-x-1/2 rounded-lg bg-gray-500">
+    <div className="absolute left-1/2 top-4 z-20 h-48 w-60 -translate-x-1/2 rounded-lg">
       <div className="relative">
         <Slider {...settings}>
           {Lists?.map((List, index) => (
-            <div key={index} className="px-4">
-              <img src={List.imageUrl} alt={`Slide ${index}`} />
-              <div className="text-1xl text-bold absolute bottom-16 font-TAEBAEKmilkyway text-white">
-                starId: {List.starId}
-              </div>
-              <div className="font-TAEBAEKmilkyway text-2xl">
-                닉네임: {List.nickname}
-              </div>
-              <div className="font-TAEBAEKmilkyway text-2xl">
-                밝기: {List.brightness}
+            <div key={index} className="flex flex-col rounded-lg">
+              <img
+                className="flex rounded-lg"
+                src={List.imageUrl}
+                alt={`Slide ${index}`}
+              />
+              <div>
+                <div className="text-1xl text-bold bottom-2 flex font-TAEBAEKmilkyway text-white">
+                  닉네임: {List.nickname}
+                </div>
+                <div className="text-1xl top-4 flex bg-red-500 font-TAEBAEKmilkyway">
+                  밝기: {List.brightness}
+                </div>
+                <button
+                  className="bottom-4 w-24 rounded-full bg-blue-500"
+                  onClick={() => handleMoveClick(List)}
+                >
+                  이동하기
+                </button>
               </div>
             </div>
           ))}
@@ -38,21 +52,22 @@ const Carousel = ({ Lists }) => {
   );
 };
 
-const ListBestStars = () => {
+const ListBestStars = ({ currentPlanet }) => {
   const [Lists, setLists] = useState([]);
-  const planetId = 1;
   useEffect(() => {
-    getBestList(planetId);
+    getBestList(currentPlanet);
     // console.log("BestList:", BestList);
-  }, [planetId]);
+  }, [currentPlanet]);
 
   useEffect(() => {}, [Lists]);
 
   const getBestList = async (planetId) => {
+    console.log(planetId);
     try {
-      const response = await usePlanetApi.planetsGetStarList(planetId);
-      // console.log(response);
+      // 인덱스가 0 이므로 접근은 +1 로 한다
+      const response = await usePlanetApi.planetsGetStarList(planetId + 1);
       const Lists = response.resultData.starList;
+      console.log("planet:", response.resultData);
       setLists(Lists);
     } catch (e) {
       console.log("planet_error:", e);

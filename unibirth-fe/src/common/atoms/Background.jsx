@@ -3,7 +3,7 @@ import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { OrbitControls, Stars } from "@react-three/drei";
 
-function GradientBackground({ controlsRef }) {
+const GradientBackground = () => {
   const { scene } = useThree();
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function GradientBackground({ controlsRef }) {
   }, [scene]);
 
   return null;
-}
+};
 
 function Scene() {
   return (
@@ -52,7 +52,7 @@ function Scene() {
       <OrbitControls
         rotateSpeed={-0.5}
         autoRotate={true}
-        autoRotateSpeed={0.5}
+        autoRotateSpeed={0.23}
         enablePan={false}
         enableDamping={true}
         dampingFactor={0.05}
@@ -60,9 +60,9 @@ function Scene() {
       />
       <GradientBackground />
       <Stars
-        radius={50}
+        radius={100}
         depth={50}
-        count={1000}
+        count={5000}
         factor={4}
         saturation={3}
         fade

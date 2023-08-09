@@ -3,8 +3,11 @@ import { Html } from "@react-three/drei";
 import earth1 from "../../../assets/images/earth1.jpg";
 import * as THREE from "three";
 import { useLoader, useFrame } from "@react-three/fiber";
+import { useSetRecoilState } from "recoil";
+import { currentplanetState } from "../../../recoil/atoms";
 
 const MeshPlanet = ({ navigateToDetailPlanet }) => {
+  const setCurrentplanet = useSetRecoilState(currentplanetState);
   const texture = useLoader(THREE.TextureLoader, earth1);
   const num = 30;
   const planetList = [
@@ -44,6 +47,7 @@ const MeshPlanet = ({ navigateToDetailPlanet }) => {
             onClick={() => {
               console.log(planet[4]);
               navigateToDetailPlanet(planet[4]);
+              setCurrentplanet(planet[4] - 1);
             }}
           >
             <sphereGeometry args={[3, 32, 32]} />
