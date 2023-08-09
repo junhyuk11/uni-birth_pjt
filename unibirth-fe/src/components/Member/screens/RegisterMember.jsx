@@ -36,7 +36,7 @@ const RegisterMember = () => {
       password,
       birthdate,
       imageUrl: image,
-      interest,
+      planetId: interest,
     };
     console.log(member);
     try {
