@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Html } from "@react-three/drei";
 import { useNavigation } from "../../../hooks/useNavigation";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
@@ -10,6 +10,10 @@ const MeshHtml = ({ constellationList, moveNum, xdamper }) => {
   const [localConstellationList, setLocalConstellationList] = useState(
     constellationList?.constellationList,
   );
+
+  useEffect(() => {
+    setLocalConstellationList(constellationList?.constellationList);
+  }, [constellationList]);
 
   const handlePinClick = async (index, constellation) => {
     if (constellation.alreadyPined) {
@@ -45,7 +49,6 @@ const MeshHtml = ({ constellationList, moveNum, xdamper }) => {
     navigateToDetailConstellation(constellationId);
   };
 
-  console.log("constellationList:", constellationList);
   return (
     <>
       {localConstellationList?.map((constellation, index) => (
