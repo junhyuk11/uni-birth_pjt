@@ -11,15 +11,16 @@ import { StellaIdState, backgroundflagState } from "../../../recoil/atoms";
 import useStarApi from "../../../api/useStarApi";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../api/useFirebaseApi";
+import InviteFollowStar from "../blocks/InviteFollowStar";
 
 const RegisterStar = () => {
-  const backgroundflag = useSetRecoilState(backgroundflagState);
   useEffect(() => {
     backgroundflag(true);
   }, []);
 
-  const { navigateToBack, navigateToDetailConstellation } = useNavigation(); // navigateToDetailConstellation
+  const backgroundflag = useSetRecoilState(backgroundflagState);
   const constellationId = useRecoilValue(StellaIdState);
+  const { navigateToBack, navigateToDetailConstellation } = useNavigation(); // navigateToDetailConstellation
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [content, setContent] = useState("");
@@ -117,9 +118,11 @@ const RegisterStar = () => {
       </div>
       <div className="flex justify-center">
         <p className="flex h-12 w-80 items-center justify-center bg-red-500 text-white">
-          별자리 초대하기 넣어야 함
+          별자리 초대하기
         </p>
       </div>
+      <InviteFollowStar />
+      ddddd
       <div className="flex justify-center">
         <Footer1 buttons={buttonsFooter} />
       </div>
