@@ -1,18 +1,15 @@
 import React, { useEffect } from "react";
 import useConstellationApi from "../../../api/useConstellationApi";
-import { useNavigation } from "../../../hooks/useNavigation";
+// import { useNavigation } from "../../../hooks/useNavigation";
 import { useParams } from "react-router-dom";
-const ListSectionConstellation = ({
-  constellationList,
-  setConstellationList,
-}) => {
+const ListSectionConstellation = ({ setConstellationList }) => {
   const { planetId } = useParams();
-  const { navigateToDetailConstellation } = useNavigation();
+  // const { navigateToDetailConstellation } = useNavigation();
   const getConstellationList = async (planetId) => {
     const response = await useConstellationApi.constellationsGetPlanet(
       planetId,
     );
-    console.log(response);
+    console.log("리스트 컨프리:", response);
     setConstellationList(response.resultData);
   };
 
@@ -20,21 +17,7 @@ const ListSectionConstellation = ({
     getConstellationList(planetId);
   }, [planetId]);
 
-  return (
-    <div className="flex flex-row flex-wrap justify-center">
-      {constellationList?.constellationList.map((constellation) => (
-        <div
-          key={constellation.constellationId}
-          onClick={() =>
-            navigateToDetailConstellation(constellation.constellationId)
-          }
-          className="bg-blue-500"
-        >
-          {constellation.title}
-        </div>
-      ))}
-    </div>
-  );
+  return <div></div>;
 };
 
 export default ListSectionConstellation;

@@ -5,21 +5,12 @@ import * as THREE from "three";
 import { useLoader, useFrame } from "@react-three/fiber";
 import { useSetRecoilState } from "recoil";
 import { currentplanetState } from "../../../recoil/atoms";
+import { PLANET_LIST } from "../../../constants/constants";
 
 const MeshPlanet = ({ navigateToDetailPlanet }) => {
   const setCurrentplanet = useSetRecoilState(currentplanetState);
   const texture = useLoader(THREE.TextureLoader, earth1);
-  const num = 30;
-  const planetList = [
-    [num, 0, 0, "planet1", 1],
-    [num * Math.sin(45), 0, num * Math.sin(45), "planet2", 2],
-    [0, 0, num, "planet3", 3],
-    [-num * Math.sin(45), 0, num, "planet4", 4],
-    [-num, 0, 0, "planet5", 5],
-    [-num * Math.sin(45), 0, -num * Math.sin(45), "planet6", 6],
-    [0, 0, -num, "planet7", 7],
-    [num * Math.sin(45), 0, -num * Math.sin(45), "planet8", 8],
-  ];
+  const planetList = PLANET_LIST;
   const rotationValues = Array(planetList.length)
     .fill()
     .map(() => (Math.random() - 0.5) * 0.005); // Generate random rotation values
@@ -43,11 +34,11 @@ const MeshPlanet = ({ navigateToDetailPlanet }) => {
         <group key={index}>
           <mesh
             ref={meshRefs.current[index]}
-            position={[planet[0], planet[1], planet[2]]}
+            position={[planet.x, planet.y, planet.z]}
             onClick={() => {
-              console.log(planet[4]);
-              navigateToDetailPlanet(planet[4]);
-              setCurrentplanet(planet[4] - 1);
+              console.log(planet.planetId);
+              navigateToDetailPlanet(planet.planetId);
+              setCurrentplanet(planet.planetId - 1);
             }}
           >
             <sphereGeometry args={[3, 32, 32]} />
@@ -60,15 +51,16 @@ const MeshPlanet = ({ navigateToDetailPlanet }) => {
             />
             <meshBasicMaterial map={texture} />
           </mesh>
-          <Html position={[planet[0], planet[1] + 5, planet[2]]}>
+          <Html position={[planet.x, planet.y + 5, planet.z]}>
             <div
+              className="w-20"
               style={{
                 color: "white",
                 fontSize: "24x",
                 textAlign: "center",
               }}
             >
-              {planet[3]}
+              {planet.name}
             </div>
           </Html>
         </group>

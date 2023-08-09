@@ -17,7 +17,7 @@ const MeshConstellation = ({
   const constellationMeshes = useMemo(
     () =>
       constellationList?.constellationList.flatMap((constellation, index) => {
-        const { boardSize, constellationId, imageUrl, lineList, title } =
+        const { boardSize, constellationId, imageUrl, lineList, title, color } =
           constellation;
 
         console.log(constellation);
@@ -40,8 +40,8 @@ const MeshConstellation = ({
               >
                 <sphereGeometry args={[1, 32, 32]} />
                 <meshStandardMaterial
-                  color="hotpink"
-                  emissive="hotpink"
+                  color={color}
+                  emissive={color}
                   emissiveIntensity={5}
                 />
               </mesh>
@@ -58,8 +58,8 @@ const MeshConstellation = ({
               >
                 <sphereGeometry args={[1, 32, 32]} />
                 <meshStandardMaterial
-                  color="hotpink"
-                  emissive="hotpink"
+                  color={color}
+                  emissive={color}
                   emissiveIntensity={5}
                 />
               </mesh>

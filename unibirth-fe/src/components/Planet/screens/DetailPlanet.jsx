@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
@@ -7,13 +7,29 @@ import ListSectionConstellation from "../blocks/ListSectionConstellation";
 import { BiSearch } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
 import ListConstellation from "../blocks/ListConstellation";
+import useConstellationApi from "../../../api/useConstellationApi";
+import { useParams } from "react-router-dom";
 
 const DetailPlanet = () => {
+  const { planetId } = useParams();
   const [constellationList, setConstellationList] = useState({
     constellationList: [],
   });
   const { navigateToMainPlanet, navigateToRegisterConstellation } =
     useNavigation();
+
+  const getConstellationList = async (planetId) => {
+    const response = await useConstellationApi.constellationsGetPlanet(
+      planetId,
+    );
+    console.log("리스트 컨프리:", response);
+    setConstellationList(response.resultData);
+  };
+
+  useEffect(() => {
+    getConstellationList(planetId);
+  }, [planetId]);
+
   const buttonsHeader = [
     {
       component: Button2,
