@@ -15,8 +15,8 @@ export const PLANET_LIST = [
 ];
 
 export const SEARTCH_LIST = [
-  { name: "All" },
-  { name: "Constellation" },
-  { name: "Star" },
-  { name: "Nickname" },
+  { name: "all" },
+  { name: "constellation" },
+  { name: "star" },
+  { name: "nickname" },
 ];

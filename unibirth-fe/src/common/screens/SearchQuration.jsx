@@ -10,7 +10,7 @@ import QurationStar from "../blocks/QurationStar";
 
 const DetailConstellation = () => {
   const { navigateToBack } = useNavigation();
-  const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState("all");
   const [query, setQuery] = useState("");
   const buttonsHeader = [
     {

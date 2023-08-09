@@ -1,45 +1,46 @@
 import React, { useState } from "react";
 import { Html } from "@react-three/drei";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
-import useConstellationApi from "../../../api/useConstellationApi";
+// import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
+// import useConstellationApi from "../../../api/useConstellationApi";
 
 const MeshHtml = ({ constellationList, moveNum, xdamper }) => {
   const { navigateToDetailConstellation } = useNavigation();
 
-  const [localConstellationList, setLocalConstellationList] = useState(
-    constellationList?.constellationList,
-  );
+  const [
+    localConstellationList,
+    // setLocalConstellationList
+  ] = useState(constellationList?.constellationList);
 
-  const handlePinClick = async (index, constellation) => {
-    if (constellation.alreadyPined) {
-      try {
-        const response = await useConstellationApi.constellationsDeletePin(
-          constellation.constellationId,
-        );
-        console.log(response);
-        updatePinedStatus(index, false);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
-        const response = await useConstellationApi.constellationsGetPin(
-          constellation.constellationId,
-        );
-        console.log(response);
-        updatePinedStatus(index, true);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
+  // const handlePinClick = async (index, constellation) => {
+  //   if (constellation.alreadyPined) {
+  //     try {
+  //       const response = await useConstellationApi.constellationsDeletePin(
+  //         constellation.constellationId,
+  //       );
+  //       console.log(response);
+  //       updatePinedStatus(index, false);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   } else {
+  //     try {
+  //       const response = await useConstellationApi.constellationsGetPin(
+  //         constellation.constellationId,
+  //       );
+  //       console.log(response);
+  //       updatePinedStatus(index, true);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  // };
 
-  const updatePinedStatus = (index, status) => {
-    const newConstellationList = [...localConstellationList];
-    newConstellationList[index].alreadyPined = status;
-    setLocalConstellationList(newConstellationList);
-  };
+  // const updatePinedStatus = (index, status) => {
+  //   const newConstellationList = [...localConstellationList];
+  //   newConstellationList[index].alreadyPined = status;
+  //   setLocalConstellationList(newConstellationList);
+  // };
 
   const handleConstellationClick = (constellationId) => {
     navigateToDetailConstellation(constellationId);
@@ -77,16 +78,16 @@ const MeshHtml = ({ constellationList, moveNum, xdamper }) => {
                   >
                     별자리 이동하기
                   </button>
-                  <div
+                  {/* <div
                     className="flex justify-center"
                     onClick={() => handlePinClick(index, constellation)}
-                  >
-                    {constellation.alreadyPined ? (
+                  > */}
+                  {/* {constellation.alreadyPined ? (
                       <AiFillPushpin size={30} />
                     ) : (
                       <AiOutlinePushpin size={30} />
-                    )}
-                  </div>
+                    )} */}
+                  {/* </div> */}
 
                   <img src={constellation.imageUrl} />
                 </div>
