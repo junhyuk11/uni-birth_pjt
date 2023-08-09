@@ -95,7 +95,7 @@ const ModifyProfile = () => {
           <div className="w-full flex-row">
             <label
               htmlFor="nickname"
-              className="inline-block w-24 font-bold text-gray-100"
+              className="inline-block w-24 font-bold text-gray-200"
             >
               닉네임
             </label>
