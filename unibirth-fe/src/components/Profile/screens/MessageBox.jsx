@@ -42,14 +42,22 @@ const MessageBox = () => {
     const chatRef = ref(database, "chats");
     const handleNewChatRoom = (snapshot) => {
       const allChats = snapshot.val();
-      const userChats = Object.entries(allChats || {}).filter(
-        ([chatId, chatData]) => {
-          return Object.values(chatData).some(
-            (message) =>
-              message.sender === nickname || message.target === nickname,
-          );
-        },
-      );
+      const userChats = Object.entries(allChats || {}).filter(([chatId]) => {
+        const [sender, target] = chatId.split("_");
+        return sender === nickname || target === nickname;
+      });
+
+      // timestamp를 기준으로 내림차순 정렬
+      userChats.sort(([, chatDataA], [, chatDataB]) => {
+        const messagesA = Object.values(chatDataA);
+        const messagesB = Object.values(chatDataB);
+
+        const lastTimestampA = messagesA[messagesA.length - 1]?.timestamp || 0;
+        const lastTimestampB = messagesB[messagesB.length - 1]?.timestamp || 0;
+
+        return lastTimestampB - lastTimestampA;
+      });
+
       setChatRooms(userChats);
     };
 
