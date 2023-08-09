@@ -67,7 +67,7 @@ const DirectMessage = () => {
     <div>
       <Header2 buttons={buttonsHeader} />
       <div className="chat-container">
-        <div className="messages">
+        <div className="messages flex flex-col">
           {messages.map((message, index) => (
             <div
               key={index}
@@ -80,9 +80,11 @@ const DirectMessage = () => {
               <div className="flex-grow">
                 <p className="text-white">{message.text}</p>
               </div>
-              <span className="ml-2 text-sm text-gray-500">
-                {formatDate(message.timestamp)}
-              </span>
+              <div className="flex flex-col items-end justify-end">
+                <span className="ml-2 text-xs text-gray-500">
+                  {formatDate(message.timestamp)}
+                </span>
+              </div>
             </div>
           ))}
           <div ref={messagesEndRef} />

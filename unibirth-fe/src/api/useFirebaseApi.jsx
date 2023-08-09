@@ -1,7 +1,15 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getStorage } from "firebase/storage";
-import { getDatabase, ref, push, onChildAdded, set } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  push,
+  onChildAdded,
+  onValue,
+  off,
+  set,
+} from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCyOsqoZjmx3f75EIqqrrcFQrN2XsDZbeQ",
@@ -46,4 +54,14 @@ function listenForMessages(callback, sender, target) {
   };
 }
 
-export { app, analytics, storage, database, sendMessage, listenForMessages };
+export {
+  app,
+  analytics,
+  storage,
+  database,
+  ref,
+  onValue,
+  off,
+  sendMessage,
+  listenForMessages,
+};
