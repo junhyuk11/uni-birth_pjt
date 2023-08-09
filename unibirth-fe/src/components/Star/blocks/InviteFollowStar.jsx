@@ -2,10 +2,13 @@ import useProfileApi from "../../../api/useProfileApi";
 import React, { useEffect, useState } from "react";
 import { nicknameState } from "../../../recoil/atoms";
 import { useRecoilValue } from "recoil";
+import { HiPaperAirplane } from "react-icons/hi";
+import { BsCheck } from "react-icons/bs";
 
 const InviteFollowStar = () => {
   const nickname = useRecoilValue(nicknameState);
   const [followList, setFollowList] = useState([]);
+  const [invitedUsers, setInvitedUsers] = useState({}); // 초대한 사용자 추적
 
   useEffect(() => {
     getFollowList(nickname);
@@ -32,33 +35,41 @@ const InviteFollowStar = () => {
       ).map((nickname) => {
         return combinedResults.find((item) => item.nickname === nickname);
       });
-
+      console.log(uniqueResults);
       setFollowList(uniqueResults);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleInvite = (nickname) => {
+    setInvitedUsers({ ...invitedUsers, [nickname]: true });
+  };
+
   return (
-    <div className="text-sky-500">
-      QQQQQQQQQQQQQQQQQQQQQQQQQQ
+    <div className="p-4 text-sky-500">
       {followList.map((item) => {
         return (
           <div
             key={item.nickname}
-            style={{ display: "flex", alignItems: "center", margin: "10px 0" }}
+            className="mb-3 flex items-center space-x-4 p-2 hover:bg-gray-100"
           >
             <img
-              src={item.profileImageUrl}
+              src={item.imageUrl}
               alt={`${item.nickname}'s profile`}
-              style={{
-                width: "50px",
-                height: "50px",
-                borderRadius: "25px",
-                marginRight: "15px",
-              }}
+              className="h-12 w-12 rounded-full"
             />
-            <div>{item.nickname}</div>
+            <div className="font-semibold">{item.nickname}</div>
+            <button
+              onClick={() => handleInvite(item.nickname)}
+              className="text-blue-500 hover:text-blue-700"
+            >
+              {invitedUsers[item.nickname] ? (
+                <BsCheck className="h-6 w-6" />
+              ) : (
+                <HiPaperAirplane className="h-6 w-6" />
+              )}
+            </button>
           </div>
         );
       })}

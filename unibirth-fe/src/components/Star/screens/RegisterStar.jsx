@@ -24,6 +24,7 @@ const RegisterStar = () => {
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [content, setContent] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const createStar = () => {
     // Firebase에 Image 저장 및 URL 받아오기
@@ -82,6 +83,10 @@ const RegisterStar = () => {
     );
   };
 
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
   const buttonsHeader = [
     {
       component: Button2,
@@ -117,12 +122,25 @@ const RegisterStar = () => {
         />
       </div>
       <div className="flex justify-center">
-        <p className="flex h-12 w-80 items-center justify-center bg-red-500 text-white">
-          별자리 초대하기
-        </p>
+        <Button1
+          className="font-TAEBAEKmilkyway"
+          value="별자리 초대하기"
+          onClick={toggleModal}
+        />
+        {showModal && (
+          <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-40">
+            <div className="max-h-2/4 overflow-y-auto rounded-lg bg-white">
+              <button
+                onClick={toggleModal}
+                className="float-right p-2 hover:bg-gray-200"
+              >
+                X
+              </button>
+              <InviteFollowStar />
+            </div>
+          </div>
+        )}
       </div>
-      <InviteFollowStar />
-      ddddd
       <div className="flex justify-center">
         <Footer1 buttons={buttonsFooter} />
       </div>
