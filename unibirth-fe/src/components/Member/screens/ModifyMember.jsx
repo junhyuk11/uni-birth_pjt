@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
@@ -12,7 +12,10 @@ import useMemberApi from "../../../api/useMemberApi";
 
 const RegisterMember = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
-  backgroundflag(true);
+  useEffect(() => {
+    backgroundflag(true);
+  }, []);
+
   const [nickname, setNickname] = useRecoilState(nicknameState);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");

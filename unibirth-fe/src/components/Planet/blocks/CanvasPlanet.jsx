@@ -23,14 +23,14 @@ function CameraController({ planet, zoomed }) {
     console.log("플래닛:", planet);
     const targetPosition = zoomed
       ? {
-          x: planet.x * multiFactor + 50,
-          y: planet.y * multiFactor + 20,
-          z: planet.z * multiFactor,
+          x: -planet.x * multiFactor + 50,
+          y: -planet.y * multiFactor + 20,
+          z: -planet.z * multiFactor,
         }
       : {
-          x: planet.x * zoomFactor,
-          y: planet.y * zoomFactor,
-          z: planet.z * zoomFactor,
+          x: -planet.x * zoomFactor,
+          y: -planet.y * zoomFactor,
+          z: -planet.z * zoomFactor,
         };
     const startPosition = {
       x: camera.position.x,

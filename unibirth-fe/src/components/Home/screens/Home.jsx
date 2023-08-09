@@ -8,11 +8,10 @@ import { backgroundflagState } from "../../../recoil/atoms";
 // // import Space from "../blocks/Space";
 
 const Home = () => {
-  const [backgroundflag, setBackgroundflag] =
-    useRecoilState(backgroundflagState);
+  const [, setBackgroundflag] = useRecoilState(backgroundflagState);
   useEffect(() => {
     setBackgroundflag(true);
-  }, [backgroundflag]);
+  }, []);
   const { navigateToMainPlanet, navigateToLoginMember } = useNavigation();
 
   const buttons = [

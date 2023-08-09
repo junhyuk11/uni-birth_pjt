@@ -13,14 +13,14 @@ import {
   nicknameState,
   targetNicknameState,
   backgroundflagState,
+  currentplanetState,
 } from "../../../recoil/atoms";
 
 const MainPlanet = () => {
-  const [backgroundflag, setBackgroundflag] =
-    useRecoilState(backgroundflagState);
+  const [, setBackgroundflag] = useRecoilState(backgroundflagState);
   useEffect(() => {
     setBackgroundflag(false);
-  }, [backgroundflag]);
+  }, []);
 
   const {
     navigateToLoginMember,
@@ -31,7 +31,8 @@ const MainPlanet = () => {
   } = useNavigation();
 
   // 행성 처음 위치
-  const [currentPlanet, setCurrentPlanet] = useState(1);
+  const currentPlanetId = useRecoilValue(currentplanetState);
+  const [currentPlanet, setCurrentPlanet] = useState(currentPlanetId % 8);
 
   // 1. 케로셀 플래닛 아이디 전달 완료
   // 버튼 누르면 setplanetPosition바뀌도록
