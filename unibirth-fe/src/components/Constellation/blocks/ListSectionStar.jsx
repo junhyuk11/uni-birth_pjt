@@ -184,7 +184,7 @@ const ListSectionStar = () => {
             <div className="flex-flex-row">
               <div className="flex">
                 <img
-                  className="cover h-96 w-96 rounded-lg"
+                  className="h-64 w-80 rounded-lg"
                   src={boxurl}
                   alt="star"
                   style={{ objectFit: "cover", overflow: "hidden" }}

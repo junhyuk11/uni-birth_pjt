@@ -3,7 +3,6 @@ import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
 import Footer1 from "../../../common/blocks/Footer1";
-import { BiSearch } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
 import BodyRegisterStar from "../blocks/BodyRegisterStar";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -12,6 +11,7 @@ import useStarApi from "../../../api/useStarApi";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../api/useFirebaseApi";
 import InviteFollowStar from "../blocks/InviteFollowStar";
+import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const RegisterStar = () => {
   useEffect(() => {
@@ -90,10 +90,8 @@ const RegisterStar = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
       onClick: navigateToBack,
-      icon: <BiSearch />,
+      icon: <LeftArrow />,
     },
   ];
 
@@ -107,42 +105,41 @@ const RegisterStar = () => {
   ];
 
   return (
-    <div className="flex flex-col space-y-1">
-      <div className="my-3 flex flex-row items-center space-x-5">
+    <div className="mx-auto h-screen max-w-screen-sm  bg-slate-100 bg-opacity-50">
+      <div>
         <Header1 buttons={buttonsHeader} />
-        <p className="flex justify-center font-TAEBAEKmilkyway">별띄우기</p>
-      </div>
-      <div className="flex flex-col justify-center px-10">
-        <BodyRegisterStar
-          title={title}
-          setTitle={setTitle}
-          content={content}
-          setContent={setContent}
-          setImageUrl={setImageUrl}
-        />
-      </div>
-      <div className="flex justify-center">
-        <Button1
-          className="font-TAEBAEKmilkyway"
-          value="별자리 초대하기"
-          onClick={toggleModal}
-        />
-        {showModal && (
-          <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-40">
-            <div className="max-h-2/4 overflow-y-auto rounded-lg bg-white">
-              <button
-                onClick={toggleModal}
-                className="float-right p-2 hover:bg-gray-200"
-              >
-                X
-              </button>
-              <InviteFollowStar />
+        <div className="flex flex-col justify-center px-10">
+          <BodyRegisterStar
+            title={title}
+            setTitle={setTitle}
+            content={content}
+            setContent={setContent}
+            setImageUrl={setImageUrl}
+          />
+        </div>
+        <div className="flex justify-center">
+          <Button1
+            className="font-TAEBAEKmilkyway"
+            value="별자리 초대하기"
+            onClick={toggleModal}
+          />
+          {showModal && (
+            <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-40">
+              <div className="max-h-2/4 overflow-y-auto rounded-lg bg-white">
+                <button
+                  onClick={toggleModal}
+                  className="float-right p-2 hover:bg-gray-200"
+                >
+                  X
+                </button>
+                <InviteFollowStar />
+              </div>
             </div>
-          </div>
-        )}
-      </div>
-      <div className="flex justify-center">
-        <Footer1 buttons={buttonsFooter} />
+          )}
+        </div>
+        <div className="flex justify-center">
+          <Footer1 buttons={buttonsFooter} />
+        </div>
       </div>
     </div>
   );
