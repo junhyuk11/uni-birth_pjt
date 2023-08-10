@@ -14,15 +14,12 @@ const MessageBox = () => {
   const { navigateToDirectMessage, navigateToBack } = useNavigation();
   const location = useLocation();
   const locationNickname = location.state;
-  const handleBackClick = () => {
-    navigateToBack();
-  };
 
   const buttonsHeader = [
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      onClick: handleBackClick,
+      onClick: navigateToBack(),
       icon: <LeftArrow />,
     },
   ];
@@ -32,7 +29,7 @@ const MessageBox = () => {
     const otherNickname = sender === nickname ? target : sender;
     setTargetNickname(otherNickname); // recoil 상태 설정
 
-    navigateToDirectMessage(chatId); // 해당 페이지로 이동
+    navigateToDirectMessage(locationNickname); // 해당 페이지로 이동
   };
 
   useEffect(() => {
