@@ -13,7 +13,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const ModifyProfile = () => {
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
-  const [imageUrl, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [introduction, setIntro] = useState("");
   const [nickname, setNickname] = useState("");
   console.log(imageUrl);
@@ -21,7 +21,7 @@ const ModifyProfile = () => {
     const fetchData = async () => {
       try {
         const response = await useMemberApi.membersGetProfiles();
-        setImage(response.resultData.imageUrl);
+        setImageUrl(response.resultData.imageUrl);
         setIntro(response.resultData.introduction);
         setNickname(response.resultData.nickname);
       } catch (error) {
@@ -33,12 +33,16 @@ const ModifyProfile = () => {
 
   const saveImgFile = (event) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setImage(e.target.result);
-    };
-    reader.readAsDataURL(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImageUrl(e.target.result);
+      };
+      console.log(imageUrl);
+      reader.readAsDataURL(file);
+    }
   };
+
   const buttonsHeader = [
     {
       component: Button2,
@@ -51,7 +55,7 @@ const ModifyProfile = () => {
   const handleCompleteClick = async (e) => {
     e.preventDefault();
     console.log("imageUrl:");
-    console.log(imageUrl.name);
+    console.log(imageUrl);
     const storageRef = ref(storage, `images/${imageUrl.name}`);
     const uploadTask = uploadBytesResumable(storageRef, imageUrl);
     uploadTask.on(

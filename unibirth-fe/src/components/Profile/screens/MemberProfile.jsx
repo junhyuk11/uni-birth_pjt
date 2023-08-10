@@ -25,7 +25,7 @@ const MemberProfile = () => {
   backgroundflag(true);
   const location = useLocation();
   const locationNickname = location.state;
-  console.log(location);
+  console.log(locationNickname);
 
   const nickname = useRecoilValue(nicknameState);
   const targetNickname = useRecoilValue(targetNicknameState);
