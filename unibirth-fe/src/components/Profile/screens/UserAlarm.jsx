@@ -2,20 +2,18 @@ import React, { useEffect, useState } from "react";
 import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { database, ref, onValue, off } from "../../../api/useFirebaseApi";
-import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
+import { nicknameState } from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const UserAlarm = () => {
   const nickname = useRecoilValue(nicknameState);
-  const [targetNickname, setTargetNickname] =
-    useRecoilState(targetNicknameState);
-  const [chatRooms, setChatRooms] = useState([]);
-  const { navigateToMemberProfile, navigateToDirectMessage } = useNavigation();
+  const [alarms, setAlarms] = useState([]);
+  const { navigateToMemberProfile, navigateToDetailConstellation } =
+    useNavigation();
 
   const handleBackClick = () => {
-    setTargetNickname(nickname);
     navigateToMemberProfile();
   };
 
@@ -28,43 +26,23 @@ const UserAlarm = () => {
     },
   ];
 
-  const handleNavigateToChat = (chatId) => {
-    const [sender, target] = chatId.split("_");
-    const otherNickname = sender === nickname ? target : sender;
-    console.log(targetNickname);
-
-    setTargetNickname(otherNickname); // recoil 상태 설정
-
-    navigateToDirectMessage(chatId); // 해당 페이지로 이동
-  };
-
   useEffect(() => {
-    const chatRef = ref(database, "chats");
-    const handleNewChatRoom = (snapshot) => {
-      const allChats = snapshot.val();
-      const userChats = Object.entries(allChats || {}).filter(([chatId]) => {
-        const [sender, target] = chatId.split("_");
-        return sender === nickname || target === nickname;
-      });
-
-      // timestamp를 기준으로 내림차순 정렬
-      userChats.sort(([, chatDataA], [, chatDataB]) => {
-        const messagesA = Object.values(chatDataA);
-        const messagesB = Object.values(chatDataB);
-
-        const lastTimestampA = messagesA[messagesA.length - 1]?.timestamp || 0;
-        const lastTimestampB = messagesB[messagesB.length - 1]?.timestamp || 0;
-
-        return lastTimestampB - lastTimestampA;
-      });
-
-      setChatRooms(userChats);
+    const invitedRef = ref(database, `invited/${nickname}`);
+    const handleNewAlarm = (snapshot) => {
+      const userAlarms = snapshot.val();
+      if (userAlarms) {
+        const formattedAlarms = Object.entries(userAlarms);
+        const sortedAlarms = formattedAlarms.sort(
+          (a, b) => b[1].timestamp - a[1].timestamp,
+        );
+        setAlarms(sortedAlarms);
+      }
     };
 
-    onValue(chatRef, handleNewChatRoom);
+    onValue(invitedRef, handleNewAlarm);
 
     return () => {
-      off(chatRef, "value", handleNewChatRoom);
+      off(invitedRef, "value", handleNewAlarm);
     };
   }, [nickname]);
 
@@ -73,28 +51,25 @@ const UserAlarm = () => {
       <div>
         <Header2 buttons={buttonsHeader} />
         <ul>
-          {chatRooms.map(([chatId, chatData]) => {
-            const [sender, target] = chatId.split("_");
-            const otherNickname = sender === nickname ? target : sender;
-
-            const messages = Object.values(chatData);
-            const lastMessage = messages[messages.length - 1];
-
-            return (
-              <li
-                key={chatId}
-                className="border-t px-4 py-4"
-                onClick={() => handleNavigateToChat(chatId)}
-              >
-                <strong className="text-base">닉네임 :</strong> {otherNickname}
-                {lastMessage && (
-                  <div className="text-xs">
-                    <strong className="text-base"></strong> {lastMessage.text}
-                  </div>
-                )}
-              </li>
-            );
-          })}
+          {alarms.map(([alarmId, alarmData]) => (
+            <li
+              key={alarmId}
+              onClick={() =>
+                navigateToDetailConstellation(alarmData.constellationId)
+              }
+              className="border-t px-4 py-4"
+            >
+              <div className="text-base">
+                {alarmData.sender}님이 {alarmData.constellationTitle}로
+                초대하였습니다.
+              </div>
+              {alarmData.timestamp && (
+                <div className="mt-2 text-xs">
+                  {new Date(alarmData.timestamp).toLocaleString()}
+                </div>
+              )}
+            </li>
+          ))}
           <li className="border-t"></li>
         </ul>
       </div>

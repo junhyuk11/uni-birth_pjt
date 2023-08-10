@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 import { HiPaperAirplane } from "react-icons/hi";
 import { BsCheck } from "react-icons/bs";
 import { sendInvite } from "../../../api/useFirebaseApi";
+import useConstellationApi from "../../../api/useConstellationApi";
 
 const InviteFollowStar = () => {
   const nickname = useRecoilValue(nicknameState);
@@ -31,7 +32,6 @@ const InviteFollowStar = () => {
         ...followersResponse.resultData,
       ];
 
-      // Set을 사용해 중복 nickname 제거
       const uniqueResults = Array.from(
         new Set(combinedResults.map((item) => item.nickname)),
       ).map((nickname) => {
@@ -44,9 +44,19 @@ const InviteFollowStar = () => {
     }
   };
 
-  const handleInvite = (nickname) => {
-    setInvitedUsers({ ...invitedUsers, [nickname]: true });
-    sendInvite(nickname, nickname, constellationId);
+  const handleInvite = async (targetNickname) => {
+    try {
+      const response = await useConstellationApi.constellationsGetDetail(
+        constellationId,
+      );
+      const constellationTitle = response.resultData.constellationTitle;
+
+      sendInvite(nickname, targetNickname, constellationTitle, constellationId);
+
+      setInvitedUsers({ ...invitedUsers, [targetNickname]: true });
+    } catch (error) {
+      console.error("Error fetching constellation detail:", error);
+    }
   };
 
   return (

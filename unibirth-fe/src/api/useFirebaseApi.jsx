@@ -54,13 +54,19 @@ function listenForMessages(callback, sender, target) {
   };
 }
 
-function sendInvite(sender, targetNickname, constellationId) {
+function sendInvite(
+  sender,
+  targetNickname,
+  constellationTitle,
+  constellationId,
+) {
   const inviteRef = ref(database, `invited/${targetNickname}`);
   const newInviteRef = push(inviteRef);
 
   const inviteData = {
     sender,
     timestamp: Date.now(),
+    constellationTitle,
     constellationId,
   };
 

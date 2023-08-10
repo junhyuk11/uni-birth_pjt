@@ -75,7 +75,7 @@ export const useNavigation = () => {
   };
 
   const navigateToUserAlarm = () => {
-    navigateToMessageBox("/useralarm");
+    navigate("/useralarm");
   };
 
   const navigateToDirectMessage = () => {
