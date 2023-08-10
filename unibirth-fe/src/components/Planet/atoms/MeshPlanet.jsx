@@ -1,6 +1,14 @@
 import React, { useRef } from "react";
 import { Html } from "@react-three/drei";
-import earth1 from "../../../assets/images/earth1.jpg";
+import earth1 from "../../../assets/images/planet01.jpg";
+import earth2 from "../../../assets/images/planet02.jpg";
+import earth3 from "../../../assets/images/planet03.jpg";
+import earth4 from "../../../assets/images/planet04.jpg";
+import earth5 from "../../../assets/images/planet05.jpg";
+import earth6 from "../../../assets/images/planet06.jpg";
+import earth7 from "../../../assets/images/planet07.jpg";
+import earth8 from "../../../assets/images/planet08.jpg";
+
 import * as THREE from "three";
 import { useLoader, useFrame } from "@react-three/fiber";
 import { useSetRecoilState } from "recoil";
@@ -8,8 +16,17 @@ import { currentplanetState } from "../../../recoil/atoms";
 import { PLANET_LIST } from "../../../constants/constants";
 
 const MeshPlanet = ({ navigateToDetailPlanet }) => {
+  const planetImage = [
+    earth1,
+    earth2,
+    earth3,
+    earth4,
+    earth5,
+    earth6,
+    earth7,
+    earth8,
+  ];
   const setCurrentplanet = useSetRecoilState(currentplanetState);
-  const texture = useLoader(THREE.TextureLoader, earth1);
   const planetList = PLANET_LIST;
   const rotationValues = Array(planetList.length)
     .fill()
@@ -49,7 +66,9 @@ const MeshPlanet = ({ navigateToDetailPlanet }) => {
               emissiveIntensity={10}
               // emissiveIntensity={starList.starList[index].brightness}
             />
-            <meshBasicMaterial map={texture} />
+            <meshBasicMaterial
+              map={useLoader(THREE.TextureLoader, planetImage[index])}
+            />
           </mesh>
           <Html position={[planet.x, planet.y + 5, planet.z]}>
             <div

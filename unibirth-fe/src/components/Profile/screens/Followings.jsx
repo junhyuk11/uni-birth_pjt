@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button2 from "../../../common/atoms/Button2";
-import Button4 from "../../../common/atoms/Button4";
 import Header2 from "../../../common/blocks/Header2";
-import Header1 from "../../../common/blocks/Header1";
-import { IoIosArrowBack } from "react-icons/io";
-import { CiLocationArrow1 } from "react-icons/ci";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useProfileApi from "../../../api/useProfileApi";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -12,6 +8,10 @@ import {
   targetNicknameState,
   backgroundflagState,
 } from "../../../recoil/atoms";
+import LeftArrow from "../../../assets/icons/js/leftArrow";
+import Button1 from "../../../common/atoms/Button1";
+import Header5 from "../../../common/blocks/Header5";
+import Message from "../../../assets/icons/js/message";
 
 const Followings = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -20,7 +20,6 @@ const Followings = () => {
     navigateToMemberProfile,
     navigateToFollowers,
     navigateToDirectMessage,
-    navigateToBack,
   } = useNavigation();
 
   const [targetNickname, setTargetNickname] =
@@ -29,24 +28,22 @@ const Followings = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
-      onClick: navigateToBack,
-      icon: <IoIosArrowBack />,
+      onClick: navigateToMemberProfile,
+      icon: <LeftArrow />,
     },
   ];
 
   const buttonsHeader2 = [
     {
-      component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      component: Button1,
+      className: "font-TAEBAEKmilkyway bg-white",
       value: "팔로잉",
     },
     {
-      component: Button4,
+      component: Button1,
       className: "font-TAEBAEKmilkyway",
-      onClick: navigateToFollowers,
       value: "팔로워",
+      onClick: navigateToFollowers,
     },
   ];
   const [followingList, setFollowingList] = useState([]);
@@ -66,27 +63,48 @@ const Followings = () => {
     navigateToMemberProfile(); // 화면 이동을 처리하는 함수를 호출합니다.
   };
 
+  const messageClick = (nick) => {
+    setTargetNickname(nick);
+    navigateToDirectMessage();
+  };
+
+  useEffect(() => {
+    console.log(targetNickname);
+  }, [targetNickname]);
+
   return (
-    <div>
+    <div className="mx-auto h-screen max-w-screen-sm">
       <Header2 buttons={buttonsHeader} />
-      <Header1 buttons={buttonsHeader2} />
-      <h1> {targetNickname}의 팔로잉 리스트입니다..</h1>
-      <div className="flex flex-col items-center">
+      <Header5 buttons={buttonsHeader2} />
+      <div className="flex flex-col items-center px-4 text-white">
         {followingList.map((user) => (
-          <div key={user.nickname} className="my-4">
-            <img src={user.imageUrl} className="avatar" alt="User Avatar" />
-            <div>
+          <div
+            key={user.nickname}
+            className="mx-4 flex w-full items-center border-b border-yellow-200 px-4 py-6"
+            onClick={() => nicknameClick(user.nickname)}
+          >
+            <img
+              src={user.imageUrl}
+              className="avatar mr-2 h-16 w-16"
+              alt="User Avatar"
+            />
+            <div className="py-5">
               <p>{user.nickname}</p>
-              <button onClick={() => nicknameClick(user.nickname)}>
-                프로필 조회하기
+            </div>
+            <div className="flex-grow"></div>
+            <div className="flex">
+              <Button1
+                onClick={() => nicknameClick(user.nickname)}
+                value="팔로우"
+                className={"mr-6"}
+              />
+              <button
+                className="flex items-center "
+                onClick={() => messageClick(user.nickname)}
+              >
+                <Message />
               </button>
             </div>
-            <button
-              className="flex h-32 w-48 items-center "
-              onClick={navigateToDirectMessage}
-            >
-              <CiLocationArrow1 />
-            </button>
           </div>
         ))}
       </div>

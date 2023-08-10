@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
 import { useNavigation } from "../../../hooks/useNavigation";
 import { sendMessage, listenForMessages } from "../../../api/useFirebaseApi";
@@ -11,15 +11,25 @@ const DirectMessage = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const nickname = useRecoilValue(nicknameState);
-  const targetNickname = useRecoilValue(targetNicknameState);
+  const [targetNickname, setTargetNickname] =
+    useRecoilState(targetNicknameState);
   const { navigateToBack } = useNavigation();
 
+  const backClick = (nickname) => {
+    setTargetNickname(nickname); // 클릭한 유저 닉네임을 targetNicknameState에 저장합니다.
+    navigateToBack(); // 화면 이동을 처리하는 함수를 호출합니다.
+  };
   const buttonsHeader = [
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      onClick: navigateToBack,
+      onClick: () => backClick(nickname),
       icon: <LeftArrow />,
+    },
+    {
+      component: () => (
+        <span className="ml-4 text-2xl text-white">{targetNickname}</span>
+      ),
     },
   ];
 
@@ -42,6 +52,7 @@ const DirectMessage = () => {
     );
 
     return () => {
+      console.log(targetNickname);
       detachListener();
     };
   }, [nickname, targetNickname]);
@@ -63,11 +74,14 @@ const DirectMessage = () => {
   useEffect(scrollToBottom, [messages]);
 
   return (
-    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+    <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
       <Header2 buttons={buttonsHeader} />
       <div className="px-4">
         <div className="chat-container">
-          <div className="messages flex flex-col">
+          <div
+            className="messages flex flex-col"
+            style={{ paddingBottom: "100px" }}
+          >
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -76,8 +90,12 @@ const DirectMessage = () => {
               ${message.sender === nickname ? "ml-auto" : ""} 
               ${message.sender === targetNickname ? "mr-auto" : ""} 
             `}
+                style={{ maxWidth: "50%", wordWrap: "break-word" }}
               >
-                <div className="flex-grow">
+                <div
+                  className="flex-grow"
+                  style={{ maxWidth: "90%", wordWrap: "break-word" }}
+                >
                   <p className="text-white">{message.text}</p>
                 </div>
                 <div className="flex flex-col items-end justify-end">

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
-import { LuMessagesSquare, LuSend } from "react-icons/lu";
 import { useNavigation } from "../../../hooks/useNavigation";
 import MemberSectionProfile from "../blocks/MemberSectionProfile";
 import ConstellationSectionProfile from "../blocks/ConstellationSectionProfile";
@@ -17,6 +16,8 @@ import {
   nicknameState,
   targetNicknameState,
 } from "../../../recoil/atoms";
+import Mail from "../../../assets/icons/js/mail";
+import Message from "../../../assets/icons/js/message";
 
 const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -26,9 +27,13 @@ const MemberProfile = () => {
   const targetNickname = useRecoilValue(targetNicknameState);
   const {
     navigateToMessageBox,
+<<<<<<< HEAD
     // navigateToModifyProfile,
     navigateToBack,
+=======
+>>>>>>> fe/dev
     navigateToMainPlanet,
+    navigateToUserAlarm,
     navigateToModifyMember,
     navigateToDirectMessage,
   } = useNavigation();
@@ -68,12 +73,18 @@ const MemberProfile = () => {
     },
     {
       component: Button2,
+      value: "",
+      onClick: navigateToUserAlarm,
+      icon: <LeftArrow />,
+    },
+    {
+      component: Button2,
       className: "font-TAEBAEKmilkyway",
       onClick:
         nickname === targetNickname
           ? navigateToMessageBox
           : navigateToDirectMessage,
-      icon: nickname === targetNickname ? <LuMessagesSquare /> : <LuSend />,
+      icon: nickname === targetNickname ? <Mail /> : <Message />,
     },
     {
       component: Button2,
