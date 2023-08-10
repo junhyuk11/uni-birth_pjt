@@ -69,23 +69,25 @@ const MeshHtml = ({ constellationList, moveNum, xdamper }) => {
                   </div>
                   <div>{constellation.content}</div>
                 </div>
-                <button
-                  className="w-40 rounded-full bg-red-500 p-2 text-white"
-                  onClick={() =>
-                    handleConstellationClick(constellation.constellationId)
-                  }
-                >
-                  별자리 이동하기
-                </button>
-                <div
-                  className="flex justify-center"
-                  onClick={() => handlePinClick(index, constellation)}
-                >
-                  {constellation.alreadyPined ? (
-                    <AiFillPushpin size={30} />
-                  ) : (
-                    <AiOutlinePushpin size={30} />
-                  )}
+                <div className="flex flex-row">
+                  <button
+                    className="mb-2 ml-6 mr-2 rounded-full bg-gradient-to-br from-purple-600 to-blue-500 px-5 py-2.5 text-center text-sm font-medium text-white shadow-lg shadow-purple-500/50 hover:bg-gradient-to-bl focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800"
+                    onClick={() =>
+                      handleConstellationClick(constellation.constellationId)
+                    }
+                  >
+                    이동하기
+                  </button>
+                  <div
+                    className="mt-1 flex"
+                    onClick={() => handlePinClick(index, constellation)}
+                  >
+                    {constellation.alreadyPined ? (
+                      <AiFillPushpin size={30} />
+                    ) : (
+                      <AiOutlinePushpin size={30} />
+                    )}
+                  </div>
                 </div>
 
                 <img src={constellation.imageUrl} />

@@ -1,11 +1,13 @@
 // import React from "react";
 import React, { useRef, useState, useEffect } from "react";
 // import usePlanetApi from "../../../api/usePlanetApi";
+import Button1 from "../../../common/atoms/Button1";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Stars } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import MeshPlanet from "../atoms/MeshPlanet";
 import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
+import { PiCubeFocus } from "react-icons/pi";
 import { gsap } from "gsap";
 import GradientBackground from "../../../common/atoms/GradientBackground";
 import { useSetRecoilState } from "recoil";
@@ -81,12 +83,11 @@ const ListSectionPlanet = ({ navigateToDetailPlanet, planetPosition }) => {
       >
         <BiSolidRightArrow />
       </button>
-      <button
-        className="absolute bottom-10 right-10 z-10 flex flex-col text-6xl text-white"
+      <Button1
+        className="font-Pretendard"
         onClick={handleMoveClick}
-      >
-        Move
-      </button>
+        icon={<PiCubeFocus />}
+      />
 
       <Canvas camera={{ position: [0, 0, 0] }}>
         <OrbitControls
