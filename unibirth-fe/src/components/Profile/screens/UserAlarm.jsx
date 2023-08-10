@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { database, ref, onValue, off } from "../../../api/useFirebaseApi";
-import { nicknameState } from "../../../recoil/atoms";
+import { nicknameState, backgroundflagState } from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const UserAlarm = () => {
+  const backgroundflag = useSetRecoilState(backgroundflagState);
+  useEffect(() => {
+    backgroundflag(true);
+  }, []);
   const nickname = useRecoilValue(nicknameState);
   const [alarms, setAlarms] = useState([]);
   const { navigateToMemberProfile, navigateToDetailConstellation } =
