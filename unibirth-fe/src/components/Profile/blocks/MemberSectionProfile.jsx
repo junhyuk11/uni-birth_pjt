@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Button1 from "../../../common/atoms/Button1";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useMemberApi from "../../../api/useMemberApi";
 import useProfileApi from "../../../api/useProfileApi";
 import { useRecoilValue } from "recoil";
 import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
+import Button5 from "../../../common/atoms/Button5";
 
 const MemberSectionProfile = () => {
   const {
@@ -79,7 +79,7 @@ const MemberSectionProfile = () => {
   }, [targetNickname]);
 
   return (
-    <div className="space-x-4 bg-slate-950 bg-opacity-60 px-5">
+    <div className="space-x-4 overflow-hidden bg-slate-950 bg-opacity-60 px-5 py-5">
       {memberData && (
         <div className="flex items-start space-x-4">
           <img
@@ -87,44 +87,55 @@ const MemberSectionProfile = () => {
             className="h-32 w-32 rounded-full"
             alt="Round image"
           />
-          <div>
-            <p className="text-lg font-bold text-yellow-100">
-              {memberData.resultData.nickname}
-            </p>
-            <p onClick={navigateToMyStars} className="text-yellow-100">
-              띄운 별: {memberData.resultData.starCount}
-            </p>
-            <p onClick={navigateToFollowings} className="text-yellow-100">
-              팔로잉: {memberData.resultData.followingCount}
-            </p>
-            <p onClick={navigateToFollowers} className="text-yellow-100">
-              팔로워: {memberData.resultData.followerCount}
-            </p>
-          </div>
-          <div>
-            <p className="text-lg font-bold text-yellow-100">
-              <p>상태 메시지 :</p>
+          <div className="flex flex-grow flex-col justify-center space-y-10">
+            <div className="flex justify-end space-x-4">
+              <div className="flex flex-col items-center">
+                <p
+                  onClick={navigateToFollowings}
+                  className="text-center text-yellow-100"
+                >
+                  팔로잉: {memberData.resultData.followingCount}
+                </p>
+              </div>
+              <div className="flex flex-col items-center">
+                <p
+                  onClick={navigateToFollowers}
+                  className="text-center text-yellow-100"
+                >
+                  팔로워: {memberData.resultData.followerCount}
+                </p>
+              </div>
+              <div className="flex flex-col items-center">
+                <p
+                  onClick={navigateToMyStars}
+                  className="text-center text-yellow-100"
+                >
+                  띄운 별: {memberData.resultData.starCount}
+                </p>
+              </div>
+            </div>
+            <div className="text-right text-lg font-bold text-white">
               {memberData.resultData.introduction}
-            </p>
+            </div>
           </div>
         </div>
       )}
 
-      <div className="flex items-center justify-center space-x-4 bg-slate-950 bg-opacity-60">
+      <div className="flex items-center justify-end space-x-4 bg-slate-950 bg-opacity-60">
         {nickname === targetNickname ? (
-          <Button1
+          <Button5
             value="수정"
             className="w-20 font-TAEBAEKmilkyway"
             onClick={navigateToModifyProfile}
           />
         ) : memberData?.resultData?.follow ? (
-          <Button1
+          <Button5
             value="언팔로우"
             className="font-TAEBAEKmilkyway"
             onClick={handleUnfollow} // 이 함수를 정의해야 함
           />
         ) : (
-          <Button1
+          <Button5
             value="팔로우"
             className="w-20 font-TAEBAEKmilkyway"
             onClick={handleFollow}

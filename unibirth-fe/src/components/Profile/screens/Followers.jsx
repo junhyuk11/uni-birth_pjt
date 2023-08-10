@@ -76,7 +76,7 @@ const Followers = () => {
     <div className="mx-auto h-screen max-w-screen-sm">
       <Header2 buttons={buttonsHeader} />
       <Header5 buttons={buttonsHeader2} />
-      <div className="flex flex-col items-center px-4 text-white">
+      <div className="mt-10 flex flex-col items-center px-4 text-white">
         {followerList.map((user) => (
           <div
             key={user.nickname}
@@ -97,11 +97,11 @@ const Followers = () => {
               <Button1
                 onClick={() => nicknameClick(user.nickname)}
                 value="팔로우"
-                className={"mr-6"}
+                className={"mr-2"}
               />
               {/* </div> */}
               <button
-                className="flex items-center "
+                className="flex items-center py-4 pl-4"
                 onClick={() => messageClick(user.nickname)}
               >
                 <Message />

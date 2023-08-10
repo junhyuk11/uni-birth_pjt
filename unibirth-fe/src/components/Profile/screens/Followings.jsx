@@ -63,6 +63,11 @@ const Followings = () => {
     navigateToMemberProfile(); // 화면 이동을 처리하는 함수를 호출합니다.
   };
 
+  function handleButtonClick(e, nickname) {
+    e.stopPropagation();
+    messageClick(nickname);
+  }
+
   const messageClick = (nick) => {
     setTargetNickname(nick);
     navigateToDirectMessage();
@@ -76,7 +81,7 @@ const Followings = () => {
     <div className="mx-auto h-screen max-w-screen-sm">
       <Header2 buttons={buttonsHeader} />
       <Header5 buttons={buttonsHeader2} />
-      <div className="flex flex-col items-center px-4 text-white">
+      <div className="mt-10 flex flex-col items-center px-4 text-white">
         {followingList.map((user) => (
           <div
             key={user.nickname}
@@ -96,11 +101,11 @@ const Followings = () => {
               <Button1
                 onClick={() => nicknameClick(user.nickname)}
                 value="팔로우"
-                className={"mr-6"}
+                className={"mr-2"}
               />
               <button
-                className="flex items-center "
-                onClick={() => messageClick(user.nickname)}
+                className="flex items-center py-4 pl-4"
+                onClick={(e) => handleButtonClick(e, user.nickname)}
               >
                 <Message />
               </button>

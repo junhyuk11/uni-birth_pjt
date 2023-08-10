@@ -7,7 +7,6 @@ import ConstellationSectionProfile from "../blocks/ConstellationSectionProfile";
 import useMemberApi from "../../../api/useMemberApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import ThreeDots from "../../../assets/icons/js/threeDots";
-import Header3 from "../../../common/blocks/Header3";
 import Close from "../../../assets/icons/js/close";
 import Header4 from "../../../common/blocks/Header4";
 import { useSetRecoilState, useRecoilValue } from "recoil";
@@ -18,6 +17,7 @@ import {
 } from "../../../recoil/atoms";
 import Mail from "../../../assets/icons/js/mail";
 import Message from "../../../assets/icons/js/message";
+import Header6 from "../../../common/blocks/Header6";
 
 const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -65,6 +65,11 @@ const MemberProfile = () => {
       value: "",
       onClick: navigateToMainPlanet,
       icon: <LeftArrow />,
+    },
+    {
+      component: () => (
+        <span className="ml-4 text-2xl text-white">{targetNickname}</span>
+      ),
     },
     {
       component: Button2,
@@ -122,8 +127,7 @@ const MemberProfile = () => {
   return (
     <div className="mx-auto h-screen max-w-screen-sm">
       <div>
-        <Header3 buttons={buttonsHeader} />
-        <h1>회원 프로필 화면입니다.</h1>
+        <Header6 buttons={buttonsHeader} />
         <MemberSectionProfile />
         <ConstellationSectionProfile />
         {isModalOpen && (
