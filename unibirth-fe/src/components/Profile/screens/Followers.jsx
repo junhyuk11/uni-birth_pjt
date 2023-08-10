@@ -18,7 +18,6 @@ const Followers = () => {
   backgroundflag(true);
   const {
     navigateToMemberProfile,
-    navigateToBack,
     navigateToFollowings,
     navigateToDirectMessage,
   } = useNavigation();
@@ -31,20 +30,20 @@ const Followers = () => {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
       value: "뒤로가기",
-      onClick: navigateToBack,
+      onClick: navigateToMemberProfile,
       icon: <IoIosArrowBack />,
     },
   ];
 
   const buttonsHeader2 = [
     {
-      component: Button4,
+      component: Button2,
       className: "font-TAEBAEKmilkyway bg-white",
       value: "팔로잉",
       onClick: navigateToFollowings,
     },
     {
-      component: Button2,
+      component: Button4,
       className: "font-TAEBAEKmilkyway",
       value: "팔로워",
     },
@@ -66,16 +65,20 @@ const Followers = () => {
     navigateToMemberProfile(); // 화면 이동을 처리하는 함수를 호출합니다.
   };
 
+  const messageClick = (nick) => {
+    setTargetNickname(nick);
+    navigateToDirectMessage();
+  };
+
   useEffect(() => {
     console.log("1", targetNickname);
   }, [targetNickname]);
 
   return (
-    <div>
+    <div className="flex min-h-screen flex-col items-center">
       <Header2 buttons={buttonsHeader} />
       <Header1 buttons={buttonsHeader2} />
-      <h1> {targetNickname}의 팔로워 리스트입니다..</h1>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center text-white">
         {followerList.map((user) => (
           <div key={user.nickname} className="my-4">
             <img src={user.imageUrl} className="avatar" alt="User Avatar" />
@@ -84,13 +87,13 @@ const Followers = () => {
               <button onClick={() => nicknameClick(user.nickname)}>
                 프로필 조회하기
               </button>
+              <button
+                className="flex h-32 w-48 items-center "
+                onClick={() => messageClick(user.nickname)}
+              >
+                <CiLocationArrow1 />
+              </button>
             </div>
-            <button
-              className="flex h-32 w-48 items-center "
-              onClick={navigateToDirectMessage}
-            >
-              <CiLocationArrow1 />
-            </button>
           </div>
         ))}
       </div>
