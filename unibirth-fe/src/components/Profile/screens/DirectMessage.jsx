@@ -28,7 +28,7 @@ const DirectMessage = () => {
     },
     {
       component: () => (
-        <span className="ml-4 text-2xl">{targetNickname} 와의 대화방</span>
+        <span className="ml-4 text-2xl text-white">{targetNickname}</span>
       ),
     },
   ];
@@ -74,11 +74,14 @@ const DirectMessage = () => {
   useEffect(scrollToBottom, [messages]);
 
   return (
-    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+    <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
       <Header2 buttons={buttonsHeader} />
       <div className="px-4">
         <div className="chat-container">
-          <div className="messages flex flex-col">
+          <div
+            className="messages flex flex-col"
+            style={{ paddingBottom: "100px" }}
+          >
             {messages.map((message, index) => (
               <div
                 key={index}
