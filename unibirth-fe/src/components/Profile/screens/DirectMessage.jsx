@@ -87,8 +87,12 @@ const DirectMessage = () => {
               ${message.sender === nickname ? "ml-auto" : ""} 
               ${message.sender === targetNickname ? "mr-auto" : ""} 
             `}
+                style={{ maxWidth: "50%", wordWrap: "break-word" }}
               >
-                <div className="flex-grow">
+                <div
+                  className="flex-grow"
+                  style={{ maxWidth: "90%", wordWrap: "break-word" }}
+                >
                   <p className="text-white">{message.text}</p>
                 </div>
                 <div className="flex flex-col items-end justify-end">
