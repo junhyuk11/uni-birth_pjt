@@ -27,6 +27,7 @@ const MemberProfile = () => {
   const {
     navigateToMessageBox,
     // navigateToModifyProfile,
+    navigateToBack,
     navigateToMainPlanet,
     navigateToModifyMember,
     navigateToDirectMessage,
@@ -62,7 +63,7 @@ const MemberProfile = () => {
     {
       component: Button2,
       value: "",
-      onClick: navigateToMainPlanet,
+      onClick: navigateToBack,
       icon: <LeftArrow />,
     },
     {

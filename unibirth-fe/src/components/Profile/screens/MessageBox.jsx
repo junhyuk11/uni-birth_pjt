@@ -12,11 +12,16 @@ const MessageBox = () => {
   const [targetNickname, setTargetNickname] =
     useRecoilState(targetNicknameState);
   const [chatRooms, setChatRooms] = useState([]);
-  const { navigateToMemberProfile, navigateToDirectMessage } = useNavigation();
+  const {
+    // navigateToMemberProfile,
+    navigateToDirectMessage,
+    navigateToBack,
+  } = useNavigation();
 
   const handleBackClick = () => {
-    setTargetNickname(nickname);
-    navigateToMemberProfile();
+    // setTargetNickname(nickname);
+    // navigateToMemberProfile();
+    navigateToBack();
   };
 
   const buttonsHeader = [
