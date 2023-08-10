@@ -74,6 +74,10 @@ export const useNavigation = () => {
     navigate("/stars");
   };
 
+  const navigateToUserAlarm = () => {
+    navigateToMessageBox("/useralarm");
+  };
+
   const navigateToDirectMessage = () => {
     navigate("/profiles/directmessage");
   };
@@ -121,6 +125,7 @@ export const useNavigation = () => {
     navigateToFollowings,
     navigateToFollowers,
     navigateToMyStars,
+    navigateToUserAlarm,
     navigateToDirectMessage,
     navigateToMessageBox,
     navigateToRegisterStar,
