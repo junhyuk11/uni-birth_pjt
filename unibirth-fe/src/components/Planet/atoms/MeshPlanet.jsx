@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Html } from "@react-three/drei";
-import earth1 from "../../../assets/images/earth1.jpg";
+import earth1 from "../../../assets/images/planet08.jpg";
 import * as THREE from "three";
 import { useLoader, useFrame } from "@react-three/fiber";
 import { useSetRecoilState } from "recoil";
