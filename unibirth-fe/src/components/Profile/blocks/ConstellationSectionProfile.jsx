@@ -8,9 +8,12 @@ import { useNavigation } from "../../../hooks/useNavigation";
 const ConstellationSectionProfile = () => {
   const targetNickname = useRecoilValue(targetNicknameState);
   const [images, setImages] = useState([]);
-
+  const [selectedButton, setSelectedButton] = useState(null);
   const { navigateToDetailConstellation } = useNavigation();
 
+  const handleButtonClick = (buttonValue) => {
+    setSelectedButton(buttonValue);
+  };
   const handlePinClick = async () => {
     const response = await useConstellationApi.constellationsGetPinList(
       targetNickname,
@@ -26,6 +29,7 @@ const ConstellationSectionProfile = () => {
   };
 
   useEffect(() => {
+    setSelectedButton("참여한 별자리");
     handleParticipateClick();
   }, []);
 
@@ -35,11 +39,15 @@ const ConstellationSectionProfile = () => {
         <Button3
           value="참여한 별자리"
           className="mx-auto  w-full border-r-2 border-yellow-100 font-Pretendard text-yellow-50"
+          selectedValue={selectedButton}
+          onSelect={handleButtonClick}
           onClick={handleParticipateClick}
         />
         <Button3
           value="핀한 별자리"
           className="mx-auto w-full font-Pretendard text-yellow-50"
+          selectedValue={selectedButton}
+          onSelect={handleButtonClick}
           onClick={handlePinClick}
         />
       </div>

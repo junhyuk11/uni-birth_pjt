@@ -1,10 +1,26 @@
 import React from "react";
 
-const Button3 = ({ value, onClick, className, icon }) => {
+const Button3 = ({
+  value,
+  onClick,
+  selectedValue,
+  className,
+  icon,
+  onSelect,
+}) => {
+  const isSelected = value === selectedValue;
+  const handleClick = () => {
+    if (!isSelected) {
+      onSelect(value);
+      onClick();
+    }
+  };
   return (
     <button
-      className={`items-center p-2 text-black hover:bg-yellow-200  ${className}`}
-      onClick={onClick}
+      className={`items-center p-2 text-black   ${
+        isSelected ? "bg-yellow-200" : ""
+      } ${className}`}
+      onClick={handleClick}
     >
       {icon && <div className="mr-2">{icon}</div>} {value}
     </button>
