@@ -3,32 +3,36 @@ import Button2 from "../../../common/atoms/Button2";
 import Header2 from "../../../common/blocks/Header2";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useProfileApi from "../../../api/useProfileApi";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import {
-  targetNicknameState,
-  backgroundflagState,
-} from "../../../recoil/atoms";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import Header5 from "../../../common/blocks/Header5";
 import Button1 from "../../../common/atoms/Button1";
 import Message from "../../../assets/icons/js/message";
+import { useLocation } from "react-router-dom";
 
 const Followers = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
   backgroundflag(true);
   const {
-    navigateToMemberProfile,
+    navigateToBack,
     navigateToFollowings,
     navigateToDirectMessage,
+    navigateToMemberProfile,
   } = useNavigation();
 
-  const [targetNickname, setTargetNickname] =
-    useRecoilState(targetNicknameState);
+  const [followerList, setFollowerList] = useState([]);
+  const location = useLocation();
+  const locationNickname = location.state;
+
+  const handleToFollowings = (locationNickname) => {
+    navigateToFollowings(locationNickname);
+  };
 
   const buttonsHeader = [
     {
       component: Button2,
-      onClick: navigateToMemberProfile,
+      onClick: navigateToBack,
       icon: <LeftArrow />,
     },
   ];
@@ -38,7 +42,7 @@ const Followers = () => {
       component: Button1,
       className: "font-TAEBAEKmilkyway bg-white",
       value: "팔로잉",
-      onClick: navigateToFollowings,
+      onClick: () => handleToFollowings(locationNickname),
     },
     {
       component: Button1,
@@ -47,10 +51,8 @@ const Followers = () => {
     },
   ];
 
-  const [followerList, setFollowerList] = useState([]);
-
   const getFollowerList = async () => {
-    const response = await useProfileApi.profilesGetFollowers(targetNickname);
+    const response = await useProfileApi.profilesGetFollowers(locationNickname);
     setFollowerList(response.resultData);
   };
 
@@ -58,19 +60,13 @@ const Followers = () => {
     getFollowerList();
   }, []);
 
-  const nicknameClick = (nick) => {
-    setTargetNickname(nick); // 클릭한 유저 닉네임을 targetNicknameState에 저장합니다.
-    navigateToMemberProfile(); // 화면 이동을 처리하는 함수를 호출합니다.
+  const nicknameClick = (nickname) => {
+    navigateToMemberProfile(nickname); // 화면 이동을 처리하는 함수를 호출합니다.
   };
 
-  const messageClick = (nick) => {
-    setTargetNickname(nick);
+  const messageClick = (nickname) => {
     navigateToDirectMessage();
   };
-
-  useEffect(() => {
-    console.log("1", targetNickname);
-  }, [targetNickname]);
 
   return (
     <div className="mx-auto h-screen max-w-screen-sm">

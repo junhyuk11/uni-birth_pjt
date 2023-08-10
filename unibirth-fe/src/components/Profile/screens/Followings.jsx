@@ -3,32 +3,35 @@ import Button2 from "../../../common/atoms/Button2";
 import Header2 from "../../../common/blocks/Header2";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useProfileApi from "../../../api/useProfileApi";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import {
-  targetNicknameState,
-  backgroundflagState,
-} from "../../../recoil/atoms";
+import { useSetRecoilState } from "recoil";
+import { backgroundflagState } from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import Button1 from "../../../common/atoms/Button1";
 import Header5 from "../../../common/blocks/Header5";
 import Message from "../../../assets/icons/js/message";
+import { useLocation } from "react-router-dom";
 
 const Followings = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
   backgroundflag(true);
   const {
-    navigateToMemberProfile,
+    navigateToBack,
     navigateToFollowers,
     navigateToDirectMessage,
+    navigateToMemberProfile,
   } = useNavigation();
 
-  const [targetNickname, setTargetNickname] =
-    useRecoilState(targetNicknameState);
+  const location = useLocation();
+  const locationNickname = location.state;
+
+  const handleToFollowers = (locationNickname) => {
+    navigateToFollowers(locationNickname);
+  };
 
   const buttonsHeader = [
     {
       component: Button2,
-      onClick: navigateToMemberProfile,
+      onClick: navigateToBack,
       icon: <LeftArrow />,
     },
   ];
@@ -43,13 +46,15 @@ const Followings = () => {
       component: Button1,
       className: "font-TAEBAEKmilkyway",
       value: "팔로워",
-      onClick: navigateToFollowers,
+      onClick: () => handleToFollowers(locationNickname),
     },
   ];
   const [followingList, setFollowingList] = useState([]);
 
   const getFollowingList = async () => {
-    const response = await useProfileApi.profilesGetFollowings(targetNickname);
+    const response = await useProfileApi.profilesGetFollowings(
+      locationNickname,
+    );
     console.log(response.resultData);
     setFollowingList(response.resultData);
   };
@@ -58,19 +63,13 @@ const Followings = () => {
     getFollowingList();
   }, []);
 
-  const nicknameClick = (nick) => {
-    setTargetNickname(nick); // 클릭한 유저 닉네임을 targetNicknameState에 저장합니다.
-    navigateToMemberProfile(); // 화면 이동을 처리하는 함수를 호출합니다.
+  const nicknameClick = (nickname) => {
+    navigateToMemberProfile(nickname); // 화면 이동을 처리하는 함수를 호출합니다.
   };
 
-  const messageClick = (nick) => {
-    setTargetNickname(nick);
+  const messageClick = (nickname) => {
     navigateToDirectMessage();
   };
-
-  useEffect(() => {
-    console.log(targetNickname);
-  }, [targetNickname]);
 
   return (
     <div className="mx-auto h-screen max-w-screen-sm">

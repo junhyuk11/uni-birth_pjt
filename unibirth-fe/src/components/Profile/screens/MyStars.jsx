@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
-import Button3 from "../../../common/atoms/Button3";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useStarApi from "../../../api/useStarApi";
-import { useRecoilValue } from "recoil";
-import { targetNicknameState } from "../../../recoil/atoms";
+import { useLocation } from "react-router";
 
 const MyStars = () => {
   const { navigateToBack } = useNavigation();
 
-  const targetNickname = useRecoilValue(targetNicknameState);
+  const location = useLocation();
+  const locationNickname = location.state;
 
   function formatDate(dateString) {
     const options = {
@@ -33,18 +32,13 @@ const MyStars = () => {
       onClick: navigateToBack,
       icon: <IoIosArrowBack />,
     },
-    {
-      component: Button3,
-      className: "font-TAEBAEKmilkyway",
-      value: "띄운 별",
-    },
   ];
 
   const [starList, setStarList] = useState([]);
 
   const getStarList = async () => {
-    const response = await useStarApi.starsGetStarList(targetNickname);
-    console.log(response.resuldData);
+    const response = await useStarApi.starsGetStarList(locationNickname);
+    console.log(response);
     setStarList(response.resultData);
   };
 

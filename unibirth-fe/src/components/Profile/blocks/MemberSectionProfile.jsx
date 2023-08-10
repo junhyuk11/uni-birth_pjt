@@ -59,7 +59,6 @@ const MemberSectionProfile = ({ locationNickname }) => {
 
   const fetchMemberData = async () => {
     try {
-      console.log("target is", locationNickname);
       const response = await useMemberApi.membersGetDetail(locationNickname);
       setMemberData(response);
     } catch (error) {
@@ -84,13 +83,22 @@ const MemberSectionProfile = ({ locationNickname }) => {
             <p className="text-lg font-bold text-yellow-100">
               {memberData.resultData.nickname}
             </p>
-            <p onClick={navigateToMyStars} className="text-yellow-100">
+            <p
+              onClick={() => navigateToMyStars(locationNickname)}
+              className="text-yellow-100"
+            >
               띄운 별: {memberData.resultData.starCount}
             </p>
-            <p onClick={navigateToFollowings} className="text-yellow-100">
+            <p
+              onClick={() => navigateToFollowings(locationNickname)}
+              className="text-yellow-100"
+            >
               팔로잉: {memberData.resultData.followingCount}
             </p>
-            <p onClick={navigateToFollowers} className="text-yellow-100">
+            <p
+              onClick={() => navigateToFollowers(locationNickname)}
+              className="text-yellow-100"
+            >
               팔로워: {memberData.resultData.followerCount}
             </p>
           </div>

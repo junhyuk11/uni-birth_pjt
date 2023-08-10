@@ -76,8 +76,10 @@ export const useNavigation = () => {
     });
   };
 
-  const navigateToMyStars = () => {
-    navigate("/stars");
+  const navigateToMyStars = (params) => {
+    navigate("/stars", {
+      state: params,
+    });
   };
 
   const navigateToUserAlarm = () => {
