@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import useConstellationApi from "../../../api/useConstellationApi";
-import { useRecoilValue } from "recoil";
-import { targetNicknameState } from "../../../recoil/atoms";
 import Button3 from "../../../common/atoms/Button3";
 import { useNavigation } from "../../../hooks/useNavigation";
 
-const ConstellationSectionProfile = () => {
-  const targetNickname = useRecoilValue(targetNicknameState);
+const ConstellationSectionProfile = ({ locationNickname }) => {
   const [images, setImages] = useState([]);
   const [selectedButton, setSelectedButton] = useState(null);
   const { navigateToDetailConstellation } = useNavigation();
@@ -16,15 +13,17 @@ const ConstellationSectionProfile = () => {
   };
   const handlePinClick = async () => {
     const response = await useConstellationApi.constellationsGetPinList(
-      targetNickname,
+      locationNickname,
     );
+    console.log(response.resultData);
     setImages(response.resultData.constellationList);
   };
 
   const handleParticipateClick = async () => {
     const response = await useConstellationApi.constellationsGetAttendList(
-      targetNickname,
+      locationNickname,
     );
+    console.log(response.resultData);
     setImages(response.resultData.constellationList);
   };
 

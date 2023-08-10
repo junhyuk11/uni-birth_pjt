@@ -41,10 +41,12 @@ const constellationsGetPin = async (constellationId) => {
 
 const constellationsGetAttendList = async (nickname) => {
   try {
+    console.log(nickname);
     const jwt = sessionStorage.getItem("accessToken");
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/constellations/profiles?nickname=${nickname}`);
+    console.log(response.data);
     return response.data;
   } catch (e) {
     console.log(e);

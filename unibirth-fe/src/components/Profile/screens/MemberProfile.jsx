@@ -130,7 +130,7 @@ const MemberProfile = () => {
         <Header3 buttons={buttonsHeader} />
         <h1>회원 프로필 화면입니다. testtest : {locationNickname}</h1>
         <MemberSectionProfile locationNickname={locationNickname} />
-        <ConstellationSectionProfile />
+        <ConstellationSectionProfile locationNickname={locationNickname} />
         {isModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div className="absolute inset-0 bg-gray-800 opacity-50"></div>

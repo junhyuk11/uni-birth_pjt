@@ -57,7 +57,7 @@ const membersGetDetail = async (nickname) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/members/detail/${nickname}`);
-    console.log(response);
+    console.log(response.data);
     return response.data;
   } catch (e) {
     console.log(e);
