@@ -1,5 +1,5 @@
 import React from "react";
-const InputIntroduction = ({ onChange }) => {
+const InputIntroduction = ({ value, onChange }) => {
   return (
     <div className="flex w-full items-center justify-center font-Pretendard">
       <div className="w-full">
@@ -20,6 +20,7 @@ const InputIntroduction = ({ onChange }) => {
             name="introduction"
             onChange={onChange}
             autoComplete="off"
+            value={value}
           />
         </div>
       </div>

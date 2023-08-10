@@ -25,6 +25,7 @@ import ModifyProfile from "./components/Profile/screens/ModifyProfile";
 import DirectMessage from "./components/Profile/screens/DirectMessage";
 import MessageBox from "./components/Profile/screens/MessageBox";
 import MyStars from "./components/Profile/screens/MyStars";
+import UserAlarm from "./components/Profile/screens/UserAlarm";
 
 // Star
 import RegisterStar from "./components/Star/screens/RegisterStar";
@@ -76,6 +77,7 @@ const App = () => {
           <Route path="/stars/detail/:starId" element={<DetailStar />} />
           <Route path="/profiles/followers" element={<Followers />} />
           <Route path="/stars" element={<MyStars />} />
+          <Route path="/useralarm" element={<UserAlarm />} />
           <Route path="/members/profiles" element={<ModifyProfile />} />
           <Route path="/members/update" element={<ModifyMember />} />
           <Route path="/profiles/directmessage" element={<DirectMessage />} />

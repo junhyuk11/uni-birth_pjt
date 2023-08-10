@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
-import { LuMessagesSquare, LuSend } from "react-icons/lu";
 import { useNavigation } from "../../../hooks/useNavigation";
 import MemberSectionProfile from "../blocks/MemberSectionProfile";
 import ConstellationSectionProfile from "../blocks/ConstellationSectionProfile";
 import useMemberApi from "../../../api/useMemberApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import ThreeDots from "../../../assets/icons/js/threeDots";
-import Header3 from "../../../common/blocks/Header3";
 import Close from "../../../assets/icons/js/close";
 import Header4 from "../../../common/blocks/Header4";
 import { useSetRecoilState, useRecoilValue } from "recoil";
@@ -17,6 +15,9 @@ import {
   nicknameState,
   targetNicknameState,
 } from "../../../recoil/atoms";
+import Mail from "../../../assets/icons/js/mail";
+import Message from "../../../assets/icons/js/message";
+import Header6 from "../../../common/blocks/Header6";
 
 const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -26,8 +27,8 @@ const MemberProfile = () => {
   const targetNickname = useRecoilValue(targetNicknameState);
   const {
     navigateToMessageBox,
-    // navigateToModifyProfile,
     navigateToMainPlanet,
+    navigateToUserAlarm,
     navigateToModifyMember,
     navigateToDirectMessage,
   } = useNavigation();
@@ -66,13 +67,24 @@ const MemberProfile = () => {
       icon: <LeftArrow />,
     },
     {
+      component: () => (
+        <span className="ml-4 text-2xl text-white">{targetNickname}</span>
+      ),
+    },
+    {
+      component: Button2,
+      value: "",
+      onClick: navigateToUserAlarm,
+      icon: <LeftArrow />,
+    },
+    {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
       onClick:
         nickname === targetNickname
           ? navigateToMessageBox
           : navigateToDirectMessage,
-      icon: nickname === targetNickname ? <LuMessagesSquare /> : <LuSend />,
+      icon: nickname === targetNickname ? <Mail /> : <Message />,
     },
     {
       component: Button2,
@@ -115,8 +127,7 @@ const MemberProfile = () => {
   return (
     <div className="mx-auto h-screen max-w-screen-sm">
       <div>
-        <Header3 buttons={buttonsHeader} />
-        <h1>회원 프로필 화면입니다.</h1>
+        <Header6 buttons={buttonsHeader} />
         <MemberSectionProfile />
         <ConstellationSectionProfile />
         {isModalOpen && (

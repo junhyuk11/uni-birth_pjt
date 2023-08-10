@@ -13,7 +13,7 @@ const DirectMessage = () => {
   const nickname = useRecoilValue(nicknameState);
   const [targetNickname, setTargetNickname] =
     useRecoilState(targetNicknameState);
-  const { navigateToBack } = useNavigation();
+  const { navigateToBack, navigateToMemberProfile } = useNavigation();
 
   const backClick = (nickname) => {
     setTargetNickname(nickname); // 클릭한 유저 닉네임을 targetNicknameState에 저장합니다.
@@ -28,7 +28,12 @@ const DirectMessage = () => {
     },
     {
       component: () => (
-        <span className="ml-4 text-2xl text-white">{targetNickname}</span>
+        <span
+          className="ml-4 text-2xl text-white"
+          onClick={() => nicknameClick(targetNickname)}
+        >
+          {targetNickname}
+        </span>
       ),
     },
   ];
@@ -63,7 +68,10 @@ const DirectMessage = () => {
       setNewMessage("");
     }
   };
-
+  const nicknameClick = (nick) => {
+    setTargetNickname(nick); // 클릭한 유저 닉네임을 targetNicknameState에 저장합니다.
+    navigateToMemberProfile(); // 화면 이동을 처리하는 함수를 호출합니다.
+  };
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     const hours = date.getHours().toString().padStart(2, "0");
