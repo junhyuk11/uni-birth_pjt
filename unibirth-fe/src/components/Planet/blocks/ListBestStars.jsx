@@ -32,6 +32,7 @@ const Carousel = ({ Lists }) => {
                 className="rounded-lg"
                 src={List.imageUrl}
                 alt={`Slide ${index}`}
+                onClick={() => handleMoveClick(List)}
               />
               <div>
                 <div className="flex justify-end">
@@ -44,15 +45,6 @@ const Carousel = ({ Lists }) => {
                   <div className="text-1xl absolute top-2 ml-4 flex-auto rounded-lg bg-black bg-opacity-75 pl-2 pr-2 font-TAEBAEKmilkyway font-bold text-gray-300 ">
                     @{List.nickname}
                   </div>
-                </div>
-
-                <div className="flex justify-center">
-                  <button
-                    className="absolute bottom-4 w-24 rounded-full bg-blue-500 text-white"
-                    onClick={() => handleMoveClick(List)}
-                  >
-                    이동하기
-                  </button>
                 </div>
               </div>
             </div>
