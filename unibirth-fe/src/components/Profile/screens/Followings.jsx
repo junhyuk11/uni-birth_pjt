@@ -20,12 +20,20 @@ const Followings = () => {
     navigateToDirectMessage,
     navigateToMemberProfile,
   } = useNavigation();
-
+  const [followingList, setFollowingList] = useState([]);
   const location = useLocation();
   const locationNickname = location.state;
-
+  const [isFollowing, setIsFollowing] = useState({});
   const handleToFollowers = (locationNickname) => {
     navigateToFollowers(locationNickname);
+  };
+
+  const toggleFollowing = (nickname) => {
+    console.log("팔로잉 버튼 상태", isFollowing[nickname]);
+    setIsFollowing((prevIsFollowing) => ({
+      ...prevIsFollowing,
+      [nickname]: !prevIsFollowing[nickname],
+    }));
   };
 
   const buttonsHeader = [
@@ -49,7 +57,6 @@ const Followings = () => {
       onClick: () => handleToFollowers(locationNickname),
     },
   ];
-  const [followingList, setFollowingList] = useState([]);
 
   const getFollowingList = async () => {
     const response = await useProfileApi.profilesGetFollowings(
@@ -68,7 +75,7 @@ const Followings = () => {
   };
 
   const messageClick = (nickname) => {
-    navigateToDirectMessage();
+    navigateToDirectMessage(nickname);
   };
 
   return (
@@ -80,21 +87,21 @@ const Followings = () => {
           <div
             key={user.nickname}
             className="mx-4 flex w-full items-center border-b border-yellow-200 px-4 py-6"
-            onClick={() => nicknameClick(user.nickname)}
           >
             <img
+              onClick={() => nicknameClick(user.nickname)}
               src={user.imageUrl}
               className="avatar mr-2 h-16 w-16"
               alt="User Avatar"
             />
-            <div className="py-5">
+            <div className="py-5" onClick={() => nicknameClick(user.nickname)}>
               <p>{user.nickname}</p>
             </div>
             <div className="flex-grow"></div>
             <div className="flex">
               <Button1
-                onClick={() => nicknameClick(user.nickname)}
-                value="팔로우"
+                onClick={() => toggleFollowing(user.nickname)}
+                value={!isFollowing[user.nickname] ? "팔로잉" : "팔로우"}
                 className={"mr-6"}
               />
               <button

@@ -34,6 +34,14 @@ const MemberProfile = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const handleMessageClick = () => {
+    if (nickname === locationNickname) {
+      navigateToMessageBox(locationNickname);
+    } else {
+      navigateToDirectMessage(locationNickname);
+    }
+  };
+
   const handleLogout = () => {
     sessionStorage.clear();
     navigateToMainPlanet();
@@ -74,10 +82,7 @@ const MemberProfile = () => {
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      onClick:
-        nickname === locationNickname
-          ? navigateToMessageBox
-          : navigateToDirectMessage,
+      onClick: handleMessageClick,
       icon: nickname === locationNickname ? <Mail /> : <Message />,
     },
     {

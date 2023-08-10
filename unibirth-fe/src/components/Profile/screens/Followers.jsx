@@ -65,7 +65,7 @@ const Followers = () => {
   };
 
   const messageClick = (nickname) => {
-    navigateToDirectMessage();
+    navigateToDirectMessage(nickname);
   };
 
   return (
@@ -77,25 +77,19 @@ const Followers = () => {
           <div
             key={user.nickname}
             className="mx-4 flex w-full items-center border-b border-yellow-200 px-4 py-6"
-            onClick={() => nicknameClick(user.nickname)}
           >
             <img
+              onClick={() => nicknameClick(user.nickname)}
               src={user.imageUrl}
               className="avatar mr-2 h-16 w-16"
               alt="User Avatar"
             />
-            <div className="py-5">
+            <div className="py-5" onClick={() => nicknameClick(user.nickname)}>
               <p>{user.nickname}</p>
             </div>
             <div className="flex-grow"></div>
-
             <div className="flex">
-              <Button1
-                onClick={() => nicknameClick(user.nickname)}
-                value="팔로우"
-                className={"mr-6"}
-              />
-              {/* </div> */}
+              <Button1 value="팔로우" className={"mr-6"} />
               <button
                 className="flex items-center "
                 onClick={() => messageClick(user.nickname)}
