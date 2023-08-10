@@ -3,17 +3,14 @@ import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
 import Footer1 from "../../../common/blocks/Footer1";
-import { BiSearch } from "react-icons/bi";
 import InputDropdown from "../atoms/InputDropdown";
 import InputStella from "../atoms/InputStella";
 import InputDescription from "../atoms/InputDescription";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { Canvas } from "@react-three/fiber";
-import GradientBackground from "../../../common/atoms/GradientBackground";
-import CanvasBg from "../../../common/atoms/CanvasBg";
 import planet1 from "../../../assets/images/planet1.png";
 import { useSetRecoilState } from "recoil";
 import { backgroundflagState } from "../../../recoil/atoms";
+import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const RegistConstellation = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -50,10 +47,8 @@ const RegistConstellation = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
       onClick: navigateToBack,
-      icon: <BiSearch />,
+      icon: <LeftArrow />,
     },
   ];
   const buttonsFooter = [
@@ -66,16 +61,10 @@ const RegistConstellation = () => {
   ];
 
   return (
-    <div className="relative h-screen w-screen">
-      <div className="absolute flex h-full w-full flex-row flex-wrap justify-center">
-        <Canvas>
-          <GradientBackground />
-          <CanvasBg />
-        </Canvas>
-      </div>
-      <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2">
+    <div className="mx-auto h-screen max-w-screen-sm">
+      <div>
         <Header1 buttons={buttonsHeader} />
-        <div className="flex flex-col items-center justify-center space-y-5">
+        <div className="mt-30 flex flex-col items-center justify-center space-y-5">
           <img
             src={planet1}
             alt="행성1 이미지 예시"
