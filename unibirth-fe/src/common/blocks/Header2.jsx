@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BiSearchAlt } from "react-icons/bi";
+import Search from "../../assets/icons/js/search";
 
 const Header2 = ({ buttons }) => {
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -38,7 +38,7 @@ const Header2 = ({ buttons }) => {
           onChange={handleSearchInputChange}
         />
         <button onClick={handleSearch}>
-          <BiSearchAlt />
+          <Search />
         </button>
       </div>
     </div>

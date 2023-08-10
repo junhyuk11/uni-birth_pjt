@@ -1,7 +1,7 @@
 import React from "react";
-import { BiSearchAlt } from "react-icons/bi";
 import { useNavigation } from "../../hooks/useNavigation";
 import { SEARTCH_LIST } from "../../constants/constants";
+import Search from "../../assets/icons/js/search";
 
 const SearchHeader = ({ buttons, category, setCategory, query, setQuery }) => {
   const { navigateToSearchCommon } = useNavigation();
@@ -24,7 +24,7 @@ const SearchHeader = ({ buttons, category, setCategory, query, setQuery }) => {
           return (
             <ButtonComponent
               key={index}
-              className="font-Pretendard"
+              className="w-10 font-Pretendard hover:bg-yellow-500"
               value={button.value}
               onClick={button.onClick}
               icon={button.icon}
@@ -48,7 +48,7 @@ const SearchHeader = ({ buttons, category, setCategory, query, setQuery }) => {
         </select>
       </div>
       <button className="font-Pretendard" onClick={handleSearch}>
-        <BiSearchAlt />
+        <Search />
       </button>
     </div>
   );

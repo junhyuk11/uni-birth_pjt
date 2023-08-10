@@ -96,6 +96,11 @@ const DirectMessage = () => {
           className="mr-4 flex-grow rounded-md border p-2"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleSend();
+            }
+          }}
           placeholder="메시지 입력..."
         />
         <button

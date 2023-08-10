@@ -34,7 +34,7 @@ const ConstellationSectionProfile = () => {
   }, []);
 
   return (
-    <div className="space-x-4">
+    <div>
       <div className="mx-auto flex flex-row items-center justify-between border-y-2 border-yellow-100 bg-slate-950 bg-opacity-70 text-yellow-50">
         <Button3
           value="참여한 별자리"
@@ -51,11 +51,11 @@ const ConstellationSectionProfile = () => {
           onClick={handlePinClick}
         />
       </div>
-      <div className="flex flex-row flex-wrap justify-center">
+      <div className="flex flex-row flex-wrap">
         {images.map((img) => (
           <div
             key={img.constellationId}
-            className="my-4"
+            className="w-1/3 p-2"
             onClick={() => navigateToDetailConstellation(img.constellationId)}
           >
             {" "}
