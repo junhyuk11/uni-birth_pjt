@@ -7,7 +7,7 @@ import useStarApi from "../../../api/useStarApi";
 import { useLocation } from "react-router";
 
 const MyStars = () => {
-  const { navigateToBack } = useNavigation();
+  const { navigateToBack, navigateToDetailStar } = useNavigation();
 
   const location = useLocation();
   const locationNickname = location.state;
@@ -36,6 +36,11 @@ const MyStars = () => {
 
   const [starList, setStarList] = useState([]);
 
+  const handleToDetailStar = (starId) => {
+    console.log(starId);
+    navigateToDetailStar(starId);
+  };
+
   const getStarList = async () => {
     const response = await useStarApi.starsGetStarList(locationNickname);
     console.log(response);
@@ -49,10 +54,13 @@ const MyStars = () => {
   return (
     <div>
       <Header2 buttons={buttonsHeader} />
-      <h1>띄운별 리스트입니다..</h1>
       <div className="flex flex-col items-center">
         {starList.map((star) => (
-          <div key={star.starId} className="my-4 flex items-center">
+          <div
+            key={star.starId}
+            className="my-4 flex items-center"
+            onClick={() => handleToDetailStar(star.starId)}
+          >
             <img
               src={star.imageUrl}
               className="avatar mr-4 h-32 w-32 object-cover"

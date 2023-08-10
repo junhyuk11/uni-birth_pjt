@@ -86,12 +86,12 @@ export const useNavigation = () => {
     navigateToMessageBox("/useralarm");
   };
 
-  const navigateToDirectMessage = () => {
-    navigate("/profiles/directmessage");
+  const navigateToDirectMessage = (params) => {
+    navigate("/profiles/directmessage", { state: params });
   };
 
-  const navigateToMessageBox = () => {
-    navigate("/profiles/messagebox");
+  const navigateToMessageBox = (params) => {
+    navigate("/profiles/messagebox", { state: params });
   };
 
   // Star

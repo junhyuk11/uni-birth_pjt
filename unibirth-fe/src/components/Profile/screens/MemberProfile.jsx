@@ -11,11 +11,7 @@ import Header3 from "../../../common/blocks/Header3";
 import Close from "../../../assets/icons/js/close";
 import Header4 from "../../../common/blocks/Header4";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import {
-  backgroundflagState,
-  nicknameState,
-  targetNicknameState,
-} from "../../../recoil/atoms";
+import { backgroundflagState, nicknameState } from "../../../recoil/atoms";
 import Mail from "../../../assets/icons/js/mail";
 import Message from "../../../assets/icons/js/message";
 import { useLocation } from "react-router-dom";
@@ -25,10 +21,8 @@ const MemberProfile = () => {
   backgroundflag(true);
   const location = useLocation();
   const locationNickname = location.state;
-  console.log(locationNickname);
 
   const nickname = useRecoilValue(nicknameState);
-  const targetNickname = useRecoilValue(targetNicknameState);
   const {
     navigateToMessageBox,
     navigateToBack,
@@ -81,10 +75,10 @@ const MemberProfile = () => {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
       onClick:
-        nickname === targetNickname
+        nickname === locationNickname
           ? navigateToMessageBox
           : navigateToDirectMessage,
-      icon: nickname === targetNickname ? <Mail /> : <Message />,
+      icon: nickname === locationNickname ? <Mail /> : <Message />,
     },
     {
       component: Button2,
