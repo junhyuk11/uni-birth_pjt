@@ -18,8 +18,8 @@ import {
 } from "../../../recoil/atoms";
 import MeshCons from "../atoms/MeshCons";
 import { gsap } from "gsap";
+import HtmlConstellation from "../atoms/HtmlConstellation";
 
-// 여기에서 카메라 컨트롤러 관리해야함
 // R3F 훅 카메라 컨트롤러 컴포넌트
 function CameraController({ ConstellationPosition, zoomed }) {
   console.log("콘솔로그::", ConstellationPosition);
@@ -66,7 +66,7 @@ function CameraController({ ConstellationPosition, zoomed }) {
     };
 
     gsap.to(startPosition, {
-      duration: 2.5, // duration in seconds
+      duration: 3, // duration in seconds
       x: -targetPosition.x,
       y: -targetPosition.y,
       z: -targetPosition.z,
@@ -100,7 +100,7 @@ const Scene = ({ constellationList }) => {
   const [zoomed, setZoomed] = useState(false);
   // 별자리 보정계수
   // const moveNum = 50;
-  const num = 50; // 별자리 간격
+  const num = 60; // 별자리 간격
   const starmultiple = 3; // 별간격
   const xdamper = -10; // x축+- 보정계수
 
@@ -156,7 +156,13 @@ const Scene = ({ constellationList }) => {
       >
         <BiMoveHorizontal style={{ color: zoomed ? "red" : "white" }} />
       </button>
-      <Canvas camera={{ position: [0, 0, 1] }}>
+
+      <HtmlConstellation
+        constellationId={
+          currentconstellationList[currentConstellation]?.constellationId
+        }
+      />
+      <Canvas camera={{ position: [0, 1, 0] }}>
         {/* <CameraController
           ConstellationIndex={ConstellationIndex}
           zoomed={zoomed}
@@ -188,8 +194,8 @@ const Scene = ({ constellationList }) => {
           num={num}
           starmultiple={starmultiple}
           xdamper={xdamper}
-        />
-        <MeshHtml
+        /> */}
+        {/* <MeshHtml
           currentconstellationList={currentconstellationList}
           xdamper={xdamper}
         /> */}
