@@ -79,7 +79,7 @@ const MemberSectionProfile = () => {
   }, [targetNickname]);
 
   return (
-    <div className="space-x-4 bg-slate-950 bg-opacity-60 px-5">
+    <div className="space-x-4 bg-slate-950 bg-opacity-60">
       {memberData && (
         <div className="flex items-start space-x-4">
           <img

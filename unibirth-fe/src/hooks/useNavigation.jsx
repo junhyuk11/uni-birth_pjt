@@ -50,8 +50,10 @@ export const useNavigation = () => {
   };
 
   // Profile
-  const navigateToMemberProfile = () => {
-    navigate("/profiles");
+  const navigateToMemberProfile = (params) => {
+    navigate("/profiles", {
+      state: params,
+    });
   };
 
   const navigateToModifyProfile = () => {
@@ -62,12 +64,16 @@ export const useNavigation = () => {
     navigate("/members/update");
   };
 
-  const navigateToFollowings = () => {
-    navigate("/profiles/followings");
+  const navigateToFollowings = (params) => {
+    navigate("/profiles/followings", {
+      state: params,
+    });
   };
 
-  const navigateToFollowers = () => {
-    navigate("/profiles/followers");
+  const navigateToFollowers = (params) => {
+    navigate("/profiles/followers", {
+      state: params,
+    });
   };
 
   const navigateToMyStars = () => {

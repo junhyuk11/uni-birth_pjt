@@ -18,20 +18,20 @@ import {
 } from "../../../recoil/atoms";
 import Mail from "../../../assets/icons/js/mail";
 import Message from "../../../assets/icons/js/message";
+import { useLocation } from "react-router-dom";
 
 const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
   backgroundflag(true);
+  const location = useLocation();
+  const locationNickname = location.state;
+  console.log(location);
 
   const nickname = useRecoilValue(nicknameState);
   const targetNickname = useRecoilValue(targetNicknameState);
   const {
     navigateToMessageBox,
-<<<<<<< HEAD
-    // navigateToModifyProfile,
     navigateToBack,
-=======
->>>>>>> fe/dev
     navigateToMainPlanet,
     navigateToUserAlarm,
     navigateToModifyMember,
@@ -129,8 +129,8 @@ const MemberProfile = () => {
     <div className="mx-auto h-screen max-w-screen-sm">
       <div>
         <Header3 buttons={buttonsHeader} />
-        <h1>회원 프로필 화면입니다.</h1>
-        <MemberSectionProfile />
+        <h1>회원 프로필 화면입니다. testtest : {locationNickname}</h1>
+        <MemberSectionProfile locationNickname={locationNickname} />
         <ConstellationSectionProfile />
         {isModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center">
