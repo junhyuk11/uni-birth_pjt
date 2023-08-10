@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import usePlanetApi from "../../../api/usePlanetApi";
+import { AiFillStar } from "react-icons/ai";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -26,19 +27,25 @@ const Carousel = ({ Lists }) => {
       <div className="relative rounded-lg">
         <Slider {...settings}>
           {Lists?.map((List, index) => (
-            <div key={index} className="h-40 overflow-hidden rounded-lg">
+            <div key={index} className="h-48 overflow-hidden rounded-lg">
               <img
                 className="rounded-lg"
                 src={List.imageUrl}
                 alt={`Slide ${index}`}
               />
               <div>
-                <div className="text-1xl text-bold absolute bottom-2 flex font-TAEBAEKmilkyway text-white">
-                  닉네임: {List.nickname}
+                <div className="flex justify-end">
+                  <div className="text-1xl absolute top-2 mr-4 flex-none font-TAEBAEKmilkyway text-gray-300">
+                    <AiFillStar color="yellow" className="mr-1 inline" />
+                    {List.brightness}
+                  </div>
                 </div>
-                <div className="text-1xl absolute top-4 flex bg-red-500 font-TAEBAEKmilkyway">
-                  밝기: {List.brightness}
+                <div className="flex justify-start">
+                  <div className="text-1xl absolute top-2 ml-4 flex-auto rounded-lg bg-black bg-opacity-75 pl-2 pr-2 font-TAEBAEKmilkyway font-bold text-gray-300 ">
+                    @{List.nickname}
+                  </div>
                 </div>
+
                 <div className="flex justify-center">
                   <button
                     className="absolute bottom-4 w-24 rounded-full bg-blue-500 text-white"

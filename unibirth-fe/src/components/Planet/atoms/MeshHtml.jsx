@@ -71,7 +71,7 @@ const MeshHtml = ({ constellationList, moveNum, xdamper }) => {
                 </div>
                 <div className="flex flex-row">
                   <button
-                    className="mb-2 ml-6 mr-2 rounded-full bg-gradient-to-br from-purple-600 to-blue-500 px-5 py-2.5 text-center text-sm font-medium text-white shadow-lg shadow-purple-500/50 hover:bg-gradient-to-bl focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800"
+                    className="mb-2 ml-6 mr-2 rounded-full bg-purple-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-bl focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800"
                     onClick={() =>
                       handleConstellationClick(constellation.constellationId)
                     }
