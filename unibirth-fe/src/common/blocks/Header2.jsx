@@ -29,9 +29,9 @@ const Header2 = ({ buttons }) => {
             );
           })}
       </div>
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-4 border-b-2">
         <input
-          className="font-Pretendard"
+          className="bg-transparent px-2 py-2  text-yellow-200 outline-none "
           type="text"
           placeholder="검색어를 입력하세요"
           value={searchKeyword}
