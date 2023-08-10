@@ -81,6 +81,7 @@ const MemberProfile = () => {
       icon: <ThreeDots />,
     },
   ];
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
