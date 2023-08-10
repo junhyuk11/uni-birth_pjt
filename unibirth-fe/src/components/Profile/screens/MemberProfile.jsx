@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
-import { LuMessagesSquare, LuSend } from "react-icons/lu";
 import { useNavigation } from "../../../hooks/useNavigation";
 import MemberSectionProfile from "../blocks/MemberSectionProfile";
 import ConstellationSectionProfile from "../blocks/ConstellationSectionProfile";
@@ -17,6 +16,8 @@ import {
   nicknameState,
   targetNicknameState,
 } from "../../../recoil/atoms";
+import Mail from "../../../assets/icons/js/mail";
+import Message from "../../../assets/icons/js/message";
 
 const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -72,7 +73,7 @@ const MemberProfile = () => {
         nickname === targetNickname
           ? navigateToMessageBox
           : navigateToDirectMessage,
-      icon: nickname === targetNickname ? <LuMessagesSquare /> : <LuSend />,
+      icon: nickname === targetNickname ? <Mail /> : <Message />,
     },
     {
       component: Button2,
