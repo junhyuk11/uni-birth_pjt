@@ -26,8 +26,8 @@ const MemberProfile = () => {
   const targetNickname = useRecoilValue(targetNicknameState);
   const {
     navigateToMessageBox,
-    // navigateToModifyProfile,
     navigateToMainPlanet,
+    navigateToUserAlarm,
     navigateToModifyMember,
     navigateToDirectMessage,
   } = useNavigation();
@@ -63,6 +63,12 @@ const MemberProfile = () => {
       component: Button2,
       value: "",
       onClick: navigateToMainPlanet,
+      icon: <LeftArrow />,
+    },
+    {
+      component: Button2,
+      value: "",
+      onClick: navigateToUserAlarm,
       icon: <LeftArrow />,
     },
     {

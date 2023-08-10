@@ -1,14 +1,16 @@
 import useProfileApi from "../../../api/useProfileApi";
 import React, { useEffect, useState } from "react";
-import { nicknameState } from "../../../recoil/atoms";
+import { nicknameState, StellaIdState } from "../../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 import { HiPaperAirplane } from "react-icons/hi";
 import { BsCheck } from "react-icons/bs";
+import { sendInvite } from "../../../api/useFirebaseApi";
 
 const InviteFollowStar = () => {
   const nickname = useRecoilValue(nicknameState);
   const [followList, setFollowList] = useState([]);
   const [invitedUsers, setInvitedUsers] = useState({}); // 초대한 사용자 추적
+  const constellationId = useRecoilValue(StellaIdState);
 
   useEffect(() => {
     getFollowList(nickname);
@@ -44,6 +46,7 @@ const InviteFollowStar = () => {
 
   const handleInvite = (nickname) => {
     setInvitedUsers({ ...invitedUsers, [nickname]: true });
+    sendInvite(nickname, nickname, constellationId);
   };
 
   return (
