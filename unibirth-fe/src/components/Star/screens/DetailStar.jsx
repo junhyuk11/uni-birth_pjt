@@ -28,7 +28,7 @@ const DetailStar = () => {
   });
 
   useEffect(() => {
-    setBackgroundflag(false);
+    setBackgroundflag(true);
     console.log("flag:", ddd);
   }, []);
 

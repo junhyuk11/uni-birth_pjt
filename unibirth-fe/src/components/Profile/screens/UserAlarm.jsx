@@ -51,7 +51,7 @@ const UserAlarm = () => {
   }, [nickname]);
 
   return (
-    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+    <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
       <div>
         <Header2 buttons={buttonsHeader} />
         <ul>

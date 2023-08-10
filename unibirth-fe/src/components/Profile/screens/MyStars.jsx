@@ -9,7 +9,7 @@ import { useRecoilValue } from "recoil";
 import { targetNicknameState } from "../../../recoil/atoms";
 
 const MyStars = () => {
-  const { navigateToBack } = useNavigation();
+  const { navigateToBack, navigateToDetailStar } = useNavigation();
 
   const targetNickname = useRecoilValue(targetNicknameState);
 
@@ -58,7 +58,11 @@ const MyStars = () => {
       <h1>띄운별 리스트입니다..</h1>
       <div className="flex flex-col items-center">
         {starList.map((star) => (
-          <div key={star.starId} className="my-4 flex items-center">
+          <div
+            key={star.starId}
+            onClick={() => navigateToDetailStar(star.starId)}
+            className="my-4 flex items-center"
+          >
             <img
               src={star.imageUrl}
               className="avatar mr-4 h-32 w-32 object-cover"
