@@ -7,7 +7,7 @@ const MeshConstellation = ({
   starmultiple,
   xdamper,
 }) => {
-  const handleBoxClick = (constellation, constellationId, title) => {
+  const handleBoxClick = (constellationId, title) => {
     console.log(
       `Clicked on constellation: ${constellationId}, title: ${title}`,
     );
