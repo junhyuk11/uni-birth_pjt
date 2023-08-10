@@ -6,7 +6,6 @@ import Footer1 from "../../../common/blocks/Footer1";
 import SignupFormMember from "../blocks/SignupFormMember";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useMemberApi from "../../../api/useMemberApi";
-import earth from "../../../assets/images/earth.png";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import { useSetRecoilState } from "recoil";
 import { backgroundflagState } from "../../../recoil/atoms";
@@ -20,7 +19,9 @@ const RegisterMember = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [birthdate, setBirthdate] = useState("");
   const [interest, setInterest] = useState(1);
-  const [image, setImage] = useState(`${earth}`);
+  const [image, setImage] = useState(
+    "https://firebasestorage.googleapis.com/v0/b/uni-birth.appspot.com/o/Zordiac%2Fearth.png?alt=media&token=0ecc42f5-7022-4197-827b-751ecb92c983",
+  );
   const { navigateToBack, navigateToLoginMember } = useNavigation();
 
   const joinMember = async (e) => {
