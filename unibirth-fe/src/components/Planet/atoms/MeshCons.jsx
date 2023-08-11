@@ -5,7 +5,12 @@ import { useRecoilState } from "recoil";
 import { currentconstellationListState } from "../../../recoil/atoms";
 import * as THREE from "three";
 
-const MeshCons = ({ constellationList, ConstellationIndex }) => {
+const MeshCons = ({
+  constellationList,
+  ConstellationIndex,
+  setCurrentConstellation,
+  currentConstellation,
+}) => {
   const meshRef = useRef();
   // 별자리 반경
   const radius = 3000;
@@ -32,12 +37,11 @@ const MeshCons = ({ constellationList, ConstellationIndex }) => {
 
   const [AllSphereList, setAllSphereList] = useState([]);
 
-  // 클릭하면 별자리 정보 보이게 하기
-  const [showDiv, setShowDiv] = useState(false);
-  const handleConstellationClick = (constellationId) => () => {
-    console.log("클릭한 별자리::", constellationId);
-    setShowDiv(!showDiv);
+  const handleConsClick = (INDEX) => {
+    console.log("콘스텔레이사ㅕㄴ!", currentConstellationList[INDEX]);
+    setCurrentConstellation(INDEX);
   };
+  console.log("야이시발아", currentConstellation);
 
   useEffect(() => {
     const verticesArray = meshRef.current.geometry.attributes.position.array;
@@ -86,8 +90,10 @@ const MeshCons = ({ constellationList, ConstellationIndex }) => {
       };
       StarsIndexList.push(xyz);
       const groupKey = constellationList?.constellationList[i].constellationId; // planet ID 정보로 사용 가능
+      const INDEX = i;
+      console.log("INDEX:", INDEX);
       const group = (
-        <group key={groupKey} onClick={handleConstellationClick(groupKey)}>
+        <group key={groupKey} onClick={() => handleConsClick(INDEX)}>
           {constellationList.constellationList[i].lineList.map(
             (line, index) => {
               const [x1, y1, z1, x2, y2, z2] = line;

@@ -222,6 +222,8 @@ const Scene = ({ constellationList }) => {
           xdamper={xdamper}
           ConstellationIndex={ConstellationIndex}
           setConstellationIndex={setConstellationIndex}
+          setCurrentConstellation={setCurrentConstellation}
+          currentConstellation={currentConstellation}
         />
         <CameraController
           ConstellationPosition={currentconstellationList[currentConstellation]}

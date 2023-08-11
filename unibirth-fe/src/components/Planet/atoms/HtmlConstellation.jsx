@@ -53,7 +53,7 @@ const HtmlConstellation = ({ constellationId }) => {
     };
 
     const [updatePinedStatus, setUpdatePinedStatus] = useState(
-      constellationContent.alreadyPined,
+      constellationContent?.alreadyPined,
     );
 
     console.log("updatePinedStatus:", updatePinedStatus);
