@@ -10,18 +10,29 @@ import LeftArrow from "../../../assets/icons/js/leftArrow";
 import InputIntroduction from "../atoms/InputIntroduction";
 import { storage } from "../../../api/useFirebaseApi";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import earth from "../../../assets/images/earth.png";
 
 const ModifyProfile = () => {
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
   const [imageUrl, setImageUrl] = useState("");
   const [introduction, setIntro] = useState("");
   const [nickname, setNickname] = useState("");
+  const [thumbUrl, setThumbUrl] = useState("");
   console.log(imageUrl);
 
+  const saveImgFile = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setThumbUrl(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
   const fetchData = async () => {
     try {
       const response = await useMemberApi.membersGetProfiles();
       setImageUrl(response.resultData.imageUrl);
+      setThumbUrl(response.resultData.imageUrl);
       setIntro(response.resultData.introduction);
       setNickname(response.resultData.nickname);
     } catch (error) {
@@ -96,12 +107,14 @@ const ModifyProfile = () => {
       <Header1 buttons={buttonsHeader} />
       <form className="flex flex-col items-center justify-center space-y-10">
         <img
-          src={imageUrl}
-          alt="프로필 이미지"
+          src={thumbUrl || earth}
+          alt="이미지"
           className="h-32 w-32 rounded-full object-cover"
         />
         <InputImage
-          onChange={(file) => setImageUrl(file)} // 파일 객체 저장
+          setImageUrl={setImageUrl}
+          setThumbUrl={setThumbUrl}
+          onChange={saveImgFile}
         />
         <div className="w-full flex-initial items-center justify-center font-Pretendard">
           <div className="w-full flex-row">
