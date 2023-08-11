@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputPassword = ({ onChange }) => {
+const InputPassword = ({ onChange, onKeyDown }) => {
   return (
     <div className="mr-2 flex w-full items-center justify-center font-Pretendard">
       <div className="w-full">
@@ -21,6 +21,7 @@ const InputPassword = ({ onChange }) => {
             onChange={onChange}
             placeholder="비밀번호를 입력하세요"
             autoComplete="off"
+            onKeyDown={onKeyDown}
           />
         </div>
       </div>
