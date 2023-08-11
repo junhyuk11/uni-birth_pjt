@@ -72,7 +72,7 @@ const HtmlConstellation = ({ constellationId }) => {
           {isVisible ? "Make Invisible" : "Make Visible"}
         </button>
         {isVisible && (
-          <div className="absolute left-1/2 top-10 z-10 h-60 w-80 -translate-x-1/2 rounded-lg bg-blue-400">
+          <div className="absolute left-1/2 top-10 z-10 h-60 w-80 -translate-x-1/2 rounded-lg">
             <div className="flex flex-col justify-center space-y-5">
               <div className="flex justify-center">
                 <div className="h-36 rounded-lg">

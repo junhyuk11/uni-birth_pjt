@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { OrbitControls, Stars } from "@react-three/drei";
+import { OrbitControls, Stars, PerspectiveCamera } from "@react-three/drei";
 import { Canvas, useThree } from "@react-three/fiber";
 import {
   BiSolidRightArrow,
@@ -78,6 +78,7 @@ function CameraController({ ConstellationPosition, zoomed }) {
 }
 
 const Scene = ({ constellationList }) => {
+  const startDirection = useState({ x: 0, y: -300, z: 0 });
   console.log("아니 받았어그래서?;::", constellationList);
   // 배경화면 flag
   const setBackgroundflag = useSetRecoilState(backgroundflagState);
@@ -95,6 +96,12 @@ const Scene = ({ constellationList }) => {
   const currentconstellationList = useRecoilValue(
     currentconstellationListState,
   );
+
+  // useEffect(() => {
+  //   if (constellationList.length > ConstellationIndex) {
+  //     setConstellationIndex(0);
+  //   }
+  // }, [constellationList]);
 
   // 확대 축소
   const [zoomed, setZoomed] = useState(false);
@@ -162,11 +169,19 @@ const Scene = ({ constellationList }) => {
           currentconstellationList[currentConstellation]?.constellationId
         }
       />
-      <Canvas camera={{ position: [0, 20, 0] }}>
-        {/* <CameraController
-          ConstellationIndex={ConstellationIndex}
-          zoomed={zoomed}
-        /> */}
+      <Canvas
+        camera={{
+          position: startDirection
+            ? [startDirection.x, startDirection.y, startDirection.z]
+            : [0, -300, 0],
+        }}
+      >
+        <PerspectiveCamera
+          makeDefault
+          position={[0, 0, 1]}
+          near={0.1}
+          far={10000}
+        />
         <GradientBackground />
         <EffectComposer>
           <Bloom mipmapBlur luminanceThreshold={1} radius={0.7} />
@@ -174,15 +189,16 @@ const Scene = ({ constellationList }) => {
         <OrbitControls
           ref={controlsRef}
           // enablePan={true}
-          enableDamping={false}
+          enableDamping={true}
           rotateSpeed={-0.4}
           minDistance={1} // minimum zoom distance
           maxDistance={700} // maximum zoom distance
+          dampingFactor={1}
         />
         <axesHelper scale={5} />
         <color attach="background" args={["black"]} />
         <Stars
-          radius={200}
+          radius={2300}
           depth={30}
           count={10000}
           factor={4}
@@ -207,11 +223,6 @@ const Scene = ({ constellationList }) => {
           ConstellationIndex={ConstellationIndex}
           setConstellationIndex={setConstellationIndex}
         />
-        {/* <CameraController
-          currentconstellationList={currentconstellationList}
-          ConstellationIndex={ConstellationIndex}
-          zoomed={zoomed}
-        /> */}
         <CameraController
           ConstellationPosition={currentconstellationList[currentConstellation]}
         />
