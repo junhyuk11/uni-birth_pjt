@@ -29,6 +29,8 @@ const MeshCons = ({
   const firstBrightness = 10;
   // 별 크기 조정
   const spherenum = 10;
+  // 행성 갯수 limit 걸기
+  const limitCount = 111;
 
   // DetailPlanet 리스트, 인덱스 관리
   const [currentConstellationList, setCurrentList] = useRecoilState(
@@ -50,7 +52,7 @@ const MeshCons = ({
     const newConstellationList = [];
     console.log("이자식아: ", verticesArray.length);
     for (let i = segments * 3; i < verticesArray.length; i += 3) {
-      if (verticesArray[i + 1] > 0 && verticesArray[i + 2] !== 0) {
+      if (verticesArray[i + 2] !== 0) {
         const vertex = {
           x: verticesArray[i],
           y: verticesArray[i + 1],
@@ -68,6 +70,9 @@ const MeshCons = ({
     const meshModels = [];
     const StarsIndexList = [];
     for (let i = 0; i < constellationList?.constellationList.length; i++) {
+      if (i === limitCount) {
+        break;
+      }
       const position = new THREE.Vector3(0, 0, 1);
       const target = new THREE.Vector3(
         AllSphereList[i].x,
