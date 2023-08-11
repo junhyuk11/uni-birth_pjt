@@ -112,9 +112,11 @@ const MeshCons = ({
                         z2 * constellationGap + xyz.z,
                       ],
                     ]}
-                    color="#F2F5A9"
+                    // color="#F2F5A9"
                     transparent={true}
                     opacity={0.5}
+                    color={("color", "white")}
+                    // vertexColors={colors}
                   />
                 </mesh>
               );

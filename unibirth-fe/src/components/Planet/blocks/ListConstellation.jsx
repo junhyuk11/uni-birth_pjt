@@ -38,8 +38,8 @@ function CameraController({ ConstellationPosition, zoomed }) {
     console.log("제[발!!ㅣ", ConstellationPosition);
     const targetPosition = zoomed
       ? {
-          x: ConstellationPosition.x * multiFactor + 50,
-          y: ConstellationPosition.y * multiFactor + 20,
+          x: ConstellationPosition.x * multiFactor + 2000,
+          y: ConstellationPosition.y * multiFactor + 2000,
           z: ConstellationPosition.z * multiFactor,
         }
       : {
@@ -66,7 +66,7 @@ function CameraController({ ConstellationPosition, zoomed }) {
     };
 
     gsap.to(startPosition, {
-      duration: 3, // duration in seconds
+      duration: 2, // duration in seconds
       x: -targetPosition.x,
       y: -targetPosition.y,
       z: -targetPosition.z,
@@ -173,12 +173,12 @@ const Scene = ({ constellationList }) => {
         camera={{
           position: startDirection
             ? [startDirection.x, startDirection.y, startDirection.z]
-            : [0, -300, 0],
+            : [0, 500, 0],
         }}
       >
         <PerspectiveCamera
           makeDefault
-          position={[0, 0, 1]}
+          position={[0, 500, 0]}
           near={0.1}
           far={10000}
         />
