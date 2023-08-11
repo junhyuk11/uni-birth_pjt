@@ -123,7 +123,7 @@ const DetailStar = () => {
         <img
           src={star.imageUrl}
           alt="별 이미지"
-          className="h-64 w-full object-cover"
+          className="h-auto max-h-96 w-full object-cover"
         />{" "}
         {/* 이미지 크기 조정 */}
       </div>

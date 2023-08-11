@@ -18,6 +18,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import * as THREE from "three";
 import GradientBackground from "../../../common/atoms/GradientBackground";
 import Background from "../../../common/atoms/Background";
+import Plus from "../../../assets/icons/js/plus";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -39,7 +40,7 @@ const ListSectionStar = () => {
 
   // tooltip
   const [tooltipStyle, setTooltipStyle] = useState({ display: "none" });
-
+  const { navigateToRegisterStar } = useNavigation();
   const handleBoxClick = ({ event, index }) => {
     console.log(index);
     const mouse = new THREE.Vector2();
@@ -110,6 +111,12 @@ const ListSectionStar = () => {
 
   return (
     <div className="relative bottom-0 h-screen w-screen">
+      <button
+        className="absolute bottom-36 right-4 z-10 flex flex-col text-4xl text-white opacity-100"
+        onClick={navigateToRegisterStar}
+      >
+        <Plus />
+      </button>
       <Canvas camera={{ position: [0, 0, 70] }}>
         <Background />
         <axesHelper scale={5} />

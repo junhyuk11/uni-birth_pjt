@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-import tops from "../../assets/images/tops.PNG";
 import useSearchApi from "../../api/useSearchApi";
 import { nicknameState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 
 const QurationStar = () => {
-  const [qurationStar, setQurationStar] = useState({
-    qurationStar: [],
-  });
+  const [qurationStar, setQurationStar] = useState([]);
   const nickname = useRecoilValue(nicknameState);
 
   const getQurationStar = async () => {
     try {
+      console.log("dd");
       const response = await useSearchApi.searchGetMemberCuration(nickname);
       if (response.status === 200) {
         console.log("파일을 불러왔습니다.", response.resultData);
@@ -30,21 +28,26 @@ const QurationStar = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <p>더미 파일</p>
-      <img src={tops} alt="별자리 이미지" />
-      <p className="my-4 flex justify-center font-TAEBAEKmilkyway">
-        현재 starId : {qurationStar.starId}
-      </p>
-      <p className="my-4 flex justify-center font-TAEBAEKmilkyway">
-        현재 nickname : {qurationStar.nickname}
-      </p>
-      <p className="my-4 flex justify-center font-TAEBAEKmilkyway">
-        현재 imageUrl : {qurationStar.imageUrl}
-      </p>
-      <p className="my-4 flex justify-center font-TAEBAEKmilkyway">
-        현재 content : {qurationStar.content}
-      </p>
+    <div className="flex w-full flex-col items-center justify-center">
+      {qurationStar.map((item, index) => (
+        <div
+          key={index}
+          className="m-4 w-full max-w-xs sm:max-w-sm md:max-w-md"
+        >
+          <div className="w-full">
+            <img
+              src={item.imageUrl}
+              alt="별 이미지"
+              className="h-auto max-h-96 w-full object-cover"
+            />{" "}
+            {/* 이미지 크기 조정 */}
+          </div>
+          <div className="rounded-b-lg bg-white p-4">
+            <h3 className="font-bold">{item.nickname}</h3>
+            <p>{item.content}</p>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

@@ -19,6 +19,9 @@ const MessageBox = () => {
       onClick: navigateToBack,
       icon: <LeftArrow />,
     },
+    {
+      component: () => <span className="ml-4 text-2xl text-white">메시지</span>,
+    },
   ];
 
   const handleNavigateToChat = (chatId) => {

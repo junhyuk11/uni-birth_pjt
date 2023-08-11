@@ -105,11 +105,11 @@ const ModifyProfile = () => {
   return (
     <div className="mx-auto h-screen max-w-screen-sm">
       <Header1 buttons={buttonsHeader} />
-      <form className="flex flex-col items-center justify-center space-y-10">
+      <form className="mx-10 mt-32 flex-col items-center justify-center space-y-5">
         <img
           src={thumbUrl || earth}
           alt="이미지"
-          className="h-32 w-32 rounded-full object-cover"
+          className="mx-auto h-32 w-32 rounded-full object-cover"
         />
         <InputImage
           setImageUrl={setImageUrl}

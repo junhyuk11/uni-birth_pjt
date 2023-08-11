@@ -66,44 +66,45 @@ const HtmlConstellation = ({ constellationId }) => {
     return (
       <div>
         <button
-          className="absolute left-20 top-10 z-10 rounded-lg bg-red-400 p-2  text-white"
+          className="absolute right-4 top-4 z-10 rounded-lg bg-red-400 p-2  text-white"
           onClick={toggleVisibility}
         >
-          {isVisible ? "Make Invisible" : "Make Visible"}
+          {isVisible ? "미리보기 가리기" : "미리보기"}
         </button>
         {isVisible && (
           <div className="absolute left-1/2 top-10 z-10 h-60 w-80 -translate-x-1/2 rounded-lg">
             <div className="flex flex-col justify-center space-y-5">
               <div className="flex justify-center">
                 <div className="h-36 rounded-lg">
-                  <img src={constellationContent.imageUrl} alt="별자리" />
+                  <img
+                    src={constellationContent.imageUrl}
+                    alt="별자리"
+                    className="h-36 px-3 py-3"
+                  />
+                </div>
+                <div
+                  className="absolute right-2 top-2"
+                  onClick={() => handlePinClick(constellationContent)}
+                >
+                  <div className="aboslute bottom-60 left-1/2 text-white">
+                    {updatePinedStatus ? (
+                      <AiFillPushpin size={30} />
+                    ) : (
+                      <AiOutlinePushpin size={30} />
+                    )}
+                  </div>
                 </div>
               </div>
-              <div className="flex justify-center text-white">
-                별자리 ID : {constellationId}
-              </div>
-              <div className="flex justify-center text-white">
-                별자리 title: {constellationContent.constellationTitle}
+              <div className="my-2 flex justify-center text-white">
+                {constellationContent.constellationTitle}
               </div>
               <div className="flex justify-center">
                 <button
-                  className="w-40 rounded-full bg-red-500 p-2 text-white"
+                  className="my-4 w-40 rounded-full bg-red-500 p-2 text-white"
                   onClick={() => handleConstellationClick(constellationId)}
                 >
                   별자리 이동하기
                 </button>
-              </div>
-              <div
-                className="flex justify-center"
-                onClick={() => handlePinClick(constellationContent)}
-              >
-                <div className="aboslute bottom-60 left-1/2 text-white">
-                  {updatePinedStatus ? (
-                    <AiFillPushpin size={30} />
-                  ) : (
-                    <AiOutlinePushpin size={30} />
-                  )}
-                </div>
               </div>
             </div>
           </div>

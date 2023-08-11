@@ -9,7 +9,7 @@ const InputImage = ({ setImageUrl, setThumbUrl, onChange }) => {
     }
   };
   return (
-    <div className="flex flex-col content-center items-center justify-center space-y-2 pl-10 font-TAEBAEKmilkyway">
+    <div className="flex flex-col content-center items-center justify-center font-Pretendard">
       <label htmlFor="profileimage">프로필 이미지</label>
       <input
         className="w-30 border border-gray-300"
