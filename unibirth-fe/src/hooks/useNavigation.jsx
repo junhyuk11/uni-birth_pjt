@@ -89,8 +89,8 @@ export const useNavigation = () => {
     navigate("/profiles/directmessage", { state: params });
   };
 
-  const navigateToMessageBox = (params) => {
-    navigate("/profiles/messagebox", { state: params });
+  const navigateToMessageBox = () => {
+    navigate("/profiles/messagebox");
   };
 
   // Star

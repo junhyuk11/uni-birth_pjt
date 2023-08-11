@@ -3,35 +3,21 @@ import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
 import { useNavigation } from "../../../hooks/useNavigation";
 import { database, ref, onValue, off } from "../../../api/useFirebaseApi";
-import {
-  nicknameState,
-  targetNicknameState,
-  updateTimeState,
-} from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
 
 const MessageBox = () => {
   const nickname = useRecoilValue(nicknameState);
-  const [targetNickname, setTargetNickname] =
-    useRecoilState(targetNicknameState);
-  const [updateTime, setUpdateTime] = useRecoilState(updateTimeState);
   const [chatRooms, setChatRooms] = useState([]);
   const { navigateToDirectMessage, navigateToBack } = useNavigation();
-  console.log(targetNickname);
+  const setTargetNickname = useSetRecoilState(targetNicknameState);
   const buttonsHeader = [
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
       onClick: navigateToBack,
       icon: <LeftArrow />,
-    },
-    {
-      component: () => (
-        <span className="ml-4 text-2xl text-white" onClick={() => {}}>
-          메시지
-        </span>
-      ),
     },
   ];
 
@@ -72,17 +58,10 @@ const MessageBox = () => {
     };
   }, [nickname]);
 
-  useEffect(() => {
-    console.log(updateTime);
-    setUpdateTime(Date.now());
-  }, []);
-
   return (
-    <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
       <div>
-        <header className="sticky top-0 z-10">
-          <Header2 buttons={buttonsHeader} />
-        </header>
+        <Header2 buttons={buttonsHeader} />
         <ul>
           {chatRooms.map(([chatId, chatData]) => {
             const [sender, target] = chatId.split("_");
