@@ -26,6 +26,13 @@ const MessageBox = () => {
       onClick: handleBackClick,
       icon: <LeftArrow />,
     },
+    {
+      component: () => (
+        <span className="ml-4 text-2xl text-white" onClick={() => {}}>
+          메시지
+        </span>
+      ),
+    },
   ];
 
   const handleNavigateToChat = (chatId) => {
@@ -71,7 +78,9 @@ const MessageBox = () => {
   return (
     <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
       <div>
-        <Header2 buttons={buttonsHeader} />
+        <header className="sticky top-0 z-10">
+          <Header2 buttons={buttonsHeader} />
+        </header>
         <ul>
           {chatRooms.map(([chatId, chatData]) => {
             const [sender, target] = chatId.split("_");

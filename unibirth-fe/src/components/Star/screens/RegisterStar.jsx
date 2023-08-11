@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
-import Footer1 from "../../../common/blocks/Footer1";
 import { useNavigation } from "../../../hooks/useNavigation";
 import BodyRegisterStar from "../blocks/BodyRegisterStar";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -10,21 +9,32 @@ import { StellaIdState, backgroundflagState } from "../../../recoil/atoms";
 import useStarApi from "../../../api/useStarApi";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../api/useFirebaseApi";
-import InviteFollowStar from "../blocks/InviteFollowStar";
+
 import LeftArrow from "../../../assets/icons/js/leftArrow";
+import InputImage from "../atoms/InputImage";
+import earth from "../../../assets/images/earth.png";
 
 const RegisterStar = () => {
   useEffect(() => {
     backgroundflag(true);
   }, []);
 
+  const saveImgFile = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setThumbUrl(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
   const backgroundflag = useSetRecoilState(backgroundflagState);
   const constellationId = useRecoilValue(StellaIdState);
   const { navigateToBack, navigateToDetailConstellation } = useNavigation(); // navigateToDetailConstellation
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [thumbUrl, setThumbUrl] = useState("");
   const [content, setContent] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   const createStar = () => {
     // Firebase에 Image 저장 및 URL 받아오기
@@ -83,9 +93,9 @@ const RegisterStar = () => {
     );
   };
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
+  // const toggleModal = () => {
+  //   setShowModal(!showModal);
+  // };
 
   const buttonsHeader = [
     {
@@ -93,36 +103,38 @@ const RegisterStar = () => {
       onClick: navigateToBack,
       icon: <LeftArrow />,
     },
-  ];
-
-  const buttonsFooter = [
     {
-      component: Button1,
-      className: "font-TAEBAEKmilkyway",
-      value: "별 생성하기",
-      onClick: createStar,
+      component: () => (
+        <span className="ml-4 text-2xl text-white" onClick={() => {}}>
+          별 생성
+        </span>
+      ),
     },
   ];
-
   return (
     <div className="mx-auto h-screen max-w-screen-sm  bg-slate-100 bg-opacity-50">
       <div>
         <Header1 buttons={buttonsHeader} />
-        <div className="flex flex-col justify-center px-10">
+        <div className="mt-24 flex flex-col items-center justify-center space-y-10">
+          <img
+            src={thumbUrl || earth}
+            alt="이미지"
+            className="h-32 w-32 rounded-full object-cover"
+          />
+          <InputImage
+            setImageUrl={setImageUrl}
+            setThumbUrl={setThumbUrl}
+            onChange={saveImgFile}
+          />
           <BodyRegisterStar
             title={title}
             setTitle={setTitle}
             content={content}
             setContent={setContent}
-            setImageUrl={setImageUrl}
           />
         </div>
-        <div className="flex justify-center">
-          <Button1
-            className="font-TAEBAEKmilkyway"
-            value="별자리 초대하기"
-            onClick={toggleModal}
-          />
+        <div className="mt-20 flex justify-center ">
+          {/* <Button1 value="별자리 초대하기" onClick={toggleModal} />
           {showModal && (
             <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-40">
               <div className="max-h-2/4 overflow-y-auto rounded-lg bg-white">
@@ -135,10 +147,8 @@ const RegisterStar = () => {
                 <InviteFollowStar />
               </div>
             </div>
-          )}
-        </div>
-        <div className="flex justify-center">
-          <Footer1 buttons={buttonsFooter} />
+          )} */}
+          <Button1 value="별 생성" onClick={createStar} />
         </div>
       </div>
     </div>

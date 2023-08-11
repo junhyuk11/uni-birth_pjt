@@ -8,7 +8,7 @@ const InputImage = ({ setImageUrl }) => {
     }
   };
   return (
-    <div className="flex flex-col items-center justify-center space-y-2 font-TAEBAEKmilkyway">
+    <div className="flex flex-col items-center justify-center space-y-2 font-Pretendard">
       <label htmlFor="profileimage">프로필 이미지</label>
       <input
         className=" w-52 border border-gray-300"

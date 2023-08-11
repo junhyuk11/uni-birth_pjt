@@ -50,6 +50,13 @@ const RegistConstellation = () => {
       onClick: navigateToBack,
       icon: <LeftArrow />,
     },
+    {
+      component: () => (
+        <span className="ml-4 text-2xl text-white" onClick={() => {}}>
+          별자리 그리기
+        </span>
+      ),
+    },
   ];
   const buttonsFooter = [
     {
@@ -64,7 +71,7 @@ const RegistConstellation = () => {
     <div className="mx-auto h-screen max-w-screen-sm  bg-slate-100 bg-opacity-50">
       <div>
         <Header1 buttons={buttonsHeader} />
-        <div className="mt-36 flex flex-col items-center justify-center space-y-10">
+        <div className="mt-24 flex flex-col items-center justify-center space-y-10">
           <img
             src={planet1}
             alt="행성1 이미지 예시"

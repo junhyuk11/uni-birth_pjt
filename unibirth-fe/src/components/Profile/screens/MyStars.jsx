@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
-import Button3 from "../../../common/atoms/Button3";
-import { IoIosArrowBack } from "react-icons/io";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useStarApi from "../../../api/useStarApi";
 import { useRecoilValue } from "recoil";
 import { targetNicknameState } from "../../../recoil/atoms";
+import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const MyStars = () => {
   const { navigateToBack } = useNavigation();
@@ -28,15 +27,15 @@ const MyStars = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
       onClick: navigateToBack,
-      icon: <IoIosArrowBack />,
+      icon: <LeftArrow />,
     },
     {
-      component: Button3,
-      className: "font-TAEBAEKmilkyway",
-      value: "띄운 별",
+      component: () => (
+        <span className="ml-4 text-2xl text-white" onClick={() => {}}>
+          띄운 별
+        </span>
+      ),
     },
   ];
 
@@ -53,9 +52,10 @@ const MyStars = () => {
   }, []);
 
   return (
-    <div>
-      <Header2 buttons={buttonsHeader} />
-      <h1>띄운별 리스트입니다..</h1>
+    <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+      <header className="sticky top-0 z-10">
+        <Header2 buttons={buttonsHeader} />
+      </header>
       <div className="flex flex-col items-center">
         {starList.map((star) => (
           <div key={star.starId} className="my-4 flex items-center">

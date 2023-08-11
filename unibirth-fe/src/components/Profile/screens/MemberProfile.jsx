@@ -127,7 +127,9 @@ const MemberProfile = () => {
   return (
     <div className="mx-auto h-screen max-w-screen-sm">
       <div>
-        <Header6 buttons={buttonsHeader} />
+        <header className="sticky top-0 z-10">
+          <Header6 buttons={buttonsHeader} />
+        </header>
         <MemberSectionProfile />
         <ConstellationSectionProfile />
         {isModalOpen && (

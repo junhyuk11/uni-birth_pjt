@@ -83,7 +83,9 @@ const DirectMessage = () => {
 
   return (
     <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
-      <Header2 buttons={buttonsHeader} />
+      <header className="sticky top-0 z-10">
+        <Header2 buttons={buttonsHeader} />
+      </header>
       <div className="px-4">
         <div className="chat-container">
           <div

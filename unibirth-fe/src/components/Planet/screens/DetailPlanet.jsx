@@ -58,8 +58,6 @@ const DetailPlanet = () => {
             setConstellationList={setConstellationList}
             className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform"
           />
-          <h1 className="text-white">별자리 리스트 화면입니다.</h1>
-          {/* <ConstellationList /> */}
         </div>
         <div className="w- absolute top-0 h-screen w-screen">
           <ListConstellation

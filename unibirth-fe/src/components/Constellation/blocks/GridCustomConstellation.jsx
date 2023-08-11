@@ -244,11 +244,11 @@ const GridCustomConstellation = ({
     setGrid(tempGrid);
   }
 
-  const handelConsoleClick = () => {
-    const [uniquePoints, uniqueLines] = removeDuplicate(lines);
-    console.log(uniquePoints);
-    console.log(uniqueLines);
-  };
+  // const handelConsoleClick = () => {
+  //   const [uniquePoints, uniqueLines] = removeDuplicate(lines);
+  //   console.log(uniquePoints);
+  //   console.log(uniqueLines);
+  // };
 
   const handleResetClick = () => {
     setPoints([]);
@@ -261,32 +261,30 @@ const GridCustomConstellation = ({
   // const buttonsFooter = [
   //   {
   //     component: Button1,
-  //     className: "font-TAEBAEKmilkyway",
+  //     className: "font-Pretendard",
   //     value: "초기화",
   //     onClick: handleResetClick,
   //   },
   //   {
   //     component: Button1,
-  //     className: "font-TAEBAEKmilkyway",
+  //     className: "font-Pretendard",
   //     value: "완료하기",
   //     onClick: handleSaveClick,
   //   },
   // ];
 
   return (
-    <div>
-      <div className="flex flex-row text-white">
+    <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-row px-10 py-4 text-white ">
         <div className="flex flex-col">
-          <p className="font-TAEBAEKmilkyway">지금 행성명: {planetId}</p>
-          <p className="font-TAEBAEKmilkyway">
-            지금 별자리명: {constellationName}
-          </p>
-          <p className="font-TAEBAEKmilkyway">
+          <p className="font-Pretendard">지금 행성명: {planetId}</p>
+          <p className="font-Pretendard">지금 별자리명: {constellationName}</p>
+          <p className="font-Pretendard">
             지금 별자리설명: {constellationDescp}
           </p>
-          <p className="font-TAEBAEKmilkyway">지금 보드사이즈: {boardSize}</p>
+          <p className="font-Pretendard">지금 보드사이즈: {boardSize}</p>
         </div>
-        <div className="flex w-28 items-center justify-center">
+        <div className="flex w-28 items-center justify-end">
           <div className="flex">
             <PickConstellationColor
               setconstellationColor={setconstellationColor}
@@ -295,7 +293,7 @@ const GridCustomConstellation = ({
           </div>
         </div>
       </div>
-      <div className={`items-center justify-center ${containerStyle}`}>
+      <div className={`mt-10 items-center justify-center ${containerStyle}`}>
         <Stage width={stageSize} height={stageSize}>
           <Layer ref={linesAndPointsLayerRef}>
             {points.map((point, y) => (
@@ -346,27 +344,10 @@ const GridCustomConstellation = ({
           </Layer>
         </Stage>
       </div>
-      <div>
-        <Button1
-          className="font-TAEBAEKmilkyway"
-          value="초기화"
-          onClick={handleResetClick}
-        ></Button1>
-        <Button1
-          className="font-TAEBAEKmilkyway"
-          value="직전으로 돌아가기"
-          onClick={handleBeforeClick}
-        ></Button1>
-        <Button1
-          className="font-TAEBAEKmilkyway"
-          value="저장하기"
-          onClick={handleSaveClick}
-        ></Button1>
-        <Button1
-          className="font-TAEBAEKmilkyway"
-          value="콘솔에 띄우기"
-          onClick={handelConsoleClick}
-        ></Button1>
+      <div className="mt-20 space-x-4">
+        <Button1 value="초기화" onClick={handleResetClick}></Button1>
+        <Button1 value="이전" onClick={handleBeforeClick}></Button1>
+        <Button1 value="저장" onClick={handleSaveClick}></Button1>
       </div>
     </div>
   );

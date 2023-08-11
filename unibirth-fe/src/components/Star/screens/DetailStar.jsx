@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
-import { BiSearch } from "react-icons/bi";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useStarApi from "../../../api/useStarApi";
 import useMemberApi from "../../../api/useMemberApi";
@@ -9,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { backgroundflagState } from "../../../recoil/atoms";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const DetailStar = () => {
   const [ddd, setBackgroundflag] = useRecoilState(backgroundflagState);
@@ -95,10 +95,8 @@ const DetailStar = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
-      value: "뒤로가기",
       onClick: navigateToBack,
-      icon: <BiSearch />,
+      icon: <LeftArrow />,
     },
   ];
 

@@ -28,6 +28,13 @@ const UserAlarm = () => {
       onClick: handleBackClick,
       icon: <LeftArrow />,
     },
+    {
+      component: () => (
+        <span className="ml-4 text-2xl text-white" onClick={() => {}}>
+          알림
+        </span>
+      ),
+    },
   ];
 
   useEffect(() => {
