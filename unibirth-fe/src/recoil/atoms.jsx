@@ -92,3 +92,15 @@ export const currentplanetState = atom({
   default: 0,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const currentConsIndexState = atom({
+  key: "currentConsIndexState",
+  default: 0,
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const currentconstellationListState = atom({
+  key: "currentconstellationListState",
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});

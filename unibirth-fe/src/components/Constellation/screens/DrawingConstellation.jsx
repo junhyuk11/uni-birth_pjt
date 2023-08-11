@@ -60,6 +60,7 @@ const DrawingConstellation = () => {
             constellationColor={constellationColor}
             setconstellationColor={setconstellationColor}
           />
+
           {isModalOpen && (
             <ListTemplateModalConstellation
               setIsModalOpen={setIsModalOpen}
