@@ -12,6 +12,11 @@ export const targetNicknameState = atom({
   default: "",
   effects_UNSTABLE: [persistAtom],
 });
+export const updateTimeState = atom({
+  key: "updateTimeState",
+  default: "",
+  effects_UNSTABLE: [persistAtom],
+});
 
 export const starListState = atom({
   key: "starListState",

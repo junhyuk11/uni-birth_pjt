@@ -4,7 +4,11 @@ import Button2 from "../../../common/atoms/Button2";
 import { useRecoilValue } from "recoil";
 import { nicknameState } from "../../../recoil/atoms";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { sendMessage, listenForMessages } from "../../../api/useFirebaseApi";
+import {
+  sendMessage,
+  listenForMessages,
+  updateMessage,
+} from "../../../api/useFirebaseApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import { useLocation } from "react-router-dom";
 
@@ -63,10 +67,11 @@ const DirectMessage = () => {
     };
   }, [nickname, locationNickname]);
 
-  const handleSend = () => {
+  const combinedFunction = async () => {
     if (newMessage.trim()) {
-      sendMessage(newMessage, nickname, locationNickname);
+      await sendMessage(newMessage, nickname, locationNickname);
       setNewMessage("");
+      await updateMessage(locationNickname, Date.now());
     }
   };
   // const nicknameClick = (nick) => {
@@ -127,14 +132,14 @@ const DirectMessage = () => {
           onChange={(e) => setNewMessage(e.target.value)}
           onKeyDown={(event) => {
             if (event.key === "Enter") {
-              handleSend();
+              combinedFunction();
             }
           }}
           placeholder="메시지 입력..."
         />
         <button
           className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
-          onClick={handleSend}
+          onClick={combinedFunction}
         >
           전송
         </button>

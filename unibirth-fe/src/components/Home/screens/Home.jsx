@@ -4,8 +4,6 @@ import Button1 from "../../../common/atoms/Button1";
 import { useNavigation } from "../../../hooks/useNavigation";
 import { useRecoilState } from "recoil";
 import { backgroundflagState } from "../../../recoil/atoms";
-// import { Canvas } from "@react-three/fiber";
-// // import Space from "../blocks/Space";
 
 const Home = () => {
   const [, setBackgroundflag] = useRecoilState(backgroundflagState);

@@ -3,15 +3,22 @@ import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
 import { useNavigation } from "../../../hooks/useNavigation";
 import { database, ref, onValue, off } from "../../../api/useFirebaseApi";
+import {
+  nicknameState,
+  targetNicknameState,
+  updateTimeState,
+} from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
-import { useSetRecoilState, useRecoilValue } from "recoil";
-import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 const MessageBox = () => {
   const nickname = useRecoilValue(nicknameState);
+  const [targetNickname, setTargetNickname] =
+    useRecoilState(targetNicknameState);
+  const [updateTime, setUpdateTime] = useRecoilState(updateTimeState);
   const [chatRooms, setChatRooms] = useState([]);
   const { navigateToDirectMessage, navigateToBack } = useNavigation();
-  const setTargetNickname = useSetRecoilState(targetNicknameState);
+  console.log(targetNickname);
   const buttonsHeader = [
     {
       component: Button2,
@@ -65,8 +72,13 @@ const MessageBox = () => {
     };
   }, [nickname]);
 
+  useEffect(() => {
+    console.log(updateTime);
+    setUpdateTime(Date.now());
+  }, []);
+
   return (
-    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+    <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
       <div>
         <header className="sticky top-0 z-10">
           <Header2 buttons={buttonsHeader} />
