@@ -13,10 +13,10 @@ const Left = () => (
       stroke="#E337FF"
     />
     <svg
-      x="44"
-      y="18"
-      width="22"
-      height="23"
+      x="46"
+      y="20"
+      width="19"
+      height="19"
       viewBox="0 0 22 23"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

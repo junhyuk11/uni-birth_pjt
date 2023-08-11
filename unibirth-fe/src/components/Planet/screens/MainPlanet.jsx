@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Button1 from "../../../common/atoms/Button1";
-import { BiSearch, BiHomeAlt } from "react-icons/bi";
-import { CgProfile } from "react-icons/cg";
 import { useNavigation } from "../../../hooks/useNavigation";
 import CanvasPlanet from "../blocks/CanvasPlanet";
 import ListBestStars from "../blocks/ListBestStars";
@@ -11,7 +8,7 @@ import {
   backgroundflagState,
   currentplanetState,
 } from "../../../recoil/atoms";
-import Footer2 from "../../../common/blocks/Footer2";
+import Footer from "../../../common/blocks/Footer";
 
 const MainPlanet = () => {
   const [, setBackgroundflag] = useRecoilState(backgroundflagState);
@@ -21,7 +18,6 @@ const MainPlanet = () => {
 
   const {
     navigateToLoginMember,
-    refreshPage,
     navigateToMemberProfile,
     navigateToSearchQuration,
     navigateToDetailPlanet,
@@ -45,31 +41,18 @@ const MainPlanet = () => {
 
   const buttonsFooter = [
     {
-      component: Button1,
-      className: "font-Pretendard",
       onClick: navigateToSearchQuration,
-      icon: <BiSearch />,
     },
-    {
-      component: Button1,
-      onClick: refreshPage,
-      icon: <BiHomeAlt />,
-    },
+    {},
   ];
 
   if (token === null) {
     buttonsFooter.push({
-      component: Button1,
-      className: "font-Pretendard",
-      value: "로그인",
       onClick: navigateToLoginMember,
     });
   } else {
     buttonsFooter.push({
-      component: Button1,
-      className: "font-Pretendard",
       onClick: mypageClick,
-      icon: <CgProfile />,
     });
   }
 
@@ -88,7 +71,7 @@ const MainPlanet = () => {
         navigateToDetailPlanet={navigateToDetailPlanet}
       />
       <div className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2 space-x-4">
-        <Footer2 buttons={buttonsFooter} />
+        <Footer buttons={buttonsFooter} />
       </div>
     </div>
   );

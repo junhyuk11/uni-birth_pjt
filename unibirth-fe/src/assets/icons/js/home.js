@@ -10,10 +10,10 @@ const Home = () => (
   >
     <rect x="0.5" y="0.5" width="114" height="60" stroke="#E337FF" />
     <svg
-      x="46.5"
-      y="18"
-      width="29"
-      height="24"
+      x="47.5"
+      y="20"
+      width="22"
+      height="20"
       viewBox="0 0 29 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

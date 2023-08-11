@@ -16,8 +16,6 @@ import Message from "../../../assets/icons/js/message";
 import Header6 from "../../../common/blocks/Header6";
 import Star from "../../../assets/icons/js/star";
 import { useLocation } from "react-router-dom";
-import { CgProfile } from "react-icons/cg";
-import { BiHomeAlt, BiSearch } from "react-icons/bi";
 import Footer from "../../../common/blocks/Footer";
 
 const MemberProfile = () => {
@@ -35,7 +33,6 @@ const MemberProfile = () => {
     navigateToModifyMember,
     navigateToSearchQuration,
     navigateToDirectMessage,
-    refreshPage,
   } = useNavigation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -105,22 +102,14 @@ const MemberProfile = () => {
 
   const buttonsFooter = [
     {
-      component: Button1,
       onClick: navigateToSearchQuration,
-      icon: <BiSearch />,
     },
     {
-      component: Button1,
       onClick: navigateToMainPlanet,
-      icon: <BiHomeAlt />,
     },
   ];
 
-  buttonsFooter.push({
-    component: Button1,
-    onClick: refreshPage,
-    icon: <CgProfile />,
-  });
+  buttonsFooter.push({});
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
