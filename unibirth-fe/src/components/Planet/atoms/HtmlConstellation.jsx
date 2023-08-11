@@ -95,8 +95,11 @@ const HtmlConstellation = ({ constellationId }) => {
                   </div>
                 </div>
               </div>
-              <div className="my-2 flex justify-center text-white">
-                {constellationContent.constellationTitle}
+              <div className="my-2 flex items-baseline justify-center text-white">
+                <p className="mt-0 text-lg">
+                  {constellationContent.constellationTitle}
+                </p>
+                <div className="bottom-0 text-sm">&nbsp;자리</div>
               </div>
               <div className="flex justify-center">
                 <button
