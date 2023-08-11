@@ -199,8 +199,8 @@ const Scene = ({ constellationList }) => {
           // enablePan={true}
           enableDamping={true}
           rotateSpeed={-0.4}
-          minDistance={1} // minimum zoom distance
-          maxDistance={700} // maximum zoom distance
+          // minDistance={1} // minimum zoom distance
+          maxDistance={8000} // maximum zoom distance
           dampingFactor={1}
         />
         <axesHelper scale={5} />
