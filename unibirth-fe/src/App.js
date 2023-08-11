@@ -19,8 +19,9 @@ import MainPlanet from "./components/Planet/screens/MainPlanet";
 
 // Profile
 import MemberProfile from "./components/Profile/screens/MemberProfile";
-import Followings from "./components/Profile/screens/Followings";
-import Followers from "./components/Profile/screens/Followers";
+// import Followings from "./components/Profile/screens/Followings";
+// import Followers from "./components/Profile/screens/Followers";
+import Follow from "./components/Profile/screens/Follow";
 import ModifyProfile from "./components/Profile/screens/ModifyProfile";
 import DirectMessage from "./components/Profile/screens/DirectMessage";
 import MessageBox from "./components/Profile/screens/MessageBox";
@@ -73,9 +74,10 @@ const App = () => {
           />
           <Route path="/stars/register" element={<RegisterStar />} />
           <Route path="/profiles" element={<MemberProfile />} />
-          <Route path="/profiles/followings" element={<Followings />} />
           <Route path="/stars/detail/:starId" element={<DetailStar />} />
-          <Route path="/profiles/followers" element={<Followers />} />
+          <Route path="/profiles/follow" element={<Follow />} />
+          {/* <Route path="/profiles/followings" element={<Followings />} />
+          <Route path="/profiles/followers" element={<Followers />} /> */}
           <Route path="/stars" element={<MyStars />} />
           <Route path="/useralarm" element={<UserAlarm />} />
           <Route path="/members/profiles" element={<ModifyProfile />} />

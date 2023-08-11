@@ -9,8 +9,9 @@ import Button5 from "../../../common/atoms/Button5";
 const MemberSectionProfile = ({ locationNickname }) => {
   const {
     navigateToModifyProfile,
-    navigateToFollowings,
-    navigateToFollowers,
+    // navigateToFollowings,
+    // navigateToFollowers,
+    navigateToFollow,
     navigateToMyStars,
   } = useNavigation();
 
@@ -83,7 +84,8 @@ const MemberSectionProfile = ({ locationNickname }) => {
             <div className="flex justify-end space-x-4">
               <div className="flex flex-col items-center">
                 <p
-                  onClick={() => navigateToFollowings(locationNickname)}
+                  onClick={() => navigateToFollow(locationNickname)}
+                  // onClick={() => navigateToFollowings(locationNickname)}
                   className="text-center text-yellow-100"
                 >
                   팔로잉: {memberData.resultData.followingCount}
@@ -91,7 +93,8 @@ const MemberSectionProfile = ({ locationNickname }) => {
               </div>
               <div className="flex flex-col items-center">
                 <p
-                  onClick={() => navigateToFollowers(locationNickname)}
+                  onClick={() => navigateToFollow(locationNickname)}
+                  // onClick={() => navigateToFollowers(locationNickname)}
                   className="text-center text-yellow-100"
                 >
                   팔로워: {memberData.resultData.followerCount}
