@@ -39,14 +39,13 @@ const MeshCons = ({ constellationList, ConstellationIndex }) => {
 
     for (let i = 0; i < vertices.length; i += 3) {
       if (vertices[i + 1] > 0) {
-        if ((i + +1) % segments) {
-          const vertex = {
-            x: vertices[i],
-            y: vertices[i + 1],
-            z: vertices[i + 2],
-          };
-          newConstellationList.push(vertex);
-        }
+        console.log("씨발아", vertices[i + 2]);
+        const vertex = {
+          x: vertices[i],
+          y: vertices[i + 1],
+          z: vertices[i + 2],
+        };
+        newConstellationList.push(vertex);
       }
     }
     setAllSphereList(newConstellationList);
