@@ -7,11 +7,11 @@ import { currentconstellationListState } from "../../../recoil/atoms";
 const MeshCons = ({ constellationList, ConstellationIndex }) => {
   const meshRef = useRef();
   // 별자리 반경
-  const radius = 300;
+  const radius = 400;
   // 별 개수 에 따라 segment 변경
   const segments = 8; // 세그먼트 수 변경 가능 갯수에 따라 달라져야 하는 로직 필요
   // count 변수
-  const countNum = 10;
+  const countNum = 1;
   const [vertices, setVertices] = useState([]);
 
   useEffect(() => {}, [ConstellationIndex]);
@@ -21,7 +21,7 @@ const MeshCons = ({ constellationList, ConstellationIndex }) => {
   // 별자리 간격 조정
   const constellationGap = 10;
   // 처음 밝기 조정
-  const firstBrightness = 5;
+  const firstBrightness = 10;
   // 별 크기 조정
   const spherenum = 3;
 
@@ -39,19 +39,23 @@ const MeshCons = ({ constellationList, ConstellationIndex }) => {
 
     for (let i = 0; i < vertices.length; i += 3) {
       if (vertices[i + 1] > 0) {
-        const vertex = {
-          x: vertices[i],
-          y: vertices[i + 1],
-          z: vertices[i + 2],
-        };
-        newConstellationList.push(vertex);
+        if ((i + +1) % segments) {
+          const vertex = {
+            x: vertices[i],
+            y: vertices[i + 1],
+            z: vertices[i + 2],
+          };
+          newConstellationList.push(vertex);
+        }
       }
     }
     setAllSphereList(newConstellationList);
     // 1부터 8까지 동일함
   }, [vertices]);
 
-  console.log("구 콘솔?", AllSphereList);
+  const ToaddconstellationList = [...new Set(AllSphereList)];
+
+  console.log("구 콘솔?", ToaddconstellationList);
 
   const constellationMeshes = useMemo(() => {
     const meshModels = [];
@@ -91,9 +95,9 @@ const MeshCons = ({ constellationList, ConstellationIndex }) => {
                           AllSphereList[i + segments + countNum].z,
                       ],
                     ]}
-                    color="white"
-                    emmisive="#00ffff"
-                    emmisiveIntensity={10}
+                    color="#F2F5A9"
+                    transparent={true}
+                    opacity={0.5}
                   />
                 </mesh>
               );
@@ -121,7 +125,7 @@ const MeshCons = ({ constellationList, ConstellationIndex }) => {
                       emissive={constellationList?.constellationList[i].color}
                       emissiveIntensity={
                         point.brightness === -1
-                          ? 1
+                          ? 2
                           : point.brightness + firstBrightness
                       }
                       // transparent={true}
