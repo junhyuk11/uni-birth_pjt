@@ -4,11 +4,7 @@ import Button2 from "../../../common/atoms/Button2";
 import { useRecoilValue } from "recoil";
 import { nicknameState } from "../../../recoil/atoms";
 import { useNavigation } from "../../../hooks/useNavigation";
-import {
-  sendMessage,
-  listenForMessages,
-  updateMessage,
-} from "../../../api/useFirebaseApi";
+import { sendMessage, listenForMessages } from "../../../api/useFirebaseApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import { useLocation } from "react-router-dom";
 
@@ -18,7 +14,8 @@ const DirectMessage = () => {
   const nickname = useRecoilValue(nicknameState);
   const location = useLocation();
   const locationNickname = location.state;
-  console.log(locationNickname);
+  console.log(location);
+
   const { navigateToBack } = useNavigation();
 
   const backClick = () => {
@@ -33,12 +30,7 @@ const DirectMessage = () => {
     },
     {
       component: () => (
-        <span
-          className="ml-4 text-2xl text-white"
-          // onClick={() => nicknameClick(locationNickname)}
-        >
-          {locationNickname}
-        </span>
+        <span className="ml-4 text-2xl text-white">{locationNickname}</span>
       ),
     },
   ];
@@ -67,17 +59,13 @@ const DirectMessage = () => {
     };
   }, [nickname, locationNickname]);
 
-  const combinedFunction = async () => {
+  const handleSend = () => {
     if (newMessage.trim()) {
-      await sendMessage(newMessage, nickname, locationNickname);
+      sendMessage(newMessage, nickname, locationNickname);
       setNewMessage("");
-      await updateMessage(locationNickname, Date.now());
     }
   };
-  // const nicknameClick = (nick) => {
-  //   setTargetNickname(nick); // 클릭한 유저 닉네임을 targetNicknameState에 저장합니다.
-  //   navigateToMemberProfile(); // 화면 이동을 처리하는 함수를 호출합니다.
-  // };
+
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     const hours = date.getHours().toString().padStart(2, "0");
@@ -89,9 +77,7 @@ const DirectMessage = () => {
 
   return (
     <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
-      <header className="sticky top-0 z-10">
-        <Header2 buttons={buttonsHeader} />
-      </header>
+      <Header2 buttons={buttonsHeader} />
       <div className="px-4">
         <div className="chat-container">
           <div
@@ -132,14 +118,14 @@ const DirectMessage = () => {
           onChange={(e) => setNewMessage(e.target.value)}
           onKeyDown={(event) => {
             if (event.key === "Enter") {
-              combinedFunction();
+              handleSend();
             }
           }}
           placeholder="메시지 입력..."
         />
         <button
           className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
-          onClick={combinedFunction}
+          onClick={handleSend}
         >
           전송
         </button>

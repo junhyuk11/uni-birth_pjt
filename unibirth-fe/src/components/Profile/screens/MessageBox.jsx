@@ -25,7 +25,7 @@ const MessageBox = () => {
     const [sender, target] = chatId.split("_");
     const otherNickname = sender === nickname ? target : sender;
     setTargetNickname(otherNickname);
-    navigateToDirectMessage(); // 해당 페이지로 이동
+    navigateToDirectMessage(otherNickname); // 해당 페이지로 이동
   };
 
   useEffect(() => {

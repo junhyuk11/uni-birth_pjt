@@ -37,7 +37,7 @@ const MemberProfile = () => {
 
   const handleMessageClick = () => {
     if (nickname === locationNickname) {
-      navigateToMessageBox(locationNickname);
+      navigateToMessageBox();
     } else {
       navigateToDirectMessage(locationNickname);
     }
