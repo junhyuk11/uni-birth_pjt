@@ -19,6 +19,8 @@ import {
 import MeshCons from "../atoms/MeshCons";
 import { gsap } from "gsap";
 import HtmlConstellation from "../atoms/HtmlConstellation";
+import { useNavigation } from "../../../hooks/useNavigation";
+import Plus from "../../../assets/icons/js/plus";
 
 // R3F 훅 카메라 컨트롤러 컴포넌트
 function CameraController({ ConstellationPosition, zoomed }) {
@@ -85,7 +87,7 @@ const Scene = ({ constellationList }) => {
     setBackgroundflag(false);
   }, []);
   const controlsRef = useRef();
-
+  const { navigateToRegisterConstellation } = useNavigation();
   useEffect(() => {}, [constellationList]);
 
   // 별자리 인덱스 이동
@@ -150,7 +152,13 @@ const Scene = ({ constellationList }) => {
         <BiSolidRightArrow />
       </button>
       <button
-        className="absolute bottom-10 right-5
+        className="absolute bottom-36 right-4 z-10 flex flex-col text-4xl text-white opacity-100"
+        onClick={navigateToRegisterConstellation}
+      >
+        <Plus />
+      </button>
+      <button
+        className="absolute bottom-24 right-4
         z-10 flex -translate-x-1/2 flex-col text-6xl text-white"
         onClick={handleZoomClick}
       >

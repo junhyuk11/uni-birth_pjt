@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from "react";
-import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
-import Footer1 from "../../../common/blocks/Footer1";
 import { useNavigation } from "../../../hooks/useNavigation";
 import ListConstellation from "../blocks/ListConstellation";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import useConstellationApi from "../../../api/useConstellationApi";
 import { useParams } from "react-router-dom";
+import Footer from "../../../common/blocks/Footer";
+import { useRecoilValue } from "recoil";
+import { nicknameState } from "../../../recoil/atoms";
 
 const DetailPlanet = () => {
   const { planetId } = useParams();
   const [constellationList, setConstellationList] = useState({
     constellationList: [],
   });
-  const { navigateToMainPlanet, navigateToRegisterConstellation } =
-    useNavigation();
+  const {
+    navigateToMainPlanet,
+    navigateToSearchQuration,
+    navigateToMemberProfile,
+    navigateToLoginMember,
+  } = useNavigation();
 
   const getConstellationList = async (planetId) => {
     const response = await useConstellationApi.constellationsGetPlanet(
@@ -38,20 +43,29 @@ const DetailPlanet = () => {
       icon: <LeftArrow />,
     },
   ];
+  const nickname = useRecoilValue(nicknameState);
+  const mypageClick = () => {
+    navigateToMemberProfile(nickname); // 화면 이동을 처리하는 함수를 호출합니다.
+  };
   const buttonsFooter = [
     {
-      component: Button1,
-      className: "font-TAEBAEKmilkyway",
-      value: "별자리 만들기",
-      onClick: navigateToRegisterConstellation,
+      onClick: navigateToSearchQuration,
     },
     {
-      component: Button1,
-      className: "font-TAEBAEKmilkyway",
-      value: "홈으로 이동",
       onClick: navigateToMainPlanet,
     },
   ];
+  const token = sessionStorage.getItem("accessToken");
+  if (token === null) {
+    buttonsFooter.push({
+      onClick: navigateToLoginMember,
+    });
+  } else {
+    buttonsFooter.push({
+      onClick: mypageClick,
+    });
+  }
+
   return (
     <div>
       <div className="absolute z-50 max-w-screen-sm">
@@ -62,7 +76,7 @@ const DetailPlanet = () => {
           <ListConstellation constellationList={constellationList} />
         </div>
         <div className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2">
-          <Footer1 buttons={buttonsFooter} />
+          <Footer buttons={buttonsFooter} />
         </div>
       </div>
     </div>
