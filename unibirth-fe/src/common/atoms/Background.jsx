@@ -50,11 +50,11 @@ function Scene() {
   return (
     <>
       <OrbitControls
-        rotateSpeed={-0.5}
+        rotateSpeed={0.5}
         autoRotate={true}
         autoRotateSpeed={0.23}
         enablePan={false}
-        enableDamping={true}
+        enableDamping={false}
         dampingFactor={0.05}
         // enabled={false}
       />

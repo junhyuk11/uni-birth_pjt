@@ -156,11 +156,11 @@ const ListSectionStar = () => {
         {/* 별을 클릭했을 때 위치 조정 필요 */}
         <div
           className={`
-  absolute z-50 -translate-x-1/2 -translate-y-1/2 transform 
+  fixed left-1/2 z-50 -translate-x-1/2 
   rounded-lg bg-white p-2 
   ${tooltipStyle.display === "none" ? "hidden" : ""}`}
           style={
-            { left: tooltipStyle.left, top: tooltipStyle.top }
+            { left: "50%", bottom: "20%" }
             // parseInt(tooltipStyle.left) < 400
             //   ? { left: tooltipStyle.left, top: tooltipStyle.top }
             //   : { left: tooltipStyle.left - 400, top: tooltipStyle.top }
@@ -184,11 +184,10 @@ const ListSectionStar = () => {
             <div className="flex-flex-row">
               <div className="flex">
                 <img
-                  className="rounded-lg"
+                  className="cover h-96 w-96 rounded-lg"
                   src={boxurl}
                   alt="star"
-                  // width="100px"
-                  // height="100px"
+                  style={{ objectFit: "cover", overflow: "hidden" }}
                 />
               </div>
               <div className="flex flex-col">

@@ -4,7 +4,11 @@ import Button2 from "../../../common/atoms/Button2";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { sendMessage, listenForMessages } from "../../../api/useFirebaseApi";
+import {
+  sendMessage,
+  listenForMessages,
+  updateMessage,
+} from "../../../api/useFirebaseApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const DirectMessage = () => {
@@ -62,12 +66,14 @@ const DirectMessage = () => {
     };
   }, [nickname, targetNickname]);
 
-  const handleSend = () => {
+  const combinedFunction = async () => {
     if (newMessage.trim()) {
-      sendMessage(newMessage, nickname, targetNickname);
+      await sendMessage(newMessage, nickname, targetNickname);
       setNewMessage("");
+      await updateMessage(targetNickname, Date.now());
     }
   };
+
   const nicknameClick = (nick) => {
     setTargetNickname(nick); // 클릭한 유저 닉네임을 targetNicknameState에 저장합니다.
     navigateToMemberProfile(); // 화면 이동을 처리하는 함수를 호출합니다.
@@ -124,14 +130,14 @@ const DirectMessage = () => {
           onChange={(e) => setNewMessage(e.target.value)}
           onKeyDown={(event) => {
             if (event.key === "Enter") {
-              handleSend();
+              combinedFunction();
             }
           }}
           placeholder="메시지 입력..."
         />
         <button
           className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
-          onClick={handleSend}
+          onClick={combinedFunction}
         >
           전송
         </button>

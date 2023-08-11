@@ -4,13 +4,18 @@ import Button2 from "../../../common/atoms/Button2";
 import { useNavigation } from "../../../hooks/useNavigation";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { database, ref, onValue, off } from "../../../api/useFirebaseApi";
-import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
+import {
+  nicknameState,
+  targetNicknameState,
+  updateTimeState,
+} from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const MessageBox = () => {
   const nickname = useRecoilValue(nicknameState);
   const [targetNickname, setTargetNickname] =
     useRecoilState(targetNicknameState);
+  const [updateTime, setUpdateTime] = useRecoilState(updateTimeState);
   const [chatRooms, setChatRooms] = useState([]);
   const { navigateToMemberProfile, navigateToDirectMessage } = useNavigation();
 
@@ -67,6 +72,11 @@ const MessageBox = () => {
       off(chatRef, "value", handleNewChatRoom);
     };
   }, [nickname]);
+
+  useEffect(() => {
+    console.log(updateTime);
+    setUpdateTime(Date.now());
+  }, []);
 
   return (
     <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">

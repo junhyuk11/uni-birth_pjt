@@ -125,21 +125,16 @@ const MemberSectionProfile = () => {
         {nickname === targetNickname ? (
           <Button5
             value="수정"
-            className="w-20 font-TAEBAEKmilkyway"
+            className="w-20"
             onClick={navigateToModifyProfile}
           />
         ) : memberData?.resultData?.follow ? (
           <Button5
             value="언팔로우"
-            className="font-TAEBAEKmilkyway"
             onClick={handleUnfollow} // 이 함수를 정의해야 함
           />
         ) : (
-          <Button5
-            value="팔로우"
-            className="w-20 font-TAEBAEKmilkyway"
-            onClick={handleFollow}
-          />
+          <Button5 value="팔로우" onClick={handleFollow} />
         )}
       </div>
     </div>

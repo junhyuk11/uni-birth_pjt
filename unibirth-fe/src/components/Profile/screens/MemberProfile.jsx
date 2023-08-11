@@ -18,6 +18,7 @@ import {
 import Mail from "../../../assets/icons/js/mail";
 import Message from "../../../assets/icons/js/message";
 import Header6 from "../../../common/blocks/Header6";
+import Star from "../../../assets/icons/js/star";
 
 const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -73,9 +74,8 @@ const MemberProfile = () => {
     },
     {
       component: Button2,
-      value: "",
       onClick: navigateToUserAlarm,
-      icon: <LeftArrow />,
+      icon: <Star />,
     },
     {
       component: Button2,
