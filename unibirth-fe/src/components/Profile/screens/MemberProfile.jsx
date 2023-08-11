@@ -42,7 +42,7 @@ const MemberProfile = () => {
 
   const handleMessageClick = () => {
     if (nickname === locationNickname) {
-      navigateToMessageBox(locationNickname);
+      navigateToMessageBox();
     } else {
       navigateToDirectMessage(locationNickname);
     }
@@ -86,7 +86,7 @@ const MemberProfile = () => {
     },
     {
       component: Button2,
-      onClick: navigateToUserAlarm,
+      onClick: () => navigateToUserAlarm(locationNickname),
       icon: <Star />,
     },
     {

@@ -7,15 +7,15 @@ import { nicknameState } from "../../../recoil/atoms";
 import Button5 from "../../../common/atoms/Button5";
 
 const MemberSectionProfile = ({ locationNickname }) => {
-  const {
-    navigateToModifyProfile,
-    navigateToFollowings,
-    navigateToFollowers,
-    navigateToMyStars,
-  } = useNavigation();
+  const { navigateToModifyProfile, navigateToFollow, navigateToMyStars } =
+    useNavigation();
 
   const [memberData, setMemberData] = useState();
   const nickname = useRecoilValue(nicknameState);
+
+  useEffect(() => {
+    fetchMemberData();
+  }, []);
 
   const handleFollow = async (e) => {
     e.preventDefault();
@@ -66,9 +66,13 @@ const MemberSectionProfile = ({ locationNickname }) => {
     }
   };
 
-  useEffect(() => {
-    fetchMemberData();
-  }, []);
+  const handleToFollow = (locationNickname, currentState) => {
+    const params = {
+      locationNickname,
+      currentState,
+    };
+    navigateToFollow(params);
+  };
 
   return (
     <div className="space-x-4 overflow-hidden bg-slate-950 bg-opacity-60 px-5 py-5">
@@ -83,7 +87,7 @@ const MemberSectionProfile = ({ locationNickname }) => {
             <div className="flex justify-end space-x-4">
               <div className="flex flex-col items-center">
                 <p
-                  onClick={() => navigateToFollowings(locationNickname)}
+                  onClick={() => handleToFollow(locationNickname, "팔로잉")}
                   className="text-center text-yellow-100"
                 >
                   팔로잉: {memberData.resultData.followingCount}
@@ -91,7 +95,7 @@ const MemberSectionProfile = ({ locationNickname }) => {
               </div>
               <div className="flex flex-col items-center">
                 <p
-                  onClick={() => navigateToFollowers(locationNickname)}
+                  onClick={() => handleToFollow(locationNickname, "팔로워")}
                   className="text-center text-yellow-100"
                 >
                   팔로워: {memberData.resultData.followerCount}

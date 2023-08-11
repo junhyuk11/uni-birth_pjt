@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Header2 from "../../../common/blocks/Header2";
+import Header1 from "../../../common/blocks/Header1";
 import Button2 from "../../../common/atoms/Button2";
 import { useRecoilValue } from "recoil";
 import { nicknameState } from "../../../recoil/atoms";
@@ -14,6 +14,7 @@ const DirectMessage = () => {
   const nickname = useRecoilValue(nicknameState);
   const location = useLocation();
   const locationNickname = location.state;
+  console.log(location);
 
   const { navigateToBack } = useNavigation();
 
@@ -29,12 +30,7 @@ const DirectMessage = () => {
     },
     {
       component: () => (
-        <span
-          className="ml-4 text-2xl text-white"
-          // onClick={() => nicknameClick(locationNickname)}
-        >
-          {locationNickname}
-        </span>
+        <span className="ml-4 text-2xl text-white">{locationNickname}</span>
       ),
     },
   ];
@@ -69,10 +65,7 @@ const DirectMessage = () => {
       setNewMessage("");
     }
   };
-  // const nicknameClick = (nick) => {
-  //   setTargetNickname(nick); // 클릭한 유저 닉네임을 targetNicknameState에 저장합니다.
-  //   navigateToMemberProfile(); // 화면 이동을 처리하는 함수를 호출합니다.
-  // };
+
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     const hours = date.getHours().toString().padStart(2, "0");
@@ -85,7 +78,7 @@ const DirectMessage = () => {
   return (
     <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
       <header className="sticky top-0 z-10">
-        <Header2 buttons={buttonsHeader} />
+        <Header1 buttons={buttonsHeader} />
       </header>
       <div className="px-4">
         <div className="chat-container">

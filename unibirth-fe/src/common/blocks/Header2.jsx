@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import Search from "../../assets/icons/js/search";
+import React from "react"; // useState
+// import Search from "../../assets/icons/js/search";
 
 const Header2 = ({ buttons }) => {
-  const [searchKeyword, setSearchKeyword] = useState("");
+  // const [searchKeyword, setSearchKeyword] = useState("");
 
-  const handleSearchInputChange = (e) => {
-    setSearchKeyword(e.target.value);
-  };
+  // const handleSearchInputChange = (e) => {
+  //   setSearchKeyword(e.target.value);
+  // };
 
-  const handleSearch = () => {
-    console.log("검색어:", searchKeyword);
-  };
+  // const handleSearch = () => {
+  //   console.log("검색어:", searchKeyword);
+  // };
 
   return (
     <div className="flex justify-between space-x-4 px-4 py-4">
@@ -29,7 +29,7 @@ const Header2 = ({ buttons }) => {
             );
           })}
       </div>
-      <div className="flex items-center space-x-4 border-b-2">
+      {/* <div className="flex items-center space-x-4 border-b-2">
         <input
           className="bg-transparent px-2 py-2  text-yellow-200 outline-none "
           type="text"
@@ -40,7 +40,7 @@ const Header2 = ({ buttons }) => {
         <button onClick={handleSearch}>
           <Search />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

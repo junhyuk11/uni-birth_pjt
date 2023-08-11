@@ -41,6 +41,11 @@ function sendMessage(message, sender, target) {
   set(newMessageRef, messageData);
 }
 
+function updateMessage(target, time) {
+  const updateRef = ref(database, `updateMessage/${target}`);
+  set(updateRef, `${time}`);
+}
+
 function listenForMessages(callback, sender, target) {
   const chatRoomId = [sender, target].sort().join("_");
   const chatRef = ref(database, `chats/${chatRoomId}`);
@@ -84,4 +89,5 @@ export {
   sendMessage,
   sendInvite,
   listenForMessages,
+  updateMessage,
 };

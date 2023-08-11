@@ -162,7 +162,7 @@ const Scene = ({ constellationList }) => {
           currentconstellationList[currentConstellation]?.constellationId
         }
       />
-      <Canvas camera={{ position: [0, 1, 0] }}>
+      <Canvas camera={{ position: [0, 20, 0] }}>
         {/* <CameraController
           ConstellationIndex={ConstellationIndex}
           zoomed={zoomed}

@@ -19,20 +19,13 @@ const MessageBox = () => {
       onClick: navigateToBack,
       icon: <LeftArrow />,
     },
-    {
-      component: () => (
-        <span className="ml-4 text-2xl text-white" onClick={() => {}}>
-          메시지
-        </span>
-      ),
-    },
   ];
 
   const handleNavigateToChat = (chatId) => {
     const [sender, target] = chatId.split("_");
     const otherNickname = sender === nickname ? target : sender;
     setTargetNickname(otherNickname);
-    navigateToDirectMessage(); // 해당 페이지로 이동
+    navigateToDirectMessage(otherNickname); // 해당 페이지로 이동
   };
 
   useEffect(() => {
@@ -68,9 +61,7 @@ const MessageBox = () => {
   return (
     <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
       <div>
-        <header className="sticky top-0 z-10">
-          <Header2 buttons={buttonsHeader} />
-        </header>
+        <Header2 buttons={buttonsHeader} />
         <ul>
           {chatRooms.map(([chatId, chatData]) => {
             const [sender, target] = chatId.split("_");

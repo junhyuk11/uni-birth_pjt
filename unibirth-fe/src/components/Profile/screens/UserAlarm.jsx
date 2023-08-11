@@ -2,23 +2,24 @@ import React, { useEffect, useState } from "react";
 import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { database, ref, onValue, off } from "../../../api/useFirebaseApi";
-import { nicknameState, backgroundflagState } from "../../../recoil/atoms";
+import { backgroundflagState } from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
+import { useLocation } from "react-router-dom";
 
 const UserAlarm = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
   useEffect(() => {
     backgroundflag(true);
   }, []);
-  const nickname = useRecoilValue(nicknameState);
+  const location = useLocation();
+  const nickname = location.state;
   const [alarms, setAlarms] = useState([]);
-  const { navigateToMemberProfile, navigateToDetailConstellation } =
-    useNavigation();
+  const { navigateToDetailConstellation, navigateToBack } = useNavigation();
 
   const handleBackClick = () => {
-    navigateToMemberProfile();
+    navigateToBack();
   };
 
   const buttonsHeader = [
@@ -58,7 +59,7 @@ const UserAlarm = () => {
   }, [nickname]);
 
   return (
-    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+    <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
       <div>
         <Header2 buttons={buttonsHeader} />
         <ul>

@@ -45,6 +45,12 @@ const DetailPlanet = () => {
       value: "별자리 만들기",
       onClick: navigateToRegisterConstellation,
     },
+    {
+      component: Button1,
+      className: "font-TAEBAEKmilkyway",
+      value: "홈으로 이동",
+      onClick: navigateToMainPlanet,
+    },
   ];
   return (
     <div>
