@@ -66,13 +66,13 @@ const HtmlConstellation = ({ constellationId }) => {
     return (
       <div>
         <button
-          className="absolute right-4 top-4 z-10 rounded-lg bg-red-400 p-2  text-white"
+          className="absolute right-4 top-4 z-10 rounded-lg border-2 bg-transparent p-2  text-white"
           onClick={toggleVisibility}
         >
           {isVisible ? "미리보기 가리기" : "미리보기"}
         </button>
         {isVisible && (
-          <div className="absolute left-1/2 top-24 z-10 h-64 w-72 -translate-x-1/2 rounded-lg bg-blue-400">
+          <div className="absolute left-1/2 top-24 z-10 h-64 w-72 -translate-x-1/2 rounded-lg bg-slate-600 bg-opacity-80">
             <div className="flex flex-col justify-center">
               <div className="flex justify-center">
                 <div className="h-36 rounded-lg">
@@ -103,7 +103,7 @@ const HtmlConstellation = ({ constellationId }) => {
               </div>
               <div className="flex justify-center">
                 <button
-                  className="my-4 w-40 rounded-full bg-red-500 p-2 text-white"
+                  className="my-4 w-40 rounded-full border-2 bg-transparent p-2 text-white"
                   onClick={() => handleConstellationClick(constellationId)}
                 >
                   별자리 이동하기
