@@ -12,7 +12,7 @@ import LeftArrow from "../../../assets/icons/js/leftArrow";
 
 const DetailStar = () => {
   const [ddd, setBackgroundflag] = useRecoilState(backgroundflagState);
-  const { navigateToBack } = useNavigation();
+  const { navigateToBack, navigateToMemberProfile } = useNavigation();
   const { starId } = useParams();
   const [memberInfo, setMemberInfo] = useState([]);
   const [star, setStar] = useState({
@@ -110,9 +110,12 @@ const DetailStar = () => {
           className="h-12 w-12 rounded-full object-cover" // 이미지 둥글게, 크기 조정
         />
         <div className="ml-4 flex flex-col">
-          <span className="text-md font-bold text-gray-800">
+          <div
+            className="text-md font-bold text-gray-800"
+            onClick={() => navigateToMemberProfile(memberInfo.nickname)}
+          >
             {memberInfo.nickname}
-          </span>
+          </div>
           <span className="text-xs text-gray-500">{star.updatedAt}</span>
         </div>
       </div>
