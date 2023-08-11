@@ -12,7 +12,8 @@ import InviteFollowStar from "../../Star/blocks/InviteFollowStar";
 const DetailConstellation = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
   backgroundflag(false);
-  const { navigateToBack, navigateToRegisterStar } = useNavigation();
+  const { navigateToBack, navigateToRegisterStar, navigateToMainPlanet } =
+    useNavigation();
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
@@ -38,6 +39,11 @@ const DetailConstellation = () => {
             className="w-36"
             value="참여하기"
             onClick={navigateToRegisterStar}
+          />
+          <Button1
+            className="w-36"
+            value="홈으로 이동"
+            onClick={navigateToMainPlanet}
           />
           <Button1
             className="w-36"

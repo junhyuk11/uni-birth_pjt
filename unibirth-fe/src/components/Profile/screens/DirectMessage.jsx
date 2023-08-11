@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Header2 from "../../../common/blocks/Header2";
+import Header1 from "../../../common/blocks/Header1";
 import Button2 from "../../../common/atoms/Button2";
 import { useRecoilValue } from "recoil";
 import { nicknameState } from "../../../recoil/atoms";
@@ -90,7 +90,7 @@ const DirectMessage = () => {
   return (
     <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
       <header className="sticky top-0 z-10">
-        <Header2 buttons={buttonsHeader} />
+        <Header1 buttons={buttonsHeader} />
       </header>
       <div className="px-4">
         <div className="chat-container">
