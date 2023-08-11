@@ -2,28 +2,21 @@ import React, { useEffect, useState } from "react";
 import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { useRecoilValue, useRecoilState } from "recoil";
 import { database, ref, onValue, off } from "../../../api/useFirebaseApi";
-import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
 
 const MessageBox = () => {
   const nickname = useRecoilValue(nicknameState);
-  const [targetNickname, setTargetNickname] =
-    useRecoilState(targetNicknameState);
   const [chatRooms, setChatRooms] = useState([]);
-  const { navigateToMemberProfile, navigateToDirectMessage } = useNavigation();
-
-  const handleBackClick = () => {
-    setTargetNickname(nickname);
-    navigateToMemberProfile();
-  };
-
+  const { navigateToDirectMessage, navigateToBack } = useNavigation();
+  const setTargetNickname = useSetRecoilState(targetNicknameState);
   const buttonsHeader = [
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      onClick: handleBackClick,
+      onClick: navigateToBack,
       icon: <LeftArrow />,
     },
     {
@@ -38,11 +31,8 @@ const MessageBox = () => {
   const handleNavigateToChat = (chatId) => {
     const [sender, target] = chatId.split("_");
     const otherNickname = sender === nickname ? target : sender;
-    console.log(targetNickname);
-
-    setTargetNickname(otherNickname); // recoil 상태 설정
-
-    navigateToDirectMessage(chatId); // 해당 페이지로 이동
+    setTargetNickname(otherNickname);
+    navigateToDirectMessage(); // 해당 페이지로 이동
   };
 
   useEffect(() => {

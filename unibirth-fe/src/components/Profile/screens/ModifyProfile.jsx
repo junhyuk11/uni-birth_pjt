@@ -13,32 +13,26 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const ModifyProfile = () => {
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
-  const [imageUrl, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [introduction, setIntro] = useState("");
   const [nickname, setNickname] = useState("");
   console.log(imageUrl);
+
+  const fetchData = async () => {
+    try {
+      const response = await useMemberApi.membersGetProfiles();
+      setImageUrl(response.resultData.imageUrl);
+      setIntro(response.resultData.introduction);
+      setNickname(response.resultData.nickname);
+    } catch (error) {
+      console.error("데이터를 가져오는데 오류가 발생했습니다.", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await useMemberApi.membersGetProfiles();
-        setImage(response.resultData.imageUrl);
-        setIntro(response.resultData.introduction);
-        setNickname(response.resultData.nickname);
-      } catch (error) {
-        console.error("데이터를 가져오는데 오류가 발생했습니다.", error);
-      }
-    };
     fetchData();
   }, []);
 
-  const saveImgFile = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setImage(e.target.result);
-    };
-    reader.readAsDataURL(file);
-  };
   const buttonsHeader = [
     {
       component: Button2,
@@ -51,8 +45,8 @@ const ModifyProfile = () => {
   const handleCompleteClick = async (e) => {
     e.preventDefault();
     console.log("imageUrl:");
-    console.log(imageUrl.name);
-    const storageRef = ref(storage, `images/${imageUrl.name}`);
+    console.log(imageUrl);
+    const storageRef = ref(storage, `images/${imageUrl}`);
     const uploadTask = uploadBytesResumable(storageRef, imageUrl);
     uploadTask.on(
       "state_changed",
@@ -76,7 +70,7 @@ const ModifyProfile = () => {
           const response = await useMemberApi.membersPutProfiles(member);
           if (response.status === 200) {
             alert("수정이 완료되었습니다.");
-            navigateToMemberProfile();
+            navigateToMemberProfile(nickname);
           } else {
             alert("오류 발생.");
           }
@@ -106,7 +100,9 @@ const ModifyProfile = () => {
           alt="프로필 이미지"
           className="h-32 w-32 rounded-full object-cover"
         />
-        <InputImage value={imageUrl} onChange={saveImgFile} />
+        <InputImage
+          onChange={(file) => setImageUrl(file)} // 파일 객체 저장
+        />
         <div className="w-full flex-initial items-center justify-center font-Pretendard">
           <div className="w-full flex-row">
             <label

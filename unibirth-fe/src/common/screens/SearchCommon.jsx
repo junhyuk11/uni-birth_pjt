@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import useSearchApi from "../../api/useSearchApi";
 import { useSetRecoilState } from "recoil";
-import { backgroundflagState, targetNicknameState } from "../../recoil/atoms";
+import { backgroundflagState } from "../../recoil/atoms";
 import { useNavigation } from "../../hooks/useNavigation";
 
 const SearchCommon = () => {
@@ -16,7 +16,6 @@ const SearchCommon = () => {
   const [constellationList, setConstellationList] = useState([]);
   const [memberList, setMemberList] = useState([]);
   const [starList, setStarList] = useState([]);
-  const setTargetNickname = useSetRecoilState(targetNicknameState);
 
   const {
     navigateToDetailConstellation,
@@ -55,8 +54,7 @@ const SearchCommon = () => {
 
   const handleMemberClick = (nickname) => {
     console.log("멤버 클릭", nickname);
-    setTargetNickname(nickname);
-    navigateToMemberProfile();
+    navigateToMemberProfile(nickname);
   };
 
   const handleStarClick = (starId) => {

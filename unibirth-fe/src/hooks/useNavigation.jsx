@@ -50,8 +50,10 @@ export const useNavigation = () => {
   };
 
   // Profile
-  const navigateToMemberProfile = () => {
-    navigate("/profiles");
+  const navigateToMemberProfile = (params) => {
+    navigate("/profiles", {
+      state: params,
+    });
   };
 
   const navigateToModifyProfile = () => {
@@ -62,28 +64,34 @@ export const useNavigation = () => {
     navigate("/members/update");
   };
 
-  const navigateToFollowings = () => {
-    navigate("/profiles/followings");
+  const navigateToFollowings = (params) => {
+    navigate("/profiles/followings", {
+      state: params,
+    });
   };
 
-  const navigateToFollowers = () => {
-    navigate("/profiles/followers");
+  const navigateToFollowers = (params) => {
+    navigate("/profiles/followers", {
+      state: params,
+    });
   };
 
-  const navigateToMyStars = () => {
-    navigate("/stars");
+  const navigateToMyStars = (params) => {
+    navigate("/stars", {
+      state: params,
+    });
   };
 
   const navigateToUserAlarm = () => {
     navigate("/useralarm");
   };
 
-  const navigateToDirectMessage = () => {
-    navigate("/profiles/directmessage");
+  const navigateToDirectMessage = (params) => {
+    navigate("/profiles/directmessage", { state: params });
   };
 
-  const navigateToMessageBox = () => {
-    navigate("/profiles/messagebox");
+  const navigateToMessageBox = (params) => {
+    navigate("/profiles/messagebox", { state: params });
   };
 
   // Star

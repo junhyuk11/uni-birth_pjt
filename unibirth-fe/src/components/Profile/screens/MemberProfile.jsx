@@ -10,24 +10,23 @@ import ThreeDots from "../../../assets/icons/js/threeDots";
 import Close from "../../../assets/icons/js/close";
 import Header4 from "../../../common/blocks/Header4";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import {
-  backgroundflagState,
-  nicknameState,
-  targetNicknameState,
-} from "../../../recoil/atoms";
+import { backgroundflagState, nicknameState } from "../../../recoil/atoms";
 import Mail from "../../../assets/icons/js/mail";
 import Message from "../../../assets/icons/js/message";
 import Header6 from "../../../common/blocks/Header6";
 import Star from "../../../assets/icons/js/star";
+import { useLocation } from "react-router-dom";
 
 const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
   backgroundflag(true);
+  const location = useLocation();
+  const locationNickname = location.state;
 
   const nickname = useRecoilValue(nicknameState);
-  const targetNickname = useRecoilValue(targetNicknameState);
   const {
     navigateToMessageBox,
+    navigateToBack,
     navigateToMainPlanet,
     navigateToUserAlarm,
     navigateToModifyMember,
@@ -35,6 +34,14 @@ const MemberProfile = () => {
   } = useNavigation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleMessageClick = () => {
+    if (nickname === locationNickname) {
+      navigateToMessageBox(locationNickname);
+    } else {
+      navigateToDirectMessage(locationNickname);
+    }
+  };
 
   const handleLogout = () => {
     sessionStorage.clear();
@@ -64,12 +71,12 @@ const MemberProfile = () => {
     {
       component: Button2,
       value: "",
-      onClick: navigateToMainPlanet,
+      onClick: navigateToBack,
       icon: <LeftArrow />,
     },
     {
       component: () => (
-        <span className="ml-4 text-2xl text-white">{targetNickname}</span>
+        <span className="ml-4 text-2xl text-white">{locationNickname}</span>
       ),
     },
     {
@@ -80,11 +87,8 @@ const MemberProfile = () => {
     {
       component: Button2,
       className: "font-TAEBAEKmilkyway",
-      onClick:
-        nickname === targetNickname
-          ? navigateToMessageBox
-          : navigateToDirectMessage,
-      icon: nickname === targetNickname ? <Mail /> : <Message />,
+      onClick: handleMessageClick,
+      icon: nickname === locationNickname ? <Mail /> : <Message />,
     },
     {
       component: Button2,
@@ -93,6 +97,7 @@ const MemberProfile = () => {
       icon: <ThreeDots />,
     },
   ];
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -130,8 +135,8 @@ const MemberProfile = () => {
         <header className="sticky top-0 z-10">
           <Header6 buttons={buttonsHeader} />
         </header>
-        <MemberSectionProfile />
-        <ConstellationSectionProfile />
+        <MemberSectionProfile locationNickname={locationNickname} />
+        <ConstellationSectionProfile locationNickname={locationNickname} />
         {isModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div className="absolute inset-0 bg-gray-800 opacity-50"></div>

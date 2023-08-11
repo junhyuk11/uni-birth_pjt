@@ -3,13 +3,11 @@ import Button1 from "../../../common/atoms/Button1";
 import { BiSearch, BiHomeAlt } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { useNavigation } from "../../../hooks/useNavigation";
-// import ListSectionPlanet from "../blocks/ListSectionPlanet";
 import CanvasPlanet from "../blocks/CanvasPlanet";
 import ListBestStars from "../blocks/ListBestStars";
 import { useRecoilValue, useRecoilState } from "recoil";
 import {
   nicknameState,
-  targetNicknameState,
   backgroundflagState,
   currentplanetState,
 } from "../../../recoil/atoms";
@@ -38,15 +36,11 @@ const MainPlanet = () => {
   // 처음 위치를 시작으로 버튼을 클릭할 때마다 인덱스 변경
 
   const nickname = useRecoilValue(nicknameState);
-  const [targetNickname, setTargetNickname] =
-    useRecoilState(targetNicknameState);
 
   const token = sessionStorage.getItem("accessToken");
-  console.log(targetNickname);
 
   const mypageClick = () => {
-    setTargetNickname(nickname); // 클릭한 유저 닉네임을 targetNicknameState에 저장합니다.
-    navigateToMemberProfile(); // 화면 이동을 처리하는 함수를 호출합니다.
+    navigateToMemberProfile(nickname); // 화면 이동을 처리하는 함수를 호출합니다.
   };
 
   const buttonsFooter = [

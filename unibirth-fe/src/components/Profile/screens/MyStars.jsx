@@ -3,14 +3,14 @@ import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useStarApi from "../../../api/useStarApi";
-import { useRecoilValue } from "recoil";
-import { targetNicknameState } from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
+import { useLocation } from "react-router";
 
 const MyStars = () => {
-  const { navigateToBack } = useNavigation();
+  const { navigateToBack, navigateToDetailStar } = useNavigation();
 
-  const targetNickname = useRecoilValue(targetNicknameState);
+  const location = useLocation();
+  const locationNickname = location.state;
 
   function formatDate(dateString) {
     const options = {
@@ -41,9 +41,14 @@ const MyStars = () => {
 
   const [starList, setStarList] = useState([]);
 
+  const handleToDetailStar = (starId) => {
+    console.log(starId);
+    navigateToDetailStar(starId);
+  };
+
   const getStarList = async () => {
-    const response = await useStarApi.starsGetStarList(targetNickname);
-    console.log(response.resuldData);
+    const response = await useStarApi.starsGetStarList(locationNickname);
+    console.log(response);
     setStarList(response.resultData);
   };
 
@@ -58,7 +63,11 @@ const MyStars = () => {
       </header>
       <div className="flex flex-col items-center">
         {starList.map((star) => (
-          <div key={star.starId} className="my-4 flex items-center">
+          <div
+            key={star.starId}
+            className="my-4 flex items-center"
+            onClick={() => handleToDetailStar(star.starId)}
+          >
             <img
               src={star.imageUrl}
               className="avatar mr-4 h-32 w-32 object-cover"

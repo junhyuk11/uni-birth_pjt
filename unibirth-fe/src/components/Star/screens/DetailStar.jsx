@@ -28,7 +28,7 @@ const DetailStar = () => {
   });
 
   useEffect(() => {
-    setBackgroundflag(false);
+    setBackgroundflag(true);
     console.log("flag:", ddd);
   }, []);
 
@@ -101,26 +101,33 @@ const DetailStar = () => {
   ];
 
   return (
-    <div className="flex flex-col">
+    <div className="mx-auto flex h-screen max-w-screen-sm flex-col bg-slate-100 bg-opacity-50 p-4">
       <Header1 buttons={buttonsHeader} />
-      <div className="flex flex-row items-center p-4">
+      <div className="flex flex-row items-center py-2">
         <img
           src={memberInfo.imageUrl}
           alt="멤버 이미지"
-          className="h-10 w-10 rounded-full"
+          className="h-12 w-12 rounded-full object-cover" // 이미지 둥글게, 크기 조정
         />
-        <div className="ml-2 flex flex-col">
-          <span className="text-sm font-bold">{memberInfo.nickname}</span>
+        <div className="ml-4 flex flex-col">
+          <span className="text-md font-bold text-gray-800">
+            {memberInfo.nickname}
+          </span>
           <span className="text-xs text-gray-500">{star.updatedAt}</span>
         </div>
       </div>
-      <div>
-        <img src={star.imageUrl} alt="별 이미지" className="w-full" />
+      <div className="w-full">
+        <img
+          src={star.imageUrl}
+          alt="별 이미지"
+          className="h-64 w-full object-cover"
+        />{" "}
+        {/* 이미지 크기 조정 */}
       </div>
-      <div className="flex flex-row items-center p-4">
-        <p className="text-blue flex-grow">{star.content}</p>
+      <div className="flex flex-row items-center py-4">
+        <p className="flex-grow text-sm text-gray-800">{star.content}</p>
         <button
-          className={`scale-100 transform text-2xl text-yellow-500 transition-transform focus:outline-none ${"animate-bounce"}`}
+          className={`scale-100 transform text-3xl text-yellow-500 transition-transform focus:outline-none ${"animate-bounce"}`}
           onClick={() => handleLikeClick(star.starId)}
         >
           {star.alreadyLiked ? <AiFillStar /> : <AiOutlineStar />}

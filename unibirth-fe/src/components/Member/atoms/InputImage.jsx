@@ -2,21 +2,16 @@ import React from "react";
 
 const InputImage = ({ onChange }) => {
   return (
-    <div className="flex flex-col content-center items-center justify-center font-Pretendard">
+    <div className="flex flex-col content-center items-center justify-center space-y-2 pl-10 font-TAEBAEKmilkyway">
+      <label htmlFor="profileimage">프로필 이미지</label>
       <input
+        className="w-30 border border-gray-300"
         type="file"
         name="profileimage"
         id="profileimage"
         accept="image/*"
-        onChange={onChange}
-        style={{ display: "none" }}
+        onChange={(e) => onChange(e.target.files[0])} // 파일 객체 전달
       />
-      <label
-        htmlFor="profileimage"
-        className="mx-auto flex cursor-pointer items-center rounded  text-blue-600"
-      >
-        프로필 이미지 변경
-      </label>
     </div>
   );
 };
