@@ -66,12 +66,12 @@ function CameraController({ ConstellationPosition, zoomed }) {
     };
 
     gsap.to(startPosition, {
-      duration: 3, // duration in seconds
+      duration: 1.5, // duration in seconds
       x: -targetPosition.x,
       y: -targetPosition.y,
       z: -targetPosition.z,
       onUpdate: updateCameraPosition,
-      // ease: "power1.inOut", // easing function for smooth transition
+      ease: "power1.inOut", // easing function for smooth transition
     });
   }
   return null;
