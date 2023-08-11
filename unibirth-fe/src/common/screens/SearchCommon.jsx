@@ -63,66 +63,39 @@ const SearchCommon = () => {
   };
 
   return (
-    <div>
-      <p className="text-white-500">검색어: {query}</p>
-      <p className="text-white-500">카테고리: {category}</p>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <div className="text-green-500">
-          <p>별자리 리스트</p>
-          {constellationList.length > 0 &&
-            constellationList.map((constellation) => (
-              <div
-                key={constellation.constellationId}
-                className="flex"
-                onClick={() =>
-                  handleConstellationClick(constellation.constellationId)
-                }
-              >
-                <img
-                  src={constellation.imageUrl}
-                  alt={constellation.title}
-                  className="h-1/4 w-1/4 object-cover"
-                />
-                <p className="w-3/4 pl-4">별자리 이름: {constellation.title}</p>
-              </div>
-            ))}
+    <div className="h-screen bg-gray-100">
+      <div className="sticky top-0 z-10 bg-white p-4 shadow-md">
+        <div className="flex justify-center space-x-4 border-b-2">
+          <button
+            onClick={() => setActiveTab("constellation")}
+            className={`pb-2 ${
+              activeTab === "constellation" ? "border-b-2 border-blue-500" : ""
+            }`}
+          >
+            별자리 리스트
+          </button>
+          <button
+            onClick={() => setActiveTab("member")}
+            className={`pb-2 ${
+              activeTab === "member" ? "border-b-2 border-blue-500" : ""
+            }`}
+          >
+            멤버 리스트
+          </button>
+          <button
+            onClick={() => setActiveTab("star")}
+            className={`pb-2 ${
+              activeTab === "star" ? "border-b-2 border-blue-500" : ""
+            }`}
+          >
+            스타 리스트
+          </button>
         </div>
-        <div className="text-sky-500">
-          <p>멤버 리스트</p>
-          {memberList.length > 0 &&
-            memberList.map((member) => (
-              <div
-                key={member.nickname}
-                className="flex"
-                onClick={() => handleMemberClick(member.nickname)}
-              >
-                <img
-                  src={member.imageUrl}
-                  alt={member.title}
-                  className="h-1/4 w-1/4 object-cover"
-                />
-                <p className="w-3/4 pl-4">멤버 닉네임: {member.nickname}</p>
-              </div>
-            ))}
-        </div>
-        <div className="text-red-500">
-          <p>스타 리스트</p>
-          {starList.length > 0 &&
-            starList.map((star) => (
-              <div
-                key={star.starId}
-                className="flex"
-                onClick={() => handleStarClick(star.starId)}
-              >
-                <img
-                  src={star.imageUrl}
-                  alt={star.title}
-                  className="h-1/4 w-1/4 object-cover"
-                />
-                <p className="w-3/4 pl-4">스타 이름: {star.content}</p>
-              </div>
-            ))}
-        </div>
+      </div>
+      <div className="px-4 pt-6">
+        {activeTab === "constellation" && <div>{/* 별자리 리스트 UI */}</div>}
+        {activeTab === "member" && <div>{/* 멤버 리스트 UI */}</div>}
+        {activeTab === "star" && <div>{/* 스타 리스트 UI */}</div>}
       </div>
     </div>
   );
