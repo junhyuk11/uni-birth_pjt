@@ -8,9 +8,6 @@ import InputDropdown from "../atoms/InputDropdown";
 import InputStella from "../atoms/InputStella";
 import InputDescription from "../atoms/InputDescription";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { Canvas } from "@react-three/fiber";
-import GradientBackground from "../../../common/atoms/GradientBackground";
-import CanvasBg from "../../../common/atoms/CanvasBg";
 import planet1 from "../../../assets/images/planet1.png";
 import { useSetRecoilState } from "recoil";
 import { backgroundflagState } from "../../../recoil/atoms";
@@ -67,12 +64,6 @@ const RegistConstellation = () => {
 
   return (
     <div className="relative h-screen w-screen">
-      <div className="absolute flex h-full w-full flex-row flex-wrap justify-center">
-        <Canvas>
-          <GradientBackground />
-          <CanvasBg />
-        </Canvas>
-      </div>
       <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2">
         <Header1 buttons={buttonsHeader} />
         <div className="flex flex-col items-center justify-center space-y-5">

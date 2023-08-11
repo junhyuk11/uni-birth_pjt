@@ -68,7 +68,7 @@ const ListBestStars = ({ currentPlanet }) => {
   const getBestList = async (planetId) => {
     console.log(planetId);
     try {
-      // 인덱스가 0 이므로 접근은 +1 로 한다
+      // 인덱스가 0~7, 실제 행성은 1~8 이므로 접근은 +1 로 한다
       const response = await usePlanetApi.planetsGetStarList(planetId + 1);
       const Lists = response.resultData.starList;
       console.log("planet:", response.resultData);
