@@ -18,7 +18,7 @@ const DirectMessage = () => {
   const nickname = useRecoilValue(nicknameState);
   const location = useLocation();
   const locationNickname = location.state;
-
+  console.log(locationNickname);
   const { navigateToBack } = useNavigation();
 
   const backClick = () => {

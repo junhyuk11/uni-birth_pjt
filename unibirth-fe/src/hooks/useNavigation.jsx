@@ -66,21 +66,12 @@ export const useNavigation = () => {
 
   const navigateToFollow = (params) => {
     navigate("/profiles/follow", {
-      state: params,
+      state: {
+        locationNickname: params.locationNickname,
+        currentState: params.currentState,
+      },
     });
   };
-
-  // const navigateToFollowings = (params) => {
-  //   navigate("/profiles/followings", {
-  //     state: params,
-  //   });
-  // };
-
-  // const navigateToFollowers = (params) => {
-  //   navigate("/profiles/followers", {
-  //     state: params,
-  //   });
-  // };
 
   const navigateToMyStars = (params) => {
     navigate("/stars", {
@@ -88,8 +79,10 @@ export const useNavigation = () => {
     });
   };
 
-  const navigateToUserAlarm = () => {
-    navigate("/useralarm");
+  const navigateToUserAlarm = (params) => {
+    navigate("/useralarm", {
+      state: params,
+    });
   };
 
   const navigateToDirectMessage = (params) => {

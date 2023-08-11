@@ -81,7 +81,7 @@ const MemberProfile = () => {
     },
     {
       component: Button2,
-      onClick: navigateToUserAlarm,
+      onClick: () => navigateToUserAlarm(locationNickname),
       icon: <Star />,
     },
     {
