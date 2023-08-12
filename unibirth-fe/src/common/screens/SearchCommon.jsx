@@ -129,7 +129,6 @@ const SearchCommon = () => {
         <div className="my-4">
           <Header5 buttons={buttonsHeader2} />
         </div>
-
         <ul className="divide-nebula-blue space-y-4 divide-y overflow-y-auto">
           {activeTab === "constellation" &&
             constellationList.map((constellation) => (
