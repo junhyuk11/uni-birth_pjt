@@ -140,7 +140,7 @@ const ModifyProfile = () => {
           </div>
         </div>
         <InputIntroduction
-          value="소개"
+          value={introduction}
           placeholder={introduction}
           onChange={(e) => setIntro(e.target.value)}
         />
