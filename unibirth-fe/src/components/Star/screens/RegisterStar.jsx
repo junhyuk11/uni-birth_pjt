@@ -37,8 +37,10 @@ const RegisterStar = () => {
   const [content, setContent] = useState("");
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   const createStar = () => {
+    setLoading(true); // 로딩 상태 시작
     const storageRef = ref(storage, `images/${imageUrl.name}`);
     const uploadTask = uploadBytesResumable(storageRef, imageUrl);
 
@@ -88,6 +90,7 @@ const RegisterStar = () => {
           setIsAlertVisible(true);
           setAlertMessage("별 생성에 실패하였습니다.");
         }
+        setLoading(false); // 로딩 상태 종료
       },
     );
   };
@@ -136,7 +139,7 @@ const RegisterStar = () => {
           />
         </div>
         <div className="mt-20 flex justify-center ">
-          <Button1 value="별 생성" onClick={createStar} />
+          <Button1 value="별 생성" onClick={createStar} disabled={isLoading} />
         </div>
       </div>
     </div>

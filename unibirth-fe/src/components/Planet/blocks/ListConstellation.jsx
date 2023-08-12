@@ -24,9 +24,9 @@ import Plus from "../../../assets/icons/js/plus";
 
 // R3F 훅 카메라 컨트롤러 컴포넌트
 function CameraController({
+  setEnableFlag,
   ConstellationPosition,
   zoomed,
-  controlsRef,
   setRotateFlag,
 }) {
   const { camera } = useThree();
@@ -56,9 +56,6 @@ function CameraController({
         z: camera.position.z,
       };
 
-      console.log("줌됐니?", zoomed);
-      console.log("카메라 표지션:", targetPosition);
-
       const updateCameraPosition = () => {
         cameraRef.current.position.set(
           startPosition.x,
@@ -74,14 +71,11 @@ function CameraController({
         x: -targetPosition.x,
         y: -targetPosition.y,
         z: -targetPosition.z,
-        onStart: () => (controlsRef.current.enabled = false),
+        onStart: () => setEnableFlag(false),
         onUpdate: updateCameraPosition,
         ease: "Power1.inOut",
         onComplete: () => {
-          controlsRef.current.enabled = true;
-          if (controlsRef.current.enabled !== null) {
-            controlsRef.current.enabled = true;
-          }
+          setEnableFlag(true);
           if (zoomed) {
             setRotateFlag(true);
           } else {
@@ -95,8 +89,9 @@ function CameraController({
 }
 
 const Scene = ({ constellationList }) => {
+  // 화면 회전
+  const [enabledFlag, setEnableFlag] = useState(true);
   const startDirection = useState({ x: 0, y: -300, z: 0 });
-  console.log("아니 받았어그래서?;::", constellationList);
   // 배경화면 flag
   const setBackgroundflag = useSetRecoilState(backgroundflagState);
   useEffect(() => {
@@ -114,12 +109,6 @@ const Scene = ({ constellationList }) => {
     currentconstellationListState,
   );
 
-  // useEffect(() => {
-  //   if (constellationList.length > ConstellationIndex) {
-  //     setConstellationIndex(0);
-  //   }
-  // }, [constellationList]);
-
   // 확대 축소
   const [zoomed, setZoomed] = useState(false);
   // 별자리 보정계수
@@ -134,8 +123,6 @@ const Scene = ({ constellationList }) => {
   );
   // orbitcontrolsRotation
   const [rotateFlag, setRotateFlag] = useState(false);
-
-  console.log("현재 별자리 위치:", currentConstellation);
 
   const handleRightClick = () => {
     setCurrentConstellation((prevIndex) =>
@@ -193,6 +180,7 @@ const Scene = ({ constellationList }) => {
         constellationId={
           currentconstellationList[currentConstellation]?.constellationId
         }
+        currentconstellationList={currentconstellationList}
       />
       <Canvas
         camera={{
@@ -226,16 +214,6 @@ const Scene = ({ constellationList }) => {
           saturation={1}
           fade
         />
-        {/* <MeshConstellation
-          currentconstellationList={currentconstellationList}
-          num={num}
-          starmultiple={starmultiple}
-          xdamper={xdamper}
-        /> */}
-        {/* <MeshHtml
-          currentconstellationList={currentconstellationList}
-          xdamper={xdamper}
-        /> */}
         <MeshCons
           constellationList={constellationList}
           num={num}
@@ -247,13 +225,14 @@ const Scene = ({ constellationList }) => {
           currentConstellation={currentConstellation}
         />
         <OrbitControls
+          enabled={enabledFlag}
           ref={controlsRef}
           // enablePan={true}
           enableDamping={true}
-          rotateSpeed={-0.4}
+          rotateSpeed={-0.2}
           // minDistance={1} // minimum zoom distance
           maxDistance={8000} // maximum zoom distance
-          dampingFactor={1}
+          dampingFactor={0.5}
           autoRotate={rotateFlag}
           autoRotateSpeed={0.3}
         />
@@ -262,6 +241,7 @@ const Scene = ({ constellationList }) => {
           controlsRef={controlsRef}
           zoomed={zoomed}
           setRotateFlag={setRotateFlag}
+          setEnableFlag={setEnableFlag}
         />
       </Canvas>
     </>

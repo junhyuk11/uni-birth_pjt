@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
@@ -8,15 +8,18 @@ import InputStella from "../atoms/InputStella";
 import InputDescription from "../atoms/InputDescription";
 import { useNavigation } from "../../../hooks/useNavigation";
 import planet1 from "../../../assets/images/planet1.png";
-import { useSetRecoilState } from "recoil";
-import { backgroundflagState } from "../../../recoil/atoms";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { backgroundflagState, currentplanetState } from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const RegistConstellation = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
-  backgroundflag(true);
-  const [planetId, setPlanetId] = useState("1");
+  useEffect(() => {
+    backgroundflag(true);
+  }, []);
+  const currentPLanet = useRecoilValue(currentplanetState);
+  const [planetId, setPlanetId] = useState(currentPLanet);
   const [constellationName, setConstellationName] = useState("");
   const [constellationDescp, setConstellationDescp] = useState("");
   const { navigateToBack, navigateToDrawingConstellation } = useNavigation();

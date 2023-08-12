@@ -35,6 +35,10 @@ const HtmlConstellation = ({ constellationId }) => {
       }
     };
 
+    const [updatePinedStatus, setUpdatePinedStatus] = useState(
+      constellationContent?.alreadyPined,
+    );
+
     const handlePinClick = async (constellationContent) => {
       if (constellationContent.alreadyPined) {
         try {
@@ -68,10 +72,6 @@ const HtmlConstellation = ({ constellationId }) => {
         }
       }
     };
-
-    const [updatePinedStatus, setUpdatePinedStatus] = useState(
-      constellationContent?.alreadyPined,
-    );
 
     console.log("updatePinedStatus:", updatePinedStatus);
 

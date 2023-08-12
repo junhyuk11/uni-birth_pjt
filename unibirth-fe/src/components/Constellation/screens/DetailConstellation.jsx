@@ -14,7 +14,9 @@ import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const DetailConstellation = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
-  backgroundflag(false);
+  useEffect(() => {
+    backgroundflag(false);
+  }, []);
   const { constellationId } = useParams();
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -39,6 +41,7 @@ const DetailConstellation = () => {
       setAlertMessage("별자리 정보를 불러오는데 실패했습니다.");
     }
   };
+  console.log("", constellationContent);
   const {
     navigateToBack,
     navigateToMainPlanet,

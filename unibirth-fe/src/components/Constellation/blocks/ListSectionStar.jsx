@@ -22,16 +22,18 @@ import CustomAlert from "../../../common/atoms/CustomAlert";
 import Close2 from "../../../assets/icons/js/close2";
 import Star2 from "../../../assets/icons/js/star2";
 import LineDrawing from "../atoms/LineDrawing";
+import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 
 const ListSectionStar = () => {
   const ref = useRef();
   // const tooltipRef = useRef(null);
   const { constellationId } = useParams();
   const setStellaId = useSetRecoilState(StellaIdState);
-
   const { navigateToDetailStar } = useNavigation();
   const [starList, setStarList] = useRecoilState(starListState);
   const [starListIndex, setStarListIndex] = useState([]);
+  const [alreadyPined, setAlreadyPined] = useState(false);
+  const [isFulledStar, setIsFulledStar] = useState(false);
   // Star box Content
   const [boxcontent, setBoxcontent] = useRecoilState(boxcontentState);
   const [boxnickname, setBoxnickname] = useRecoilState(boxnicknameState);
@@ -85,6 +87,8 @@ const ListSectionStar = () => {
       if (response.status === 200) {
         setStarList(response.resultData);
         setStarListIndex(response.resultData.starList);
+        setAlreadyPined(response.resultData.alreadyPined);
+        setIsFulledStar(response.resultData.completion);
       } else {
         setIsAlertVisible(true);
         setAlertMessage("별 리스트를 불러오는데 실패했습니다.");
@@ -94,6 +98,8 @@ const ListSectionStar = () => {
       setAlertMessage("별 리스트를 불러오는데 실패했습니다.");
     }
   };
+
+  console.log("isFulledStar:", isFulledStar);
 
   // starPotisions recoil 저장
   const starPoint = starList?.pointList;
@@ -113,8 +119,29 @@ const ListSectionStar = () => {
 
   const lines = starList?.lineList;
 
-  // console.log("lineList:", lines);
-  // console.log("starPosition:", starPotisions);
+  const handlePinClick = async (constellationId) => {
+    if (alreadyPined) {
+      try {
+        const response = await useConstellationApi.constellationsDeletePin(
+          constellationId,
+        );
+        console.log(response);
+        setAlreadyPined(false);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        const response = await useConstellationApi.constellationsGetPin(
+          constellationId,
+        );
+        console.log(response);
+        setAlreadyPined(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   return (
     <div className="relative bottom-0 h-screen w-screen">
@@ -128,12 +155,26 @@ const ListSectionStar = () => {
           }
         }}
       />
-      <button
-        className="absolute bottom-36 right-4 z-10 flex flex-col text-4xl text-white opacity-100"
-        onClick={navigateToRegisterStar}
-      >
-        <Plus />
-      </button>
+      {!isFulledStar && (
+        <button
+          className="absolute bottom-36 right-4 z-10 flex flex-col text-4xl text-white opacity-100"
+          onClick={navigateToRegisterStar}
+        >
+          <Plus />
+        </button>
+      )}
+      <div className="absolute left-1/2 top-20 z-10 text-white">
+        <div
+          className="mt-1 flex"
+          onClick={() => handlePinClick(constellationId)}
+        >
+          {alreadyPined ? (
+            <AiFillPushpin size={30} />
+          ) : (
+            <AiOutlinePushpin size={30} />
+          )}
+        </div>
+      </div>
       <Canvas camera={{ position: [0, 0, 70] }}>
         <Background />
         <axesHelper scale={5} />
