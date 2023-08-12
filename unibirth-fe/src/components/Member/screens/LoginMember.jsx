@@ -31,7 +31,7 @@ const LoginMember = () => {
   const { navigateToBack, navigateToRegisterMember, navigateToMainPlanet } =
     useNavigation();
 
-  const handleLogin = async (e) => {
+  const handleLogin = async () => {
     const member = {
       email,
       password,
@@ -45,7 +45,7 @@ const LoginMember = () => {
         navigateToMainPlanet();
       } else {
         setIsAlertVisible(true);
-        setAlertMessage("이메일 또는 비밀번호가 일치하지 않습니다.");
+        setAlertMessage(`${response.message}`);
       }
     } catch (e) {
       setIsAlertVisible(true);

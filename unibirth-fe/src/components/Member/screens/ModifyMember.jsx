@@ -34,10 +34,10 @@ const RegisterMember = () => {
       const response = await useMemberApi.membersPutUpdate(password);
       if (response.status === 200) {
         setIsAlertVisible(true);
-        setAlertMessage("비밀번호 변경이 완료되었습니다.");
+        setAlertMessage(response.message);
       } else {
         setIsAlertVisible(true);
-        setAlertMessage("비밀번호 변경에 실패하였습니다.");
+        setAlertMessage(`${response.message}`);
       }
     } catch (e) {
       setIsAlertVisible(true);

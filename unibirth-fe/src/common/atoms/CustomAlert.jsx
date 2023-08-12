@@ -11,7 +11,7 @@ const CustomAlert = ({ message, isVisible, onClose }) => {
     };
 
     const handleKeyDown = (e) => {
-      if (e.key === "Enter") {
+      if (e.key === "Enter" || e.key === "Escape") {
         onClose();
       }
     };
@@ -28,7 +28,7 @@ const CustomAlert = ({ message, isVisible, onClose }) => {
   if (!isVisible) return null;
 
   return (
-    <div className="z-60 fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-40">
+    <div className="fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-black bg-opacity-40">
       <div
         ref={ref}
         className="w-1/3 rounded-md border-2 border-yellow-300 bg-transparent p-5 shadow-lg"

@@ -53,7 +53,7 @@ const RegisterMember = () => {
         setAlertMessage("회원가입이 완료되었습니다.");
       } else {
         setIsAlertVisible(true);
-        setAlertMessage("회원가입에 실패하였습니다.");
+        setAlertMessage(response.message);
       }
     } catch (e) {
       setIsAlertVisible(true);
