@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 const Line = ({ start, end }) => {
@@ -6,24 +6,28 @@ const Line = ({ start, end }) => {
   const startPoint = new THREE.Vector3(...start);
   const endPoint = new THREE.Vector3(...end);
   const currentPoint = new THREE.Vector3().copy(startPoint);
+  const [flag, setFlag] = useState(true);
 
-  console.log("몇번하는건데 그래서");
-  useFrame(() => {
-    if (lineRef.current) {
-      const lineGeometry = lineRef.current.geometry;
-      currentPoint.lerp(endPoint, 0.02);
+  if (start && flag) {
+    console.log("몇번하는건데 그래서");
+    useFrame(() => {
+      if (lineRef.current) {
+        const lineGeometry = lineRef.current.geometry;
+        currentPoint.lerp(endPoint, 0.02);
 
-      lineGeometry.setFromPoints([startPoint, currentPoint]);
-      lineGeometry.attributes.position.needsUpdate = true;
-    }
-  });
+        lineGeometry.setFromPoints([startPoint, currentPoint]);
+        lineGeometry.attributes.position.needsUpdate = true;
+      }
+    });
+    setFlag(false);
 
-  return (
-    <line ref={lineRef}>
-      <bufferGeometry attach="geometry" />
-      <lineBasicMaterial attach="material" color="white" />
-    </line>
-  );
+    return (
+      <line ref={lineRef}>
+        <bufferGeometry attach="geometry" />
+        <lineBasicMaterial attach="material" color="white" />
+      </line>
+    );
+  }
 };
 
 const LineDrawing = ({ lines, num, zero, zDamping }) => {
