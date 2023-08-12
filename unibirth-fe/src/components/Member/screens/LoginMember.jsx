@@ -30,7 +30,7 @@ const LoginMember = () => {
     useNavigation();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const member = {
       email,
       password,
@@ -76,6 +76,11 @@ const LoginMember = () => {
       onClick: navigateToRegisterMember,
     },
   ];
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleLogin(); // 엔터 키로 바로 handleLogin 호출
+    }
+  };
   return (
     <div className="mx-auto h-screen max-w-screen-sm">
       <div>
@@ -86,6 +91,7 @@ const LoginMember = () => {
             setEmail={setEmail}
             password={password}
             setPassword={setPassword}
+            onKeyDown={handleKeyDown}
           />
         </form>
       </div>

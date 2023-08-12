@@ -163,11 +163,15 @@ const ListSectionStar = () => {
         {/* 별을 클릭했을 때 위치 조정 필요 */}
         <div
           className={`
-  fixed left-1/2 z-50 -translate-x-1/2 
-  rounded-lg bg-white p-2 
+  absolute z-50
+  w-screen max-w-screen-sm rounded-lg bg-white p-2
   ${tooltipStyle.display === "none" ? "hidden" : ""}`}
           style={
-            { left: "50%", bottom: "20%" }
+            {
+              bottom: "30%",
+              left: "50%",
+              transform: "translateX(-50%)",
+            }
             // parseInt(tooltipStyle.left) < 400
             //   ? { left: tooltipStyle.left, top: tooltipStyle.top }
             //   : { left: tooltipStyle.left - 400, top: tooltipStyle.top }
@@ -179,7 +183,7 @@ const ListSectionStar = () => {
             // top: tooltipStyle.top,
           }
         >
-          <div className="relative flex flex-col font-TAEBAEKmilkyway">
+          <div className="relative flex flex-col font-Pretendard">
             <button
               className="absolute right-0 top-0 rounded-lg font-bold"
               onClick={() =>
@@ -189,7 +193,7 @@ const ListSectionStar = () => {
               X
             </button>
             <div className="flex-flex-row">
-              <div className="flex">
+              <div className="flex items-center justify-center">
                 <img
                   className="h-64 w-80 rounded-lg"
                   src={boxurl}
@@ -208,7 +212,7 @@ const ListSectionStar = () => {
             </div>
             현재 빛남 : {brightness}
             <button
-              className="rounded-lg bg-red-500 text-white"
+              className="rounded-lg border-2 border-black bg-transparent text-black"
               onClick={() => navigateToDetailStar(boxid)}
             >
               이동하기
