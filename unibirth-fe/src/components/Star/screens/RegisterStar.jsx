@@ -82,7 +82,7 @@ const RegisterStar = () => {
             navigateToDetailConstellation(constellationId);
           } else {
             setIsAlertVisible(true);
-            setAlertMessage("별 생성에 실패하였습니다.");
+            setAlertMessage(response.message);
           }
         } catch (error) {
           setIsAlertVisible(true);

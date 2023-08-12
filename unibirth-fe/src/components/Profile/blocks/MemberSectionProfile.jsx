@@ -19,6 +19,7 @@ const MemberSectionProfile = ({ locationNickname }) => {
     memberData?.resultData?.follow,
   );
   const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertStatus, setAlertStatus] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const nickname = useRecoilValue(nicknameState);
 
@@ -34,7 +35,8 @@ const MemberSectionProfile = ({ locationNickname }) => {
     };
     try {
       const response = await useProfileApi.profilesPostFollow(followData);
-      if (response.status === 200) {
+      setAlertStatus(response.status);
+      if (alertStatus === 200) {
         setIsFollowing(true);
       }
     } catch (e) {
@@ -66,7 +68,7 @@ const MemberSectionProfile = ({ locationNickname }) => {
         setIsFollowing(response?.resultData?.follow);
       } else {
         setIsAlertVisible(true);
-        setAlertMessage("사용자 정보를 가져오는데 실패했습니다.");
+        setAlertMessage(response.message);
       }
     } catch (error) {
       setIsAlertVisible(true);

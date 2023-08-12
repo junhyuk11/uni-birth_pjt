@@ -22,7 +22,7 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
         setImages(response.resultData.constellationList);
       } else {
         setIsAlertVisible(true);
-        setAlertMessage("핀한 별자리 리스트를 불러오는데 실패했습니다.");
+        setAlertMessage(response.message);
       }
     } catch (e) {
       setIsAlertVisible(true);
@@ -31,11 +31,20 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
   };
 
   const handleParticipateClick = async () => {
-    const response = await useConstellationApi.constellationsGetAttendList(
-      locationNickname,
-    );
-    console.log(response.resultData);
-    setImages(response.resultData.constellationList);
+    try {
+      const response = await useConstellationApi.constellationsGetAttendList(
+        locationNickname,
+      );
+      if (response.status === 200) {
+        setImages(response.resultData.constellationList);
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage(response.message);
+      }
+    } catch (e) {
+      setIsAlertVisible(true);
+      setAlertMessage("참여한 별자리 리스트를 불러오는데 실패했습니다.");
+    }
   };
 
   useEffect(() => {
@@ -52,7 +61,9 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
           onClose={() => {
             setIsAlertVisible(false);
             if (
-              alertMessage === "핀한 별자리 리스트를 불러오는데 실패했습니다."
+              alertMessage ===
+                "핀한 별자리 리스트를 불러오는데 실패했습니다." ||
+              alertMessage === "참여한 별자리 리스트를 불러오는데 실패했습니다."
             ) {
               navigateToBack();
             }

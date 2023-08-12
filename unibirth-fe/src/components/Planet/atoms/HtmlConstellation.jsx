@@ -27,7 +27,7 @@ const HtmlConstellation = ({ constellationId }) => {
           setConstellationConstent(response.resultData);
         } else {
           setIsAlertVisible(true);
-          setAlertMessage("별자리 정보를 불러오는데 실패했습니다.");
+          setAlertMessage(response.message);
         }
       } catch (error) {
         setIsAlertVisible(true);
@@ -45,7 +45,7 @@ const HtmlConstellation = ({ constellationId }) => {
             setUpdatePinedStatus(false);
           } else {
             setIsAlertVisible(true);
-            setAlertMessage("핀 삭제에 실패하였습니다.");
+            setAlertMessage(response.message);
           }
         } catch (error) {
           setIsAlertVisible(true);
@@ -60,7 +60,7 @@ const HtmlConstellation = ({ constellationId }) => {
             setUpdatePinedStatus(true);
           } else {
             setIsAlertVisible(true);
-            setAlertMessage("핀 등록에 실패하였습니다.");
+            setAlertMessage(response.message);
           }
         } catch (error) {
           setIsAlertVisible(true);
