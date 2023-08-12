@@ -19,6 +19,7 @@ import * as THREE from "three";
 import GradientBackground from "../../../common/atoms/GradientBackground";
 import Background from "../../../common/atoms/Background";
 import Plus from "../../../assets/icons/js/plus";
+import CustomSphere from "./CustomSphere";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -118,6 +119,7 @@ const ListSectionStar = () => {
         <Plus />
       </button>
       <Canvas camera={{ position: [0, 0, 70] }}>
+        <CustomSphere />
         <Background />
         <axesHelper scale={5} />
         <EffectComposer>

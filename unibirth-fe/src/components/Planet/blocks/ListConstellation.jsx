@@ -23,10 +23,12 @@ import { useNavigation } from "../../../hooks/useNavigation";
 import Plus from "../../../assets/icons/js/plus";
 
 // R3F 훅 카메라 컨트롤러 컴포넌트
-function CameraController({ ConstellationPosition, zoomed }) {
-  const controlsRef = useRef();
-  console.log("졸려서모학[ㅆ다", controlsRef);
-  const [animating, setAnimating] = useState(false);
+function CameraController({
+  ConstellationPosition,
+  zoomed,
+  controlsRef,
+  setRotateFlag,
+}) {
   const { camera } = useThree();
   const cameraRef = useRef(camera);
   console.log("카메러::", cameraRef.current);
@@ -39,9 +41,9 @@ function CameraController({ ConstellationPosition, zoomed }) {
       // console.log("제[발!!ㅣ", ConstellationPosition);
       const targetPosition = zoomed
         ? {
-            x: ConstellationPosition.x * multiFactor + 2000,
-            y: ConstellationPosition.y * multiFactor + 2000,
-            z: ConstellationPosition.z * multiFactor,
+            x: ConstellationPosition.x * multiFactor + 3500,
+            y: ConstellationPosition.y * multiFactor - 3000,
+            z: ConstellationPosition.z * multiFactor + 3500,
           }
         : {
             x: ConstellationPosition.x * zoomFactor,
@@ -54,10 +56,10 @@ function CameraController({ ConstellationPosition, zoomed }) {
         z: camera.position.z,
       };
 
-      console.log("카메라 표지션:", startPosition);
+      console.log("줌됐니?", zoomed);
+      console.log("카메라 표지션:", targetPosition);
 
       const updateCameraPosition = () => {
-        controlsRef.current.enabled = false;
         cameraRef.current.position.set(
           startPosition.x,
           startPosition.y,
@@ -72,32 +74,21 @@ function CameraController({ ConstellationPosition, zoomed }) {
         x: -targetPosition.x,
         y: -targetPosition.y,
         z: -targetPosition.z,
-        onStart: () => setAnimating(true),
+        onStart: () => (controlsRef.current.enabled = false),
         onUpdate: updateCameraPosition,
         ease: "Power1.inOut",
         onComplete: () => {
           controlsRef.current.enabled = true;
+          if (zoomed) {
+            setRotateFlag(true);
+          } else {
+            setRotateFlag(false);
+          }
         },
       });
     }
-  }, [ConstellationPosition]);
-  useEffect(() => {
-    document.body.style.pointerEvents = animating ? "none" : "auto";
-  }, [animating]);
-  return (
-    <>
-      {" "}
-      <OrbitControls
-        ref={controlsRef}
-        // enablePan={true}
-        enableDamping={true}
-        rotateSpeed={-0.4}
-        // minDistance={1} // minimum zoom distance
-        maxDistance={8000} // maximum zoom distance
-        dampingFactor={1}
-      />
-    </>
-  );
+  }, [ConstellationPosition, zoomed]);
+  return null;
 }
 
 const Scene = ({ constellationList }) => {
@@ -108,6 +99,7 @@ const Scene = ({ constellationList }) => {
   useEffect(() => {
     setBackgroundflag(false);
   }, []);
+  const controlsRef = useRef();
   const { navigateToRegisterConstellation } = useNavigation();
   useEffect(() => {}, [constellationList]);
 
@@ -137,6 +129,8 @@ const Scene = ({ constellationList }) => {
   const [currentConstellation, setCurrentConstellation] = useState(
     ConstellationIndex % currentconstellationList.length,
   );
+  // orbitcontrolsRotation
+  const [rotateFlag, setRotateFlag] = useState(false);
 
   console.log("현재 별자리 위치:", currentConstellation);
 
@@ -219,7 +213,7 @@ const Scene = ({ constellationList }) => {
         <Stars
           radius={2300}
           depth={30}
-          count={10000}
+          count={12000}
           factor={4}
           saturation={1}
           fade
@@ -244,8 +238,22 @@ const Scene = ({ constellationList }) => {
           setCurrentConstellation={setCurrentConstellation}
           currentConstellation={currentConstellation}
         />
+        <OrbitControls
+          ref={controlsRef}
+          // enablePan={true}
+          enableDamping={true}
+          rotateSpeed={-0.4}
+          // minDistance={1} // minimum zoom distance
+          maxDistance={8000} // maximum zoom distance
+          dampingFactor={1}
+          autoRotate={rotateFlag}
+          autoRotateSpeed={0.3}
+        />
         <CameraController
           ConstellationPosition={currentconstellationList[currentConstellation]}
+          controlsRef={controlsRef}
+          zoomed={zoomed}
+          setRotateFlag={setRotateFlag}
         />
       </Canvas>
     </>

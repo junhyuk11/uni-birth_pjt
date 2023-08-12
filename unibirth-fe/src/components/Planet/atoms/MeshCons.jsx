@@ -140,7 +140,7 @@ const MeshCons = ({
                       point.z * constellationGap + xyz.z,
                     ]}
                   >
-                    <sphereGeometry args={[spherenum, 16, 16]} />
+                    <sphereGeometry args={[spherenum, 5, 5]} />
                     <meshStandardMaterial
                       color={constellationList?.constellationList[i].color}
                       emissive={constellationList?.constellationList[i].color}
