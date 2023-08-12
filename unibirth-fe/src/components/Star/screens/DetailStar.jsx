@@ -106,7 +106,17 @@ const DetailStar = () => {
       ),
     },
   ];
-
+  function formatDate(dateString) {
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
   return (
     <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
       <header className="sticky top-0 z-10">
@@ -143,7 +153,9 @@ const DetailStar = () => {
             >
               {memberInfo.nickname}
             </div>
-            <span className="text-xs text-gray-700">{star.updatedAt}</span>
+            <span className="text-xs text-gray-700">
+              {formatDate(star.updatedAt)}
+            </span>
           </div>
         </div>
       </div>

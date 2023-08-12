@@ -21,7 +21,6 @@ import Background from "../../../common/atoms/Background";
 import Plus from "../../../assets/icons/js/plus";
 import Close2 from "../../../assets/icons/js/close2";
 import Star2 from "../../../assets/icons/js/star2";
-import Button2 from "../../../common/atoms/Button2";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -225,11 +224,12 @@ const ListSectionStar = () => {
                 <p></p>
               </div>
             </div>
-            <Button2
-              className="rounded-lg border-2 border-white bg-transparent text-white"
+            <button
+              className="my-4 w-40 rounded-full border-2 bg-transparent p-2 text-white"
               onClick={() => navigateToDetailStar(boxid)}
-              value="상세정보"
-            />
+            >
+              상세정보
+            </button>
           </div>
         </div>
       </div>
