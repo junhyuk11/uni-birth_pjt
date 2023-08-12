@@ -26,9 +26,9 @@ const MeshCons = ({
   // 별자리 간격 조정
   const constellationGap = 30;
   // 처음 밝기 조정
-  const firstBrightness = 10;
+  const firstBrightness = 1;
   // 별 크기 조정
-  const spherenum = 10;
+  const spherenum = 7;
   // 행성 갯수 limit 걸기
   const limitCount = 111;
 
@@ -140,14 +140,14 @@ const MeshCons = ({
                       point.z * constellationGap + xyz.z,
                     ]}
                   >
-                    <sphereGeometry args={[spherenum, 16, 16]} />
+                    <sphereGeometry args={[spherenum, 5, 5]} />
                     <meshStandardMaterial
                       color={constellationList?.constellationList[i].color}
                       emissive={constellationList?.constellationList[i].color}
                       emissiveIntensity={
                         point.brightness === -1
-                          ? 2
-                          : point.brightness + firstBrightness
+                          ? 1
+                          : firstBrightness + point.brightness / 10
                       }
                       toneMapped={false}
                       // transparent={true}

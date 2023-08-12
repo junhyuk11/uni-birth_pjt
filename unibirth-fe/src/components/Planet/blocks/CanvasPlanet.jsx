@@ -98,6 +98,12 @@ const ListSectionPlanet = ({
     setZoomed(!zoomed);
   };
 
+  // axesHelper커스텀 가능
+  // import * as THREE from "three";
+  // const axesHelperMaterial = new THREE.MeshBasicMaterial({ color: "red" });
+  // const axesHelper = new THREE.AxesHelper(0.2);
+  // axesHelper.material = axesHelperMaterial;
+
   return (
     <div className="absolute flex h-full w-full flex-row flex-wrap justify-center">
       <button
@@ -128,14 +134,14 @@ const ListSectionPlanet = ({
           // autoRotateSpeed={0.5}
         />
         <CameraController planet={PLANET_LIST[currentPlanet]} zoomed={zoomed} />
-        <axesHelper scale={0.5} />
+        <axesHelper scale={0.2} />
+        {/* <primitive object={axesHelper} /> */}
         <EffectComposer>
           <Bloom
-            mipmapBlur
-            luminanceThreshold={1}
-            radius={0.7}
-            luminanceSmoothing={0.9}
-            intensity={0.1}
+            luminanceThreshold={0}
+            luminanceSmoothing={0.5}
+            height={1000}
+            // intensity={2}
           />
         </EffectComposer>
         <GradientBackground />
