@@ -22,7 +22,6 @@ import Plus from "../../../assets/icons/js/plus";
 import Close2 from "../../../assets/icons/js/close2";
 import Star2 from "../../../assets/icons/js/star2";
 import Button2 from "../../../common/atoms/Button2";
-import CustomSphere from "./CustomSphere";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -122,7 +121,6 @@ const ListSectionStar = () => {
         <Plus />
       </button>
       <Canvas camera={{ position: [0, 0, 70] }}>
-        <CustomSphere />
         <Background />
         <axesHelper scale={5} />
         <EffectComposer>

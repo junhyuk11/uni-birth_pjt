@@ -99,6 +99,12 @@ const DetailStar = () => {
       onClick: navigateToBack,
       icon: <LeftArrow />,
     },
+    {
+      component: () => (
+        // <span className="ml-4 text-2xl text-white">{constellation}</span>
+        <span className="ml-4 text-2xl text-white">별자리 이름</span>
+      ),
+    },
   ];
 
   return (
@@ -108,18 +114,22 @@ const DetailStar = () => {
       </header>
       <div className="px-4">
         <div className="flex flex-row items-center py-2">
-          <div className="mt-0 flex flex-col">
+          <div
+            className="mt-0 flex flex-col"
+            style={{ maxWidth: "100%", wordWrap: "break-word" }}
+          >
             <div
               className="text-md w-full overflow-hidden font-bold text-gray-800"
-              style={{ maxWidth: "50%", wordWrap: "break-word" }}
+              style={{ maxWidth: "70%", wordWrap: "break-word" }}
             >
-              sadfasdfasdfasdfjasdlkfjlsdakjfkladsjfl;jasdlf;jsadfasdfasfasfd
+              sㄴㅁㅇㄹㄴ마ㅣㅇ런미ㅏㅇ린망린ㅁ어린ㅁㅇ러ㅏㅣㄴㅁㅇ러ㅣㅏㄴㅁㅇㄹㄴ미얼ㄴㅁ이;러
+              {/* {star.title} */}
             </div>
           </div>
         </div>
       </div>
       <div className="px-4">
-        <div className="flex flex-row items-center py-2">
+        <div className="flex flex-row items-center border-b-2 border-gray-300 py-2">
           <img
             src={memberInfo.imageUrl}
             alt="멤버 이미지"
@@ -137,7 +147,7 @@ const DetailStar = () => {
           </div>
         </div>
       </div>
-      <div className="w-full">
+      <div className="mt-4 w-full">
         <img
           src={star.imageUrl}
           alt="별 이미지"
