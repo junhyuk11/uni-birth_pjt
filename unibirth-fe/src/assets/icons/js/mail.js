@@ -1,33 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { nicknameState, updateTimeState } from "../../../recoil/atoms";
+import { nicknameState } from "../../../recoil/atoms";
 import { get, ref } from "firebase/database";
 import { database } from "../../../api/useFirebaseApi";
 
 const Mail = () => {
-  const updateTime = useRecoilValue(updateTimeState);
   const nickname = useRecoilValue(nicknameState);
   const [lastUpdate, setLastUpdate] = useState(null);
+  const [checkUpdate, setCheckUpdate] = useState(null);
 
   useEffect(() => {
-    const fetchLastUpdate = async () => {
-      const nicknameRef = ref(database, `updateMessage/${nickname}`);
-      const snapshot = await get(nicknameRef);
-      console.log(nicknameRef);
-      console.log(snapshot);
-      if (snapshot.exists()) {
-        setLastUpdate(snapshot.val());
+    const fetchUpdates = async () => {
+      // Fetching lastUpdate as before
+      // Fetching checkUpdate from the new reference
+      const checkUpdateRef = ref(database, `checkMessage/${nickname}`);
+      const checkUpdateSnapshot = await get(checkUpdateRef);
+      if (checkUpdateSnapshot.exists()) {
+        setCheckUpdate(checkUpdateSnapshot.val());
+      }
+
+      // Fetching lastUpdate as before
+      const lastUpdateRef = ref(database, `updateMessage/${nickname}`);
+      const lastUpdateSnapshot = await get(lastUpdateRef);
+      if (lastUpdateSnapshot.exists()) {
+        setLastUpdate(lastUpdateSnapshot.val());
       }
     };
 
-    fetchLastUpdate();
-  }, []);
+    fetchUpdates();
+  }, [nickname]);
 
-  useEffect(() => {
-    console.log("상태 변경 후 비교", lastUpdate, updateTime);
-  }, [lastUpdate]);
-
-  const backgroundColor = lastUpdate > updateTime ? "yellow" : "transparent";
+  const backgroundColor = lastUpdate > checkUpdate ? "yellow" : "transparent";
 
   return (
     <div style={{ backgroundColor }}>

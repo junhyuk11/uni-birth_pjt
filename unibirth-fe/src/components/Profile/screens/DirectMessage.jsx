@@ -4,7 +4,11 @@ import Button2 from "../../../common/atoms/Button2";
 import { useRecoilValue } from "recoil";
 import { nicknameState } from "../../../recoil/atoms";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { sendMessage, listenForMessages } from "../../../api/useFirebaseApi";
+import {
+  sendMessage,
+  listenForMessages,
+  updateMessage,
+} from "../../../api/useFirebaseApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import { useLocation } from "react-router-dom";
 
@@ -59,10 +63,11 @@ const DirectMessage = () => {
     };
   }, [nickname, locationNickname]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (newMessage.trim()) {
-      sendMessage(newMessage, nickname, locationNickname);
+      await sendMessage(newMessage, nickname, locationNickname);
       setNewMessage("");
+      await updateMessage(locationNickname, Date.now());
     }
   };
 

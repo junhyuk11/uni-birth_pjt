@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
 import { useNavigation } from "../../../hooks/useNavigation";
-import { database, ref, onValue, off } from "../../../api/useFirebaseApi";
+import {
+  database,
+  ref,
+  onValue,
+  off,
+  checkMessage,
+} from "../../../api/useFirebaseApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
@@ -60,6 +66,10 @@ const MessageBox = () => {
       off(chatRef, "value", handleNewChatRoom);
     };
   }, [nickname]);
+
+  useEffect(() => {
+    checkMessage(nickname, Date.now());
+  }, []);
 
   return (
     <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
