@@ -1,7 +1,5 @@
 import React, { useRef } from "react";
 const SpreadConstellation = ({ constellationList, constellationPosition }) => {
-  console.log("이자식!", constellationList);
-  console.log("뭐하는데?!", constellationPosition);
   const meshRef = useRef();
   return (
     <mesh ref={meshRef}>

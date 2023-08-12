@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useConstellationApi from "../../../api/useConstellationApi";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const HtmlConstellation = ({ constellationId }) => {
   if (constellationId) {
     // naviigate  to detailconstellation
-    const { navigateToDetailConstellation } = useNavigation();
+    const { navigateToDetailConstellation, navigateToBack } = useNavigation();
     const handleConstellationClick = (constellationId) => {
       navigateToDetailConstellation(constellationId);
     };
     const [constellationContent, setConstellationConstent] = useState([]);
-
+    const [isAlertVisible, setIsAlertVisible] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("");
     useEffect(() => {
       getConstellationContent(constellationId);
     }, [constellationId]);
@@ -21,12 +23,17 @@ const HtmlConstellation = ({ constellationId }) => {
         const response = await useConstellationApi.constellationsGetDetail(
           constellationId,
         );
-        setConstellationConstent(response.resultData);
+        if (response.status === 200) {
+          setConstellationConstent(response.resultData);
+        } else {
+          setIsAlertVisible(true);
+          setAlertMessage("별자리 정보를 불러오는데 실패했습니다.");
+        }
       } catch (error) {
-        console.log(error);
+        setIsAlertVisible(true);
+        setAlertMessage("별자리 정보를 불러오는데 실패했습니다.");
       }
     };
-    console.log(constellationContent);
 
     const handlePinClick = async (constellationContent) => {
       if (constellationContent.alreadyPined) {
@@ -34,20 +41,30 @@ const HtmlConstellation = ({ constellationId }) => {
           const response = await useConstellationApi.constellationsDeletePin(
             constellationContent.constellationId,
           );
-          console.log(response);
-          setUpdatePinedStatus(false);
+          if (response.status === 200) {
+            setUpdatePinedStatus(false);
+          } else {
+            setIsAlertVisible(true);
+            setAlertMessage("핀 삭제에 실패하였습니다.");
+          }
         } catch (error) {
-          console.log(error);
+          setIsAlertVisible(true);
+          setAlertMessage("핀 삭제에 실패하였습니다.");
         }
       } else {
         try {
           const response = await useConstellationApi.constellationsGetPin(
             constellationContent.constellationId,
           );
-          console.log(response);
-          setUpdatePinedStatus(true);
+          if (response.status === 200) {
+            setUpdatePinedStatus(true);
+          } else {
+            setIsAlertVisible(true);
+            setAlertMessage("핀 등록에 실패하였습니다.");
+          }
         } catch (error) {
-          console.log(error);
+          setIsAlertVisible(true);
+          setAlertMessage("핀 등록에 실패하였습니다.");
         }
       }
     };
@@ -65,6 +82,16 @@ const HtmlConstellation = ({ constellationId }) => {
 
     return (
       <div>
+        <CustomAlert
+          message={alertMessage}
+          isVisible={isAlertVisible}
+          onClose={() => {
+            setIsAlertVisible(false);
+            if (alertMessage === "별자리 정보를 불러오는데 실패했습니다.") {
+              navigateToBack();
+            }
+          }}
+        />
         <button
           className="absolute right-4 top-4 z-10 rounded-lg border-2 bg-transparent p-2  text-white"
           onClick={toggleVisibility}
