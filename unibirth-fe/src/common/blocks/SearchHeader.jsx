@@ -11,8 +11,6 @@ const SearchHeader = ({ buttons, category, setCategory, query, setQuery }) => {
   };
 
   const handleSearch = () => {
-    console.log("검색어:", query);
-    console.log("카테고리:", category);
     navigateToSearchCommon(query, category);
   };
 

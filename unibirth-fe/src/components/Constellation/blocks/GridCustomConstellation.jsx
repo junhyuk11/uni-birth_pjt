@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Stage, Layer, Rect, Line, Star } from "react-konva";
 import Button1 from "../../../common/atoms/Button1";
-// import Footer1 from "../../../common/blocks/Footer1";
-// import DrawingBackButton from "../atoms/DrawingBackButton";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../api/useFirebaseApi";
 import useConstellationApi from "../../../api/useConstellationApi";
@@ -10,6 +8,7 @@ import { useRecoilState } from "recoil";
 import { boardSizeState } from "../../../recoil/atoms";
 import { useNavigation } from "../../../hooks/useNavigation";
 import PickConstellationColor from "../atoms/PickConstellationColor";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const GridCustomConstellation = ({
   planetId,
@@ -32,6 +31,8 @@ const GridCustomConstellation = ({
   const [templatePointSize, setTemplatePointsSize] = useState(0);
   const [templateLineSize, setTemplateLinesSize] = useState(0);
   const { navigateToDetailConstellation } = useNavigation();
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     if (shouldDeduplicate) {
@@ -42,8 +43,6 @@ const GridCustomConstellation = ({
 
   useEffect(() => {
     if (pointList && lineList) {
-      console.log("pointList", pointList);
-      console.log("lineList", lineList);
       setTemplatePointsSize(pointList.length);
       setTemplateLinesSize(lineList.length);
       const updateGrid = grid.map((y) => y.slice());
@@ -68,12 +67,10 @@ const GridCustomConstellation = ({
           line[3] * 50 + 25,
         ]),
       );
-      console.log(lines);
     }
   }, [pointList, lineList]);
 
   const deDuplication = (input) => {
-    // points 배열에서 중복된 값 제거
     const array = input;
     array.forEach((point) => {
       const yIndex = (point.centerY - 25) / 50;
@@ -84,7 +81,6 @@ const GridCustomConstellation = ({
       if (!existingPoint) {
         setGrid((prevGrid) => {
           const newGrid = [...prevGrid];
-          console.log(prevGrid[yIndex][xIndex]);
           newGrid[yIndex][xIndex] = false;
           return newGrid;
         });
@@ -176,8 +172,9 @@ const GridCustomConstellation = ({
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log(`Upload is ${progress}% done`);
       },
-      (error) => {
-        console.error("Upload failed:", error);
+      () => {
+        setIsAlertVisible(true);
+        setAlertMessage("업로드에 실패했습니다.");
       },
       async () => {
         try {
@@ -192,20 +189,19 @@ const GridCustomConstellation = ({
             boardSize: boardSize[0],
             color: constellationColor,
           };
-          console.log(constellation);
           const response =
             await useConstellationApi.constellationsPostConstellation(
               constellation,
             );
-          console.log(response); // 성공 처리
-          console.log(response.resultData.constellationId);
-          navigateToDetailConstellation(response.resultData.constellationId);
-        } catch (error) {
-          if (error.code === "storage/object-not-found") {
-            console.error("Failed to get download URL:", error);
+          if (response.status === 200) {
+            navigateToDetailConstellation(response.resultData.constellationId);
           } else {
-            console.error("Failed to post constellation:", error); // 에러 처리
+            setIsAlertVisible(true);
+            setAlertMessage("업로드에 실패했습니다.");
           }
+        } catch (error) {
+          setIsAlertVisible(true);
+          setAlertMessage("업로드에 실패했습니다.");
         }
       },
     );
@@ -244,12 +240,6 @@ const GridCustomConstellation = ({
     setGrid(tempGrid);
   }
 
-  // const handelConsoleClick = () => {
-  //   const [uniquePoints, uniqueLines] = removeDuplicate(lines);
-  //   console.log(uniquePoints);
-  //   console.log(uniqueLines);
-  // };
-
   const handleResetClick = () => {
     setPoints([]);
     setLines([]);
@@ -258,23 +248,13 @@ const GridCustomConstellation = ({
     setShouldDeduplicate(false);
   };
 
-  // const buttonsFooter = [
-  //   {
-  //     component: Button1,
-  //     className: "font-Pretendard",
-  //     value: "초기화",
-  //     onClick: handleResetClick,
-  //   },
-  //   {
-  //     component: Button1,
-  //     className: "font-Pretendard",
-  //     value: "완료하기",
-  //     onClick: handleSaveClick,
-  //   },
-  // ];
-
   return (
     <div className="flex flex-col items-center justify-center">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => setIsAlertVisible(false)}
+      />
       <div className="flex flex-row px-10 py-4 text-white ">
         <div className="flex flex-col">
           <p className="font-Pretendard">지금 행성명: {planetId}</p>

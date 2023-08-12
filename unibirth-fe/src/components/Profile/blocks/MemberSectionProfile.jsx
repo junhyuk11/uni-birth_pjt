@@ -5,12 +5,21 @@ import useProfileApi from "../../../api/useProfileApi";
 import { useRecoilValue } from "recoil";
 import { nicknameState } from "../../../recoil/atoms";
 import Button5 from "../../../common/atoms/Button5";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const MemberSectionProfile = ({ locationNickname }) => {
-  const { navigateToModifyProfile, navigateToFollow, navigateToMyStars } =
-    useNavigation();
-
+  const {
+    navigateToModifyProfile,
+    navigateToFollow,
+    navigateToMyStars,
+    navigateToBack,
+  } = useNavigation();
   const [memberData, setMemberData] = useState();
+  const [isFollowing, setIsFollowing] = useState(
+    memberData?.resultData?.follow,
+  );
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const nickname = useRecoilValue(nicknameState);
 
   useEffect(() => {
@@ -26,15 +35,11 @@ const MemberSectionProfile = ({ locationNickname }) => {
     try {
       const response = await useProfileApi.profilesPostFollow(followData);
       if (response.status === 200) {
-        alert("팔로우 완료!");
-        window.location.reload();
-      } else {
-        alert("이미 팔로우한 상대입니다!");
-        window.location.reload();
+        setIsFollowing(true);
       }
     } catch (e) {
-      console.log(e);
-      alert("팔로우 버튼 클릭했는데 큰일났습니다.");
+      setIsAlertVisible(true);
+      setAlertMessage("팔로우 중 오류가 발생했습니다.");
     }
   };
 
@@ -45,24 +50,27 @@ const MemberSectionProfile = ({ locationNickname }) => {
         locationNickname,
       );
       if (response.status === 200) {
-        alert("언팔로우 완료!");
-        window.location.reload();
-      } else {
-        alert("이미 언팔로우한 상대입니다!");
-        window.location.reload();
+        setIsFollowing(false);
       }
     } catch (e) {
-      console.log(e);
-      alert("언팔로우 버튼 클릭했는데 큰일났습니다.");
+      setIsAlertVisible(true);
+      setAlertMessage("팔로우 취소 중 오류가 발생했습니다.");
     }
   };
 
   const fetchMemberData = async () => {
     try {
       const response = await useMemberApi.membersGetDetail(locationNickname);
-      setMemberData(response);
+      if (response.status === 200) {
+        setMemberData(response);
+        setIsFollowing(response?.resultData?.follow);
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage("사용자 정보를 가져오는데 실패했습니다.");
+      }
     } catch (error) {
-      console.error("멤버 데이터를 가져오는데 에러 발생:", error);
+      setIsAlertVisible(true);
+      setAlertMessage("사용자 정보 에러 발생.");
     }
   };
 
@@ -76,6 +84,16 @@ const MemberSectionProfile = ({ locationNickname }) => {
 
   return (
     <div className="space-x-4 overflow-hidden bg-slate-950 bg-opacity-60 px-5 py-5">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => {
+          setIsAlertVisible(false);
+          if (alertMessage === "사용자 정보 에러 발생.") {
+            navigateToBack();
+          }
+        }}
+      />
       {memberData && (
         <div className="flex items-start space-x-4">
           <img
@@ -124,11 +142,8 @@ const MemberSectionProfile = ({ locationNickname }) => {
             className="w-20"
             onClick={navigateToModifyProfile}
           />
-        ) : memberData?.resultData?.follow ? (
-          <Button5
-            value="언팔로우"
-            onClick={handleUnfollow} // 이 함수를 정의해야 함
-          />
+        ) : isFollowing ? (
+          <Button5 value="언팔로우" onClick={handleUnfollow} />
         ) : (
           <Button5 value="팔로우" onClick={handleFollow} />
         )}

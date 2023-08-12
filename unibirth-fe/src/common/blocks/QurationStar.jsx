@@ -2,24 +2,25 @@ import React, { useEffect, useState } from "react";
 import useSearchApi from "../../api/useSearchApi";
 import { nicknameState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
+import CustomAlert from "../atoms/CustomAlert";
 
 const QurationStar = () => {
   const [qurationStar, setQurationStar] = useState([]);
   const nickname = useRecoilValue(nicknameState);
-
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const getQurationStar = async () => {
     try {
-      console.log("dd");
       const response = await useSearchApi.searchGetMemberCuration(nickname);
       if (response.status === 200) {
-        console.log("파일을 불러왔습니다.", response.resultData);
         setQurationStar(response.resultData);
       } else {
-        alert("파일을 불러오는데 실패하였습니다.");
+        setIsAlertVisible(true);
+        setAlertMessage("관심 별이 없습니다.");
       }
     } catch (e) {
-      console.log(e);
-      alert("파일을 불러오는데 실패하였습니다.");
+      setIsAlertVisible(true);
+      setAlertMessage("관심 별이 없습니다.");
     }
   };
 
@@ -29,6 +30,12 @@ const QurationStar = () => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => setIsAlertVisible(false)}
+      />
+
       {qurationStar.map((item, index) => (
         <div
           key={index}

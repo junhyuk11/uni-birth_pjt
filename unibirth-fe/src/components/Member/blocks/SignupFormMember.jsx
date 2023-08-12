@@ -9,6 +9,7 @@ import InPutZodiac from "../atoms/InputZodiac";
 import { debounce } from "lodash";
 import { Jodiac } from "../../../constants/zodiac";
 import { PLANET_LIST } from "../../../constants/constants";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const MemberRegistrationForm = ({
   nickname,
@@ -31,6 +32,8 @@ const MemberRegistrationForm = ({
   const [content, setContent] = useState(
     "생년월일을 입력하시면 별자리가 자동으로 설정됩니다.",
   );
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const isNicknameValid = (nickname) => {
     const regex = /^[a-zA-Z0-9가-힣]+$/;
     return regex.test(nickname);
@@ -43,22 +46,33 @@ const MemberRegistrationForm = ({
   const [jodiacname, setJodiacname] = useState("당신의 별자리는?");
   const duplicateCheck = useCallback(async (type, value, emptyMessage) => {
     console.log(type, value, emptyMessage);
+
     if (value === "") {
       alert(emptyMessage);
       return;
     }
+
     const checkFunc =
       type === "Email"
         ? useMemberApi.membersPostCheckEmail
         : useMemberApi.membersPostCheckNickname;
+
     const param = type === "Email" ? { email: value } : { nickname: value };
 
-    const response = await checkFunc(param);
-    alert(
-      response.status === 200
-        ? `사용 가능한 ${type}입니다.`
-        : `이미 사용중인 ${type}입니다.`,
-    );
+    try {
+      const response = await checkFunc(param);
+
+      if (response.status === 200) {
+        setIsAlertVisible(true);
+        setAlertMessage(`사용 가능한 ${type}입니다.`);
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage(`이미 사용중인 ${type}입니다.`);
+      }
+    } catch (error) {
+      setIsAlertVisible(true);
+      setAlertMessage(`사용자 ${type} 확인 중 오류가 발생했습니다.`);
+    }
   }, []);
 
   const debouncedSetImage = useCallback(
@@ -128,6 +142,11 @@ const MemberRegistrationForm = ({
 
   return (
     <div className="mx-10 flex-col items-center justify-center space-y-5">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => setIsAlertVisible(false)}
+      />
       <InPutZodiac
         onChange={(e) => {
           setBirthdate(e.target.value);

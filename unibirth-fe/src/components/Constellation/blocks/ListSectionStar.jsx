@@ -19,6 +19,7 @@ import * as THREE from "three";
 import GradientBackground from "../../../common/atoms/GradientBackground";
 import Background from "../../../common/atoms/Background";
 import Plus from "../../../assets/icons/js/plus";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -35,12 +36,12 @@ const ListSectionStar = () => {
   const [boxurl, setBoxurl] = useRecoilState(boxurlState);
   const [boxid, setBoxid] = useRecoilState(boxidState);
   const [boxcreated, setBoxcreated] = useRecoilState(boxcreatedState);
-  // 김민섭
   const [brightness, setBrightness] = useState(0);
-
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   // tooltip
   const [tooltipStyle, setTooltipStyle] = useState({ display: "none" });
-  const { navigateToRegisterStar } = useNavigation();
+  const { navigateToRegisterStar, navigateToBack } = useNavigation();
   const handleBoxClick = ({ event, index }) => {
     console.log(index);
     const mouse = new THREE.Vector2();
@@ -75,17 +76,20 @@ const ListSectionStar = () => {
   }, [constellationId]);
 
   const getStarList = async (constellationId) => {
-    // console.log("consteelationID:", constellationId);
     try {
       const response = await useConstellationApi.constellationsGetConstellation(
         constellationId,
       );
-      console.log(" setStarList:", response);
-      setStarList(response.resultData);
-      setStarListIndex(response.resultData.starList);
-      // console.log("starList:", starList);
+      if (response.status === 200) {
+        setStarList(response.resultData);
+        setStarListIndex(response.resultData.starList);
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage("별 리스트를 불러오는데 실패했습니다.");
+      }
     } catch (error) {
-      console.error("Failed to get star list:", error);
+      setIsAlertVisible(true);
+      setAlertMessage("별 리스트를 불러오는데 실패했습니다.");
     }
   };
 
@@ -111,6 +115,16 @@ const ListSectionStar = () => {
 
   return (
     <div className="relative bottom-0 h-screen w-screen">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => {
+          setIsAlertVisible(false);
+          if (alertMessage === "별 리스트를 불러오는데 실패했습니다.") {
+            navigateToBack();
+          }
+        }}
+      />
       <button
         className="absolute bottom-36 right-4 z-10 flex flex-col text-4xl text-white opacity-100"
         onClick={navigateToRegisterStar}

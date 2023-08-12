@@ -22,7 +22,6 @@ function CameraController({ planet, zoomed }) {
   const zoomFactor = 0.1;
   const multiFactor = 1.5;
   useEffect(() => {
-    console.log("플래닛:", planet);
     const targetPosition = zoomed
       ? {
           x: planet.x * multiFactor + 50,

@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useNavigation } from "../../../hooks/useNavigation";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const Carousel = ({ Lists }) => {
   const settings = {
@@ -57,30 +58,38 @@ const Carousel = ({ Lists }) => {
 
 const ListBestStars = ({ currentPlanet }) => {
   const [Lists, setLists] = useState([]);
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   useEffect(() => {
     getBestList(currentPlanet);
     // console.log("BestList:", BestList);
   }, [currentPlanet]);
-
   useEffect(() => {}, [Lists]);
 
   const getBestList = async (planetId) => {
-    console.log(planetId);
     try {
       // 인덱스가 0~7, 실제 행성은 1~8 이므로 접근은 +1 로 한다
       const response = await usePlanetApi.planetsGetStarList(planetId + 1);
-      const Lists = response.resultData.starList;
-      console.log("planet:", response.resultData);
-      setLists(Lists);
+      if (response.status === 200) {
+        const Lists = response.resultData.starList;
+        setLists(Lists);
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage("가장 밝은 별 리스트를 불러오는데 실패했습니다.");
+      }
     } catch (e) {
-      console.log("planet_error:", e);
+      setIsAlertVisible(true);
+      setAlertMessage("가장 밝은 별 리스트를 불러오는데 실패했습니다.");
     }
   };
 
-  console.log(Lists);
-
   return (
     <div>
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => setIsAlertVisible(false)}
+      />
       <Carousel Lists={Lists} />
     </div>
   );
