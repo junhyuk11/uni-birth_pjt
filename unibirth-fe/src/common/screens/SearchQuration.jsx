@@ -47,11 +47,7 @@ const DetailConstellation = () => {
           query={query}
           setQuery={setQuery}
         />
-        <div className="flex flex-col items-center justify-center">
-          <p>별자리 상세 페이지</p>
-          <p>현재 카테고리 {category}</p>
-          <p>현재 검색어 {query}</p>
-        </div>
+        <div className="flex flex-col items-center justify-center"></div>
         <QurationStar />
         <Footer3 buttons={buttonsFooter} />
       </div>
