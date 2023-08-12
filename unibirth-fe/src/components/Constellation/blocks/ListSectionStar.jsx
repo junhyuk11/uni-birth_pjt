@@ -19,6 +19,9 @@ import * as THREE from "three";
 import GradientBackground from "../../../common/atoms/GradientBackground";
 import Background from "../../../common/atoms/Background";
 import Plus from "../../../assets/icons/js/plus";
+import Close2 from "../../../assets/icons/js/close2";
+import Star2 from "../../../assets/icons/js/star2";
+import Button2 from "../../../common/atoms/Button2";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -164,7 +167,7 @@ const ListSectionStar = () => {
         <div
           className={`
   absolute z-50
-  w-screen max-w-screen-sm rounded-lg bg-white p-2
+  w-screen max-w-screen-sm rounded-lg bg-slate-600 bg-opacity-80 p-2
   ${tooltipStyle.display === "none" ? "hidden" : ""}`}
           style={
             {
@@ -183,40 +186,50 @@ const ListSectionStar = () => {
             // top: tooltipStyle.top,
           }
         >
-          <div className="relative flex flex-col font-Pretendard">
+          <div className="relative flex flex-col items-center justify-center font-Pretendard text-white">
             <button
-              className="absolute right-0 top-0 rounded-lg font-bold"
+              className="absolute right-1 top-1 rounded-lg font-bold"
               onClick={() =>
                 setTooltipStyle({ ...tooltipStyle, display: "none" })
               }
             >
-              X
+              <Close2 />
             </button>
-            <div className="flex-flex-row">
+            <div className="flex-flex-row relative">
               <div className="flex items-center justify-center">
                 <img
-                  className="h-64 w-80 rounded-lg"
+                  className="mt-10 h-64 w-80 rounded-lg"
                   src={boxurl}
                   alt="star"
                   style={{ objectFit: "cover", overflow: "hidden" }}
                 />
+                <div
+                  className="absolute left-0 top-10 flex items-center p-2 font-bold text-white"
+                  style={{
+                    zIndex: 1,
+                    verticalAlign: "text-bottom",
+                    display: "flex",
+                    alignItems: "flex-end",
+                  }}
+                >
+                  <Star2 />
+                  <p className="mb-0 ml-2">: {brightness}</p>
+                </div>
               </div>
               <div className="flex flex-col">
                 <div className="flex justify-between p-2">
                   <p className="flex font-bold">{boxnickname}</p>
                   <p className="flex">{boxcreated?.slice(0, 10)}</p>
                 </div>
-                <p>{boxcontent}</p>
+                <p className="overflow-ellipsis p-2">{boxcontent}</p>
                 <p></p>
               </div>
             </div>
-            현재 빛남 : {brightness}
-            <button
-              className="rounded-lg border-2 border-black bg-transparent text-black"
+            <Button2
+              className="rounded-lg border-2 border-white bg-transparent text-white"
               onClick={() => navigateToDetailStar(boxid)}
-            >
-              이동하기
-            </button>
+              value="상세정보"
+            />
           </div>
         </div>
       </div>
