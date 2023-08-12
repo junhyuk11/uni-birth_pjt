@@ -64,7 +64,7 @@ const MeshCons = ({
     setAllSphereList(newConstellationList);
     // 1부터 8까지 동일함
   }, [vertices]);
-  console.log("구 콘솔?", AllSphereList);
+  // console.log("구 콘솔?", AllSphereList);
 
   const constellationMeshes = useMemo(() => {
     const meshModels = [];
@@ -85,7 +85,7 @@ const MeshCons = ({
         .normalize();
 
       direction.multiplyScalar(constellationGap);
-      console.log("다이렉션::", direction);
+      // console.log("다이렉션::", direction);
 
       const xyz = {
         x: AllSphereList[i].x + direction.x,
@@ -96,7 +96,7 @@ const MeshCons = ({
       StarsIndexList.push(xyz);
       const groupKey = constellationList?.constellationList[i].constellationId; // planet ID 정보로 사용 가능
       const INDEX = i;
-      console.log("INDEX:", INDEX);
+      // console.log("INDEX:", INDEX);
       const group = (
         <group key={groupKey} onClick={() => handleConsClick(INDEX)}>
           {constellationList.constellationList[i].lineList.map(

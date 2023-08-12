@@ -24,10 +24,12 @@ import Plus from "../../../assets/icons/js/plus";
 
 // R3F 훅 카메라 컨트롤러 컴포넌트
 function CameraController({ ConstellationPosition, zoomed }) {
+  const controlsRef = useRef();
+  console.log("졸려서모학[ㅆ다", controlsRef);
   const [animating, setAnimating] = useState(false);
-
   const { camera } = useThree();
   const cameraRef = useRef(camera);
+  console.log("카메러::", cameraRef.current);
   cameraRef.current = camera;
   const zoomFactor = 0.1;
   const multiFactor = 1.5;
@@ -55,6 +57,7 @@ function CameraController({ ConstellationPosition, zoomed }) {
       console.log("카메라 표지션:", startPosition);
 
       const updateCameraPosition = () => {
+        controlsRef.current.enabled = false;
         cameraRef.current.position.set(
           startPosition.x,
           startPosition.y,
@@ -73,7 +76,7 @@ function CameraController({ ConstellationPosition, zoomed }) {
         onUpdate: updateCameraPosition,
         ease: "Power1.inOut",
         onComplete: () => {
-          setAnimating(false);
+          controlsRef.current.enabled = true;
         },
       });
     }
@@ -81,7 +84,20 @@ function CameraController({ ConstellationPosition, zoomed }) {
   useEffect(() => {
     document.body.style.pointerEvents = animating ? "none" : "auto";
   }, [animating]);
-  return null;
+  return (
+    <>
+      {" "}
+      <OrbitControls
+        ref={controlsRef}
+        // enablePan={true}
+        enableDamping={true}
+        rotateSpeed={-0.4}
+        // minDistance={1} // minimum zoom distance
+        maxDistance={8000} // maximum zoom distance
+        dampingFactor={1}
+      />
+    </>
+  );
 }
 
 const Scene = ({ constellationList }) => {
@@ -92,7 +108,6 @@ const Scene = ({ constellationList }) => {
   useEffect(() => {
     setBackgroundflag(false);
   }, []);
-  const controlsRef = useRef();
   const { navigateToRegisterConstellation } = useNavigation();
   useEffect(() => {}, [constellationList]);
 
@@ -199,15 +214,6 @@ const Scene = ({ constellationList }) => {
         <EffectComposer>
           <Bloom mipmapBlur luminanceThreshold={1} radius={0.7} />
         </EffectComposer>
-        <OrbitControls
-          ref={controlsRef}
-          // enablePan={true}
-          enableDamping={true}
-          rotateSpeed={-0.4}
-          // minDistance={1} // minimum zoom distance
-          maxDistance={8000} // maximum zoom distance
-          dampingFactor={1}
-        />
         <axesHelper scale={5} />
         <color attach="background" args={["black"]} />
         <Stars
