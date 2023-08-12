@@ -19,7 +19,6 @@ const RegistConstellation = () => {
     backgroundflag(true);
   }, []);
   const currentPLanet = useRecoilValue(currentplanetState);
-  console.log("제발:", currentPLanet);
   const [planetId, setPlanetId] = useState(currentPLanet);
   const [constellationName, setConstellationName] = useState("");
   const [constellationDescp, setConstellationDescp] = useState("");

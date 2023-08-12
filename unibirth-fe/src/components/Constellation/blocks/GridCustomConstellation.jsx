@@ -33,6 +33,7 @@ const GridCustomConstellation = ({
   const { navigateToDetailConstellation } = useNavigation();
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     if (shouldDeduplicate) {
@@ -153,6 +154,7 @@ const GridCustomConstellation = ({
   };
 
   const handleSaveClick = () => {
+    setLoading(true); // 로딩 상태 시작
     const [uniquePoints, uniqueLines] = removeDuplicate(lines);
     const imageUrl = linesAndPointsLayerRef.current.toDataURL();
     const [header, data] = imageUrl.split(",");
@@ -203,6 +205,7 @@ const GridCustomConstellation = ({
           setIsAlertVisible(true);
           setAlertMessage("업로드에 실패했습니다.");
         }
+        setLoading(false); // 로딩 상태 종료
       },
     );
   };
@@ -327,7 +330,11 @@ const GridCustomConstellation = ({
       <div className="mt-20 space-x-4">
         <Button1 value="초기화" onClick={handleResetClick}></Button1>
         <Button1 value="이전" onClick={handleBeforeClick}></Button1>
-        <Button1 value="저장" onClick={handleSaveClick}></Button1>
+        <Button1
+          value="생성"
+          onClick={handleSaveClick}
+          disabled={isLoading}
+        ></Button1>
       </div>
     </div>
   );

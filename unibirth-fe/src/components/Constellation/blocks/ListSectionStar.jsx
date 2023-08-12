@@ -159,7 +159,6 @@ const ListSectionStar = () => {
         <button
           className="absolute bottom-36 right-4 z-10 flex flex-col text-4xl text-white opacity-100"
           onClick={navigateToRegisterStar}
-          disabled={!isFulledStar}
         >
           <Plus />
         </button>
