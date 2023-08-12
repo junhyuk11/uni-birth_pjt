@@ -14,7 +14,6 @@ const DirectMessage = () => {
   const nickname = useRecoilValue(nicknameState);
   const location = useLocation();
   const locationNickname = location.state;
-  console.log(location);
 
   const { navigateToBack } = useNavigation();
 
@@ -35,7 +34,6 @@ const DirectMessage = () => {
     },
   ];
 
-  // DOM ref를 사용하여 스크롤 관리
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -54,7 +52,6 @@ const DirectMessage = () => {
     );
 
     return () => {
-      console.log(locationNickname);
       detachListener();
     };
   }, [nickname, locationNickname]);

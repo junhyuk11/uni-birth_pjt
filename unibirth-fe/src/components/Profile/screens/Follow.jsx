@@ -10,6 +10,7 @@ import Header5 from "../../../common/blocks/Header5";
 import Button1 from "../../../common/atoms/Button1";
 import Message from "../../../assets/icons/js/message";
 import { useLocation } from "react-router-dom";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const Follow = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -19,7 +20,8 @@ const Follow = () => {
 
   const [followerList, setFollowerList] = useState([]);
   const [followingList, setFollowingList] = useState([]);
-
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const location = useLocation();
   const locationNickname = location.state.locationNickname;
   const [currentList, setCurrentList] = useState(location.state.currentState);
@@ -48,15 +50,37 @@ const Follow = () => {
   ];
 
   const getFollowerList = async () => {
-    const response = await useProfileApi.profilesGetFollowers(locationNickname);
-    setFollowerList(response.resultData);
+    try {
+      const response = await useProfileApi.profilesGetFollowers(
+        locationNickname,
+      );
+      if (response.status === 200) {
+        setFollowerList(response.resultData);
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage("리스트를 불러오는데 실패하였습니다.");
+      }
+    } catch (error) {
+      setIsAlertVisible(true);
+      setAlertMessage("리스트를 불러오는데 실패하였습니다.");
+    }
   };
 
   const getFollowingList = async () => {
-    const response = await useProfileApi.profilesGetFollowings(
-      locationNickname,
-    );
-    setFollowingList(response.resultData);
+    try {
+      const response = await useProfileApi.profilesGetFollowings(
+        locationNickname,
+      );
+      if (response.status === 200) {
+        setFollowingList(response.resultData);
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage("리스트를 불러오는데 실패하였습니다.");
+      }
+    } catch (error) {
+      setIsAlertVisible(true);
+      setAlertMessage("리스트를 불러오는데 실패하였습니다.");
+    }
   };
 
   useEffect(() => {
@@ -76,6 +100,16 @@ const Follow = () => {
     <div className="mx-auto h-screen max-w-screen-sm">
       <Header2 buttons={buttonsHeader} />
       <Header5 buttons={buttonsHeader2} />
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => {
+          setIsAlertVisible(false);
+          if (alertMessage === "리스트를 불러오는데 실패하였습니다.") {
+            navigateToBack();
+          }
+        }}
+      />
       <div className="flex flex-col items-center px-4 text-white">
         {currentList === "팔로워" &&
           followerList.map((user) => (

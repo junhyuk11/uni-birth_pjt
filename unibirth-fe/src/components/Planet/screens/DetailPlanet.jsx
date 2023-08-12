@@ -9,24 +9,38 @@ import { useParams } from "react-router-dom";
 import Footer from "../../../common/blocks/Footer";
 import { useRecoilValue } from "recoil";
 import { nicknameState } from "../../../recoil/atoms";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const DetailPlanet = () => {
   const { planetId } = useParams();
   const [constellationList, setConstellationList] = useState({
     constellationList: [],
   });
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const {
     navigateToMainPlanet,
     navigateToSearchQuration,
     navigateToMemberProfile,
     navigateToLoginMember,
+    navigateToBack,
   } = useNavigation();
 
   const getConstellationList = async (planetId) => {
-    const response = await useConstellationApi.constellationsGetPlanet(
-      planetId,
-    );
-    setConstellationList(response.resultData);
+    try {
+      const response = await useConstellationApi.constellationsGetPlanet(
+        planetId,
+      );
+      if (response.status === 200) {
+        setConstellationList(response.resultData);
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage("별자리 리스트를 불러오는데 실패하였습니다.");
+      }
+    } catch (e) {
+      setIsAlertVisible(true);
+      setAlertMessage("별자리 리스트를 불러오는데 실패하였습니다.");
+    }
   };
 
   useEffect(() => {}, [constellationList]);
@@ -68,6 +82,16 @@ const DetailPlanet = () => {
 
   return (
     <div>
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => {
+          setIsAlertVisible(false);
+          if (alertMessage === "별자리 리스트를 불러오는데 실패하였습니다.") {
+            navigateToBack();
+          }
+        }}
+      />
       <div className="absolute z-50 max-w-screen-sm">
         <Header1 buttons={buttonsHeader} />
       </div>

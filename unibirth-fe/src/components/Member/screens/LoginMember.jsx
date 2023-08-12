@@ -13,6 +13,7 @@ import {
 import LoginFormMember from "../blocks/LoginFormMember";
 import useMemberApi from "../../../api/useMemberApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const LoginMember = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -25,12 +26,12 @@ const LoginMember = () => {
   const [nickname, setNickname] = useRecoilState(nicknameState);
   // eslint-disable-next-line no-unused-vars
   const [boardSize, setBoardSize] = useRecoilState(boardSizeState);
-
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const { navigateToBack, navigateToRegisterMember, navigateToMainPlanet } =
     useNavigation();
 
   const handleLogin = async (e) => {
-    // e.preventDefault();
     const member = {
       email,
       password,
@@ -38,18 +39,17 @@ const LoginMember = () => {
     try {
       const response = await useMemberApi.membersPostLogin(member);
       if (response.status === 200) {
-        alert("로그인이 완료되었습니다.");
-        console.log(response.resultData);
         sessionStorage.setItem("accessToken", response.resultData.accessToken);
         setBoardSize(response.resultData.purchasedBoard);
         setNickname(response.resultData.nickname);
         navigateToMainPlanet();
       } else {
-        alert("이메일 또는 비밀번호가 일치하지 않습니다.");
+        setIsAlertVisible(true);
+        setAlertMessage("이메일 또는 비밀번호가 일치하지 않습니다.");
       }
     } catch (e) {
-      console.log(e);
-      alert("로그인에 실패하였습니다.");
+      setIsAlertVisible(true);
+      setAlertMessage("로그인에 실패하였습니다.");
     }
   };
 
@@ -83,6 +83,12 @@ const LoginMember = () => {
   };
   return (
     <div className="mx-auto h-screen max-w-screen-sm">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => setIsAlertVisible(false)}
+      />
+      ;
       <div>
         <Header1 buttons={buttonsHeader} />
         <form className="justify-center">

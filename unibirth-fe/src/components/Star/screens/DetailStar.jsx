@@ -5,16 +5,18 @@ import { useNavigation } from "../../../hooks/useNavigation";
 import useStarApi from "../../../api/useStarApi";
 import useMemberApi from "../../../api/useMemberApi";
 import { useParams } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { backgroundflagState } from "../../../recoil/atoms";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
-
+import CustomAlert from "../../../common/atoms/CustomAlert";
 const DetailStar = () => {
-  const [ddd, setBackgroundflag] = useRecoilState(backgroundflagState);
+  const setBackgroundflag = useSetRecoilState(backgroundflagState);
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
   const { starId } = useParams();
   const [memberInfo, setMemberInfo] = useState([]);
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const [star, setStar] = useState({
     brightness: "",
     content: "",
@@ -29,7 +31,6 @@ const DetailStar = () => {
 
   useEffect(() => {
     setBackgroundflag(true);
-    console.log("flag:", ddd);
   }, []);
 
   useEffect(() => {
@@ -43,24 +44,32 @@ const DetailStar = () => {
   }, [star.nickname]);
 
   const getStar = async (starId) => {
-    console.log(starId);
     try {
       const response = await useStarApi.starsGetStar(starId);
-      console.log("별자리 디테일: ", response);
-      setStar(response.resultData);
+      if (response.status === 200) {
+        setStar(response.resultData);
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage("별을 불러오는데 실패하였습니다.");
+      }
     } catch (error) {
-      console.error("Failed to get star:", error);
+      setIsAlertVisible(true);
+      setAlertMessage("별을 불러오는데 실패하였습니다.");
     }
   };
 
   const getMemberInfo = async (nickname) => {
-    console.log(nickname);
     try {
       const response = await useMemberApi.membersGetDetail(nickname);
-      console.log(response);
-      setMemberInfo(response.resultData);
+      if (response.status === 200) {
+        setMemberInfo(response.resultData);
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage("멤버 정보를 불러오는데 실패하였습니다.");
+      }
     } catch (error) {
-      console.error("Failed to get member:", error);
+      setIsAlertVisible(true);
+      setAlertMessage("멤버 정보를 불러오는데 실패하였습니다.");
     }
   };
 
@@ -70,24 +79,34 @@ const DetailStar = () => {
     if (star.alreadyLiked) {
       try {
         const response = await useStarApi.starsDeleteBrightness(starId);
-        console.log(response);
-        setStar({
-          ...star,
-          alreadyLiked: false,
-        });
+        if (response.status === 200) {
+          setStar({
+            ...star,
+            alreadyLiked: false,
+          });
+        } else {
+          setIsAlertVisible(true);
+          setAlertMessage("오류 발생");
+        }
       } catch (error) {
-        console.error("Failed to delete like:", error);
+        setIsAlertVisible(true);
+        setAlertMessage("오류 발생");
       }
     } else {
       try {
         const response = await useStarApi.starsGetBrightness(starId);
-        console.log(response);
-        setStar({
-          ...star,
-          alreadyLiked: true,
-        });
+        if (response.status === 200) {
+          setStar({
+            ...star,
+            alreadyLiked: true,
+          });
+        } else {
+          setIsAlertVisible(true);
+          setAlertMessage("오류 발생");
+        }
       } catch (error) {
-        console.error("Failed to post like:", error);
+        setIsAlertVisible(true);
+        setAlertMessage("오류 발생");
       }
     }
   };
@@ -102,6 +121,20 @@ const DetailStar = () => {
 
   return (
     <div className="mx-auto flex h-screen max-w-screen-sm flex-col bg-slate-100 bg-opacity-50 p-4">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => {
+          setIsAlertVisible(false);
+          if (
+            alertMessage === "별을 불러오는데 실패하였습니다." ||
+            alertMessage === "멤버 정보를 불러오는데 실패하였습니다." ||
+            alertMessage === "오류 발생"
+          ) {
+            navigateToBack();
+          }
+        }}
+      />
       <Header1 buttons={buttonsHeader} />
       <div className="flex flex-row items-center py-2">
         <img

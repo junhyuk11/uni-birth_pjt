@@ -5,13 +5,15 @@ import { useNavigation } from "../../../hooks/useNavigation";
 import useStarApi from "../../../api/useStarApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import { useLocation } from "react-router";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const MyStars = () => {
   const { navigateToBack, navigateToDetailStar } = useNavigation();
 
   const location = useLocation();
   const locationNickname = location.state;
-
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   function formatDate(dateString) {
     const options = {
       year: "numeric",
@@ -47,9 +49,18 @@ const MyStars = () => {
   };
 
   const getStarList = async () => {
-    const response = await useStarApi.starsGetStarList(locationNickname);
-    console.log(response);
-    setStarList(response.resultData);
+    try {
+      const response = await useStarApi.starsGetStarList(locationNickname);
+      if (response.status === 200) {
+        setStarList(response.resultData);
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage("별 리스트를 불러오는데 실패하였습니다.");
+      }
+    } catch (e) {
+      setIsAlertVisible(true);
+      setAlertMessage("별 리스트를 불러오는데 실패하였습니다.");
+    }
   };
 
   useEffect(() => {
@@ -58,6 +69,16 @@ const MyStars = () => {
 
   return (
     <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => {
+          setIsAlertVisible(false);
+          if (alertMessage === "별 리스트를 불러오는데 실패하였습니다.") {
+            navigateToBack();
+          }
+        }}
+      />
       <header className="sticky top-0 z-10">
         <Header2 buttons={buttonsHeader} />
       </header>

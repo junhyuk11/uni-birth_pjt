@@ -17,13 +17,15 @@ import Header6 from "../../../common/blocks/Header6";
 import Star from "../../../assets/icons/js/star";
 import { useLocation } from "react-router-dom";
 import Footer from "../../../common/blocks/Footer";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
   backgroundflag(true);
   const location = useLocation();
   const locationNickname = location.state;
-
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const nickname = useRecoilValue(nicknameState);
   const {
     navigateToMessageBox,
@@ -56,15 +58,16 @@ const MemberProfile = () => {
       try {
         const response = await useMemberApi.membersDeleteMember();
         if (response.status === 200) {
-          alert("회원탈퇴 완료.");
+          setIsAlertVisible(true);
+          setAlertMessage("회원탈퇴가 완료되었습니다.");
           sessionStorage.clear();
-          navigateToMainPlanet();
         } else {
-          alert("죽어도 못 보내~");
+          setIsAlertVisible(true);
+          setAlertMessage("회원탈퇴에 실패하였습니다.");
         }
       } catch (e) {
-        console.log(e);
-        alert("내가 어떻게 널 보내~");
+        setIsAlertVisible(true);
+        setAlertMessage("회원탈퇴에 실패하였습니다.");
       }
     }
   };
@@ -144,6 +147,16 @@ const MemberProfile = () => {
 
   return (
     <div className="mx-auto h-screen max-w-screen-sm">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => {
+          setIsAlertVisible(false);
+          if (alertMessage === "회원탈퇴가 완료되었습니다.") {
+            navigateToMainPlanet();
+          }
+        }}
+      />
       <div>
         <header className="sticky top-0 z-10">
           <Header6 buttons={buttonsHeader} />

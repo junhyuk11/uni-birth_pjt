@@ -13,6 +13,7 @@ import { storage } from "../../../api/useFirebaseApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import InputImage from "../atoms/InputImage";
 import earth from "../../../assets/images/earth.png";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const RegisterStar = () => {
   useEffect(() => {
@@ -34,21 +35,24 @@ const RegisterStar = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [thumbUrl, setThumbUrl] = useState("");
   const [content, setContent] = useState("");
-  // const [showModal, setShowModal] = useState(false);
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const createStar = () => {
-    // Firebase에 Image 저장 및 URL 받아오기
     const storageRef = ref(storage, `images/${imageUrl.name}`);
     const uploadTask = uploadBytesResumable(storageRef, imageUrl);
 
     if (title.trim() === "") {
-      alert("이름을 입력해주세요");
+      setIsAlertVisible(true);
+      setAlertMessage("제목을 입력해주세요.");
       return;
     } else if (content.trim() === "") {
-      alert("내용을 입력해주세요");
+      setIsAlertVisible(true);
+      setAlertMessage("내용을 입력해주세요.");
       return;
     } else if (!imageUrl) {
-      alert("이미지를 넣어주세요");
+      setIsAlertVisible(true);
+      setAlertMessage("이미지를 넣어주세요.");
       return;
     }
 
@@ -59,16 +63,13 @@ const RegisterStar = () => {
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log(`Upload is ${progress}% done.`);
       },
-      (error) => {
-        // Error handling
-        console.log(error);
+      () => {
+        setIsAlertVisible(true);
+        setAlertMessage("이미지 업로드에 실패하였습니다.");
       },
       async () => {
         try {
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          // 2. 받은 URL back 서버에 저장
-          // Removed the extra arrow function
-          console.log(downloadURL);
           setImageUrl(downloadURL);
           const data = {
             constellationId,
@@ -77,25 +78,19 @@ const RegisterStar = () => {
             content,
           };
           const response = await useStarApi.starsPostStar(data);
-          navigateToDetailConstellation(constellationId);
-          console.log("response:", response);
-          console.log("data:", data);
           if (response.status === 200) {
-            alert("별 생성에 성공하였습니다.");
-            // navigateToDetailConstellation(constellationId);
+            navigateToDetailConstellation(constellationId);
           } else {
-            alert("별 생성에 실패하였습니다. 다시 입력해주세요");
+            setIsAlertVisible(true);
+            setAlertMessage("별 생성에 실패하였습니다.");
           }
         } catch (error) {
-          console.log("Failed to get download url", error);
+          setIsAlertVisible(true);
+          setAlertMessage("별 생성에 실패하였습니다.");
         }
       },
     );
   };
-
-  // const toggleModal = () => {
-  //   setShowModal(!showModal);
-  // };
 
   const buttonsHeader = [
     {
@@ -113,6 +108,13 @@ const RegisterStar = () => {
   ];
   return (
     <div className="mx-auto h-screen max-w-screen-sm  bg-slate-100 bg-opacity-50">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => {
+          setIsAlertVisible(false);
+        }}
+      />
       <div>
         <Header1 buttons={buttonsHeader} />
         <div className="mt-24 flex flex-col items-center justify-center space-y-10">
@@ -134,20 +136,6 @@ const RegisterStar = () => {
           />
         </div>
         <div className="mt-20 flex justify-center ">
-          {/* <Button1 value="별자리 초대하기" onClick={toggleModal} />
-          {showModal && (
-            <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-40">
-              <div className="max-h-2/4 overflow-y-auto rounded-lg bg-white">
-                <button
-                  onClick={toggleModal}
-                  className="float-right p-2 hover:bg-gray-200"
-                >
-                  X
-                </button>
-                <InviteFollowStar />
-              </div>
-            </div>
-          )} */}
           <Button1 value="별 생성" onClick={createStar} />
         </div>
       </div>

@@ -7,6 +7,7 @@ import { useNavigation } from "../../hooks/useNavigation";
 import Button2 from "../atoms/Button2";
 import LeftArrow from "../../assets/icons/js/leftArrow";
 import SearchHeader from "../blocks/SearchHeader";
+import CustomAlert from "../atoms/CustomAlert";
 
 const SearchCommon = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -17,14 +18,15 @@ const SearchCommon = () => {
   const [activeTab, setActiveTab] = useState("constellation");
   const query = location.state.query;
   const category = location.state.categoryName;
-  console.log("쿼리:", query);
-  console.log("카테고리:", category);
   const [constellationList, setConstellationList] = useState([]);
   const [memberList, setMemberList] = useState([]);
   const [starList, setStarList] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [searchCategory, setSearchCategory] = useState("all");
+
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const {
     navigateToDetailConstellation,
@@ -45,11 +47,12 @@ const SearchCommon = () => {
         setMemberList(response.resultData.memberList || []);
         setStarList(response.resultData.starList || []);
       } else {
-        alert("파일을 불러오는데 실패하였습니다.");
+        setIsAlertVisible(true);
+        setAlertMessage("검색 결과를 불러오는데 실패하였습니다.");
       }
     } catch (e) {
-      console.log(e);
-      alert("파일을 불러오는데 실패하였습니다.");
+      setIsAlertVisible(true);
+      setAlertMessage("검색 결과를 불러오는데 실패하였습니다.");
     }
   };
   const formatDate = (dateStr) => {
@@ -60,17 +63,14 @@ const SearchCommon = () => {
   };
 
   const handleConstellationClick = (constellationId) => {
-    console.log("별자리 클릭", constellationId);
     navigateToDetailConstellation(constellationId);
   };
 
   const handleMemberClick = (nickname) => {
-    console.log("멤버 클릭", nickname);
     navigateToMemberProfile(nickname);
   };
 
   const handleStarClick = (starId) => {
-    console.log("스타 클릭", starId);
     navigateToDetailStar(starId);
   };
 
@@ -85,6 +85,16 @@ const SearchCommon = () => {
 
   return (
     <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => {
+          setIsAlertVisible(false);
+          if (alertMessage === "검색 결과를 불러오는데 실패하였습니다.") {
+            navigateToBack();
+          }
+        }}
+      />
       <SearchHeader
         buttons={buttonsHeader}
         category={searchCategory}
