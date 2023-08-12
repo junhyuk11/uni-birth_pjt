@@ -38,7 +38,7 @@ const DetailConstellation = () => {
   ];
 
   return (
-    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+    <div className="mx-auto h-screen max-w-screen-sm ">
       <div>
         <SearchHeader
           buttons={buttonsHeader}

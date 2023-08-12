@@ -21,7 +21,6 @@ const searchGetSearch = async (category, word) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/search?category=${category}&word=${word}`);
-    console.log(response.data);
     return response.data;
   } catch (e) {
     console.log(e);

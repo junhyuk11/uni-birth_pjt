@@ -6,7 +6,6 @@ const constellationsGetPlanet = async (planetId) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/constellations/list/${planetId}`);
-    console.log("api입니다", response);
     return response.data;
   } catch (e) {
     console.log(e);
@@ -19,7 +18,6 @@ const constellationsGetConstellation = async (constellationId) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/constellations/${constellationId}`);
-    console.log(response);
     return response.data;
   } catch (e) {
     console.log(e);
@@ -32,7 +30,6 @@ const constellationsGetPin = async (constellationId) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/constellations/pin/${constellationId}`);
-    console.log(response);
     return response.data;
   } catch (e) {
     console.log(e);
@@ -41,12 +38,10 @@ const constellationsGetPin = async (constellationId) => {
 
 const constellationsGetAttendList = async (nickname) => {
   try {
-    console.log(nickname);
     const jwt = sessionStorage.getItem("accessToken");
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/constellations/profiles?nickname=${nickname}`);
-    console.log(response.data);
     return response.data;
   } catch (e) {
     console.log(e);
@@ -66,7 +61,6 @@ const constellationsGetPinList = async (nickname) => {
 };
 
 const constellationsPostConstellation = async (constellation) => {
-  console.log("api입니다", constellation);
   try {
     const jwt = sessionStorage.getItem("accessToken");
     const response = await useAxiosInstance
