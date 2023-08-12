@@ -35,7 +35,7 @@ const DetailPlanet = () => {
         setConstellationList(response.resultData);
       } else {
         setIsAlertVisible(true);
-        setAlertMessage("별자리 리스트를 불러오는데 실패하였습니다.");
+        setAlertMessage(response.message);
       }
     } catch (e) {
       setIsAlertVisible(true);

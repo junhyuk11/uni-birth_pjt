@@ -58,7 +58,7 @@ const Follow = () => {
         setFollowerList(response.resultData);
       } else {
         setIsAlertVisible(true);
-        setAlertMessage("리스트를 불러오는데 실패하였습니다.");
+        setAlertMessage(response.message);
       }
     } catch (error) {
       setIsAlertVisible(true);
@@ -75,7 +75,7 @@ const Follow = () => {
         setFollowingList(response.resultData);
       } else {
         setIsAlertVisible(true);
-        setAlertMessage("리스트를 불러오는데 실패하였습니다.");
+        setAlertMessage(response.message);
       }
     } catch (error) {
       setIsAlertVisible(true);

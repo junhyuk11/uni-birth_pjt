@@ -75,7 +75,7 @@ const ListBestStars = ({ currentPlanet }) => {
         setLists(Lists);
       } else {
         setIsAlertVisible(true);
-        setAlertMessage("가장 밝은 별 리스트를 불러오는데 실패했습니다.");
+        setAlertMessage(response.message);
       }
     } catch (e) {
       setIsAlertVisible(true);

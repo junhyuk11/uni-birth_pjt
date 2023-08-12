@@ -66,7 +66,7 @@ const DetailStar = () => {
         setMemberInfo(response.resultData);
       } else {
         setIsAlertVisible(true);
-        setAlertMessage("멤버 정보를 불러오는데 실패하였습니다.");
+        setAlertMessage(response.message);
       }
     } catch (error) {
       setIsAlertVisible(true);
@@ -87,7 +87,7 @@ const DetailStar = () => {
           });
         } else {
           setIsAlertVisible(true);
-          setAlertMessage("오류 발생");
+          setAlertMessage(response.message);
         }
       } catch (error) {
         setIsAlertVisible(true);
@@ -103,7 +103,7 @@ const DetailStar = () => {
           });
         } else {
           setIsAlertVisible(true);
-          setAlertMessage("오류 발생");
+          setAlertMessage(response.message);
         }
       } catch (error) {
         setIsAlertVisible(true);
@@ -204,7 +204,7 @@ const DetailStar = () => {
         <div className="flex flex-row items-center py-4">
           <p className="flex-grow text-sm text-gray-800">{star.content}</p>
           <button
-            className={`scale-100 transform text-3xl text-yellow-500 transition-transform focus:outline-none ${"animate-bounce"}`}
+            className={`scale-100 transform text-3xl text-yellow-500 transition-transform focus:outline-none`}
             onClick={() => handleLikeClick(star.starId)}
           >
             {star.alreadyLiked ? <AiFillStar /> : <AiOutlineStar />}

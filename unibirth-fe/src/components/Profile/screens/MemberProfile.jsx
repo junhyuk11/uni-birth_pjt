@@ -63,7 +63,7 @@ const MemberProfile = () => {
           sessionStorage.clear();
         } else {
           setIsAlertVisible(true);
-          setAlertMessage("회원탈퇴에 실패하였습니다.");
+          setAlertMessage(response.message);
         }
       } catch (e) {
         setIsAlertVisible(true);

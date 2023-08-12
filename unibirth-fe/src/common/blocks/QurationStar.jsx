@@ -3,12 +3,14 @@ import useSearchApi from "../../api/useSearchApi";
 import { nicknameState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 import CustomAlert from "../atoms/CustomAlert";
+import { useNavigation } from "../../hooks/useNavigation";
 
 const QurationStar = () => {
   const [qurationStar, setQurationStar] = useState([]);
   const nickname = useRecoilValue(nicknameState);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const { navigateToBack } = useNavigation();
   const getQurationStar = async () => {
     try {
       const response = await useSearchApi.searchGetMemberCuration(nickname);
@@ -33,7 +35,12 @@ const QurationStar = () => {
       <CustomAlert
         message={alertMessage}
         isVisible={isAlertVisible}
-        onClose={() => setIsAlertVisible(false)}
+        onClose={() => {
+          setIsAlertVisible(false);
+          if (alertMessage === "관심 별이 없습니다.") {
+            navigateToBack();
+          }
+        }}
       />
 
       {qurationStar.map((item, index) => (

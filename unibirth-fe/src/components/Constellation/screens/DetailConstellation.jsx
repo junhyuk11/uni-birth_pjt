@@ -10,6 +10,7 @@ import Footer from "../../../common/blocks/Footer";
 import { useParams } from "react-router-dom";
 import useConstellationApi from "../../../api/useConstellationApi";
 import Header1 from "../../../common/blocks/Header1";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const DetailConstellation = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -17,7 +18,8 @@ const DetailConstellation = () => {
     backgroundflag(false);
   }, []);
   const { constellationId } = useParams();
-  console.log(constellationId);
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const [constellationContent, setConstellationConstent] = useState([]);
   useEffect(() => {
     getConstellationContent(constellationId);
@@ -28,9 +30,15 @@ const DetailConstellation = () => {
       const response = await useConstellationApi.constellationsGetDetail(
         constellationId,
       );
-      setConstellationConstent(response.resultData);
+      if (response.status === 200) {
+        setConstellationConstent(response.resultData);
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage("별자리 정보를 불러오는데 실패했습니다.");
+      }
     } catch (error) {
-      console.log(error);
+      setIsAlertVisible(true);
+      setAlertMessage("별자리 정보를 불러오는데 실패했습니다.");
     }
   };
   console.log("", constellationContent);
@@ -47,16 +55,6 @@ const DetailConstellation = () => {
       onClick: navigateToBack,
       icon: <LeftArrow />,
     },
-    // {
-    //   component: () => (
-    //     <div className="my-2 flex items-baseline justify-center text-white">
-    //       <p className="mt-0 text-lg">
-    //         {constellationContent.constellationTitle}
-    //       </p>
-    //       <div className="bottom-0 text-sm">&nbsp;자리</div>
-    //     </div>
-    //   ),
-    // },
   ];
   const buttonsFooter = [
     {
@@ -87,6 +85,16 @@ const DetailConstellation = () => {
         <Header1 buttons={buttonsHeader} />
       </div>
       <div className="absolute left-1/2 top-2 z-10 -translate-x-1/2 rounded-lg bg-transparent p-2  text-white">
+        <CustomAlert
+          message={alertMessage}
+          isVisible={isAlertVisible}
+          onClose={() => {
+            setIsAlertVisible(false);
+            if (alertMessage === "별자리 정보를 불러오는데 실패했습니다.") {
+              navigateToBack();
+            }
+          }}
+        />
         <div className="my-2 flex items-baseline justify-center text-white">
           <p className="mt-0 text-xl">
             {constellationContent.constellationTitle}
