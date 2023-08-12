@@ -79,6 +79,9 @@ function CameraController({
         ease: "Power1.inOut",
         onComplete: () => {
           controlsRef.current.enabled = true;
+          if (controlsRef.current.enabled !== null) {
+            controlsRef.current.enabled = true;
+          }
           if (zoomed) {
             setRotateFlag(true);
           } else {
@@ -206,7 +209,12 @@ const Scene = ({ constellationList }) => {
         />
         <GradientBackground />
         <EffectComposer>
-          <Bloom mipmapBlur luminanceThreshold={1} radius={0.7} />
+          <Bloom
+            luminanceThreshold={0.1}
+            luminanceSmoothing={0.5}
+            height={1000}
+            intensity={1}
+          />
         </EffectComposer>
         <axesHelper scale={5} />
         <color attach="background" args={["black"]} />

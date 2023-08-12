@@ -4,7 +4,6 @@ import useConstellationApi from "../../../api/useConstellationApi";
 import { useParams } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-import { Line } from "@react-three/drei";
 import {
   starListState,
   boxcontentState,
@@ -22,7 +21,7 @@ import Plus from "../../../assets/icons/js/plus";
 import Close2 from "../../../assets/icons/js/close2";
 import Star2 from "../../../assets/icons/js/star2";
 import Button2 from "../../../common/atoms/Button2";
-import CustomSphere from "./CustomSphere";
+import LineDrawing from "../atoms/LineDrawing";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -95,13 +94,14 @@ const ListSectionStar = () => {
 
   // starPotisions recoil 저장
   const starPoint = starList?.pointList;
-  const num = 5; // 별 거리 조절
-  const zero = 20;
+  const num = 10; // 별 거리 조절
+  const zero = 10;
+  const zDamping = 5;
   // const znum = (Math.floor(Math.random() * 11) - 5) * num;
   const starPotisions = starPoint?.map((star) => ({
     x: star[0] * num - zero,
     y: star[1] * num,
-    z: star[2] * num,
+    z: (star[2] * num) / zDamping,
     // brightness: starList?.Star.brightness,
     // starId: starList?.Star.starId,
     // memberId: starList?.Star.memberId,
@@ -122,11 +122,15 @@ const ListSectionStar = () => {
         <Plus />
       </button>
       <Canvas camera={{ position: [0, 0, 70] }}>
-        <CustomSphere />
         <Background />
         <axesHelper scale={5} />
+        <ambientLight intensity={0.1} />
         <EffectComposer>
-          <Bloom mipmapBlur luminanceThreshold={1} radius={0.7} />
+          <Bloom
+            luminanceThreshold={0}
+            luminanceSmoothing={0.5}
+            height={1000}
+          />
         </EffectComposer>
         {/* <color attach="background" args={["black"]} /> */}
         <GradientBackground />
@@ -151,18 +155,9 @@ const ListSectionStar = () => {
                 // emissiveIntensity={starList.starList[index].brightness}
               />
             </mesh>
-            {lines.map((line, index) => (
-              <Line
-                key={index}
-                points={[
-                  [line[0] * num - zero, line[1] * num, line[2] * num],
-                  [line[3] * num - zero, line[4] * num, line[5] * num],
-                ]}
-                color="white"
-              />
-            ))}
           </group>
         ))}
+        <LineDrawing lines={lines} num={num} zero={zero} zDamping={zDamping} />
       </Canvas>
       <div>
         {/* 별을 클릭했을 때 위치 조정 필요 */}
