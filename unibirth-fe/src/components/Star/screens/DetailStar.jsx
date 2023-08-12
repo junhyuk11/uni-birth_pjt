@@ -25,6 +25,7 @@ const DetailStar = () => {
     constellationId: "",
     starId: "",
     nickname: "",
+    title: "",
   });
 
   useEffect(() => {
@@ -101,22 +102,39 @@ const DetailStar = () => {
   ];
 
   return (
-    <div className="mx-auto flex h-screen max-w-screen-sm flex-col bg-slate-100 bg-opacity-50 p-4">
-      <Header1 buttons={buttonsHeader} />
-      <div className="flex flex-row items-center py-2">
-        <img
-          src={memberInfo.imageUrl}
-          alt="멤버 이미지"
-          className="h-12 w-12 rounded-full object-cover" // 이미지 둥글게, 크기 조정
-        />
-        <div className="ml-4 flex flex-col">
-          <div
-            className="text-md font-bold text-gray-800"
-            onClick={() => navigateToMemberProfile(memberInfo.nickname)}
-          >
-            {memberInfo.nickname}
+    <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+      <header className="sticky top-0 z-10">
+        <Header1 buttons={buttonsHeader} />
+      </header>
+      <div className="px-4">
+        <div className="flex flex-row items-center py-2">
+          <div className="mt-0 flex flex-col">
+            <div
+              className="text-md w-full overflow-hidden font-bold text-gray-800"
+              style={{ maxWidth: "50%", wordWrap: "break-word" }}
+            >
+              sadfasdfasdfasdfjasdlkfjlsdakjfkladsjfl;jasdlf;jsadfasdfasfasfd
+            </div>
           </div>
-          <span className="text-xs text-gray-500">{star.updatedAt}</span>
+        </div>
+      </div>
+      <div className="px-4">
+        <div className="flex flex-row items-center py-2">
+          <img
+            src={memberInfo.imageUrl}
+            alt="멤버 이미지"
+            className="h-10 w-10 rounded-full object-cover" // 이미지 둥글게, 크기 조정
+            style={{ alignSelf: "flex-start" }}
+          />
+          <div className="ml-3 mt-0 flex flex-col">
+            <div
+              className="text-md font-bold text-gray-800"
+              onClick={() => navigateToMemberProfile(memberInfo.nickname)}
+            >
+              {memberInfo.nickname}
+            </div>
+            <span className="text-xs text-gray-700">{star.updatedAt}</span>
+          </div>
         </div>
       </div>
       <div className="w-full">
@@ -127,14 +145,16 @@ const DetailStar = () => {
         />{" "}
         {/* 이미지 크기 조정 */}
       </div>
-      <div className="flex flex-row items-center py-4">
-        <p className="flex-grow text-sm text-gray-800">{star.content}</p>
-        <button
-          className={`scale-100 transform text-3xl text-yellow-500 transition-transform focus:outline-none ${"animate-bounce"}`}
-          onClick={() => handleLikeClick(star.starId)}
-        >
-          {star.alreadyLiked ? <AiFillStar /> : <AiOutlineStar />}
-        </button>
+      <div className="px-4">
+        <div className="flex flex-row items-center py-4">
+          <p className="flex-grow text-sm text-gray-800">{star.content}</p>
+          <button
+            className={`scale-100 transform text-3xl text-yellow-500 transition-transform focus:outline-none ${"animate-bounce"}`}
+            onClick={() => handleLikeClick(star.starId)}
+          >
+            {star.alreadyLiked ? <AiFillStar /> : <AiOutlineStar />}
+          </button>
+        </div>
       </div>
     </div>
   );
