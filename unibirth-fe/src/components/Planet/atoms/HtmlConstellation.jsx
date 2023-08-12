@@ -28,13 +28,17 @@ const HtmlConstellation = ({ constellationId }) => {
     };
     console.log(constellationContent);
 
+    const [updatePinedStatus, setUpdatePinedStatus] = useState(
+      constellationContent?.alreadyPined,
+    );
+
     const handlePinClick = async (constellationContent) => {
       if (constellationContent.alreadyPined) {
         try {
           const response = await useConstellationApi.constellationsDeletePin(
             constellationContent.constellationId,
           );
-          console.log(response);
+          console.log("already핀!!!", response);
           setUpdatePinedStatus(false);
         } catch (error) {
           console.log(error);
@@ -44,17 +48,13 @@ const HtmlConstellation = ({ constellationId }) => {
           const response = await useConstellationApi.constellationsGetPin(
             constellationContent.constellationId,
           );
-          console.log(response);
+          console.log("Get핀?:", response);
           setUpdatePinedStatus(true);
         } catch (error) {
           console.log(error);
         }
       }
     };
-
-    const [updatePinedStatus, setUpdatePinedStatus] = useState(
-      constellationContent?.alreadyPined,
-    );
 
     console.log("updatePinedStatus:", updatePinedStatus);
 

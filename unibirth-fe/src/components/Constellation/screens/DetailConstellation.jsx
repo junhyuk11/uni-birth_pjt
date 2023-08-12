@@ -13,7 +13,9 @@ import Header1 from "../../../common/blocks/Header1";
 
 const DetailConstellation = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
-  backgroundflag(false);
+  useEffect(() => {
+    backgroundflag(false);
+  }, []);
   const { constellationId } = useParams();
   console.log(constellationId);
   const [constellationContent, setConstellationConstent] = useState([]);
@@ -31,6 +33,7 @@ const DetailConstellation = () => {
       console.log(error);
     }
   };
+  console.log("", constellationContent);
   const {
     navigateToBack,
     navigateToMainPlanet,
