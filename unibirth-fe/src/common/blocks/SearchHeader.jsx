@@ -93,7 +93,7 @@ const SearchHeader = ({ buttons, category, setCategory, query, setQuery }) => {
       <input
         className="bg-transparent font-Pretendard"
         type="text"
-        placeholder="검색어를 입력하세요"
+        placeholder={query}
         value={query}
         onChange={handleSearchInputChange}
       />
