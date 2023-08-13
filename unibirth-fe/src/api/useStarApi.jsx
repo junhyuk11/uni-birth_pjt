@@ -54,8 +54,10 @@ const starsPostStar = async (data) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .post(`/stars/register`, data);
+    console.log(response.data);
     return response.data;
   } catch (e) {
+    console.log(e);
     if (e.response.data.status === 404) {
       return e.response.data;
     } else if (e.response.data.status === 403) {

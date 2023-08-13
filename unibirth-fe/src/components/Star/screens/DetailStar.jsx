@@ -47,6 +47,7 @@ const DetailStar = () => {
   const getStar = async (starId) => {
     try {
       const response = await useStarApi.starsGetStar(starId);
+      console.log(response);
       if (response.status === 200) {
         setStar(response.resultData);
       } else if (response.status === 404) {
@@ -170,12 +171,8 @@ const DetailStar = () => {
             className="mt-0 flex flex-col"
             style={{ maxWidth: "100%", wordWrap: "break-word" }}
           >
-            <div
-              className="text-md w-full overflow-hidden font-bold text-white"
-              style={{ maxWidth: "70%", wordWrap: "break-word" }}
-            >
-              스타 타이틀 나와야 하는데, 도대체 누가짠거임
-              {/* {star.title} */}
+            <div className="text-md w-full overflow-hidden font-bold text-white">
+              {star.title}
             </div>
           </div>
         </div>
