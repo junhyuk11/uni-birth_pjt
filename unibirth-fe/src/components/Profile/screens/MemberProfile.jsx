@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import { useNavigation } from "../../../hooks/useNavigation";
 import MemberSectionProfile from "../blocks/MemberSectionProfile";
@@ -19,6 +18,7 @@ import { useLocation } from "react-router-dom";
 import Footer from "../../../common/blocks/Footer";
 import CustomAlert from "../../../common/atoms/CustomAlert";
 import CustomConfirm from "../../../common/atoms/CustomConfirm";
+import Button11 from "../../../common/atoms/Button11";
 
 const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -125,25 +125,25 @@ const MemberProfile = () => {
 
   const modalButtons = [
     {
-      component: Button1,
+      component: Button11,
       className: "font-TAEBAEKmilkyway m-10 p-10",
       value: "회원정보 수정",
       onClick: navigateToModifyMember,
     },
     {
-      component: Button1,
+      component: Button11,
       className: "font-TAEBAEKmilkyway",
       value: "로그아웃",
       onClick: handleLogout,
     },
     {
-      component: Button1,
+      component: Button11,
       className: "font-TAEBAEKmilkyway",
       value: "회원 탈퇴",
       onClick: handleSignout,
     },
     {
-      component: Button1,
+      component: Button11,
       className: "font-TAEBAEKmilkyway h-10 w-10",
       onClick: handleCloseModal,
       icon: <Close />,
