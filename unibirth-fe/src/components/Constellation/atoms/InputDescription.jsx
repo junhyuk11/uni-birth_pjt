@@ -20,6 +20,7 @@ const InpuitDescription = ({ constellationDescp, setConstellationDescp }) => {
             id="constellationDescp"
             name="constellationDescp"
             value={constellationDescp}
+            maxLength={50}
             className="bg-transparent py-2 text-center text-yellow-200 outline-none "
             onChange={(e) => setConstellationDescp(e.target.value)}
           />

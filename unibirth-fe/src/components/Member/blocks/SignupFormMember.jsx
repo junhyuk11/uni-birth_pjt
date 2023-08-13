@@ -145,6 +145,7 @@ const MemberRegistrationForm = ({
       <div className="flex">
         <Inputnickname
           value={nickname}
+          maxLength={8}
           onChange={(e) => setNickname(e.target.value)}
         />
         <Button1
@@ -195,10 +196,12 @@ const MemberRegistrationForm = ({
       <div className="flex flex-row">
         <InputPassword
           value={password}
+          maxLength={12}
           onChange={(e) => setPassword(e.target.value)}
         />
         <InputPasswordConfirm
           value={confirmPassword}
+          maxLength={12}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
       </div>

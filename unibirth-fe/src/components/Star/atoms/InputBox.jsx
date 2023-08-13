@@ -13,6 +13,7 @@ const InputBox = ({ content, setContent }) => {
           id="text"
           name="text"
           value={content}
+          maxLengte={100}
           onChange={(e) => setContent(e.target.value)}
           placeholder="내용을 입력해주세요!"
           autoComplete="off"

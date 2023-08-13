@@ -19,6 +19,7 @@ const InputStella = ({ constellationName, setConstellationName }) => {
             id="constellationName"
             name="constellationName"
             value={constellationName}
+            maxLength={8}
             className="bg-transparent py-2 text-center text-yellow-200 outline-none "
             onChange={(e) => setConstellationName(e.target.value)}
           />
