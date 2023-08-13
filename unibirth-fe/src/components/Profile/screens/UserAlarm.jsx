@@ -7,6 +7,7 @@ import { database, ref, onValue, off } from "../../../api/useFirebaseApi";
 import { backgroundflagState } from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import { useLocation } from "react-router-dom";
+import StarBig from "../../../assets/icons/js/starBig";
 
 const UserAlarm = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -62,28 +63,40 @@ const UserAlarm = () => {
     <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
       <div>
         <Header2 buttons={buttonsHeader} />
-        <ul>
-          {alarms.map(([alarmId, alarmData]) => (
-            <li
-              key={alarmId}
-              onClick={() =>
-                navigateToDetailConstellation(alarmData.constellationId)
-              }
-              className="border-t px-4 py-4"
-            >
-              <div className="text-base">
-                {alarmData.sender}님이 {alarmData.constellationTitle}로
-                초대하였습니다.
-              </div>
-              {alarmData.timestamp && (
-                <div className="mt-2 text-xs">
-                  {new Date(alarmData.timestamp).toLocaleString()}
+        {alarms.length === 0 ? (
+          <div className="text-center">
+            <p className="border-t"></p>
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+              <StarBig className="mx-auto" />
+              <p className="text-white text-opacity-60">
+                알림 내역이 없습니다.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <ul>
+            {alarms.map(([alarmId, alarmData]) => (
+              <li
+                key={alarmId}
+                onClick={() =>
+                  navigateToDetailConstellation(alarmData.constellationId)
+                }
+                className="border-t px-4 py-4"
+              >
+                <div className="text-base">
+                  {alarmData.sender}님이 {alarmData.constellationTitle}로
+                  초대하였습니다.
                 </div>
-              )}
-            </li>
-          ))}
-          <li className="border-t"></li>
-        </ul>
+                {alarmData.timestamp && (
+                  <div className="mt-2 text-xs">
+                    {new Date(alarmData.timestamp).toLocaleString()}
+                  </div>
+                )}
+              </li>
+            ))}
+            <li className="border-t"></li>
+          </ul>
+        )}
       </div>
     </div>
   );

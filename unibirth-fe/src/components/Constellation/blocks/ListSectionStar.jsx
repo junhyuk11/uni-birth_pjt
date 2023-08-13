@@ -180,7 +180,7 @@ const ListSectionStar = () => {
           <Plus />
         </button>
       )}
-      <div className="absolute left-1/2 top-20 z-10 text-white">
+      <div className="absolute right-5 top-5 z-10 text-white">
         <div
           className="mt-1 flex"
           onClick={() => handlePinClick(constellationId)}
