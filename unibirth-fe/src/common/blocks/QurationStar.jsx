@@ -1,29 +1,37 @@
 import React from "react";
-import Footer3 from "../blocks/Footer3";
 import Button1 from "../atoms/Button1";
+import { useNavigation } from "../../hooks/useNavigation";
+
 const QurationStar = ({ data }) => {
-  const buttonsFooter = [
-    {
-      component: Button1,
-      value: "별자리보기",
-    },
-    {
-      component: Button1,
-      value: "찜하기",
-    },
-  ];
+  const { navigateToDetailStar } = useNavigation();
+
   return (
     <div className="flex w-full flex-col items-center justify-center">
-      <div className="w-full">
+      {/* 이미지 */}
+      <div className="w-full" onClick={() => navigateToDetailStar(data.starId)}>
         <img
           src={data.imageUrl}
           alt="별 이미지"
           className="h-auto max-h-96 w-full object-cover"
-        />{" "}
+        />
       </div>
-      <h3 className="font-bold">{data.nickname}</h3>
-      <p>{data.content}</p>
-      <Footer3 buttons={buttonsFooter} />
+
+      {/* 닉네임 */}
+      <div className="mt-2 w-full text-center font-bold">{data.nickname}</div>
+
+      {/* 제목, 내용 및 버튼 */}
+      <div className="mt-2 flex w-full items-center justify-between px-4">
+        <div className="flex flex-col">
+          <div className="font-bold">data.title 이거 나중에 괄호치면 댐</div>
+          <div>{data.content}</div>
+        </div>
+        <div>
+          <Button1
+            value="별 보기"
+            onClick={() => navigateToDetailStar(data.starId)}
+          />
+        </div>
+      </div>
     </div>
   );
 };

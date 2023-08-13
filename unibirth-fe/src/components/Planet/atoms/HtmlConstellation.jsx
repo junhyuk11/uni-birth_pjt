@@ -34,8 +34,6 @@ const HtmlConstellation = ({ constellationId }) => {
       }
     };
 
-    console.log("콘솔로그");
-
     const handlePinClick = async (constellationContent) => {
       console.log("핀클릭:", constellationContent.pined);
       if (constellationContent.pined) {
