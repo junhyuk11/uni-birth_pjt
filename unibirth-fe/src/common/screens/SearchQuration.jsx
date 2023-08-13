@@ -71,8 +71,8 @@ const SearchQuration = () => {
   ];
 
   return (
-    <div className="absolute left-1/2 z-10 h-screen w-full -translate-x-1/2">
-      <div className="bg-space-black mx-auto flex h-screen max-w-screen-sm flex-col text-yellow-100">
+    <div className="mx-auto h-full min-h-screen max-w-screen-sm">
+      <header className="sticky top-0 z-10">
         <SearchHeader
           buttons={buttonsHeader}
           category={category}
@@ -80,6 +80,8 @@ const SearchQuration = () => {
           query={query}
           setQuery={setQuery}
         />
+      </header>
+      <div className="bg-space-black mx-auto flex h-screen max-w-screen-sm flex-col text-yellow-100">
         <CustomAlert
           message={alertMessage}
           isVisible={isAlertVisible}

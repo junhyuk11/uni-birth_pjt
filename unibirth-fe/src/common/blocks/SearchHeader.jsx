@@ -22,36 +22,41 @@ const SearchHeader = ({ buttons, category, setCategory, query, setQuery }) => {
 
   return (
     <div className="flex justify-between space-x-4 px-4 py-4">
-      {buttons &&
-        buttons.map((button, index) => {
-          const ButtonComponent = button.component;
-          return (
-            <ButtonComponent
-              key={index}
-              className="w-10 font-Pretendard hover:bg-yellow-500"
-              value={button.value}
-              onClick={button.onClick}
-              icon={button.icon}
-            />
-          );
-        })}
-      <input
-        className="bg-transparent font-Pretendard"
-        type="text"
-        placeholder={query}
-        value={query}
-        onChange={handleSearchInputChange}
-      />
-      <div className="flex flex-col items-center justify-center rounded-lg border-double bg-transparent font-TAEBAEKmilkyway">
-        <CustomDropdown
-          value={category}
-          onChange={handleCategoryChange}
-          searchList={SEARTCH_LIST}
-        />
+      <div className="flex items-center">
+        {buttons &&
+          buttons.map((button, index) => {
+            const ButtonComponent = button.component;
+            return (
+              <ButtonComponent
+                key={index}
+                className="w-10 font-Pretendard hover:bg-yellow-500"
+                value={button.value}
+                onClick={button.onClick}
+                icon={button.icon}
+              />
+            );
+          })}
       </div>
-      <button className="font-Pretendard" onClick={handleSearch}>
-        <Search />
-      </button>
+      <div className="flex flex-grow"></div>
+      <div className="flex items-center justify-end space-x-4 px-2">
+        <input
+          className="w-1/2 border-b bg-transparent font-Pretendard"
+          type="text"
+          placeholder={query}
+          value={query}
+          onChange={handleSearchInputChange}
+        />
+        <div className="flex flex-col items-center justify-center rounded-lg border-double bg-transparent font-Pretendard">
+          <CustomDropdown
+            value={category}
+            onChange={handleCategoryChange}
+            searchList={SEARTCH_LIST}
+          />
+        </div>
+        <button className="font-Pretendard" onClick={handleSearch}>
+          <Search />
+        </button>
+      </div>
     </div>
   );
 };
