@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useMemo } from "react";
 // import SpreadConstellation from "./MeshConstellation";
 import { Line } from "@react-three/drei";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { currentconstellationListState } from "../../../recoil/atoms";
 import * as THREE from "three";
 
@@ -9,7 +9,6 @@ const MeshCons = ({
   constellationList,
   ConstellationIndex,
   setCurrentConstellation,
-  currentConstellation,
 }) => {
   const meshRef = useRef();
   // 별자리 반경
@@ -26,31 +25,28 @@ const MeshCons = ({
   // 별자리 간격 조정
   const constellationGap = 30;
   // 처음 밝기 조정
-  const firstBrightness = 10;
+  const firstBrightness = 1;
   // 별 크기 조정
-  const spherenum = 10;
+  const spherenum = 7;
   // 행성 갯수 limit 걸기
   const limitCount = 111;
+  // 별자리 Z 값 변경
+  const correctionZ = 0.3;
 
   // DetailPlanet 리스트, 인덱스 관리
-  const [currentConstellationList, setCurrentList] = useRecoilState(
-    currentconstellationListState,
-  );
+  const setCurrentList = useSetRecoilState(currentconstellationListState);
 
   const [AllSphereList, setAllSphereList] = useState([]);
 
   const handleConsClick = (INDEX) => {
-    console.log("콘스텔레이사ㅕㄴ!", currentConstellationList[INDEX]);
+    // console.log("콘스텔레이사ㅕㄴ!", currentConstellationList[INDEX]);
     setCurrentConstellation(INDEX);
   };
-  console.log("야이시발아", currentConstellation);
 
   useEffect(() => {
     const verticesArray = meshRef.current.geometry.attributes.position.array;
-    console.log("제발 나와라", verticesArray);
     setVertices(verticesArray);
     const newConstellationList = [];
-    console.log("이자식아: ", verticesArray.length);
     for (let i = segments * 3; i < verticesArray.length; i += 3) {
       if (verticesArray[i + 2] !== 0) {
         const vertex = {
@@ -109,12 +105,12 @@ const MeshCons = ({
                       [
                         x1 * constellationGap + xyz.x,
                         y1 * constellationGap + xyz.y,
-                        z1 * constellationGap + xyz.z,
+                        z1 * constellationGap * correctionZ + xyz.z,
                       ],
                       [
                         x2 * constellationGap + xyz.x,
                         y2 * constellationGap + xyz.y,
-                        z2 * constellationGap + xyz.z,
+                        z2 * constellationGap * correctionZ + xyz.z,
                       ],
                     ]}
                     // color="#F2F5A9"
@@ -137,7 +133,7 @@ const MeshCons = ({
                     position={[
                       point.x * constellationGap + xyz.x,
                       point.y * constellationGap + xyz.y,
-                      point.z * constellationGap + xyz.z,
+                      point.z * constellationGap * correctionZ + xyz.z,
                     ]}
                   >
                     <sphereGeometry args={[spherenum, 5, 5]} />
@@ -146,8 +142,8 @@ const MeshCons = ({
                       emissive={constellationList?.constellationList[i].color}
                       emissiveIntensity={
                         point.brightness === -1
-                          ? 2
-                          : point.brightness + firstBrightness
+                          ? 1
+                          : firstBrightness + point.brightness / 10
                       }
                       toneMapped={false}
                       // transparent={true}
@@ -177,7 +173,6 @@ const MeshCons = ({
     return meshModels;
   }, [constellationList]);
 
-  console.log("현재 포지션!!:", currentConstellationList);
   return (
     <>
       <mesh ref={meshRef}>

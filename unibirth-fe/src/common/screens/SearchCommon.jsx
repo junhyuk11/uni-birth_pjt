@@ -7,6 +7,9 @@ import { useNavigation } from "../../hooks/useNavigation";
 import Button2 from "../atoms/Button2";
 import LeftArrow from "../../assets/icons/js/leftArrow";
 import SearchHeader from "../blocks/SearchHeader";
+import CustomAlert from "../atoms/CustomAlert";
+import Button1 from "../atoms/Button1";
+import Header5 from "../blocks/Header5";
 
 const SearchCommon = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -17,14 +20,15 @@ const SearchCommon = () => {
   const [activeTab, setActiveTab] = useState("constellation");
   const query = location.state.query;
   const category = location.state.categoryName;
-  console.log("쿼리:", query);
-  console.log("카테고리:", category);
   const [constellationList, setConstellationList] = useState([]);
   const [memberList, setMemberList] = useState([]);
   const [starList, setStarList] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [searchCategory, setSearchCategory] = useState("all");
+
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const {
     navigateToDetailConstellation,
@@ -45,11 +49,12 @@ const SearchCommon = () => {
         setMemberList(response.resultData.memberList || []);
         setStarList(response.resultData.starList || []);
       } else {
-        alert("파일을 불러오는데 실패하였습니다.");
+        setIsAlertVisible(true);
+        setAlertMessage("검색 결과를 불러오는데 실패하였습니다.");
       }
     } catch (e) {
-      console.log(e);
-      alert("파일을 불러오는데 실패하였습니다.");
+      setIsAlertVisible(true);
+      setAlertMessage("검색 결과를 불러오는데 실패하였습니다.");
     }
   };
   const formatDate = (dateStr) => {
@@ -60,20 +65,16 @@ const SearchCommon = () => {
   };
 
   const handleConstellationClick = (constellationId) => {
-    console.log("별자리 클릭", constellationId);
     navigateToDetailConstellation(constellationId);
   };
 
   const handleMemberClick = (nickname) => {
-    console.log("멤버 클릭", nickname);
     navigateToMemberProfile(nickname);
   };
 
   const handleStarClick = (starId) => {
-    console.log("스타 클릭", starId);
     navigateToDetailStar(starId);
   };
-
   const buttonsHeader = [
     {
       component: Button2, // Assuming you have this imported or you can adjust based on your needs
@@ -83,110 +84,106 @@ const SearchCommon = () => {
     },
   ];
 
+  const buttonsHeader2 = [
+    {
+      component: Button1,
+      className: "font-TAEBAEKmilkyway bg-white",
+      value: "별자리",
+      onClick: () => setActiveTab("constellation"),
+    },
+    {
+      component: Button1,
+      className: "font-TAEBAEKmilkyway",
+      value: "멤버",
+      onClick: () => setActiveTab("member"),
+    },
+    {
+      component: Button1,
+      className: "font-TAEBAEKmilkyway",
+      value: "스타",
+      onClick: () => setActiveTab("star"),
+    },
+  ];
+
   return (
-    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+    <div className="bg-space-black mx-auto flex h-screen max-w-screen-sm flex-col text-yellow-100">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => {
+          setIsAlertVisible(false);
+          if (alertMessage === "검색 결과를 불러오는데 실패하였습니다.") {
+            navigateToBack();
+          }
+        }}
+      />
       <SearchHeader
         buttons={buttonsHeader}
         category={searchCategory}
         setCategory={setSearchCategory}
         query={searchQuery}
         setQuery={setSearchQuery}
-      />{" "}
-      <div className="h-screen bg-gray-100">
-        <div className="sticky top-0 z-10 bg-white p-4 shadow-md">
-          <button
-            onClick={() => setActiveTab("constellation")}
-            className={`pb-2 ${
-              activeTab === "constellation" ? "border-b-2 border-blue-500" : ""
-            }`}
-          >
-            별자리 리스트
-          </button>
-          <button
-            onClick={() => setActiveTab("member")}
-            className={`pb-2 ${
-              activeTab === "member" ? "border-b-2 border-blue-500" : ""
-            }`}
-          >
-            멤버 리스트
-          </button>
-          <button
-            onClick={() => setActiveTab("star")}
-            className={`pb-2 ${
-              activeTab === "star" ? "border-b-2 border-blue-500" : ""
-            }`}
-          >
-            스타 리스트
-          </button>
-        </div>
-        <div className="grid max-h-[calc(100vh-180px)] gap-4 overflow-y-auto px-4 pt-6">
-          {activeTab === "constellation" && (
-            <div className="col-span-3">
-              {constellationList.map((constellation) => (
-                <div
-                  key={constellation.constellationId}
-                  className="mb-4 flex items-center"
-                  onClick={() =>
-                    handleConstellationClick(constellation.constellationId)
-                  }
-                >
-                  <img
-                    src={constellation.imageUrl}
-                    alt={constellation.title}
-                    className="mr-4 h-14 w-14 rounded-lg object-cover"
-                  />
-                  <span className="text-gray-700">{constellation.title}</span>
-                </div>
-              ))}
-            </div>
-          )}
+      />
 
-          {activeTab === "member" && (
-            <div className="col-span-3">
-              {memberList.map((member) => (
-                <div
-                  key={member.nickname}
-                  className="mb-4 flex items-center"
-                  onClick={() => handleMemberClick(member.nickname)}
-                >
-                  <img
-                    src={member.imageUrl}
-                    alt={member.nickname}
-                    className="mr-4 h-14 w-14 rounded-full object-cover"
-                  />
-                  <span className="text-gray-700">{member.nickname}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {activeTab === "star" && (
-            <div className="col-span-3">
-              {starList.map((star) => (
-                <div
-                  key={star.starId}
-                  className="group relative mb-4 flex items-start"
-                  onClick={() => handleStarClick(star.starId)}
-                >
-                  <img
-                    src={star.imageUrl}
-                    alt={star.content}
-                    className="mr-4 h-14 w-14 rounded-lg object-cover"
-                  />
-                  <div>
-                    <span className="font-semibold text-gray-700">
-                      {star.nickname}
-                    </span>
-                    <p className="text-sm text-gray-500">{star.content}</p>
-                    <span className="text-xs text-gray-400">
-                      {formatDate(star.createdAt)}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+      <div className="flex flex-1 flex-col p-4">
+        <div className="my-4">
+          <Header5 buttons={buttonsHeader2} />
         </div>
+        <ul className="divide-nebula-blue space-y-4 divide-y overflow-y-auto">
+          {activeTab === "constellation" &&
+            constellationList.map((constellation) => (
+              <li
+                key={constellation.constellationId}
+                className="animate-sparkle flex items-center px-4 py-4"
+                onClick={() =>
+                  handleConstellationClick(constellation.constellationId)
+                }
+              >
+                <img
+                  src={constellation.imageUrl}
+                  alt={constellation.title}
+                  className="glow mr-4 h-20 w-20 rounded-lg object-cover"
+                />
+                {constellation.title}
+              </li>
+            ))}
+          {activeTab === "member" &&
+            memberList.map((member) => (
+              <li
+                key={member.nickname}
+                className="animate-sparkle flex items-center px-4 py-4"
+                onClick={() => handleMemberClick(member.nickname)}
+              >
+                <img
+                  src={member.imageUrl}
+                  alt={member.nickname}
+                  className="glow mr-4 h-20 w-20 rounded-full object-cover"
+                />
+                {member.nickname}
+              </li>
+            ))}
+          {activeTab === "star" &&
+            starList.map((star) => (
+              <li
+                key={star.starId}
+                className="animate-sparkle flex items-center px-4 py-4"
+                onClick={() => handleStarClick(star.starId)}
+              >
+                <img
+                  src={star.imageUrl}
+                  alt={star.content}
+                  className="glow mr-4 h-20 w-20 rounded-lg object-cover"
+                />
+                <div>
+                  {star.nickname}
+                  <p className="mt-2 text-sm text-yellow-400">{star.content}</p>
+                  <span className="text-xs text-yellow-300">
+                    {formatDate(star.createdAt)}
+                  </span>
+                </div>
+              </li>
+            ))}
+        </ul>
       </div>
     </div>
   );

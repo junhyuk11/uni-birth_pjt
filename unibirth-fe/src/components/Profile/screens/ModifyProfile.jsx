@@ -11,6 +11,7 @@ import InputIntroduction from "../atoms/InputIntroduction";
 import { storage } from "../../../api/useFirebaseApi";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import earth from "../../../assets/images/earth.png";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const ModifyProfile = () => {
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
@@ -18,6 +19,8 @@ const ModifyProfile = () => {
   const [introduction, setIntro] = useState("");
   const [nickname, setNickname] = useState("");
   const [thumbUrl, setThumbUrl] = useState("");
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   console.log(imageUrl);
 
   const saveImgFile = (event) => {
@@ -31,12 +34,18 @@ const ModifyProfile = () => {
   const fetchData = async () => {
     try {
       const response = await useMemberApi.membersGetProfiles();
+      if (response.status !== 200) {
+        setIsAlertVisible(true);
+        setAlertMessage("회원정보를 가져오는데 오류가 발생했습니다.");
+        return;
+      }
       setImageUrl(response.resultData.imageUrl);
       setThumbUrl(response.resultData.imageUrl);
       setIntro(response.resultData.introduction);
       setNickname(response.resultData.nickname);
     } catch (error) {
-      console.error("데이터를 가져오는데 오류가 발생했습니다.", error);
+      setIsAlertVisible(true);
+      setAlertMessage("회원정보를 가져오는데 오류가 발생했습니다.");
     }
   };
 
@@ -55,8 +64,6 @@ const ModifyProfile = () => {
 
   const handleCompleteClick = async (e) => {
     e.preventDefault();
-    console.log("imageUrl:");
-    console.log(imageUrl);
     const storageRef = ref(storage, `images/${imageUrl.name}`);
     const uploadTask = uploadBytesResumable(storageRef, imageUrl);
     uploadTask.on(
@@ -67,27 +74,27 @@ const ModifyProfile = () => {
         console.log(`Upload is ${progress}% done.`);
       },
       (error) => {
+        setIsAlertVisible(true);
+        setAlertMessage("회원정보 수정에 실패하였습니다.");
         console.log(error);
       },
       async () => {
         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-        console.log("downloadURL:", downloadURL);
         const member = {
           introduction,
           imageUrl: downloadURL,
         };
-        console.log("member:", member);
         try {
           const response = await useMemberApi.membersPutProfiles(member);
           if (response.status === 200) {
-            alert("수정이 완료되었습니다.");
             navigateToMemberProfile(nickname);
           } else {
-            alert("오류 발생.");
+            setIsAlertVisible(true);
+            setAlertMessage("회원정보 수정에 실패하였습니다.");
           }
         } catch (e) {
-          console.log(e);
-          alert("오류가 발생.");
+          setIsAlertVisible(true);
+          setAlertMessage("회원정보 수정에 실패하였습니다.");
         }
       },
     );
@@ -105,6 +112,16 @@ const ModifyProfile = () => {
   return (
     <div className="mx-auto h-screen max-w-screen-sm">
       <Header1 buttons={buttonsHeader} />
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => {
+          setIsAlertVisible(false);
+          if (alertMessage === "회원정보를 가져오는데 오류가 발생했습니다.") {
+            navigateToBack();
+          }
+        }}
+      />
       <form className="mx-10 mt-32 flex-col items-center justify-center space-y-5">
         <img
           src={thumbUrl || earth}

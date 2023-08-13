@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
@@ -8,40 +8,39 @@ import InputStella from "../atoms/InputStella";
 import InputDescription from "../atoms/InputDescription";
 import { useNavigation } from "../../../hooks/useNavigation";
 import planet1 from "../../../assets/images/planet1.png";
-import { useSetRecoilState } from "recoil";
-import { backgroundflagState } from "../../../recoil/atoms";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { backgroundflagState, currentplanetState } from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const RegistConstellation = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
-  backgroundflag(true);
-  const [planetId, setPlanetId] = useState("1");
+  useEffect(() => {
+    backgroundflag(true);
+  }, []);
+  const currentPLanet = useRecoilValue(currentplanetState);
+  const [planetId, setPlanetId] = useState(currentPLanet);
   const [constellationName, setConstellationName] = useState("");
   const [constellationDescp, setConstellationDescp] = useState("");
   const { navigateToBack, navigateToDrawingConstellation } = useNavigation();
-
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const handleSubmit = () => {
-    console.log(planetId, constellationName, constellationDescp);
-    console.log(planetId);
     if (planetId && constellationName && constellationDescp) {
-      console.log("행성명: ", planetId);
-      console.log("별자리명: ", constellationName);
-      console.log("별자리설명: ", constellationDescp);
       navigateToDrawingConstellation({
         planetId,
         constellationName,
         constellationDescp,
       });
-    } else if (constellationName) {
-      console.log("행성명: ", planetId);
-      console.log("별자리명: ", constellationName);
-      console.log("별자리설명: ", constellationDescp);
-      alert("별자리를 설명해주세요 ! ");
-    } else {
-      console.log("행성명: ", planetId);
-      console.log("별자리명: ", constellationName);
-      console.log("별자리설명: ", constellationDescp);
-      alert("별자리를 입력해주세요 ! ");
+    } else if (!constellationName) {
+      setIsAlertVisible(true);
+      setAlertMessage("별자리 이름을 입력해주세요.");
+    } else if (!constellationDescp) {
+      setIsAlertVisible(true);
+      setAlertMessage("별자리 설명을 입력해주세요.");
+    } else if (!planetId) {
+      setIsAlertVisible(true);
+      setAlertMessage("행성을 선택해주세요.");
     }
   };
   const buttonsHeader = [
@@ -69,6 +68,11 @@ const RegistConstellation = () => {
 
   return (
     <div className="mx-auto h-screen max-w-screen-sm  bg-slate-100 bg-opacity-50">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => setIsAlertVisible(false)}
+      />
       <div>
         <Header1 buttons={buttonsHeader} />
         <div className="mt-24 flex flex-col items-center justify-center space-y-10">

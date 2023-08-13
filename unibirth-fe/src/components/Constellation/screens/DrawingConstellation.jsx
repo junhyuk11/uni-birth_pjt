@@ -23,7 +23,6 @@ const DrawingConstellation = () => {
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
-    console.log(constellationColor);
   };
 
   const buttonsHeader = [

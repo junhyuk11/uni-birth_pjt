@@ -4,7 +4,6 @@ import useConstellationApi from "../../../api/useConstellationApi";
 import { useParams } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-import { Line } from "@react-three/drei";
 import {
   starListState,
   boxcontentState,
@@ -16,34 +15,37 @@ import {
 } from "../../../recoil/atoms";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import * as THREE from "three";
-import GradientBackground from "../../../common/atoms/GradientBackground";
 import Background from "../../../common/atoms/Background";
 import Plus from "../../../assets/icons/js/plus";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 import Close2 from "../../../assets/icons/js/close2";
 import Star2 from "../../../assets/icons/js/star2";
-import Button2 from "../../../common/atoms/Button2";
+import LineDrawing from "../atoms/LineDrawing";
+import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 
 const ListSectionStar = () => {
   const ref = useRef();
   // const tooltipRef = useRef(null);
   const { constellationId } = useParams();
   const setStellaId = useSetRecoilState(StellaIdState);
-
   const { navigateToDetailStar } = useNavigation();
   const [starList, setStarList] = useRecoilState(starListState);
   const [starListIndex, setStarListIndex] = useState([]);
+  const [alreadyPined, setAlreadyPined] = useState(false);
+  const [isFulledStar, setIsFulledStar] = useState(false);
+  const [responseState, setResponseState] = useState();
   // Star box Content
   const [boxcontent, setBoxcontent] = useRecoilState(boxcontentState);
   const [boxnickname, setBoxnickname] = useRecoilState(boxnicknameState);
   const [boxurl, setBoxurl] = useRecoilState(boxurlState);
   const [boxid, setBoxid] = useRecoilState(boxidState);
   const [boxcreated, setBoxcreated] = useRecoilState(boxcreatedState);
-  // 김민섭
   const [brightness, setBrightness] = useState(0);
-
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   // tooltip
   const [tooltipStyle, setTooltipStyle] = useState({ display: "none" });
-  const { navigateToRegisterStar } = useNavigation();
+  const { navigateToRegisterStar, navigateToBack } = useNavigation();
   const handleBoxClick = ({ event, index }) => {
     console.log(index);
     const mouse = new THREE.Vector2();
@@ -78,29 +80,41 @@ const ListSectionStar = () => {
   }, [constellationId]);
 
   const getStarList = async (constellationId) => {
-    // console.log("consteelationID:", constellationId);
     try {
       const response = await useConstellationApi.constellationsGetConstellation(
         constellationId,
       );
-      console.log(" setStarList:", response);
-      setStarList(response.resultData);
-      setStarListIndex(response.resultData.starList);
-      // console.log("starList:", starList);
+      setResponseState(response.status);
+      if (response.status === 200) {
+        setStarList(response.resultData);
+        setStarListIndex(response.resultData.starList);
+        setAlreadyPined(response.resultData.alreadyPined);
+        setIsFulledStar(response.resultData.completion);
+      } else if (response.status === 404) {
+        setIsAlertVisible(true);
+        setAlertMessage("별 리스트를 불러오는데 실패했습니다.");
+      } else if (response.status === 403) {
+        setIsAlertVisible(true);
+        setAlertMessage("로그인이 필요한 서비스입니다.");
+      }
     } catch (error) {
-      console.error("Failed to get star list:", error);
+      setIsAlertVisible(true);
+      setAlertMessage("오류가 발생했습니다.");
     }
   };
 
+  console.log("isFulledStar:", isFulledStar);
+
   // starPotisions recoil 저장
   const starPoint = starList?.pointList;
-  const num = 5; // 별 거리 조절
+  const num = 10; // 별 거리 조절
   const zero = 20;
+  const zDamping = 3;
   // const znum = (Math.floor(Math.random() * 11) - 5) * num;
   const starPotisions = starPoint?.map((star) => ({
     x: star[0] * num - zero,
     y: star[1] * num,
-    z: star[2] * num,
+    z: (star[2] * num) / zDamping,
     // brightness: starList?.Star.brightness,
     // starId: starList?.Star.starId,
     // memberId: starList?.Star.memberId,
@@ -109,25 +123,87 @@ const ListSectionStar = () => {
 
   const lines = starList?.lineList;
 
-  // console.log("lineList:", lines);
-  // console.log("starPosition:", starPotisions);
+  const handlePinClick = async (constellationId) => {
+    if (alreadyPined) {
+      try {
+        const response = await useConstellationApi.constellationsDeletePin(
+          constellationId,
+        );
+        setResponseState(response.status);
+        if (response.status === 200) {
+          setAlreadyPined(false);
+        } else if (response.status === 404) {
+          setIsAlertVisible(true);
+          setAlertMessage("핀 취소에 실패했습니다.");
+        } else if (response.status === 403) {
+          setIsAlertVisible(true);
+          setAlertMessage("로그인이 필요한 서비스입니다.");
+        }
+      } catch (error) {
+        setIsAlertVisible(true);
+        setAlertMessage("오류가 발생했습니다.");
+      }
+    } else {
+      try {
+        const response = await useConstellationApi.constellationsGetPin(
+          constellationId,
+        );
+        setResponseState(response.status);
+        setAlreadyPined(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   return (
     <div className="relative bottom-0 h-screen w-screen">
-      <button
-        className="absolute bottom-36 right-4 z-10 flex flex-col text-4xl text-white opacity-100"
-        onClick={navigateToRegisterStar}
-      >
-        <Plus />
-      </button>
-      <Canvas camera={{ position: [0, 0, 70] }}>
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => {
+          setIsAlertVisible(false);
+          if (
+            alertMessage === "오류가 발생했습니다." ||
+            responseState === 403 ||
+            responseState === 404
+          ) {
+            navigateToBack();
+          }
+        }}
+      />
+      {!isFulledStar && (
+        <button
+          className="absolute bottom-36 right-4 z-10 flex flex-col text-4xl text-white opacity-100"
+          onClick={navigateToRegisterStar}
+        >
+          <Plus />
+        </button>
+      )}
+      <div className="absolute left-1/2 top-20 z-10 text-white">
+        <div
+          className="mt-1 flex"
+          onClick={() => handlePinClick(constellationId)}
+        >
+          {alreadyPined ? (
+            <AiFillPushpin size={30} />
+          ) : (
+            <AiOutlinePushpin size={30} />
+          )}
+        </div>
+      </div>
+      <Canvas camera={{ position: [0, 0, 80] }}>
         <Background />
         <axesHelper scale={5} />
+        <ambientLight intensity={0.1} />
         <EffectComposer>
-          <Bloom mipmapBlur luminanceThreshold={1} radius={0.7} />
+          <Bloom
+            luminanceThreshold={0}
+            luminanceSmoothing={0.5}
+            height={1000}
+          />
         </EffectComposer>
         {/* <color attach="background" args={["black"]} /> */}
-        <GradientBackground />
         {starPotisions?.map((star, index) => (
           <group key={index}>
             <mesh
@@ -149,18 +225,9 @@ const ListSectionStar = () => {
                 // emissiveIntensity={starList.starList[index].brightness}
               />
             </mesh>
-            {lines.map((line, index) => (
-              <Line
-                key={index}
-                points={[
-                  [line[0] * num - zero, line[1] * num, line[2] * num],
-                  [line[3] * num - zero, line[4] * num, line[5] * num],
-                ]}
-                color="white"
-              />
-            ))}
           </group>
         ))}
+        <LineDrawing lines={lines} num={num} zero={zero} zDamping={zDamping} />
       </Canvas>
       <div>
         {/* 별을 클릭했을 때 위치 조정 필요 */}
@@ -225,11 +292,12 @@ const ListSectionStar = () => {
                 <p></p>
               </div>
             </div>
-            <Button2
-              className="rounded-lg border-2 border-white bg-transparent text-white"
+            <button
+              className="my-4 w-40 rounded-full border-2 bg-transparent p-2 text-white"
               onClick={() => navigateToDetailStar(boxid)}
-              value="상세정보"
-            />
+            >
+              상세정보
+            </button>
           </div>
         </div>
       </div>

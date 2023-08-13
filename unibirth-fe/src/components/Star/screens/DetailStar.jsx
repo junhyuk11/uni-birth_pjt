@@ -5,16 +5,18 @@ import { useNavigation } from "../../../hooks/useNavigation";
 import useStarApi from "../../../api/useStarApi";
 import useMemberApi from "../../../api/useMemberApi";
 import { useParams } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { backgroundflagState } from "../../../recoil/atoms";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
-
+import CustomAlert from "../../../common/atoms/CustomAlert";
 const DetailStar = () => {
-  const [ddd, setBackgroundflag] = useRecoilState(backgroundflagState);
+  const setBackgroundflag = useSetRecoilState(backgroundflagState);
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
   const { starId } = useParams();
   const [memberInfo, setMemberInfo] = useState([]);
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const [star, setStar] = useState({
     brightness: "",
     content: "",
@@ -30,7 +32,6 @@ const DetailStar = () => {
 
   useEffect(() => {
     setBackgroundflag(true);
-    console.log("flag:", ddd);
   }, []);
 
   useEffect(() => {
@@ -44,24 +45,38 @@ const DetailStar = () => {
   }, [star.nickname]);
 
   const getStar = async (starId) => {
-    console.log(starId);
     try {
       const response = await useStarApi.starsGetStar(starId);
-      console.log("별자리 디테일: ", response);
-      setStar(response.resultData);
+      if (response.status === 200) {
+        setStar(response.resultData);
+      } else if (response.status === 404) {
+        setIsAlertVisible(true);
+        setAlertMessage("존재하지 않는 별입니다.");
+      } else if (response.status === 403) {
+        setIsAlertVisible(true);
+        setAlertMessage("로그인이 필요한 서비스입니다.");
+      }
     } catch (error) {
-      console.error("Failed to get star:", error);
+      setIsAlertVisible(true);
+      setAlertMessage("별을 불러오는데 실패하였습니다.");
     }
   };
 
   const getMemberInfo = async (nickname) => {
-    console.log(nickname);
     try {
       const response = await useMemberApi.membersGetDetail(nickname);
-      console.log(response);
-      setMemberInfo(response.resultData);
+      if (response.status === 200) {
+        setMemberInfo(response.resultData);
+      } else if (response.status === 404) {
+        setIsAlertVisible(true);
+        setAlertMessage("존재하지 않는 회원입니다.");
+      } else if (response.status === 403) {
+        setIsAlertVisible(true);
+        setAlertMessage("로그인이 필요한 서비스입니다.");
+      }
     } catch (error) {
-      console.error("Failed to get member:", error);
+      setIsAlertVisible(true);
+      setAlertMessage("멤버 정보를 불러오는데 실패하였습니다.");
     }
   };
 
@@ -71,24 +86,34 @@ const DetailStar = () => {
     if (star.alreadyLiked) {
       try {
         const response = await useStarApi.starsDeleteBrightness(starId);
-        console.log(response);
-        setStar({
-          ...star,
-          alreadyLiked: false,
-        });
+        if (response.status === 200) {
+          setStar({
+            ...star,
+            alreadyLiked: false,
+          });
+        } else {
+          setIsAlertVisible(true);
+          setAlertMessage(response.message);
+        }
       } catch (error) {
-        console.error("Failed to delete like:", error);
+        setIsAlertVisible(true);
+        setAlertMessage("오류 발생");
       }
     } else {
       try {
         const response = await useStarApi.starsGetBrightness(starId);
-        console.log(response);
-        setStar({
-          ...star,
-          alreadyLiked: true,
-        });
+        if (response.status === 200) {
+          setStar({
+            ...star,
+            alreadyLiked: true,
+          });
+        } else {
+          setIsAlertVisible(true);
+          setAlertMessage(response.message);
+        }
       } catch (error) {
-        console.error("Failed to post like:", error);
+        setIsAlertVisible(true);
+        setAlertMessage("오류 발생");
       }
     }
   };
@@ -106,9 +131,36 @@ const DetailStar = () => {
       ),
     },
   ];
-
+  function formatDate(dateString) {
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
   return (
-    <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+    <div className="mx-auto h-full min-h-screen max-w-screen-sm">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => {
+          setIsAlertVisible(false);
+          if (
+            alertMessage === "별을 불러오는데 실패하였습니다." ||
+            alertMessage === "멤버 정보를 불러오는데 실패하였습니다." ||
+            alertMessage === "오류 발생" ||
+            alertMessage === "존재하지 않는 별입니다." ||
+            alertMessage === "존재하지 않는 회원입니다." ||
+            alertMessage === "로그인이 필요한 서비스입니다."
+          ) {
+            navigateToBack();
+          }
+        }}
+      />
       <header className="sticky top-0 z-10">
         <Header1 buttons={buttonsHeader} />
       </header>
@@ -119,10 +171,10 @@ const DetailStar = () => {
             style={{ maxWidth: "100%", wordWrap: "break-word" }}
           >
             <div
-              className="text-md w-full overflow-hidden font-bold text-gray-800"
+              className="text-md w-full overflow-hidden font-bold text-white"
               style={{ maxWidth: "70%", wordWrap: "break-word" }}
             >
-              sㄴㅁㅇㄹㄴ마ㅣㅇ런미ㅏㅇ린망린ㅁ어린ㅁㅇ러ㅏㅣㄴㅁㅇ러ㅣㅏㄴㅁㅇㄹㄴ미얼ㄴㅁ이;러
+              스타 타이틀 나와야 하는데, 도대체 누가짠거임
               {/* {star.title} */}
             </div>
           </div>
@@ -138,12 +190,14 @@ const DetailStar = () => {
           />
           <div className="ml-3 mt-0 flex flex-col">
             <div
-              className="text-md font-bold text-gray-800"
+              className="text-md font-bold text-white"
               onClick={() => navigateToMemberProfile(memberInfo.nickname)}
             >
               {memberInfo.nickname}
             </div>
-            <span className="text-xs text-gray-700">{star.updatedAt}</span>
+            <span className="text-xs text-white">
+              {formatDate(star.updatedAt)}
+            </span>
           </div>
         </div>
       </div>
@@ -151,19 +205,22 @@ const DetailStar = () => {
         <img
           src={star.imageUrl}
           alt="별 이미지"
-          className="h-auto max-h-96 w-full object-cover"
-        />{" "}
+          className="h-auto max-h-96 w-full rounded-lg object-cover"
+        />
         {/* 이미지 크기 조정 */}
       </div>
       <div className="px-4">
         <div className="flex flex-row items-center py-4">
-          <p className="flex-grow text-sm text-gray-800">{star.content}</p>
+          <p className="flex-grow text-xl text-white">{star.content}</p>
           <button
-            className={`scale-100 transform text-3xl text-yellow-500 transition-transform focus:outline-none ${"animate-bounce"}`}
+            className={
+              "flex  scale-100 transform self-start text-3xl text-yellow-500 transition-transform focus:outline-none"
+            }
             onClick={() => handleLikeClick(star.starId)}
           >
             {star.alreadyLiked ? <AiFillStar /> : <AiOutlineStar />}
           </button>
+          <div className="flex"></div>
         </div>
       </div>
     </div>

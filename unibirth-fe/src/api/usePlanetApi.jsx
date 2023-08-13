@@ -5,20 +5,26 @@ const planetsGetPlanetList = async () => {
     const response = await useAxiosInstance.apiClient.get(`/planets`);
     return response.data;
   } catch (e) {
-    console.log("planet_error:", e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
 const planetsGetStarList = async (planetId) => {
-  console.log("palnet:", planetId);
   try {
     const response = await useAxiosInstance.apiClient.get(
       `/planets/${planetId}`,
     );
-    console.log("RESPONSE:", response);
     return response.data;
   } catch (e) {
-    console.log("planet_error:", e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 

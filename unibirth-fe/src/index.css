@@ -25,6 +25,25 @@
   src: url("./assets/fonts/Pretendard-Regular.woff") format("woff");
 }
 
+@layer components {
+  .dropdown-enter {
+    @apply transform transition-transform ease-out duration-300;
+    transform: translateY(-100%);
+  }
+  .dropdown-enter-active {
+    @apply transform transition-transform ease-out duration-300;
+    transform: translateY(0);
+  }
+  .dropdown-leave {
+    @apply transform transition-transform ease-in duration-300;
+    transform: translateY(0);
+  }
+  .dropdown-leave-active {
+    @apply transform transition-transform ease-in duration-300;
+    transform: translateY(-100%);
+  }
+}
+
 .custom-font {
   font-family: 'Pretendard';
 }

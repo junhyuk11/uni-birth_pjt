@@ -9,13 +9,15 @@ import useMemberApi from "../../../api/useMemberApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import { useSetRecoilState } from "recoil";
 import { backgroundflagState } from "../../../recoil/atoms";
+import CustomAlert from "../../../common/atoms/CustomAlert";
 
 const RegisterMember = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
   useEffect(() => {
     backgroundflag(true);
   }, []);
-
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +32,8 @@ const RegisterMember = () => {
   const joinMember = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert("비밀번호가 일치하지 않습니다.");
+      setIsAlertVisible(true);
+      setAlertMessage("비밀번호가 일치하지 않습니다.");
       return;
     }
 
@@ -42,28 +45,20 @@ const RegisterMember = () => {
       imageUrl: image,
       planetId: interest,
     };
-    console.log(member);
+
     try {
       const response = await useMemberApi.membersPostRegister(member);
-      updateimage();
-      console.log(response);
-      alert("회원가입이 완료되었습니다.");
-      navigateToLoginMember();
+      if (response.status === 200) {
+        setIsAlertVisible(true);
+        setAlertMessage("회원가입이 완료되었습니다.");
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage(response.message);
+      }
     } catch (e) {
-      console.log(e);
-      alert("회원가입에 실패하였습니다.");
+      setIsAlertVisible(true);
+      setAlertMessage("회원가입에 실패하였습니다.");
     }
-
-    console.log(
-      `Nickname: ${nickname}, Email: ${email}, Password: ${password}, confirmPassword: ${confirmPassword}`,
-    );
-  };
-
-  const updateimage = () => {
-    const [year, month, day] = birthdate.split("-");
-    console.log(year);
-    const birthdateAsNumber = parseInt(month + day, 10);
-    console.log(`Birthdate as number: ${birthdateAsNumber}`);
   };
 
   const buttonsHeader = [
@@ -86,6 +81,16 @@ const RegisterMember = () => {
 
   return (
     <div className="mx-auto h-screen max-w-screen-sm">
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => {
+          setIsAlertVisible(false);
+          if (alertMessage === "회원가입이 완료되었습니다.") {
+            navigateToLoginMember();
+          }
+        }}
+      />
       <div>
         <Header1 buttons={buttonsHeader} />
         <form className="justify-center">

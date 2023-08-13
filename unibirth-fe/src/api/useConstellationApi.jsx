@@ -6,10 +6,13 @@ const constellationsGetPlanet = async (planetId) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/constellations/list/${planetId}`);
-    console.log("api입니다", response);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -19,10 +22,13 @@ const constellationsGetConstellation = async (constellationId) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/constellations/${constellationId}`);
-    console.log(response);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -32,24 +38,29 @@ const constellationsGetPin = async (constellationId) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/constellations/pin/${constellationId}`);
-    console.log(response);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
 const constellationsGetAttendList = async (nickname) => {
   try {
-    console.log(nickname);
     const jwt = sessionStorage.getItem("accessToken");
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/constellations/profiles?nickname=${nickname}`);
-    console.log(response.data);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -61,12 +72,15 @@ const constellationsGetPinList = async (nickname) => {
       .get(`/constellations/profiles/pins?nickname=${nickname}`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
 const constellationsPostConstellation = async (constellation) => {
-  console.log("api입니다", constellation);
   try {
     const jwt = sessionStorage.getItem("accessToken");
     const response = await useAxiosInstance
@@ -74,7 +88,11 @@ const constellationsPostConstellation = async (constellation) => {
       .post(`/constellations/register`, constellation);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -86,7 +104,11 @@ const constellationsGetDetail = async (constellationId) => {
       .get(`/constellations/detail/${constellationId}`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -98,7 +120,11 @@ const constellationsGetTemplateList = async () => {
       .get(`/constellations/templates`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -110,7 +136,11 @@ const constellationsDeletePin = async (constellationId) => {
       .delete(`/constellations/pin/${constellationId}`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 

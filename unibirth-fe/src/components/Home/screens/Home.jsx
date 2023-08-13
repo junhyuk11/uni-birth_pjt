@@ -32,6 +32,7 @@ const Home = () => {
       <p className="absolute left-1/3 top-10 z-10 font-TAEBAEKmilkyway text-2xl text-white">
         세상에서 가장 빛나는 너의 별
       </p>
+
       <p className="absolute left-1/3 top-20 z-10 font-TAEBAEKmilkyway text-4xl text-white">
         uni-Birth
       </p>

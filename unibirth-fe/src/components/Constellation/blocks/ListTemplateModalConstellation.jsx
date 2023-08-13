@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useConstellationApi from "../../../api/useConstellationApi";
-
+import CustomAlert from "../../../common/atoms/CustomAlert";
 const ListTemplateModalConstellation = ({
   setIsModalOpen,
   setPointList,
@@ -9,13 +9,13 @@ const ListTemplateModalConstellation = ({
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const [templateList, setTemplateList] = useState({
     templateList: [],
   });
 
   const handlePutTemplateConstellation = (template) => {
-    alert(template.templateId);
     setPointList(template.pointList);
     setLineList(template.lineList);
     handleCloseModal();
@@ -27,13 +27,16 @@ const ListTemplateModalConstellation = ({
         await useConstellationApi.constellationsGetTemplateList();
       if (response.status === 200) {
         setTemplateList(response.resultData);
-        console.log("별자리 템플릿을 불러왔습니다.", response.resultData);
-      } else {
-        alert("별자리 템플릿을 불러오는데 실패하였습니다.");
+      } else if (response.status === 404) {
+        setIsAlertVisible(true);
+        setAlertMessage("템플릿 정보가 없습니다.");
+      } else if (response.status === 403) {
+        setIsAlertVisible(true);
+        setAlertMessage("로그인이 필요한 서비스입니다.");
       }
     } catch (e) {
-      console.log(e);
-      alert("별자리 템플릿을 불러오는데 실패하였습니다.");
+      setIsAlertVisible(true);
+      setAlertMessage("오류가 발생했습니다.");
     }
   };
 
@@ -44,6 +47,11 @@ const ListTemplateModalConstellation = ({
   return (
     <div>
       <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <CustomAlert
+          message={alertMessage}
+          isVisible={isAlertVisible}
+          onClose={() => setIsAlertVisible(false)}
+        />
         <div className="absolute inset-0 bg-gray-800 opacity-50"></div>
         <div className="z-10 rounded bg-white p-4 shadow-md">
           <div className="mt-4 flex justify-center">
