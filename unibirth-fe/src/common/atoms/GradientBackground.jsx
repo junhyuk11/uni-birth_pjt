@@ -49,7 +49,6 @@ function Scene() {
   return (
     <>
       <GradientBackground />
-      {/* <color attach="background" args={["black"]} /> */}
     </>
   );
 }
