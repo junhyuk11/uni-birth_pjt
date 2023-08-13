@@ -35,25 +35,34 @@ const CustomDropdown = ({ value, onChange }) => {
         >
           {value}
         </button>
-        {isOpen && (
-          <div className="absolute mt-2 rounded-lg border ">
-            {SEARTCH_LIST.map(
-              (option) =>
-                option.name !== value && (
-                  <div
-                    className="cursor-pointer p-2 hover:bg-gray-200"
-                    key={option.name}
-                    onClick={() => {
-                      onChange(option.name); // 선택된 값을 부모 컴포넌트에 전달
-                      setIsOpen(false);
-                    }}
-                  >
-                    {option.name}
-                  </div>
-                ),
-            )}
-          </div>
-        )}
+        <div
+          className={`absolute mt-2 rounded-lg ${
+            isOpen
+              ? "visible opacity-100 transition-all duration-300 ease-out"
+              : "invisible opacity-0 transition-all duration-300 ease-out"
+          }`}
+        >
+          {isOpen && (
+            <div className="absolute mt-2 rounded-lg border ">
+              {SEARTCH_LIST.map(
+                (option) =>
+                  option.name !== value && (
+                    <div
+                      className="cursor-pointer p-2 hover:bg-gray-200
+                    hover:text-black"
+                      key={option.name}
+                      onClick={() => {
+                        onChange(option.name); // 선택된 값을 부모 컴포넌트에 전달
+                        setIsOpen(false);
+                      }}
+                    >
+                      {option.name}
+                    </div>
+                  ),
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

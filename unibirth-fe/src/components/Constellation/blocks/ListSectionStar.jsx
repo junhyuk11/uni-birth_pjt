@@ -15,7 +15,6 @@ import {
 } from "../../../recoil/atoms";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import * as THREE from "three";
-import GradientBackground from "../../../common/atoms/GradientBackground";
 import Background from "../../../common/atoms/Background";
 import Plus from "../../../assets/icons/js/plus";
 import CustomAlert from "../../../common/atoms/CustomAlert";
@@ -104,8 +103,8 @@ const ListSectionStar = () => {
   // starPotisions recoil 저장
   const starPoint = starList?.pointList;
   const num = 10; // 별 거리 조절
-  const zero = 10;
-  const zDamping = 5;
+  const zero = 20;
+  const zDamping = 3;
   // const znum = (Math.floor(Math.random() * 11) - 5) * num;
   const starPotisions = starPoint?.map((star) => ({
     x: star[0] * num - zero,
@@ -175,7 +174,7 @@ const ListSectionStar = () => {
           )}
         </div>
       </div>
-      <Canvas camera={{ position: [0, 0, 70] }}>
+      <Canvas camera={{ position: [0, 0, 80] }}>
         <Background />
         <axesHelper scale={5} />
         <ambientLight intensity={0.1} />
@@ -187,7 +186,6 @@ const ListSectionStar = () => {
           />
         </EffectComposer>
         {/* <color attach="background" args={["black"]} /> */}
-        <GradientBackground />
         {starPotisions?.map((star, index) => (
           <group key={index}>
             <mesh

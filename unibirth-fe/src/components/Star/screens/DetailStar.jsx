@@ -137,7 +137,7 @@ const DetailStar = () => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   }
   return (
-    <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+    <div className="mx-auto h-full min-h-screen max-w-screen-sm">
       <CustomAlert
         message={alertMessage}
         isVisible={isAlertVisible}
@@ -162,10 +162,10 @@ const DetailStar = () => {
             style={{ maxWidth: "100%", wordWrap: "break-word" }}
           >
             <div
-              className="text-md w-full overflow-hidden font-bold text-gray-800"
+              className="text-md w-full overflow-hidden font-bold text-white"
               style={{ maxWidth: "70%", wordWrap: "break-word" }}
             >
-              sㄴㅁㅇㄹㄴ마ㅣㅇ런미ㅏㅇ린망린ㅁ어린ㅁㅇ러ㅏㅣㄴㅁㅇ러ㅣㅏㄴㅁㅇㄹㄴ미얼ㄴㅁ이;러
+              스타 타이틀 나와야 하는데, 도대체 누가짠거임
               {/* {star.title} */}
             </div>
           </div>
@@ -181,12 +181,12 @@ const DetailStar = () => {
           />
           <div className="ml-3 mt-0 flex flex-col">
             <div
-              className="text-md font-bold text-gray-800"
+              className="text-md font-bold text-white"
               onClick={() => navigateToMemberProfile(memberInfo.nickname)}
             >
               {memberInfo.nickname}
             </div>
-            <span className="text-xs text-gray-700">
+            <span className="text-xs text-white">
               {formatDate(star.updatedAt)}
             </span>
           </div>
@@ -196,19 +196,22 @@ const DetailStar = () => {
         <img
           src={star.imageUrl}
           alt="별 이미지"
-          className="h-auto max-h-96 w-full object-cover"
-        />{" "}
+          className="h-auto max-h-96 w-full rounded-lg object-cover"
+        />
         {/* 이미지 크기 조정 */}
       </div>
       <div className="px-4">
         <div className="flex flex-row items-center py-4">
-          <p className="flex-grow text-sm text-gray-800">{star.content}</p>
+          <p className="flex-grow text-xl text-white">{star.content}</p>
           <button
-            className={`scale-100 transform text-3xl text-yellow-500 transition-transform focus:outline-none`}
+            className={
+              "flex  scale-100 transform self-start text-3xl text-yellow-500 transition-transform focus:outline-none"
+            }
             onClick={() => handleLikeClick(star.starId)}
           >
             {star.alreadyLiked ? <AiFillStar /> : <AiOutlineStar />}
           </button>
+          <div className="flex"></div>
         </div>
       </div>
     </div>

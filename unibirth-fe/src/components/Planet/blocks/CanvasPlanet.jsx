@@ -140,7 +140,7 @@ const ListSectionPlanet = ({
           <Bloom
             luminanceThreshold={0}
             luminanceSmoothing={0.5}
-            height={1000}
+            height={500}
             // intensity={2}
           />
         </EffectComposer>

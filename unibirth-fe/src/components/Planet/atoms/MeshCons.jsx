@@ -9,7 +9,6 @@ const MeshCons = ({
   constellationList,
   ConstellationIndex,
   setCurrentConstellation,
-  currentConstellation,
 }) => {
   const meshRef = useRef();
   // 별자리 반경
@@ -31,6 +30,8 @@ const MeshCons = ({
   const spherenum = 7;
   // 행성 갯수 limit 걸기
   const limitCount = 111;
+  // 별자리 Z 값 변경
+  const correctionZ = 0.3;
 
   // DetailPlanet 리스트, 인덱스 관리
   const setCurrentList = useSetRecoilState(currentconstellationListState);
@@ -104,12 +105,12 @@ const MeshCons = ({
                       [
                         x1 * constellationGap + xyz.x,
                         y1 * constellationGap + xyz.y,
-                        z1 * constellationGap + xyz.z,
+                        z1 * constellationGap * correctionZ + xyz.z,
                       ],
                       [
                         x2 * constellationGap + xyz.x,
                         y2 * constellationGap + xyz.y,
-                        z2 * constellationGap + xyz.z,
+                        z2 * constellationGap * correctionZ + xyz.z,
                       ],
                     ]}
                     // color="#F2F5A9"
@@ -132,7 +133,7 @@ const MeshCons = ({
                     position={[
                       point.x * constellationGap + xyz.x,
                       point.y * constellationGap + xyz.y,
-                      point.z * constellationGap + xyz.z,
+                      point.z * constellationGap * correctionZ + xyz.z,
                     ]}
                   >
                     <sphereGeometry args={[spherenum, 5, 5]} />
