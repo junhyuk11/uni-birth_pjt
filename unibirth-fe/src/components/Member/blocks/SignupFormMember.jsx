@@ -65,7 +65,7 @@ const MemberRegistrationForm = ({
       if (response.status === 200) {
         setIsAlertVisible(true);
         setAlertMessage(`사용 가능한 ${type}입니다.`);
-      } else {
+      } else if (response.status === 409) {
         setIsAlertVisible(true);
         setAlertMessage(`이미 사용중인 ${type}입니다.`);
       }

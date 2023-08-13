@@ -22,7 +22,9 @@ const QurationStar = ({ data }) => {
       {/* 제목, 내용 및 버튼 */}
       <div className="mt-2 flex w-full items-center justify-between px-4">
         <div className="flex flex-col">
-          <div className="font-bold">data.title 이거 나중에 괄호치면 댐</div>
+          <div className="font-bold">
+            {data.title} data.title나오는 공간임ㅇㅇ
+          </div>
           <div>{data.content}</div>
         </div>
         <div>

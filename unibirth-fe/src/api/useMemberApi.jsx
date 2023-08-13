@@ -8,7 +8,11 @@ const membersGetBoard = async () => {
       .get(`/members/board`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -21,7 +25,11 @@ const membersGetProfiles = async () => {
       .get(`/members/profiles/read`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -31,10 +39,13 @@ const membersPostRegister = async (member) => {
       "/members/register",
       member,
     );
-    console.log(response);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -46,21 +57,27 @@ const membersPostLogin = async (member) => {
     );
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
 const membersGetDetail = async (nickname) => {
   try {
-    console.log(nickname);
     const jwt = sessionStorage.getItem("accessToken");
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/members/detail/${nickname}`);
-    console.log(response.data);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -72,7 +89,11 @@ const membersPutUpdate = async (member) => {
       .put(`/members/update`, member);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -84,7 +105,11 @@ const membersPutBoard = async () => {
       .put(`/members/board`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -97,7 +122,11 @@ const membersPutProfiles = async (data) => {
       .put(`/members/profiles/update`, data);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -109,7 +138,11 @@ const membersDeleteMember = async () => {
       .delete(`/members/delete`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -121,7 +154,9 @@ const membersPostCheckNickname = async (nickname) => {
     );
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 409) {
+      return e.response.data;
+    }
   }
 };
 
@@ -133,7 +168,9 @@ const membersPostCheckEmail = async (email) => {
     );
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 409) {
+      return e.response.data;
+    }
   }
 };
 
@@ -145,7 +182,11 @@ const membersPostEmail = async (email) => {
     );
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -157,7 +198,11 @@ const membersGetPin = async () => {
       .get(`/members/pin`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -169,7 +214,11 @@ const membersPutPin = async () => {
       .put(`/members/pin`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 

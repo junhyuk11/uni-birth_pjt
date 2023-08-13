@@ -32,16 +32,18 @@ const DetailConstellation = () => {
       );
       if (response.status === 200) {
         setConstellationConstent(response.resultData);
-      } else {
+      } else if (response.status === 404) {
         setIsAlertVisible(true);
         setAlertMessage("별자리 정보를 불러오는데 실패했습니다.");
+      } else if (response.status === 403) {
+        setIsAlertVisible(true);
+        setAlertMessage("로그인이 필요한 서비스입니다.");
       }
     } catch (error) {
       setIsAlertVisible(true);
-      setAlertMessage("별자리 정보를 불러오는데 실패했습니다.");
+      setAlertMessage("오류가 발생했습니다.");
     }
   };
-  console.log("", constellationContent);
   const {
     navigateToBack,
     navigateToMainPlanet,
@@ -90,9 +92,7 @@ const DetailConstellation = () => {
           isVisible={isAlertVisible}
           onClose={() => {
             setIsAlertVisible(false);
-            if (alertMessage === "별자리 정보를 불러오는데 실패했습니다.") {
-              navigateToBack();
-            }
+            navigateToBack();
           }}
         />
         <div className="my-2 flex items-baseline justify-center text-white">

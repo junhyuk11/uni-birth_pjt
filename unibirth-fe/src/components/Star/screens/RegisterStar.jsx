@@ -82,9 +82,9 @@ const RegisterStar = () => {
           const response = await useStarApi.starsPostStar(data);
           if (response.status === 200) {
             navigateToDetailConstellation(constellationId);
-          } else {
+          } else if (response.status === 400) {
             setIsAlertVisible(true);
-            setAlertMessage(response.message);
+            setAlertMessage("이미 완성된 별자리입니다.");
           }
         } catch (error) {
           setIsAlertVisible(true);
@@ -116,6 +116,12 @@ const RegisterStar = () => {
         isVisible={isAlertVisible}
         onClose={() => {
           setIsAlertVisible(false);
+          if (
+            alertMessage === "이미 완성된 별자리입니다." ||
+            alertMessage === "별 생성에 실패하였습니다."
+          ) {
+            navigateToBack();
+          }
         }}
       />
       <div>

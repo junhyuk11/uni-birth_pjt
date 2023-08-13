@@ -49,9 +49,12 @@ const DetailStar = () => {
       const response = await useStarApi.starsGetStar(starId);
       if (response.status === 200) {
         setStar(response.resultData);
-      } else {
+      } else if (response.status === 404) {
         setIsAlertVisible(true);
-        setAlertMessage("별을 불러오는데 실패하였습니다.");
+        setAlertMessage("존재하지 않는 별입니다.");
+      } else if (response.status === 403) {
+        setIsAlertVisible(true);
+        setAlertMessage("로그인이 필요한 서비스입니다.");
       }
     } catch (error) {
       setIsAlertVisible(true);
@@ -64,9 +67,12 @@ const DetailStar = () => {
       const response = await useMemberApi.membersGetDetail(nickname);
       if (response.status === 200) {
         setMemberInfo(response.resultData);
-      } else {
+      } else if (response.status === 404) {
         setIsAlertVisible(true);
-        setAlertMessage(response.message);
+        setAlertMessage("존재하지 않는 회원입니다.");
+      } else if (response.status === 403) {
+        setIsAlertVisible(true);
+        setAlertMessage("로그인이 필요한 서비스입니다.");
       }
     } catch (error) {
       setIsAlertVisible(true);
@@ -146,7 +152,10 @@ const DetailStar = () => {
           if (
             alertMessage === "별을 불러오는데 실패하였습니다." ||
             alertMessage === "멤버 정보를 불러오는데 실패하였습니다." ||
-            alertMessage === "오류 발생"
+            alertMessage === "오류 발생" ||
+            alertMessage === "존재하지 않는 별입니다." ||
+            alertMessage === "존재하지 않는 회원입니다." ||
+            alertMessage === "로그인이 필요한 서비스입니다."
           ) {
             navigateToBack();
           }

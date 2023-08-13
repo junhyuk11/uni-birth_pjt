@@ -34,6 +34,7 @@ const ListSectionStar = () => {
   const [starListIndex, setStarListIndex] = useState([]);
   const [alreadyPined, setAlreadyPined] = useState(false);
   const [isFulledStar, setIsFulledStar] = useState(false);
+  const [responseState, setResponseState] = useState();
   // Star box Content
   const [boxcontent, setBoxcontent] = useRecoilState(boxcontentState);
   const [boxnickname, setBoxnickname] = useRecoilState(boxnicknameState);
@@ -84,18 +85,22 @@ const ListSectionStar = () => {
       const response = await useConstellationApi.constellationsGetConstellation(
         constellationId,
       );
+      setResponseState(response.status);
       if (response.status === 200) {
         setStarList(response.resultData);
         setStarListIndex(response.resultData.starList);
         setAlreadyPined(response.resultData.alreadyPined);
         setIsFulledStar(response.resultData.completion);
-      } else {
+      } else if (response.status === 404) {
         setIsAlertVisible(true);
         setAlertMessage("별 리스트를 불러오는데 실패했습니다.");
+      } else if (response.status === 403) {
+        setIsAlertVisible(true);
+        setAlertMessage("로그인이 필요한 서비스입니다.");
       }
     } catch (error) {
       setIsAlertVisible(true);
-      setAlertMessage("별 리스트를 불러오는데 실패했습니다.");
+      setAlertMessage("오류가 발생했습니다.");
     }
   };
 
@@ -125,17 +130,26 @@ const ListSectionStar = () => {
         const response = await useConstellationApi.constellationsDeletePin(
           constellationId,
         );
-        console.log(response);
-        setAlreadyPined(false);
+        setResponseState(response.status);
+        if (response.status === 200) {
+          setAlreadyPined(false);
+        } else if (response.status === 404) {
+          setIsAlertVisible(true);
+          setAlertMessage("핀 취소에 실패했습니다.");
+        } else if (response.status === 403) {
+          setIsAlertVisible(true);
+          setAlertMessage("로그인이 필요한 서비스입니다.");
+        }
       } catch (error) {
-        console.log(error);
+        setIsAlertVisible(true);
+        setAlertMessage("오류가 발생했습니다.");
       }
     } else {
       try {
         const response = await useConstellationApi.constellationsGetPin(
           constellationId,
         );
-        console.log(response);
+        setResponseState(response.status);
         setAlreadyPined(true);
       } catch (error) {
         console.log(error);
@@ -150,7 +164,11 @@ const ListSectionStar = () => {
         isVisible={isAlertVisible}
         onClose={() => {
           setIsAlertVisible(false);
-          if (alertMessage === "별 리스트를 불러오는데 실패했습니다.") {
+          if (
+            alertMessage === "오류가 발생했습니다." ||
+            responseState === 403 ||
+            responseState === 404
+          ) {
             navigateToBack();
           }
         }}
