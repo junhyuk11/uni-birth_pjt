@@ -1,20 +1,13 @@
 import React from "react";
-import Footer3 from "../blocks/Footer3";
 import Button1 from "../atoms/Button1";
+import { useNavigation } from "../../hooks/useNavigation";
+
 const QurationStar = ({ data }) => {
-  const buttonsFooter = [
-    {
-      component: Button1,
-      value: "별자리보기",
-    },
-    {
-      component: Button1,
-      value: "찜하기",
-    },
-  ];
+  const { navigateToDetailStar } = useNavigation();
+
   return (
     <div className="flex w-full flex-col items-center justify-center">
-      <div className="w-full">
+      <div className="w-full" onClick={() => navigateToDetailStar(data.starId)}>
         <img
           src={data.imageUrl}
           alt="별 이미지"
@@ -23,7 +16,10 @@ const QurationStar = ({ data }) => {
       </div>
       <h3 className="font-bold">{data.nickname}</h3>
       <p>{data.content}</p>
-      <Footer3 buttons={buttonsFooter} />
+      <Button1
+        value="별 보기"
+        onClick={() => navigateToDetailStar(data.starId)}
+      />
     </div>
   );
 };
