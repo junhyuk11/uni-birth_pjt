@@ -33,10 +33,11 @@ const CustomDropdown = ({ planetId, setPlanetId }) => {
     >
       <div className="relative flex w-40 justify-center text-white">
         <button
+          type="button"
           className=" flex w-32 flex-row justify-center rounded-lg border bg-transparent p-2"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <div>{PLANET_LIST[planetId - 1]?.name}</div>
+          <div>{PLANET_LIST[planetId]?.name}</div>
         </button>
         <div
           className={`absolute mt-2 rounded-lg ${
@@ -52,8 +53,8 @@ const CustomDropdown = ({ planetId, setPlanetId }) => {
                   className="flex w-32 cursor-pointer
                       justify-center p-2 hover:bg-gray-200 hover:text-black"
                   key={planet.planetId}
-                  onClick={() => {
-                    handleSelect(planet.planetId);
+                  onClick={(e) => {
+                    handleSelect(planet.planetId - 1);
                     setIsOpen(false);
                   }}
                 >
