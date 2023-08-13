@@ -22,7 +22,7 @@ const SearchQuration = () => {
   const { navigateToBack } = useNavigation();
   const [category, setCategory] = useState("all");
   const [query, setQuery] = useState("");
-  const [currentState, setCurrentState] = useState("팔로잉");
+  const [currentState, setCurrentState] = useState("팔로우");
   const [followingData, setFollowingData] = useState([]);
   const [interestData, setInterestData] = useState([]);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
