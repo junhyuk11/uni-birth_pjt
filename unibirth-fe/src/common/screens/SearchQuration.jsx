@@ -9,7 +9,7 @@ import { backgroundflagState, nicknameState } from "../../recoil/atoms";
 import LeftArrow from "../../assets/icons/js/leftArrow";
 import Header5 from "../blocks/Header5";
 import useSearchApi from "../../api/useSearchApi";
-import CustomAlert from "../atoms/CustomAlert";
+// import CustomAlert from "../atoms/CustomAlert";
 
 const SearchQuration = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -17,7 +17,7 @@ const SearchQuration = () => {
     backgroundflag(true);
   }, []);
   const nickname = useRecoilValue(nicknameState);
-  const [alertMessage, setAlertMessage] = useState("");
+  // const [alertMessage, setAlertMessage] = useState("");
 
   const { navigateToBack } = useNavigation();
   const [category, setCategory] = useState("all");
@@ -25,7 +25,7 @@ const SearchQuration = () => {
   const [currentState, setCurrentState] = useState("팔로우");
   const [followingData, setFollowingData] = useState([]);
   const [interestData, setInterestData] = useState([]);
-  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  // const [isAlertVisible, setIsAlertVisible] = useState(false);
 
   const getQurationStar = async () => {
     try {
@@ -71,15 +71,16 @@ const SearchQuration = () => {
   ];
 
   return (
-    <div className="bg-space-black mx-auto flex h-screen max-w-screen-sm flex-col text-yellow-100">
-      <SearchHeader
-        buttons={buttonsHeader}
-        category={category}
-        setCategory={setCategory}
-        query={query}
-        setQuery={setQuery}
-      />
-      <CustomAlert
+    <div className="absolute left-1/2 z-10 h-screen w-full -translate-x-1/2">
+      <div className="bg-space-black mx-auto flex h-screen max-w-screen-sm flex-col text-yellow-100">
+        <SearchHeader
+          buttons={buttonsHeader}
+          category={category}
+          setCategory={setCategory}
+          query={query}
+          setQuery={setQuery}
+        />
+        {/* <CustomAlert
         message={alertMessage}
         isVisible={isAlertVisible}
         onClose={() => {
@@ -91,14 +92,15 @@ const SearchQuration = () => {
             navigateToBack();
           }
         }}
-      />
-      <div className="flex flex-1 flex-col p-4">
-        <div className="my-4">
-          <Header5 buttons={buttonsHeader2} />
+      /> */}
+        <div className="flex flex-1 flex-col p-4">
+          <div className="my-4">
+            <Header5 buttons={buttonsHeader2} />
+          </div>
+          <div className="flex flex-col items-center justify-center"></div>
+          {currentState === "팔로우" && <QurationStar data={followingData} />}
+          {currentState === "관심행성" && <QurationStar data={interestData} />}
         </div>
-        <div className="flex flex-col items-center justify-center"></div>
-        {currentState === "팔로우" && <QurationStar data={followingData} />}
-        {currentState === "관심행성" && <QurationStar data={interestData} />}
       </div>
     </div>
   );

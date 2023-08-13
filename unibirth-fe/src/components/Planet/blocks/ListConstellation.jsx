@@ -185,7 +185,7 @@ const Scene = ({ constellationList }) => {
         camera={{
           position: startDirection
             ? [startDirection.x, startDirection.y, startDirection.z]
-            : [0, 500, 0],
+            : [100, 500, 0],
         }}
       >
         <PerspectiveCamera
