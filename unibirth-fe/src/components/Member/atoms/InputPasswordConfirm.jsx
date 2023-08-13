@@ -21,7 +21,12 @@ const InputPasswordConfirm = ({ onChange }) => {
             onChange={onChange}
             placeholder="비밀번호 확인"
             autoComplete="off"
+            maxLength={12}
+            minLength={4}
           />
+          <div className="mt-2 text-red-500">
+            {<span style={{ opacity: 0 }}>Placeholder</span>}
+          </div>
         </div>
       </div>
     </div>

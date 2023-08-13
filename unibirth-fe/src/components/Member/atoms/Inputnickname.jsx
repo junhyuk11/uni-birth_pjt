@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Inputnickname = ({ onChange }) => {
+  const [error, setError] = useState("");
+  const handleNicknameChange = (e) => {
+    const newNickname = e.target.value;
+    if (newNickname.length < 2 && newNickname.length > 0) {
+      setError("닉네임은 최소 2자리 이상이어야 합니다.");
+    } else if (newNickname.length >= 8) {
+      setError("닉네임은 최대 8자리까지 가능합니다.");
+    } else {
+      setError("");
+    }
+    onChange(e);
+  };
+
   return (
     <div className="w-full flex-initial items-center justify-center font-Pretendard">
       <div className="w-full flex-row">
@@ -17,11 +30,15 @@ const Inputnickname = ({ onChange }) => {
         focus:border-yellow-200"
             type="text"
             name="nickname"
-            onChange={onChange}
+            onChange={handleNicknameChange}
             placeholder="닉네임을 입력하세요"
-            autoComplete="off"
             id="nickname"
+            maxLength={8}
+            minLength={2}
           />
+          <div className="mt-2 text-red-500">
+            {error || <span style={{ opacity: 0 }}>Placeholder</span>}
+          </div>
         </div>
       </div>
     </div>

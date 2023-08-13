@@ -7,10 +7,12 @@ const InputPassword = ({ onChange }) => {
     const newPassword = e.target.value;
     if (newPassword.length < 4 && newPassword.length > 0) {
       setError("비밀번호는 최소 4자리 이상이어야 합니다.");
+    } else if (newPassword.length >= 12) {
+      setError("비밀번호는 최대 12자리까지 가능합니다.");
     } else {
       setError("");
-      onChange(e);
     }
+    onChange(e);
   };
 
   return (
@@ -25,17 +27,21 @@ const InputPassword = ({ onChange }) => {
         <div className="mt-2">
           <input
             className="w-full flex-1 border-b-2 border-gray-400 bg-transparent py-2 text-yellow-200 
-            placeholder-gray-400 outline-none
-            focus:border-yellow-200"
+          placeholder-gray-400 outline-none
+          focus:border-yellow-200"
             type="password"
             id="password"
             name="password"
             onChange={handlePasswordChange}
             placeholder="비밀번호를 입력하세요"
             autoComplete="off"
+            maxLength={12}
+            minLength={4}
           />
-          {error && <div className="mt-2 text-red-500">{error}</div>}{" "}
-          {/* 에러 메시지 표시 */}
+          {/* 에러 메시지 또는 투명한 텍스트를 항상 표시 */}
+          <div className="mt-2 text-red-500">
+            {error || <span style={{ opacity: 0 }}>Placeholder</span>}
+          </div>
         </div>
       </div>
     </div>

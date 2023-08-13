@@ -34,21 +34,22 @@ const MemberRegistrationForm = ({
   );
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+
   const isNicknameValid = (nickname) => {
     const regex = /^[a-zA-Z0-9가-힣]+$/;
     return regex.test(nickname);
   };
+
   const isEmailValid = (email) => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(email);
   };
 
   const [jodiacname, setJodiacname] = useState("당신의 별자리는?");
-  const duplicateCheck = useCallback(async (type, value, emptyMessage) => {
-    console.log(type, value, emptyMessage);
-
+  const duplicateCheck = useCallback(async (type, value) => {
     if (value === "") {
-      alert(emptyMessage);
+      setIsAlertVisible(true);
+      setAlertMessage("사용자 " + type + "을 입력해주세요.");
       return;
     }
 
@@ -164,7 +165,6 @@ const MemberRegistrationForm = ({
       <div className="flex">
         <Inputnickname
           value={nickname}
-          maxLength={8}
           onChange={(e) => setNickname(e.target.value)}
         />
         <Button1
@@ -173,10 +173,16 @@ const MemberRegistrationForm = ({
           onClick={(event) => {
             event.preventDefault();
             if (!isNicknameValid(nickname)) {
-              alert("닉네임 형식이 올바르지 않습니다.");
+              setIsAlertVisible(true);
+              setAlertMessage("닉네임 형식을 확인해주세요.");
               return;
             }
-            duplicateCheck("Nickname", nickname, "닉네임을 입력해주세요.");
+            if (nickname.length < 2) {
+              setIsAlertVisible(true);
+              setAlertMessage("닉네임은 최소 2자리 이상이어야 합니다.");
+              return;
+            }
+            duplicateCheck("Nickname", nickname);
           }}
         />
       </div>
@@ -193,10 +199,11 @@ const MemberRegistrationForm = ({
           onClick={(event) => {
             event.preventDefault();
             if (!isEmailValid(email)) {
-              alert("유효한 이메일 형식을 입력해주세요.");
+              setIsAlertVisible(true);
+              setAlertMessage("이메일 형식을 확인해주세요.");
               return;
             }
-            duplicateCheck("Email", email, "이메일을 입력해주세요.");
+            duplicateCheck("Email", email);
           }}
         />
         <div className="flex flex-col items-center justify-center rounded-lg border-double font-TAEBAEKmilkyway">
@@ -215,12 +222,10 @@ const MemberRegistrationForm = ({
       <div className="flex flex-row">
         <InputPassword
           value={password}
-          maxLength={12}
           onChange={(e) => setPassword(e.target.value)}
         />
         <InputPasswordConfirm
           value={confirmPassword}
-          maxLength={12}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
       </div>

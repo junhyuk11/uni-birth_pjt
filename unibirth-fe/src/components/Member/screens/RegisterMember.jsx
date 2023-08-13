@@ -29,11 +29,72 @@ const RegisterMember = () => {
   );
   const { navigateToBack, navigateToLoginMember } = useNavigation();
 
+  const isNicknameValid = (nickname) => {
+    const regex = /^[a-zA-Z0-9가-힣]+$/;
+    return regex.test(nickname);
+  };
+
+  const isEmailValid = (email) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
+  };
+
   const joinMember = async (e) => {
     e.preventDefault();
+    console.log(birthdate);
+    console.log("test");
+    if (!nickname) {
+      setIsAlertVisible(true);
+      setAlertMessage("닉네임을 입력해주세요.");
+      return;
+    } else {
+      if (!isNicknameValid(nickname)) {
+        setIsAlertVisible(true);
+        setAlertMessage("닉네임은 한글, 영문, 숫자만 입력 가능합니다.");
+        return;
+      }
+    }
+
+    if (!email) {
+      setIsAlertVisible(true);
+      setAlertMessage("이메일을 입력해주세요.");
+      return;
+    } else {
+      if (!isEmailValid(email)) {
+        setIsAlertVisible(true);
+        setAlertMessage("이메일 형식이 올바르지 않습니다.");
+        return;
+      }
+    }
+
+    if (!password) {
+      setIsAlertVisible(true);
+      setAlertMessage("비밀번호를 입력해주세요.");
+      return;
+    } else if (!(password.length >= 4 && password.length <= 12)) {
+      setIsAlertVisible(true);
+      setAlertMessage("비밀번호는 4자리 이상 12자리 이하로 입력해주세요.");
+      return;
+    }
+
     if (password !== confirmPassword) {
       setIsAlertVisible(true);
       setAlertMessage("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    if (!confirmPassword) {
+      setIsAlertVisible(true);
+      setAlertMessage("비밀번호 확인을 입력해주세요.");
+      return;
+    } else if (!(confirmPassword.length >= 4 && confirmPassword.length <= 12)) {
+      setIsAlertVisible(true);
+      setAlertMessage("비밀번호 확인은 4자리 이상 12자리 이하로 입력해주세요.");
+      return;
+    }
+    if (!birthdate) {
+      setIsAlertVisible(true);
+      setAlertMessage("생년월일을 입력해주세요.");
       return;
     }
 
