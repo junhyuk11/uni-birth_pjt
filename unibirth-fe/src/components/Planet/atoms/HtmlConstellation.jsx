@@ -16,8 +16,7 @@ const HtmlConstellation = ({ constellationId }) => {
     const [alertMessage, setAlertMessage] = useState("");
     useEffect(() => {
       getConstellationContent(constellationId);
-    }, [constellationId]);
-
+    }, [constellationContent]);
     const getConstellationContent = async (constellationId) => {
       try {
         const response = await useConstellationApi.constellationsGetDetail(
@@ -35,18 +34,15 @@ const HtmlConstellation = ({ constellationId }) => {
       }
     };
 
-    const [updatePinedStatus, setUpdatePinedStatus] = useState(
-      constellationContent?.alreadyPined,
-    );
-
     const handlePinClick = async (constellationContent) => {
-      if (constellationContent.alreadyPined) {
+      console.log("핀클릭:", constellationContent.pined);
+      if (constellationContent.pined) {
         try {
           const response = await useConstellationApi.constellationsDeletePin(
             constellationContent.constellationId,
           );
           if (response.status === 200) {
-            setUpdatePinedStatus(false);
+            setConstellationConstent({ ...constellationContent, pined: false });
           } else {
             setIsAlertVisible(true);
             setAlertMessage(response.message);
@@ -61,7 +57,7 @@ const HtmlConstellation = ({ constellationId }) => {
             constellationContent.constellationId,
           );
           if (response.status === 200) {
-            setUpdatePinedStatus(true);
+            setConstellationConstent({ ...constellationContent, pined: true });
           } else {
             setIsAlertVisible(true);
             setAlertMessage(response.message);
@@ -72,8 +68,6 @@ const HtmlConstellation = ({ constellationId }) => {
         }
       }
     };
-
-    console.log("updatePinedStatus:", updatePinedStatus);
 
     const [isVisible, setIsVisible] = useState(true);
     const toggleVisibility = () => {
@@ -109,12 +103,12 @@ const HtmlConstellation = ({ constellationId }) => {
                     className="h-36 px-3 py-3"
                   />
                 </div>
-                <div
-                  className="absolute right-2 top-2"
-                  onClick={() => handlePinClick(constellationContent)}
-                >
-                  <div className="aboslute bottom-60 left-1/2 text-white">
-                    {updatePinedStatus ? (
+                <div className="absolute right-2 top-2">
+                  <div
+                    className="aboslute bottom-60 left-1/2 text-white"
+                    onClick={() => handlePinClick(constellationContent)}
+                  >
+                    {constellationContent.pined ? (
                       <AiFillPushpin size={30} />
                     ) : (
                       <AiOutlinePushpin size={30} />
