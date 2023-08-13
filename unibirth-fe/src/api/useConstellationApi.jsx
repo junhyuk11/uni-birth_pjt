@@ -108,6 +108,7 @@ const constellationsDeletePin = async (constellationId) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .delete(`/constellations/pin/${constellationId}`);
+    console.log(response);
     return response.data;
   } catch (e) {
     console.log(e);
