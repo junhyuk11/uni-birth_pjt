@@ -9,7 +9,7 @@ import { backgroundflagState, nicknameState } from "../../recoil/atoms";
 import LeftArrow from "../../assets/icons/js/leftArrow";
 import Header5 from "../blocks/Header5";
 import useSearchApi from "../../api/useSearchApi";
-// import CustomAlert from "../atoms/CustomAlert";
+import CustomAlert from "../atoms/CustomAlert";
 
 const SearchQuration = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -17,7 +17,7 @@ const SearchQuration = () => {
     backgroundflag(true);
   }, []);
   const nickname = useRecoilValue(nicknameState);
-  // const [alertMessage, setAlertMessage] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
 
   const { navigateToBack } = useNavigation();
   const [category, setCategory] = useState("all");
@@ -25,7 +25,7 @@ const SearchQuration = () => {
   const [currentState, setCurrentState] = useState("팔로우");
   const [followingData, setFollowingData] = useState([]);
   const [interestData, setInterestData] = useState([]);
-  // const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
 
   const getQurationStar = async () => {
     try {
@@ -80,19 +80,19 @@ const SearchQuration = () => {
           query={query}
           setQuery={setQuery}
         />
-        {/* <CustomAlert
-        message={alertMessage}
-        isVisible={isAlertVisible}
-        onClose={() => {
-          setIsAlertVisible(false);
-          if (
-            alertMessage === "로그인이 필요한 서비스입니다." ||
-            alertMessage === "오류가 발생했습니다."
-          ) {
-            navigateToBack();
-          }
-        }}
-      /> */}
+        <CustomAlert
+          message={alertMessage}
+          isVisible={isAlertVisible}
+          onClose={() => {
+            setIsAlertVisible(false);
+            if (
+              alertMessage === "로그인이 필요한 서비스입니다." ||
+              alertMessage === "오류가 발생했습니다."
+            ) {
+              navigateToBack();
+            }
+          }}
+        />
         <div className="flex flex-1 flex-col p-4">
           <div className="my-4">
             <Header5 buttons={buttonsHeader2} />
