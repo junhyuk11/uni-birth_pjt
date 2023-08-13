@@ -183,9 +183,9 @@ const GridCustomConstellation = ({
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
           console.log("다운로드:", downloadURL);
           const constellation = {
-            planetId: planetId[0],
-            title: constellationName[0],
-            description: constellationDescp[0],
+            planetId,
+            title: constellationName,
+            description: constellationDescp,
             lineList: uniqueLines,
             pointList: uniquePoints,
             imageUrl: downloadURL,
