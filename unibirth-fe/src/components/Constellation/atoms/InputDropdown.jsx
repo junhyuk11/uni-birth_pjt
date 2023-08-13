@@ -53,7 +53,7 @@ const CustomDropdown = ({ planetId, setPlanetId }) => {
                       justify-center p-2 hover:bg-gray-200 hover:text-black"
                   key={planet.planetId}
                   onClick={() => {
-                    handleSelect(planet.planetId);
+                    handleSelect(planet.planetId - 1);
                     setIsOpen(false);
                   }}
                 >

@@ -12,8 +12,6 @@ import { useSetRecoilState, useRecoilValue } from "recoil";
 import { backgroundflagState, currentplanetState } from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import CustomAlert from "../../../common/atoms/CustomAlert";
-import { PLANET_LIST } from "../../../constants/constants";
-import CustomDropdown from "../../../common/atoms/CustomDropdown";
 
 const RegistConstellation = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -27,8 +25,6 @@ const RegistConstellation = () => {
   const { navigateToBack, navigateToDrawingConstellation } = useNavigation();
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [category, setCategory] = useState(PLANET_LIST[planetId].name);
-  console.log("받아지는 이름:", category, planetId);
   const handleSubmit = () => {
     if (planetId && constellationName && constellationDescp) {
       navigateToDrawingConstellation({
@@ -70,10 +66,6 @@ const RegistConstellation = () => {
     },
   ];
 
-  const handleCategoryChange = (newCategory) => {
-    setCategory(newCategory);
-  };
-
   return (
     <div className="mx-auto h-screen max-w-screen-sm">
       <CustomAlert
@@ -90,12 +82,6 @@ const RegistConstellation = () => {
             className="flex items-center justify-center rounded-full"
           />
           <p className="font-Pretendard text-white">행성 명</p>
-          <CustomDropdown
-            category={category}
-            onChange={handleCategoryChange}
-            searchList={PLANET_LIST}
-          />
-
           <InputDropdown planetId={planetId} setPlanetId={setPlanetId} />
           <InputStella
             constellationName={constellationName}
