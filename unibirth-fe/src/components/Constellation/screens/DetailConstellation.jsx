@@ -11,7 +11,6 @@ import { useParams } from "react-router-dom";
 import useConstellationApi from "../../../api/useConstellationApi";
 import Header1 from "../../../common/blocks/Header1";
 import CustomAlert from "../../../common/atoms/CustomAlert";
-// import LoadingImg from "../../../assets/images/Loading.gif";
 
 const DetailConstellation = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -26,28 +25,23 @@ const DetailConstellation = () => {
     getConstellationContent(constellationId);
   }, [constellationId]);
 
-  // const [isLoading, setIsLoading] = useState(false);
-
   const getConstellationContent = async (constellationId) => {
-    // setIsLoading(true);
     try {
       const response = await useConstellationApi.constellationsGetDetail(
         constellationId,
       );
       if (response.status === 200) {
         setConstellationConstent(response.resultData);
-      } else if (response.status === 404) {
+      } else {
         setIsAlertVisible(true);
         setAlertMessage("별자리 정보를 불러오는데 실패했습니다.");
-      } else if (response.status === 403) {
-        setIsAlertVisible(true);
-        setAlertMessage("로그인이 필요한 서비스입니다.");
       }
     } catch (error) {
       setIsAlertVisible(true);
-      setAlertMessage("오류가 발생했습니다.");
+      setAlertMessage("별자리 정보를 불러오는데 실패했습니다.");
     }
   };
+  console.log("", constellationContent);
   const {
     navigateToBack,
     navigateToMainPlanet,
@@ -96,7 +90,9 @@ const DetailConstellation = () => {
           isVisible={isAlertVisible}
           onClose={() => {
             setIsAlertVisible(false);
-            navigateToBack();
+            if (alertMessage === "별자리 정보를 불러오는데 실패했습니다.") {
+              navigateToBack();
+            }
           }}
         />
         <div className="my-2 flex items-baseline justify-center text-white">
@@ -105,33 +101,10 @@ const DetailConstellation = () => {
           </p>
           <div className="text-md">&nbsp;자리</div>
         </div>
-        <div>
-          <div className="absolute z-50 max-w-screen-sm">
-            <Header1 buttons={buttonsHeader} />
-          </div>
-          <div className="absolute left-1/2 top-2 z-10 -translate-x-1/2 rounded-lg bg-transparent p-2  text-white">
-            <CustomAlert
-              message={alertMessage}
-              isVisible={isAlertVisible}
-              onClose={() => {
-                setIsAlertVisible(false);
-                if (alertMessage === "별자리 정보를 불러오는데 실패했습니다.") {
-                  navigateToBack();
-                }
-              }}
-            />
-            <div className="my-2 flex items-baseline justify-center text-white">
-              <p className="mt-0 text-xl">
-                {constellationContent.constellationTitle}
-              </p>
-              <div className="text-md">&nbsp;자리</div>
-            </div>
-          </div>
-          <ListSectionStar className="relative left-0 top-0 z-0 h-full w-full" />
-          <div className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2 space-x-4">
-            <Footer buttons={buttonsFooter} />
-          </div>
-        </div>
+      </div>
+      <ListSectionStar className="relative left-0 top-0 z-0 h-full w-full" />
+      <div className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2 space-x-4">
+        <Footer buttons={buttonsFooter} />
       </div>
     </div>
   );
