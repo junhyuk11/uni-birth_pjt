@@ -181,6 +181,7 @@ const GridCustomConstellation = ({
       async () => {
         try {
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          console.log("다운로드:", downloadURL);
           const constellation = {
             planetId: planetId[0],
             title: constellationName[0],
@@ -195,7 +196,9 @@ const GridCustomConstellation = ({
             await useConstellationApi.constellationsPostConstellation(
               constellation,
             );
+          console.log(response);
           if (response.status === 200) {
+            console.log("받은 리스폰스:", response);
             navigateToDetailConstellation(response.resultData.constellationId);
           } else {
             setIsAlertVisible(true);
@@ -258,17 +261,23 @@ const GridCustomConstellation = ({
         isVisible={isAlertVisible}
         onClose={() => setIsAlertVisible(false)}
       />
-      <div className="flex flex-row px-10 py-4 text-white ">
-        <div className="flex flex-col">
-          <p className="font-Pretendard">지금 행성명: {planetId}</p>
-          <p className="font-Pretendard">지금 별자리명: {constellationName}</p>
-          <p className="font-Pretendard">
-            지금 별자리설명: {constellationDescp}
-          </p>
-          <p className="font-Pretendard">지금 보드사이즈: {boardSize}</p>
+      <div className="flex flex-row px-10 py-4 text-white">
+        <div className="ml-5 flex flex-row space-x-5">
+          <div className="flex flex-col">
+            <p className="font-Pretendard">행성명: </p>
+            <p className="font-Pretendard">별자리명: </p>
+            <p className="font-Pretendard">별자리설명: </p>
+            <p className="font-Pretendard">보드사이즈: </p>
+          </div>
+          <div className="flex flex-col">
+            <p className="font-Pretendard">{planetId}</p>
+            <p className="font-Pretendard">{constellationName}</p>
+            <p className="font-Pretendard">{constellationDescp}</p>
+            <p className="font-Pretendard">{boardSize}</p>
+          </div>
         </div>
-        <div className="flex w-28 items-center justify-end">
-          <div className="flex">
+        <div className="flex w-28 items-center justify-center">
+          <div className="ml-3 flex">
             <PickConstellationColor
               setconstellationColor={setconstellationColor}
               constellationColor={constellationColor}

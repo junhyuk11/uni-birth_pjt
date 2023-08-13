@@ -46,7 +46,7 @@ const DrawingConstellation = () => {
   ];
 
   return (
-    <div className="mx-auto h-screen max-w-screen-sm  bg-slate-100 bg-opacity-50">
+    <div className="mx-auto h-screen max-w-screen-sm">
       <div>
         <Header7 buttons={buttonsHeader} />
         <div className="mt-20 justify-center space-y-10">
