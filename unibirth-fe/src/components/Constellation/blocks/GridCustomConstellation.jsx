@@ -5,7 +5,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../api/useFirebaseApi";
 import useConstellationApi from "../../../api/useConstellationApi";
 import { useRecoilState } from "recoil";
-import { boardSizeState } from "../../../recoil/atoms";
+import { boardSizeState, constellationLimitState } from "../../../recoil/atoms";
 import { useNavigation } from "../../../hooks/useNavigation";
 import PickConstellationColor from "../atoms/PickConstellationColor";
 import CustomAlert from "../../../common/atoms/CustomAlert";
@@ -27,15 +27,17 @@ const GridCustomConstellation = ({
   const [lastPoints, setLastPoints] = useState([]);
   const linesAndPointsLayerRef = useRef(null);
   const boardSize = useRecoilState(boardSizeState);
+  const [constellationLimit, setConstellationLimit] = useRecoilState(
+    constellationLimitState,
+  );
   const stageSize = boardSize[0] * 50;
   const containerStyle = boardSize[0] === 5 ? "max-w-md mx-auto" : "w-full";
   const [templatePointSize, setTemplatePointsSize] = useState(0);
   const [templateLineSize, setTemplateLinesSize] = useState(0);
-  const { navigateToDetailConstellation } = useNavigation();
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [isLoading, setLoading] = useState(false);
-
+  const { navigateToDetailConstellation } = useNavigation();
   useEffect(() => {
     if (shouldDeduplicate) {
       deDuplication(lastPoints);
@@ -198,9 +200,17 @@ const GridCustomConstellation = ({
               constellation,
             );
           console.log(response);
+          console.log(constellation);
           if (response.status === 200) {
             console.log("받은 리스폰스:", response);
+            setConstellationLimit((prevLimit) => prevLimit - 1);
             navigateToDetailConstellation(response.resultData.constellationId);
+          } else if (response.status === 400) {
+            setIsAlertVisible(true);
+            setAlertMessage(response.message);
+          } else if (response.status === 403) {
+            setIsAlertVisible(true);
+            setAlertMessage("로그인이 필요합니다.");
           } else {
             setIsAlertVisible(true);
             setAlertMessage("업로드에 실패했습니다.");
@@ -269,12 +279,14 @@ const GridCustomConstellation = ({
             <p className="font-Pretendard">별자리명: </p>
             <p className="font-Pretendard">별자리설명: </p>
             <p className="font-Pretendard">보드사이즈: </p>
+            <p className="font-Pretendard">남은 생성 횟수: </p>
           </div>
           <div className="flex flex-col">
             <p className="font-Pretendard">{PLANET_LIST[planetId - 1].name}</p>
             <p className="font-Pretendard">{constellationName}</p>
             <p className="font-Pretendard">{constellationDescp}</p>
             <p className="font-Pretendard">{boardSize}</p>
+            <p className="font-Pretendard">{constellationLimit}</p>
           </div>
         </div>
         <div className="flex w-28 items-center justify-center">

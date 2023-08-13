@@ -18,6 +18,7 @@ import Star from "../../../assets/icons/js/star";
 import { useLocation } from "react-router-dom";
 import Footer from "../../../common/blocks/Footer";
 import CustomAlert from "../../../common/atoms/CustomAlert";
+import CustomConfirm from "../../../common/atoms/CustomConfirm";
 
 const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -38,6 +39,7 @@ const MemberProfile = () => {
   } = useNavigation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const handleMessageClick = () => {
     if (nickname === locationNickname) {
@@ -53,22 +55,25 @@ const MemberProfile = () => {
   };
 
   const handleSignout = async () => {
-    const confirmSignOut = window.confirm("정말로 회원을 탈퇴하시겠습니까?");
-    if (confirmSignOut) {
-      try {
-        const response = await useMemberApi.membersDeleteMember();
-        if (response.status === 200) {
-          setIsAlertVisible(true);
-          setAlertMessage("회원탈퇴가 완료되었습니다.");
-          sessionStorage.clear();
-        } else {
-          setIsAlertVisible(true);
-          setAlertMessage(response.message);
-        }
-      } catch (e) {
+    setIsModalOpen(false);
+    setShowConfirm(true);
+  };
+
+  const confirmSignout = async () => {
+    setShowConfirm(false);
+    try {
+      const response = await useMemberApi.membersDeleteMember();
+      if (response.status === 200) {
+        sessionStorage.clear();
         setIsAlertVisible(true);
-        setAlertMessage("회원탈퇴에 실패하였습니다.");
+        setAlertMessage("회원탈퇴가 완료되었습니다.");
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage(response.message);
       }
+    } catch (e) {
+      setIsAlertVisible(true);
+      setAlertMessage("회원탈퇴에 실패하였습니다.");
     }
   };
 
@@ -156,6 +161,12 @@ const MemberProfile = () => {
             navigateToMainPlanet();
           }
         }}
+      />
+      <CustomConfirm
+        message="정말로 회원을 탈퇴하시겠습니까?"
+        isVisible={showConfirm}
+        onClose={() => setShowConfirm(false)}
+        onConfirm={confirmSignout}
       />
       <div>
         <header className="sticky top-0 z-10">

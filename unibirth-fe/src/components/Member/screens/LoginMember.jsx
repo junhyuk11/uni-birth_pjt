@@ -9,6 +9,8 @@ import {
   nicknameState,
   boardSizeState,
   backgroundflagState,
+  starCountState,
+  constellationLimitState,
 } from "../../../recoil/atoms";
 import LoginFormMember from "../blocks/LoginFormMember";
 import useMemberApi from "../../../api/useMemberApi";
@@ -26,6 +28,8 @@ const LoginMember = () => {
   const [nickname, setNickname] = useRecoilState(nicknameState);
   // eslint-disable-next-line no-unused-vars
   const [boardSize, setBoardSize] = useRecoilState(boardSizeState);
+  const setStarCount = useSetRecoilState(starCountState);
+  const setConstellationLimit = useSetRecoilState(constellationLimitState);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const { navigateToBack, navigateToRegisterMember, navigateToMainPlanet } =
@@ -42,6 +46,9 @@ const LoginMember = () => {
         sessionStorage.setItem("accessToken", response.resultData.accessToken);
         setBoardSize(response.resultData.purchasedBoard);
         setNickname(response.resultData.nickname);
+        setStarCount(response.resultData.starCount);
+        setConstellationLimit(response.resultData.constellationLimit);
+        console.log(response.resultData);
         navigateToMainPlanet();
       } else {
         setIsAlertVisible(true);

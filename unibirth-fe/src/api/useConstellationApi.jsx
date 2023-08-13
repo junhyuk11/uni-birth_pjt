@@ -12,6 +12,8 @@ const constellationsGetPlanet = async (planetId) => {
       return e.response.data;
     } else if (e.response.data.status === 403) {
       return e.response.data;
+    } else if (e.response.data.status === 400) {
+      return e.response.data;
     }
   }
 };
