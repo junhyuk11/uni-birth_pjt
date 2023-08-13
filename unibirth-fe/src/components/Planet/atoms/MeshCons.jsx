@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useMemo } from "react";
 // import SpreadConstellation from "./MeshConstellation";
 import { Line } from "@react-three/drei";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { currentconstellationListState } from "../../../recoil/atoms";
 import * as THREE from "three";
 
@@ -33,24 +33,19 @@ const MeshCons = ({
   const limitCount = 111;
 
   // DetailPlanet 리스트, 인덱스 관리
-  const [currentConstellationList, setCurrentList] = useRecoilState(
-    currentconstellationListState,
-  );
+  const setCurrentList = useSetRecoilState(currentconstellationListState);
 
   const [AllSphereList, setAllSphereList] = useState([]);
 
   const handleConsClick = (INDEX) => {
-    console.log("콘스텔레이사ㅕㄴ!", currentConstellationList[INDEX]);
+    // console.log("콘스텔레이사ㅕㄴ!", currentConstellationList[INDEX]);
     setCurrentConstellation(INDEX);
   };
-  console.log("야이시발아", currentConstellation);
 
   useEffect(() => {
     const verticesArray = meshRef.current.geometry.attributes.position.array;
-    console.log("제발 나와라", verticesArray);
     setVertices(verticesArray);
     const newConstellationList = [];
-    console.log("이자식아: ", verticesArray.length);
     for (let i = segments * 3; i < verticesArray.length; i += 3) {
       if (verticesArray[i + 2] !== 0) {
         const vertex = {
@@ -177,7 +172,6 @@ const MeshCons = ({
     return meshModels;
   }, [constellationList]);
 
-  console.log("현재 포지션!!:", currentConstellationList);
   return (
     <>
       <mesh ref={meshRef}>
