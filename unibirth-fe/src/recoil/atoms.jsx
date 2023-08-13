@@ -27,6 +27,19 @@ export const starListState = atom({
 export const boardSizeState = atom({
   key: "boardSizeState",
   default: 5,
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const starCountState = atom({
+  key: "starCountState",
+  default: 0,
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const constellationLimitState = atom({
+  key: "constellationLimitState",
+  default: 5,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const constellationLinkList = atom({
