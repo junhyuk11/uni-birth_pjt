@@ -8,7 +8,11 @@ const profilesGetFollowings = async (nickname) => {
       .get(`/profiles/followings?nickname=${nickname}`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -20,7 +24,11 @@ const profilesGetFollowers = async (nickname) => {
       .get(`/profiles/followers?nickname=${nickname}`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -30,10 +38,13 @@ const profilesPostFollow = async (followData) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .post(`/profiles/follow`, followData);
-    console.log(response);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -45,7 +56,11 @@ const profilesDeleteFollow = async (nickname) => {
       .delete(`/profiles/follow?to=${nickname}`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -57,7 +72,11 @@ const profilesGetCntFollowers = async () => {
       .get(`/profiles/followers/cnt`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -69,7 +88,11 @@ const profilesGetCntFollowings = async () => {
       .get(`/profiles/followings/cnt`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 

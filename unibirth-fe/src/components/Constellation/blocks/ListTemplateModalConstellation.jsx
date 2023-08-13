@@ -27,13 +27,16 @@ const ListTemplateModalConstellation = ({
         await useConstellationApi.constellationsGetTemplateList();
       if (response.status === 200) {
         setTemplateList(response.resultData);
-      } else {
+      } else if (response.status === 404) {
         setIsAlertVisible(true);
-        setAlertMessage("");
+        setAlertMessage("템플릿 정보가 없습니다.");
+      } else if (response.status === 403) {
+        setIsAlertVisible(true);
+        setAlertMessage("로그인이 필요한 서비스입니다.");
       }
     } catch (e) {
       setIsAlertVisible(true);
-      setAlertMessage("");
+      setAlertMessage("오류가 발생했습니다.");
     }
   };
 

@@ -20,13 +20,16 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
       );
       if (response.status === 200) {
         setImages(response.resultData.constellationList);
-      } else {
+      } else if (response.status === 404) {
         setIsAlertVisible(true);
-        setAlertMessage(response.message);
+        setAlertMessage("존재하지 않는 회원입니다.");
+      } else if (response.status === 403) {
+        setIsAlertVisible(true);
+        setAlertMessage("로그인이 필요한 서비스입니다.");
       }
     } catch (e) {
       setIsAlertVisible(true);
-      setAlertMessage("핀한 별자리 리스트를 불러오는데 실패했습니다.");
+      setAlertMessage("오류가 발생했습니다.");
     }
   };
 
@@ -37,13 +40,16 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
       );
       if (response.status === 200) {
         setImages(response.resultData.constellationList);
-      } else {
+      } else if (response.status === 404) {
         setIsAlertVisible(true);
-        setAlertMessage(response.message);
+        setAlertMessage("존재하지 않는 회원입니다.");
+      } else if (response.status === 403) {
+        setIsAlertVisible(true);
+        setAlertMessage("로그인이 필요한 서비스입니다.");
       }
     } catch (e) {
       setIsAlertVisible(true);
-      setAlertMessage("참여한 별자리 리스트를 불러오는데 실패했습니다.");
+      setAlertMessage("오류가 발생했습니다.");
     }
   };
 
@@ -61,9 +67,9 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
           onClose={() => {
             setIsAlertVisible(false);
             if (
-              alertMessage ===
-                "핀한 별자리 리스트를 불러오는데 실패했습니다." ||
-              alertMessage === "참여한 별자리 리스트를 불러오는데 실패했습니다."
+              alertMessage === "존재하지 않는 회원입니다." ||
+              alertMessage === "오류가 발생했습니다." ||
+              alertMessage === "로그인이 필요한 서비스입니다."
             ) {
               navigateToBack();
             }

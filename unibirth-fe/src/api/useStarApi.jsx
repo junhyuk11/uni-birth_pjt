@@ -8,7 +8,11 @@ const starsGetStar = async (starId) => {
       .get(`/stars/${starId}`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -18,10 +22,13 @@ const starsGetBrightness = async (starId) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/stars/brightness/${starId}`);
-    console.log(response);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -31,10 +38,13 @@ const starsGetStarList = async (nickname) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/stars?nickname=${nickname}`);
-    console.log(response);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -46,7 +56,11 @@ const starsPostStar = async (data) => {
       .post(`/stars/register`, data);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -58,7 +72,11 @@ const starsDeleteBrightness = async (starId) => {
       .delete(`/stars/brightness/${starId}`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -70,7 +88,11 @@ const starsPutStar = async (starId) => {
       .put(`/stars/${starId}`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 
@@ -82,7 +104,11 @@ const starsDeleteStar = async (starId) => {
       .delete(`/stars/${starId}`);
     return response.data;
   } catch (e) {
-    console.log(e);
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
   }
 };
 

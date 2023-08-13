@@ -24,18 +24,20 @@ const HtmlConstellation = ({ constellationId }) => {
         );
         if (response.status === 200) {
           setConstellationConstent(response.resultData);
-        } else {
+        } else if (response.status === 404) {
           setIsAlertVisible(true);
-          setAlertMessage(response.message);
+          setAlertMessage("별자리 정보를 불러오는데 실패했습니다.");
+        } else if (response.status === 403) {
+          setIsAlertVisible(true);
+          setAlertMessage("로그인이 필요한 서비스입니다.");
         }
       } catch (error) {
         setIsAlertVisible(true);
-        setAlertMessage("별자리 정보를 불러오는데 실패했습니다.");
+        setAlertMessage("오류가 발생했습니다.");
       }
     };
 
     const handlePinClick = async (constellationContent) => {
-      console.log("핀클릭:", constellationContent.pined);
       if (constellationContent.pined) {
         try {
           const response = await useConstellationApi.constellationsDeletePin(
@@ -43,13 +45,16 @@ const HtmlConstellation = ({ constellationId }) => {
           );
           if (response.status === 200) {
             setConstellationConstent({ ...constellationContent, pined: false });
-          } else {
+          } else if (response.status === 404) {
             setIsAlertVisible(true);
-            setAlertMessage(response.message);
+            setAlertMessage("핀을 삭제하는데 실패했습니다.");
+          } else if (response.status === 403) {
+            setIsAlertVisible(true);
+            setAlertMessage("로그인이 필요한 서비스입니다.");
           }
         } catch (error) {
           setIsAlertVisible(true);
-          setAlertMessage("핀 삭제에 실패하였습니다.");
+          setAlertMessage("오류가 발생했습니다.");
         }
       } else {
         try {
@@ -64,7 +69,7 @@ const HtmlConstellation = ({ constellationId }) => {
           }
         } catch (error) {
           setIsAlertVisible(true);
-          setAlertMessage("핀 등록에 실패하였습니다.");
+          setAlertMessage("오류가 발생했습니다.");
         }
       }
     };
@@ -81,7 +86,11 @@ const HtmlConstellation = ({ constellationId }) => {
           isVisible={isAlertVisible}
           onClose={() => {
             setIsAlertVisible(false);
-            if (alertMessage === "별자리 정보를 불러오는데 실패했습니다.") {
+            if (
+              alertMessage === "별자리 정보를 불러오는데 실패했습니다." ||
+              alertMessage === "로그인이 필요한 서비스입니다." ||
+              alertMessage === "오류가 발생했습니다."
+            ) {
               navigateToBack();
             }
           }}

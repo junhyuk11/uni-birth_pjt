@@ -51,6 +51,7 @@ const MemberSectionProfile = ({ locationNickname }) => {
       const response = await useProfileApi.profilesDeleteFollow(
         locationNickname,
       );
+      setAlertStatus(response.status);
       if (response.status === 200) {
         setIsFollowing(false);
       }
@@ -63,12 +64,16 @@ const MemberSectionProfile = ({ locationNickname }) => {
   const fetchMemberData = async () => {
     try {
       const response = await useMemberApi.membersGetDetail(locationNickname);
+      setAlertStatus(response.status);
       if (response.status === 200) {
         setMemberData(response);
         setIsFollowing(response?.resultData?.follow);
-      } else {
+      } else if (response.status === 404) {
         setIsAlertVisible(true);
-        setAlertMessage(response.message);
+        setAlertMessage("존재하지 않는 회원입니다.");
+      } else if (response.status === 403) {
+        setIsAlertVisible(true);
+        setAlertMessage("로그인이 필요한 서비스입니다.");
       }
     } catch (error) {
       setIsAlertVisible(true);
@@ -91,7 +96,11 @@ const MemberSectionProfile = ({ locationNickname }) => {
         isVisible={isAlertVisible}
         onClose={() => {
           setIsAlertVisible(false);
-          if (alertMessage === "사용자 정보 에러 발생.") {
+          if (
+            alertMessage === "사용자 정보 에러 발생." ||
+            alertStatus === 403 ||
+            alertStatus === 404
+          ) {
             navigateToBack();
           }
         }}

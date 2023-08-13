@@ -33,16 +33,13 @@ const SearchQuration = () => {
       if (response.status === 200) {
         setFollowingData(response.resultData[0]);
         setInterestData(response.resultData[1]);
-        console.log(response.resultData);
-        console.log(response.resultData[0]);
-        console.log(response.resultData[1]);
-      } else {
-        // setIsAlertVisible(true);
-        // setAlertMessage("관심 별이 없습니다.");
+      } else if (response.status === 403) {
+        setIsAlertVisible(true);
+        setAlertMessage("로그인이 필요한 서비스입니다.");
       }
     } catch (e) {
-      // setIsAlertVisible(true);
-      // setAlertMessage("관심 별이 없습니다.");
+      setIsAlertVisible(true);
+      setAlertMessage("오류가 발생했습니다.");
     }
   };
 
@@ -88,7 +85,10 @@ const SearchQuration = () => {
         isVisible={isAlertVisible}
         onClose={() => {
           setIsAlertVisible(false);
-          if (alertMessage === "관심 별이 없습니다.") {
+          if (
+            alertMessage === "로그인이 필요한 서비스입니다." ||
+            alertMessage === "오류가 발생했습니다."
+          ) {
             navigateToBack();
           }
         }}
