@@ -21,7 +21,7 @@ const InputImage = ({ setImageUrl, setThumbUrl, onChange }) => {
 
       <label
         htmlFor="profileimage"
-        className="mx-auto flex cursor-pointer items-center rounded  text-blue-600"
+        className="mx-auto flex cursor-pointer items-center rounded  text-white"
       >
         별 이미지 변경
       </label>

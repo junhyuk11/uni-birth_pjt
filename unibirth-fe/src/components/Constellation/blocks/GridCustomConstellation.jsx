@@ -9,6 +9,7 @@ import { boardSizeState, constellationLimitState } from "../../../recoil/atoms";
 import { useNavigation } from "../../../hooks/useNavigation";
 import PickConstellationColor from "../atoms/PickConstellationColor";
 import CustomAlert from "../../../common/atoms/CustomAlert";
+import { PLANET_LIST } from "../../../constants/constants";
 
 const GridCustomConstellation = ({
   planetId,
@@ -281,7 +282,7 @@ const GridCustomConstellation = ({
             <p className="font-Pretendard">남은 생성 횟수: </p>
           </div>
           <div className="flex flex-col">
-            <p className="font-Pretendard">{planetId}</p>
+            <p className="font-Pretendard">{PLANET_LIST[planetId - 1].name}</p>
             <p className="font-Pretendard">{constellationName}</p>
             <p className="font-Pretendard">{constellationDescp}</p>
             <p className="font-Pretendard">{boardSize}</p>

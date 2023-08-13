@@ -8,8 +8,9 @@ import useMemberApi from "../../../api/useMemberApi";
 import InPutZodiac from "../atoms/InputZodiac";
 import { debounce } from "lodash";
 import { Jodiac } from "../../../constants/zodiac";
-import { PLANET_LIST } from "../../../constants/constants";
+// import { PLANET_LIST } from "../../../constants/constants";
 import CustomAlert from "../../../common/atoms/CustomAlert";
+import Inputdropdown from "../atoms/InputDropdown";
 
 const MemberRegistrationForm = ({
   nickname,
@@ -206,7 +207,7 @@ const MemberRegistrationForm = ({
             duplicateCheck("Email", email);
           }}
         />
-        <div className="flex flex-col items-center justify-center rounded-lg border-double font-TAEBAEKmilkyway">
+        {/* <div className="flex flex-col items-center justify-center rounded-lg border-double font-TAEBAEKmilkyway">
           <select
             value={interest}
             onChange={(e) => setInterest(e.target.value)}
@@ -217,6 +218,9 @@ const MemberRegistrationForm = ({
               </option>
             ))}
           </select>
+        </div> */}
+        <div>
+          <Inputdropdown planetId={interest} setPlanetId={setInterest} />
         </div>
       </div>
       <div className="flex flex-row">

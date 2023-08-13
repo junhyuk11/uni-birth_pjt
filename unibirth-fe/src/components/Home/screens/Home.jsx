@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Footer1 from "../../../common/blocks/Footer1";
+import HomeFooter from "../../../common/blocks/HomeFooter";
 import Button1 from "../../../common/atoms/Button1";
 import { useNavigation } from "../../../hooks/useNavigation";
 import { useRecoilState } from "recoil";
@@ -29,15 +29,17 @@ const Home = () => {
 
   return (
     <div className="relative h-screen w-screen">
-      <p className="absolute left-1/3 top-10 z-10 font-TAEBAEKmilkyway text-2xl text-white">
-        세상에서 가장 빛나는 너의 별
+      <p className="absolute left-1/2 top-10 z-10 w-56 -translate-x-1/2 font-TAEBAEKmilkyway text-2xl text-white">
+        세상에서
       </p>
-
-      <p className="absolute left-1/3 top-20 z-10 font-TAEBAEKmilkyway text-4xl text-white">
+      <p className="absolute left-1/2 top-20 z-10 w-56 -translate-x-1/2 font-TAEBAEKmilkyway text-2xl text-white">
+        가장 빛나는 너의 별
+      </p>
+      <p className="absolute left-1/2 top-32 z-10 w-56 -translate-x-1/2 font-TAEBAEKmilkyway text-5xl text-white">
         uni-Birth
       </p>
       <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform">
-        <Footer1 buttons={buttons} />
+        <HomeFooter buttons={buttons} />
       </div>
     </div>
   );

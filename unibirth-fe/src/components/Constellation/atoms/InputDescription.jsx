@@ -15,13 +15,17 @@ const InpuitDescription = ({ constellationDescp, setConstellationDescp }) => {
       <div className="w-full">
         <div className=" flex flex-row items-center justify-center">
           <p className="inline-block text-sm text-white">&nbsp;&nbsp;&nbsp;</p>
-          <input
+          <textarea
+            style={{
+              overflow: "hidden",
+              resize: "none", // 사용자가 크기를 조정할 수 없도록 함
+            }}
             type="text"
             id="constellationDescp"
             name="constellationDescp"
             value={constellationDescp}
             maxLength={50}
-            className="bg-transparent py-2 text-center text-yellow-200 outline-none "
+            className="h-28 w-44 bg-transparent text-center text-yellow-200 outline-none "
             onChange={(e) => setConstellationDescp(e.target.value)}
           />
           <p className="inline-block text-sm text-white">&nbsp;&nbsp;&nbsp;</p>
