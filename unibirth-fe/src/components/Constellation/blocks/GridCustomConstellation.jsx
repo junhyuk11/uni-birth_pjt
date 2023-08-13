@@ -200,6 +200,12 @@ const GridCustomConstellation = ({
           if (response.status === 200) {
             console.log("받은 리스폰스:", response);
             navigateToDetailConstellation(response.resultData.constellationId);
+          } else if (response.status === 400) {
+            setIsAlertVisible(true);
+            setAlertMessage(response.message);
+          } else if (response.status === 403) {
+            setIsAlertVisible(true);
+            setAlertMessage("로그인이 필요합니다.");
           } else {
             setIsAlertVisible(true);
             setAlertMessage("업로드에 실패했습니다.");
