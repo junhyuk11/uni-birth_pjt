@@ -5,7 +5,7 @@ const Header7 = ({ buttons }) => {
   const RightButtons = buttons.slice(2);
 
   return (
-    <div className="flex justify-between space-x-4 px-4 py-4">
+    <div className="flex justify-between space-x-4 px-2 py-4">
       <div className="flex items-center">
         {LeftButtons.map((button, index) => {
           const ButtonComponent = button.component;

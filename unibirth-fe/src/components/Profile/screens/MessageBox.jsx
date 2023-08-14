@@ -101,11 +101,21 @@ const MessageBox = () => {
                   className="border-t px-4 py-4 text-white"
                   onClick={() => handleNavigateToChat(chatId)}
                 >
-                  <strong className="text-base">닉네임 :</strong>{" "}
-                  {otherNickname}
+                  <strong className="text-xl">{otherNickname}</strong>
+                  <div className="py-1"></div>
                   {lastMessage && (
-                    <div className="text-xs">
-                      <strong className="text-base"></strong> {lastMessage.text}
+                    <div
+                      className="text-sm"
+                      style={{
+                        maxHeight: "10em",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 1,
+                        WebkitBoxOrient: "vertical",
+                      }}
+                    >
+                      {lastMessage.text}
                     </div>
                   )}
                 </li>

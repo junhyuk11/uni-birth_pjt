@@ -56,7 +56,7 @@ function Scene() {
         enablePan={false}
         enableDamping={false}
         dampingFactor={0.05}
-        // enabled={false}
+        enableZoom={false}
       />
       <GradientBackground />
       <Stars

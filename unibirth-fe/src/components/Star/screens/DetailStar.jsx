@@ -6,7 +6,11 @@ import useStarApi from "../../../api/useStarApi";
 import useMemberApi from "../../../api/useMemberApi";
 import { useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { backgroundflagState, nicknameState } from "../../../recoil/atoms";
+import {
+  backgroundflagState,
+  nicknameState,
+  memberProfileImageState,
+} from "../../../recoil/atoms";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import CustomAlert from "../../../common/atoms/CustomAlert";
@@ -18,6 +22,7 @@ const DetailStar = () => {
   const setBackgroundflag = useSetRecoilState(backgroundflagState);
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
   const { starId } = useParams();
+  const imageUrl = useRecoilValue(memberProfileImageState);
   const [memberInfo, setMemberInfo] = useState([]);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -322,13 +327,13 @@ const DetailStar = () => {
             <div className="flex flex-row justify-between border-y py-2">
               <div className="flex flex-row">
                 <img
-                  src={memberInfo.imageUrl}
+                  src={imageUrl}
                   alt="멤버 이미지"
                   className="h-8 w-8 rounded-full object-cover"
                   style={{ alignSelf: "flex-start" }}
                 />
                 <input
-                  className="ml-2 flex-grow bg-transparent text-white"
+                  className="ml-2 bg-transparent text-white"
                   placeholder="댓글을 남겨보세요"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
@@ -337,7 +342,7 @@ const DetailStar = () => {
                 ></input>
               </div>
               <button
-                className="ml-2  rounded-xl border border-yellow-500 bg-transparent px-4 py-1 text-white"
+                className="w-14 rounded-xl border border-yellow-500 bg-transparent px-2 py-1 text-white"
                 onClick={handleCommentClick}
               >
                 등록
@@ -367,7 +372,7 @@ const DetailStar = () => {
                         ></img>
                         <div
                           className="ml-2 flex flex-grow flex-col"
-                          style={{ maxWidth: "100%", wordWrap: "break-word" }}
+                          style={{ maxWidth: "80%", wordWrap: "break-word" }}
                         >
                           <strong
                             className="text-base text-white"
@@ -379,7 +384,7 @@ const DetailStar = () => {
                           </strong>
                           <p
                             className="text-white"
-                            style={{ maxWidth: "90%", wordWrap: "break-word" }}
+                            style={{ maxWidth: "80%", wordWrap: "break-word" }}
                           >
                             {comment.content}
                           </p>
@@ -387,13 +392,15 @@ const DetailStar = () => {
                             {formatDate(comment.createdAt)}
                           </span>
                         </div>
-                        {comment.nickname === nickname && (
+                        {comment.nickname === nickname ? (
                           <button
                             className=" flex flex-grow items-end justify-end self-start"
                             onClick={() => setShowConfirm(true)}
                           >
                             <Close />
                           </button>
+                        ) : (
+                          <div className=" flex flex-grow items-end justify-end self-start"></div>
                         )}
 
                         <CustomConfirm

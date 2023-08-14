@@ -91,14 +91,14 @@ const UserAlarm = () => {
                 onClick={() =>
                   navigateToDetailConstellation(alarmData.constellationId)
                 }
-                className="border-t px-4 py-4"
+                className="border-t px-4 py-4 text-white"
               >
                 <div className="text-base">
                   {alarmData.sender}님이 {alarmData.constellationTitle}로
                   초대하였습니다.
                 </div>
                 {alarmData.timestamp && (
-                  <div className="mt-2 text-xs">
+                  <div className="mt-2 text-xs text-gray-400">
                     {new Date(alarmData.timestamp).toLocaleString()}
                   </div>
                 )}

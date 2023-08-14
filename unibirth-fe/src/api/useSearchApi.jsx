@@ -6,6 +6,7 @@ const searchGetMemberCuration = async (nickname) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .get(`/members/curation`, nickname);
+    console.log(response);
     return response.data;
   } catch (e) {
     if (e.response.data.status === 404) {

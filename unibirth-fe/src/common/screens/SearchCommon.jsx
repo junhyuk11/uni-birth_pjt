@@ -25,7 +25,7 @@ const SearchCommon = () => {
   const [starList, setStarList] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchCategory, setSearchCategory] = useState("all");
+  const [searchCategory, setSearchCategory] = useState("전체");
 
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -43,7 +43,20 @@ const SearchCommon = () => {
 
   const getSearchGetSearch = async () => {
     try {
-      const response = await useSearchApi.searchGetSearch(category, query);
+      let submitCategory;
+      if (category === "전체") {
+        submitCategory = "all";
+      } else if (category === "별자리") {
+        submitCategory = "constellation";
+      } else if (category === "닉네임") {
+        submitCategory = "nickname";
+      } else if (category === "별") {
+        submitCategory = "star";
+      }
+      const response = await useSearchApi.searchGetSearch(
+        submitCategory,
+        query,
+      );
       if (response.status === 200) {
         console.log(response.resultData);
         setConstellationList(response.resultData.constellationList || []);
@@ -58,12 +71,16 @@ const SearchCommon = () => {
       setAlertMessage("검색 결과를 불러오는데 실패하였습니다.");
     }
   };
-  const formatDate = (dateStr) => {
-    const date = new Date(dateStr);
-    return `${date.getDate()}/${
-      date.getMonth() + 1
-    }/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
-  };
+  function formatDate(dateString) {
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
 
   const handleConstellationClick = (constellationId) => {
     navigateToDetailConstellation(constellationId);
@@ -173,14 +190,29 @@ const SearchCommon = () => {
                 <img
                   src={star.imageUrl}
                   alt={star.content}
-                  className="glow mr-4 h-20 w-20 rounded-lg object-cover"
+                  className="mr-4 h-20 w-20 rounded-lg object-cover"
                 />
                 <div className="flex flex-col justify-between space-y-2">
+                  <div className="text-lg font-semibold">{star.title}</div>
+                  <div className="max-h-10 overflow-hidden">
+                    <p
+                      className="text-md"
+                      style={{
+                        maxHeight: "4em",
+                        maxWidth: "14em",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 1,
+                        WebkitBoxOrient: "vertical",
+                      }}
+                    >
+                      {star.content}
+                    </p>
+                  </div>
                   <div className="font-bold text-yellow-400">
                     {star.nickname}
                   </div>
-                  <div className="text-lg font-semibold">{star.title}</div>
-                  <p className="text-sm">{star.content}</p>
                   <span className="mt-2 text-xs text-yellow-300">
                     {formatDate(star.createdAt)}
                   </span>
