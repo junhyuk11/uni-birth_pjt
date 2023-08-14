@@ -30,9 +30,7 @@ const MemberRegistrationForm = ({
   interest,
   setInterest,
 }) => {
-  const [content, setContent] = useState(
-    "생년월일을 입력하시면 별자리가 자동으로 설정됩니다.",
-  );
+  const [content, setContent] = useState("");
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 

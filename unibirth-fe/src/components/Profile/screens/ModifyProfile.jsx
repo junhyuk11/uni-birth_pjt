@@ -12,22 +12,24 @@ import { storage } from "../../../api/useFirebaseApi";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import earth from "../../../assets/images/earth.png";
 import CustomAlert from "../../../common/atoms/CustomAlert";
-
+import { useRecoilValue } from "recoil";
+import { memberProfileImageState } from "../../../recoil/atoms";
 const ModifyProfile = () => {
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
-  const [imageUrl, setImageUrl] = useState("");
   const [introduction, setIntro] = useState("");
   const [nickname, setNickname] = useState("");
   const [thumbUrl, setThumbUrl] = useState("");
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  console.log(imageUrl);
+  const memberProfileImage = useRecoilValue(memberProfileImageState);
+  const [imageUrl, setImageUrl] = useState(memberProfileImage);
 
   const saveImgFile = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
       setThumbUrl(e.target.result);
+      setImageUrl(file);
     };
     reader.readAsDataURL(file);
   };
@@ -64,40 +66,52 @@ const ModifyProfile = () => {
 
   const handleCompleteClick = async (e) => {
     e.preventDefault();
-    const storageRef = ref(storage, `images/${imageUrl.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, imageUrl);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(`Upload is ${progress}% done.`);
-      },
-      (error) => {
-        setIsAlertVisible(true);
-        setAlertMessage("회원정보 수정에 실패하였습니다.");
-        console.log(error);
-      },
-      async () => {
-        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-        const member = {
-          introduction,
-          imageUrl: downloadURL,
-        };
-        try {
-          const response = await useMemberApi.membersPutProfiles(member);
-          if (response.status === 200) {
-            navigateToMemberProfile(nickname);
-          } else {
+    let finalImageUrl = imageUrl; // 잠재적으로 업데이트 될 수 있으므로 'let'을 사용
+
+    // imageUrl이 File 객체일 때만 이미지를 Firebase에 업로드합니다.
+    if (!(typeof imageUrl === "string")) {
+      const storageRef = ref(storage, `images/${imageUrl.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, imageUrl);
+
+      await new Promise((resolve, reject) => {
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log(`Upload is ${progress}% done.`);
+          },
+          (error) => {
             setIsAlertVisible(true);
             setAlertMessage("회원정보 수정에 실패하였습니다.");
-          }
-        } catch (e) {
-          setIsAlertVisible(true);
-          setAlertMessage("회원정보 수정에 실패하였습니다.");
-        }
-      },
-    );
+            console.log(error);
+            reject(error); // 에러가 발생하면 Promise를 reject합니다.
+          },
+          async () => {
+            finalImageUrl = await getDownloadURL(uploadTask.snapshot.ref);
+            resolve(); // 업로드가 성공하면 Promise를 resolve합니다.
+          },
+        );
+      });
+    }
+
+    const member = {
+      introduction,
+      imageUrl: finalImageUrl,
+    };
+
+    try {
+      const response = await useMemberApi.membersPutProfiles(member);
+      if (response.status === 200) {
+        navigateToMemberProfile(nickname);
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage("회원정보 수정에 실패하였습니다.");
+      }
+    } catch (e) {
+      setIsAlertVisible(true);
+      setAlertMessage("회원정보 수정에 실패하였습니다.");
+    }
   };
 
   const buttonsFooter = [

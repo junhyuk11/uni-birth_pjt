@@ -19,7 +19,7 @@ const DrawingConstellation = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pointList, setPointList] = useState([]);
   const [lineList, setLineList] = useState([]);
-  const [constellationColor, setconstellationColor] = useState("#00ffff");
+  const [constellationColor, setconstellationColor] = useState("#291531");
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
@@ -34,7 +34,7 @@ const DrawingConstellation = () => {
     {
       component: () => (
         <span className="ml-4 text-2xl text-white" onClick={() => {}}>
-          띄운 별
+          별자리 그리기
         </span>
       ),
     },

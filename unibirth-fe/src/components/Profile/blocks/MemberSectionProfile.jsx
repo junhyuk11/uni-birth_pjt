@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigation } from "../../../hooks/useNavigation";
 import useMemberApi from "../../../api/useMemberApi";
 import useProfileApi from "../../../api/useProfileApi";
-import { useRecoilValue } from "recoil";
-import { nicknameState } from "../../../recoil/atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { nicknameState, memberProfileImageState } from "../../../recoil/atoms";
 import Button5 from "../../../common/atoms/Button5";
 import CustomAlert from "../../../common/atoms/CustomAlert";
 
@@ -19,6 +19,7 @@ const MemberSectionProfile = ({ locationNickname }) => {
     memberData?.resultData?.follow,
   );
   const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const setMemberProfileImage = useSetRecoilState(memberProfileImageState);
   const [alertStatus, setAlertStatus] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const nickname = useRecoilValue(nicknameState);
@@ -68,6 +69,7 @@ const MemberSectionProfile = ({ locationNickname }) => {
       if (response.status === 200) {
         setMemberData(response);
         setIsFollowing(response?.resultData?.follow);
+        setMemberProfileImage(response?.resultData?.imageUrl);
       } else if (response.status === 404) {
         setIsAlertVisible(true);
         setAlertMessage("존재하지 않는 회원입니다.");
@@ -109,7 +111,7 @@ const MemberSectionProfile = ({ locationNickname }) => {
         <div className="flex items-start space-x-4">
           <img
             src={memberData.resultData.imageUrl}
-            className="h-32 w-32 rounded-full"
+            className="mx-auto h-32 w-32 rounded-full object-cover"
             alt="Round image"
           />
           <div className="flex flex-grow flex-col justify-center space-y-10 font-Pretendard">

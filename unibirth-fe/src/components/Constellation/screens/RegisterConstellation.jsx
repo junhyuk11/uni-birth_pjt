@@ -19,7 +19,7 @@ const RegistConstellation = () => {
     backgroundflag(true);
   }, []);
   const currentPLanet = useRecoilValue(currentplanetState);
-  const [planetId, setPlanetId] = useState(currentPLanet);
+  const [planetId, setPlanetId] = useState(currentPLanet + 1);
   const [constellationName, setConstellationName] = useState("");
   const [constellationDescp, setConstellationDescp] = useState("");
   const { navigateToBack, navigateToDrawingConstellation } = useNavigation();

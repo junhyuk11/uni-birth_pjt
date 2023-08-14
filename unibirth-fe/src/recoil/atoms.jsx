@@ -30,6 +30,13 @@ export const boardSizeState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+export const memberProfileImageState = atom({
+  key: "memberProfileImageState",
+  default: "",
+  effects_UNSTABLE: [persistAtom],
+});
+
+// 사용자 최대 생성갯수, n번추가하면 + 1
 export const starCountState = atom({
   key: "starCountState",
   default: 0,
@@ -51,6 +58,11 @@ export const constellationLinkList = atom({
 // Star Box content
 export const boxcontentState = atom({
   key: "boxcontentState",
+  default: "",
+  effects_UNSTABLE: [persistAtom],
+});
+export const boxtitleState = atom({
+  key: "boxtitleState",
   default: "",
   effects_UNSTABLE: [persistAtom],
 });

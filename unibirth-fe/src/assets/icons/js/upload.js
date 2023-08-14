@@ -12,13 +12,13 @@ const Upload = () => (
     <path
       d="M38 28L38 48"
       stroke="white"
-      stroke-width="2"
+      strokeWidth="2"
       stroke-linecap="round"
     />
     <path
       d="M28 38H48"
       stroke="white"
-      stroke-width="2"
+      strokeWidth="2"
       stroke-linecap="round"
     />
   </svg>

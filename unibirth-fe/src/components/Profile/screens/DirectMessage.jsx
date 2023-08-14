@@ -27,7 +27,6 @@ const DirectMessage = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
       onClick: () => backClick(nickname),
       icon: <LeftArrow />,
     },
@@ -78,7 +77,7 @@ const DirectMessage = () => {
   useEffect(scrollToBottom, [messages]);
 
   return (
-    <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+    <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-0">
       <header className="sticky top-0 z-10">
         <Header1 buttons={buttonsHeader} />
       </header>

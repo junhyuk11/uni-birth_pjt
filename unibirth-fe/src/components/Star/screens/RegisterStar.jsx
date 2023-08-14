@@ -5,7 +5,11 @@ import Header1 from "../../../common/blocks/Header1";
 import { useNavigation } from "../../../hooks/useNavigation";
 import BodyRegisterStar from "../blocks/BodyRegisterStar";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { StellaIdState, backgroundflagState } from "../../../recoil/atoms";
+import {
+  StellaIdState,
+  backgroundflagState,
+  constellationLimitState,
+} from "../../../recoil/atoms";
 import useStarApi from "../../../api/useStarApi";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../api/useFirebaseApi";
@@ -14,7 +18,6 @@ import LeftArrow from "../../../assets/icons/js/leftArrow";
 import InputImage from "../atoms/InputImage";
 import earth from "../../../assets/images/earth.png";
 import CustomAlert from "../../../common/atoms/CustomAlert";
-
 const RegisterStar = () => {
   useEffect(() => {
     backgroundflag(true);
@@ -38,6 +41,7 @@ const RegisterStar = () => {
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [isLoading, setLoading] = useState(false);
+  const setConstellationLimitState = useSetRecoilState(constellationLimitState);
 
   const createStar = () => {
     setLoading(true); // 로딩 상태 시작
@@ -84,6 +88,7 @@ const RegisterStar = () => {
           };
           const response = await useStarApi.starsPostStar(data);
           if (response.status === 200) {
+            setConstellationLimitState(response.resultData.constellationLimit);
             navigateToDetailConstellation(constellationId);
           } else if (response.status === 400) {
             setIsAlertVisible(true);

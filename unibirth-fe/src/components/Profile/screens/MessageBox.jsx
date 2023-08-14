@@ -73,7 +73,7 @@ const MessageBox = () => {
   }, []);
 
   return (
-    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-0">
       <div>
         <Header2 buttons={buttonsHeader} />
         {chatRooms.length === 0 ? (
@@ -98,7 +98,7 @@ const MessageBox = () => {
               return (
                 <li
                   key={chatId}
-                  className="border-t px-4 py-4"
+                  className="border-t px-4 py-4 text-white"
                   onClick={() => handleNavigateToChat(chatId)}
                 >
                   <strong className="text-base">닉네임 :</strong>{" "}
