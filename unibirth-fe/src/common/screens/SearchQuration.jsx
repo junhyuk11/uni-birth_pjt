@@ -31,11 +31,7 @@ const SearchQuration = () => {
     try {
       const response = await useSearchApi.searchGetMemberCuration(nickname);
       if (response.status === 200) {
-<<<<<<< Updated upstream
-        console.log(response.resultData);
-=======
         console.log(response);
->>>>>>> Stashed changes
         setFollowingData(response.resultData[0]);
         setInterestData(response.resultData[1]);
       } else if (response.status === 403) {
