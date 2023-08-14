@@ -17,8 +17,10 @@ const DetailStar = () => {
   const { starId } = useParams();
   const [memberInfo, setMemberInfo] = useState([]);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [constellation, setConstellation] = useState("");
+  const [content, setContent] = useState("");
   const [star, setStar] = useState({
     brightness: "",
     content: "",
@@ -30,6 +32,7 @@ const DetailStar = () => {
     starId: "",
     nickname: "",
     title: "",
+    commentList: "",
   });
 
   useEffect(() => {
@@ -147,6 +150,31 @@ const DetailStar = () => {
     }
   };
 
+  const handleCommentClick = async () => {
+    if (content && !isSubmitting) {
+      setIsSubmitting(true);
+      try {
+        const data = {
+          starId,
+          content,
+        };
+        const response = await useStarApi.commentRegistStar(data);
+        if (response.status === 200) {
+          getStar(starId);
+          setContent("");
+        } else {
+          setIsAlertVisible(true);
+          setAlertMessage(response.message);
+        }
+      } catch (error) {
+        setIsAlertVisible(true);
+        setAlertMessage("오류 발생");
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
+  };
+
   const buttonsHeader = [
     {
       component: Button2,
@@ -168,7 +196,6 @@ const DetailStar = () => {
       day: "2-digit",
       hour: "2-digit",
       minute: "2-digit",
-      second: "2-digit",
     };
     return new Date(dateString).toLocaleDateString(undefined, options);
   }
@@ -230,22 +257,84 @@ const DetailStar = () => {
         <img
           src={star.imageUrl}
           alt="별 이미지"
-          className="h-auto max-h-96 w-full rounded-lg object-cover"
+          className="h-auto w-full rounded-lg"
         />
         {/* 이미지 크기 조정 */}
       </div>
       <div className="px-4">
-        <div className="flex flex-row items-center py-4">
-          <p className="flex-grow text-xl text-white">{star.content}</p>
+        <div className="flex flex-col items-center py-4">
+          <div className="flex-grow self-start py-5 text-xl text-white">
+            {star.content.split("\n").map((line, index) => (
+              <React.Fragment key={index}>
+                {line}
+                <br />
+              </React.Fragment>
+            ))}
+          </div>
           <button
             className={
-              "flex  scale-100 transform self-start text-3xl text-yellow-500 transition-transform focus:outline-none"
+              "flex  scale-100 transform justify-center text-3xl text-yellow-500 transition-transform focus:outline-none"
             }
             onClick={() => handleLikeClick(star.starId)}
           >
             {star.alreadyLiked ? <AiFillStar /> : <AiOutlineStar />}
           </button>
-          <div className="flex"></div>
+          <div className="mt-4 w-screen border-t px-4 pb-4 pt-2 text-white">
+            댓글
+          </div>
+          <div className="flex w-full flex-col">
+            <div className="flex flex-row justify-between border-y py-2">
+              <div className="flex flex-row">
+                <img
+                  src={memberInfo.imageUrl}
+                  alt="멤버 이미지"
+                  className="h-8 w-8 rounded-full object-cover"
+                  style={{ alignSelf: "flex-start" }}
+                />
+                <input
+                  className="ml-2 flex-grow bg-transparent text-white"
+                  placeholder="댓글을 남겨보세요"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                ></input>
+              </div>
+              <button
+                className="ml-2  rounded-xl border border-yellow-500 bg-transparent px-4 py-1 text-white"
+                onClick={handleCommentClick}
+              >
+                등록
+              </button>
+            </div>
+            {star.commentList.length === 0 ? (
+              <div className="text-center">
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+                  <p className="text-white text-opacity-60">댓글이 없습니다.</p>
+                </div>
+              </div>
+            ) : (
+              <ul className="w-full">
+                {star.commentList.map((comment, commentId) => {
+                  return (
+                    <li key={commentId} className="flex flex-row border-b py-4">
+                      <img
+                        className="h-8 w-8 rounded-full object-cover"
+                        src={comment.imageUrl}
+                      ></img>
+                      <div className="ml-2 flex flex-col">
+                        <strong className="text-base text-white">
+                          {comment.nickname}
+                        </strong>
+                        <p className="text-white">{comment.content}</p>
+                        <span className="text-xs text-gray-400">
+                          {formatDate(comment.createdAt)}
+                        </span>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -114,6 +114,22 @@ const starsDeleteStar = async (starId) => {
   }
 };
 
+const commentRegistStar = async (data) => {
+  try {
+    const jwt = sessionStorage.getItem("accessToken");
+    const response = await useAxiosInstance
+      .authApiClient(jwt)
+      .post(`/comments/register`, data);
+    return response.data;
+  } catch (e) {
+    if (e.response.data.status === 404) {
+      return e.response.data;
+    } else if (e.response.data.status === 403) {
+      return e.response.data;
+    }
+  }
+};
+
 export default {
   starsGetStar,
   starsGetBrightness,
@@ -122,4 +138,5 @@ export default {
   starsDeleteBrightness,
   starsPutStar,
   starsDeleteStar,
+  commentRegistStar,
 };
