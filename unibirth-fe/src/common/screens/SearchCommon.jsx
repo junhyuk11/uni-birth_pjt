@@ -25,7 +25,7 @@ const SearchCommon = () => {
   const [starList, setStarList] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchCategory, setSearchCategory] = useState("all");
+  const [searchCategory, setSearchCategory] = useState("전체");
 
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -43,7 +43,20 @@ const SearchCommon = () => {
 
   const getSearchGetSearch = async () => {
     try {
-      const response = await useSearchApi.searchGetSearch(category, query);
+      let submitCategory;
+      if (category === "전체") {
+        submitCategory = "all";
+      } else if (category === "별자리") {
+        submitCategory = "constellation";
+      } else if (category === "닉네임") {
+        submitCategory = "nickname";
+      } else if (category === "별") {
+        submitCategory = "star";
+      }
+      const response = await useSearchApi.searchGetSearch(
+        submitCategory,
+        query,
+      );
       if (response.status === 200) {
         console.log(response.resultData);
         setConstellationList(response.resultData.constellationList || []);
@@ -131,10 +144,10 @@ const SearchCommon = () => {
       />
 
       <div className="flex flex-1 flex-col p-4">
-        <div className="my-4 ">
+        <div className="my-4">
           <Header5 buttons={buttonsHeader2} />
         </div>
-        <ul className="divide-nebula-blue divide-y overflow-y-auto">
+        <ul className="divide-nebula-blue space-y-4 divide-y overflow-y-auto">
           {activeTab === "constellation" &&
             constellationList.map((constellation) => (
               <li
@@ -171,13 +184,13 @@ const SearchCommon = () => {
             starList.map((star) => (
               <li
                 key={star.starId}
-                className="animate-sparkle flex items-center px-4 py-4"
+                className="animate-sparkle flex items-start px-4 py-4"
                 onClick={() => handleStarClick(star.starId)}
               >
                 <img
                   src={star.imageUrl}
                   alt={star.content}
-                  className="mr-4 h-20 w-20 rounded-lg object-cover"
+                  className="glow mr-4 h-20 w-20 rounded-lg object-cover"
                 />
                 <div className="flex flex-col justify-between space-y-2">
                   <div className="text-lg font-semibold">{star.title}</div>
@@ -200,6 +213,8 @@ const SearchCommon = () => {
                   <div className="font-bold text-yellow-400">
                     {star.nickname}
                   </div>
+                  <div className="text-lg font-semibold">{star.title}</div>
+                  <p className="text-sm">{star.content}</p>
                   <span className="mt-2 text-xs text-yellow-300">
                     {formatDate(star.createdAt)}
                   </span>
