@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 import useConstellationApi from "../../../api/useConstellationApi";
 import CustomAlert from "../../../common/atoms/CustomAlert";
+
 const ListTemplateModalConstellation = ({
   setIsModalOpen,
   setPointList,
@@ -9,11 +13,18 @@ const ListTemplateModalConstellation = ({
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [templateList, setTemplateList] = useState({
-    templateList: [],
-  });
+  const [templateList, setTemplateList] = useState([]);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   const handlePutTemplateConstellation = (template) => {
     setPointList(template.pointList);
@@ -26,7 +37,7 @@ const ListTemplateModalConstellation = ({
       const response =
         await useConstellationApi.constellationsGetTemplateList();
       if (response.status === 200) {
-        setTemplateList(response.resultData);
+        setTemplateList(response.resultData.templateList);
       } else if (response.status === 404) {
         setIsAlertVisible(true);
         setAlertMessage("템플릿 정보가 없습니다.");
@@ -45,35 +56,37 @@ const ListTemplateModalConstellation = ({
   }, []);
 
   return (
-    <div>
-      <div className="fixed inset-0 z-50 flex items-center justify-center">
-        <CustomAlert
-          message={alertMessage}
-          isVisible={isAlertVisible}
-          onClose={() => setIsAlertVisible(false)}
-        />
-        <div className="absolute inset-0 bg-gray-800 opacity-50"></div>
-        <div className="z-10 rounded bg-white p-4 shadow-md">
-          <div className="mt-4 flex justify-center">
-            {templateList?.templateList.map((template) => (
-              <div key={template.templateId}>
-                <img
-                  src={template.imageUrl}
-                  onClick={() => {
-                    handlePutTemplateConstellation(template);
-                  }}
-                />
-              </div>
-            ))}
-            <button
-              className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-              onClick={handleCloseModal}
+    <div className="fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-black bg-opacity-40">
+      <div className="flex w-2/3 flex-col rounded-md border-2 border-yellow-300 bg-transparent p-5 shadow-lg">
+        <Slider {...settings}>
+          {templateList.map((template) => (
+            <div
+              key={template.templateId}
+              className="flex flex-col items-center text-white"
             >
-              창 닫기
-            </button>
-          </div>
-        </div>
+              <img
+                src={template.imageUrl}
+                onClick={() => {
+                  handlePutTemplateConstellation(template);
+                }}
+                className="mx-auto mb-2 block cursor-pointer"
+              />
+              <div>{""}</div>
+            </div>
+          ))}
+        </Slider>
+        <button
+          className="mx-auto mt-4 inline-flex w-24 items-center justify-center rounded-full border border-yellow-300 p-2 text-yellow-100 hover:bg-yellow-200 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2"
+          onClick={handleCloseModal}
+        >
+          창 닫기
+        </button>
       </div>
+      <CustomAlert
+        message={alertMessage}
+        isVisible={isAlertVisible}
+        onClose={() => setIsAlertVisible(false)}
+      />
     </div>
   );
 };

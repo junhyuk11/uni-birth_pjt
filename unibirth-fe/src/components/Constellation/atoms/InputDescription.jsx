@@ -25,7 +25,7 @@ const InpuitDescription = ({ constellationDescp, setConstellationDescp }) => {
             name="constellationDescp"
             value={constellationDescp}
             maxLength={50}
-            className="h-28 w-44 bg-transparent text-center text-yellow-200 outline-none "
+            className="w-44 bg-transparent text-center text-yellow-200 outline-none "
             onChange={(e) => setConstellationDescp(e.target.value)}
           />
           <p className="inline-block text-sm text-white">&nbsp;&nbsp;&nbsp;</p>
