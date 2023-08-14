@@ -6,8 +6,8 @@ import { Canvas } from "@react-three/fiber";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import {
   starListState,
-  boxcontentState,
   boxnicknameState,
+  boxtitleState,
   boxurlState,
   boxidState,
   boxcreatedState,
@@ -35,8 +35,8 @@ const ListSectionStar = () => {
   const [isFulledStar, setIsFulledStar] = useState(false);
   const [responseState, setResponseState] = useState();
   // Star box Content
-  const [boxcontent, setBoxcontent] = useRecoilState(boxcontentState);
   const [boxnickname, setBoxnickname] = useRecoilState(boxnicknameState);
+  const [boxtitle, setBoxtitle] = useRecoilState(boxtitleState);
   const [boxurl, setBoxurl] = useRecoilState(boxurlState);
   const [boxid, setBoxid] = useRecoilState(boxidState);
   const [boxcreated, setBoxcreated] = useRecoilState(boxcreatedState);
@@ -64,10 +64,10 @@ const ListSectionStar = () => {
 
     // Set StarBox Content
     console.log("index:", starListIndex[index]);
-    setBoxcontent(starListIndex[index]?.content);
     setBoxnickname(starListIndex[index]?.nickname);
     setBoxurl(starListIndex[index]?.imageUrl);
     setBoxid(starListIndex[index]?.starId);
+    setBoxtitle(starListIndex[index]?.starTitle);
     setBoxcreated(starListIndex[index]?.createdAt);
     setBrightness(starListIndex[index]?.brightness);
     console.log("boxid:", boxid);
@@ -288,7 +288,7 @@ const ListSectionStar = () => {
                   <p className="flex font-bold">{boxnickname}</p>
                   <p className="flex">{boxcreated?.slice(0, 10)}</p>
                 </div>
-                <p className="overflow-ellipsis p-2">{boxcontent}</p>
+                <p className="overflow-ellipsis p-2">{boxtitle}</p>
                 <p></p>
               </div>
             </div>

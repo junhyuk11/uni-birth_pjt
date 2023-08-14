@@ -73,7 +73,7 @@ const MessageBox = () => {
   }, []);
 
   return (
-    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+    <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-0">
       <div>
         <Header2 buttons={buttonsHeader} />
         {chatRooms.length === 0 ? (

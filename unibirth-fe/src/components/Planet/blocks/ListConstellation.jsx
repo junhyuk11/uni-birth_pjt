@@ -91,8 +91,9 @@ function CameraController({
 const Scene = ({ constellationList }) => {
   // 화면 회전
   const [enabledFlag, setEnableFlag] = useState(true);
-  const startDirection = useState({ x: 0, y: +300, z: 0 });
+  const startDirection = { x: -200, y: -300, z: -100 };
   // 배경화면 flag
+  console.log("starDrection:", startDirection);
   const setBackgroundflag = useSetRecoilState(backgroundflagState);
   useEffect(() => {
     setBackgroundflag(false);
@@ -191,7 +192,7 @@ const Scene = ({ constellationList }) => {
       >
         <PerspectiveCamera
           makeDefault
-          position={[0, 500, 0]}
+          position={[0, -500, 0]}
           near={0.1}
           far={10000}
         />

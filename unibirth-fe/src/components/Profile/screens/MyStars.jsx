@@ -68,7 +68,7 @@ const MyStars = () => {
   }, []);
 
   return (
-    <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
+    <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-0">
       <CustomAlert
         message={alertMessage}
         isVisible={isAlertVisible}
