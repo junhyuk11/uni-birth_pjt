@@ -342,7 +342,7 @@ const DetailStar = () => {
                 ></input>
               </div>
               <button
-                className="ml-2  rounded-xl border border-yellow-500 bg-transparent px-4 py-1 text-white"
+                className="w-14 rounded-xl border border-yellow-500 bg-transparent px-2 py-1 text-white"
                 onClick={handleCommentClick}
               >
                 등록
