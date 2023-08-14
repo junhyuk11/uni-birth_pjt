@@ -112,7 +112,7 @@ const MemberSectionProfile = ({ locationNickname }) => {
             className="h-32 w-32 rounded-full"
             alt="Round image"
           />
-          <div className="flex flex-grow flex-col justify-center space-y-10">
+          <div className="flex flex-grow flex-col justify-center space-y-10 font-Pretendard">
             <div className="flex justify-end space-x-4">
               <div className="flex flex-col items-center">
                 <p
@@ -135,7 +135,7 @@ const MemberSectionProfile = ({ locationNickname }) => {
                   onClick={() => navigateToMyStars(locationNickname)}
                   className="text-center text-yellow-100"
                 >
-                  띄운 별: {memberData.resultData.starCount}
+                  띄운별: {memberData.resultData.starCount}
                 </p>
               </div>
             </div>
@@ -146,7 +146,7 @@ const MemberSectionProfile = ({ locationNickname }) => {
         </div>
       )}
 
-      <div className="flex items-center justify-end space-x-4 bg-slate-950 bg-opacity-60">
+      <div className="flex items-center justify-end space-x-4 bg-slate-950 bg-opacity-60 font-Pretendard">
         {nickname === locationNickname ? (
           <Button5
             value="수정"

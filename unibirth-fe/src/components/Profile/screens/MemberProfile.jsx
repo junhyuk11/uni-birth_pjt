@@ -86,7 +86,9 @@ const MemberProfile = () => {
     },
     {
       component: () => (
-        <span className="ml-4 text-2xl text-white">{locationNickname}</span>
+        <span className="ml-4 font-Pretendard text-2xl text-white">
+          {locationNickname}
+        </span>
       ),
     },
     {
@@ -96,7 +98,7 @@ const MemberProfile = () => {
     },
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "font-Pretendard",
       onClick: handleMessageClick,
       icon: nickname === locationNickname ? <Mail /> : <Message />,
     },
@@ -126,25 +128,25 @@ const MemberProfile = () => {
   const modalButtons = [
     {
       component: Button11,
-      className: "font-TAEBAEKmilkyway m-10 p-10",
+      className: "font-Pretendard m-10 p-10",
       value: "회원정보 수정",
       onClick: navigateToModifyMember,
     },
     {
       component: Button11,
-      className: "font-TAEBAEKmilkyway",
+      className: "font-Pretendard",
       value: "로그아웃",
       onClick: handleLogout,
     },
     {
       component: Button11,
-      className: "font-TAEBAEKmilkyway",
+      className: "font-Pretendard",
       value: "회원 탈퇴",
       onClick: handleSignout,
     },
     {
       component: Button11,
-      className: "font-TAEBAEKmilkyway h-10 w-10",
+      className: "font-Pretendard h-10 w-10",
       onClick: handleCloseModal,
       icon: <Close />,
     },

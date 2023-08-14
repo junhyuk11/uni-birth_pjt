@@ -60,7 +60,7 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
 
   return (
     <div>
-      <div className="mx-auto flex flex-row items-center justify-between border-y-2 border-yellow-100 bg-slate-950 bg-opacity-70 text-yellow-50">
+      <div className="mx-auto flex flex-row items-center justify-between border-y-2 border-yellow-100 bg-slate-950 bg-opacity-70 font-Pretendard text-yellow-50">
         <CustomAlert
           message={alertMessage}
           isVisible={isAlertVisible}
