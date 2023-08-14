@@ -51,6 +51,7 @@ const MyStars = () => {
   const getStarList = async () => {
     try {
       const response = await useStarApi.starsGetStarList(locationNickname);
+      console.log(response);
       if (response.status === 200) {
         setStarList(response.resultData);
       } else {

@@ -86,7 +86,7 @@ const DirectMessage = () => {
 
   return (
     <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-0">
-      <header className="sticky top-0 z-10">
+      <header className="fixed top-0 z-10">
         <Header1 buttons={buttonsHeader} />
       </header>
       <div className="px-4">
