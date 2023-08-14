@@ -48,9 +48,9 @@ const CustomDropdown = ({ value, onChange, searchList }) => {
                     <div
                       className="cursor-pointer p-2 hover:bg-gray-200
                       hover:text-black"
-                      key={option.planetId - 1}
+                      key={option.name}
                       onClick={() => {
-                        onChange(option.planetId - 1); // 선택된 값을 부모 컴포넌트에 전달
+                        onChange(option.name); // 선택된 값을 부모 컴포넌트에 전달
                         setIsOpen(false);
                       }}
                     >
