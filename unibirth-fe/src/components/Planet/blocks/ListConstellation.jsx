@@ -200,8 +200,6 @@ const Scene = ({ constellationList }) => {
             intensity={1}
           />
         </EffectComposer>
-        <axesHelper scale={5} />
-        <color attach="background" args={["black"]} />
         <Stars
           radius={2300}
           depth={30}

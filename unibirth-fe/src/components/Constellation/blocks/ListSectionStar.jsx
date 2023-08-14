@@ -226,8 +226,6 @@ const ListSectionStar = () => {
       </div>
       <Canvas camera={{ position: [0, 0, 80] }}>
         <Background />
-        <axesHelper scale={5} />
-        <ambientLight intensity={0.1} />
         <EffectComposer>
           <Bloom
             luminanceThreshold={0}
