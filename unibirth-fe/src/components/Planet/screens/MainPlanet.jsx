@@ -9,6 +9,8 @@ import {
   currentplanetState,
 } from "../../../recoil/atoms";
 import Footer from "../../../common/blocks/Footer";
+import HelpCarousel from "../atoms/HelpCarousel";
+import SpaceBackground from "../atoms/help1.png";
 
 const MainPlanet = () => {
   const [, setBackgroundflag] = useRecoilState(backgroundflagState);
@@ -27,9 +29,13 @@ const MainPlanet = () => {
   const currentPlanetId = useRecoilValue(currentplanetState);
   const [currentPlanet, setCurrentPlanet] = useState(currentPlanetId % 8);
 
-  // 1. 케로셀 플래닛 아이디 전달 완료
-  // 버튼 누르면 setplanetPosition바뀌도록
-  // 처음 위치를 시작으로 버튼을 클릭할 때마다 인덱스 변경
+  // 도움말 List.png
+  const HelpList = [
+    SpaceBackground,
+    SpaceBackground,
+    SpaceBackground,
+    SpaceBackground,
+  ];
 
   const nickname = useRecoilValue(nicknameState);
 
@@ -65,6 +71,9 @@ const MainPlanet = () => {
         currentPlanet={currentPlanet}
         // setPlanetPosition={setPlanetPosition} 삭제 해야 할 것
       />
+      <div>
+        <HelpCarousel HelpList={HelpList} />
+      </div>
       <CanvasPlanet
         currentPlanet={currentPlanet}
         setCurrentPlanet={setCurrentPlanet}

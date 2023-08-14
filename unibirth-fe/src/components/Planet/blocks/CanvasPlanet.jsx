@@ -134,7 +134,7 @@ const ListSectionPlanet = ({
           // autoRotateSpeed={0.5}
         />
         <CameraController planet={PLANET_LIST[currentPlanet]} zoomed={zoomed} />
-        <axesHelper scale={0.2} />
+        {/* <axesHelper scale={0.2} /> */}
         {/* <primitive object={axesHelper} /> */}
         <EffectComposer>
           <Bloom
