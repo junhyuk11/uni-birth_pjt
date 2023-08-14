@@ -22,6 +22,8 @@ import Close2 from "../../../assets/icons/js/close2";
 import Star2 from "../../../assets/icons/js/star2";
 import LineDrawing from "../atoms/LineDrawing";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
+import InviteFollowStar from "../../Star/blocks/InviteFollowStar";
+import { LiaUserFriendsSolid } from "react-icons/lia";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -45,6 +47,8 @@ const ListSectionStar = () => {
   const [alertMessage, setAlertMessage] = useState("");
   // tooltip
   const [tooltipStyle, setTooltipStyle] = useState({ display: "none" });
+  const [showModal, setShowModal] = useState(false);
+
   const { navigateToRegisterStar, navigateToBack } = useNavigation();
   const handleBoxClick = ({ event, index }) => {
     console.log(index);
@@ -78,6 +82,10 @@ const ListSectionStar = () => {
     setStellaId(constellationId);
     console.log("ref:", ref);
   }, [constellationId]);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   const getStarList = async (constellationId) => {
     try {
@@ -173,17 +181,40 @@ const ListSectionStar = () => {
           }
         }}
       />
+
       {!isFulledStar && (
         <button
-          className="absolute bottom-36 right-4 z-10 flex flex-col text-4xl text-white opacity-100"
+          className="fixed bottom-56 right-4 z-10 flex flex-col text-4xl text-white"
+          onClick={toggleModal}
+        >
+          <LiaUserFriendsSolid />
+        </button>
+      )}
+
+      {!isFulledStar && (
+        <button
+          className="fixed bottom-36 right-4 z-10 flex flex-col text-4xl text-white"
           onClick={navigateToRegisterStar}
         >
           <Plus />
         </button>
       )}
+
+      {showModal && (
+        <div className="fixed bottom-56 right-4 z-50 w-64 rounded-lg bg-white shadow-lg">
+          <button
+            onClick={toggleModal}
+            className="float-right rounded p-2 text-xl hover:bg-gray-200"
+          >
+            X
+          </button>
+          <InviteFollowStar />
+        </div>
+      )}
+
       <div className="absolute right-5 top-5 z-10 text-white">
         <div
-          className="mt-1 flex"
+          className="mt-1 flex cursor-pointer"
           onClick={() => handlePinClick(constellationId)}
         >
           {alreadyPined ? (

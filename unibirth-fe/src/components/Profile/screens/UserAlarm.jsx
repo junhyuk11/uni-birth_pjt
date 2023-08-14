@@ -3,7 +3,13 @@ import Header2 from "../../../common/blocks/Header2";
 import Button2 from "../../../common/atoms/Button2";
 import { useNavigation } from "../../../hooks/useNavigation";
 import { useSetRecoilState } from "recoil";
-import { database, ref, onValue, off } from "../../../api/useFirebaseApi";
+import {
+  database,
+  ref,
+  onValue,
+  off,
+  checkAlarm,
+} from "../../../api/useFirebaseApi";
 import { backgroundflagState } from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import { useLocation } from "react-router-dom";
@@ -58,6 +64,10 @@ const UserAlarm = () => {
       off(invitedRef, "value", handleNewAlarm);
     };
   }, [nickname]);
+
+  useEffect(() => {
+    checkAlarm(nickname, Date.now());
+  }, []);
 
   return (
     <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-0">

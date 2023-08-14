@@ -34,7 +34,7 @@ const DrawingConstellation = () => {
     {
       component: () => (
         <span className="ml-4 text-2xl text-white" onClick={() => {}}>
-          띄운 별
+          별자리 그리기
         </span>
       ),
     },

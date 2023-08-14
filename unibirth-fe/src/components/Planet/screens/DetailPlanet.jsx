@@ -19,6 +19,7 @@ const DetailPlanet = () => {
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [responseState, setResponseState] = useState();
+
   const {
     navigateToMainPlanet,
     navigateToSearchQuration,
@@ -108,7 +109,7 @@ const DetailPlanet = () => {
         <div className="w- absolute top-0 h-screen w-screen">
           <ListConstellation constellationList={constellationList} />
         </div>
-        <div className="fixed bottom-10 left-1/2 z-10 -translate-x-1/2">
+        <div className="fixed bottom-3 left-1/2 z-10 -translate-x-1/2">
           <Footer buttons={buttonsFooter} />
         </div>
       </div>

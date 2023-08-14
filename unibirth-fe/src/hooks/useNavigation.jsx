@@ -130,8 +130,6 @@ export const useNavigation = () => {
     navigateToModifyProfile,
     navigateToModifyMember,
     navigateToFollow,
-    // navigateToFollowings,
-    // navigateToFollowers,
     navigateToMyStars,
     navigateToUserAlarm,
     navigateToDirectMessage,

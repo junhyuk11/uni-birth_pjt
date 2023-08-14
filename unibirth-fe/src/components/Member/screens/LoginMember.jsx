@@ -32,8 +32,16 @@ const LoginMember = () => {
   const setConstellationLimit = useSetRecoilState(constellationLimitState);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [rememberId, setRememberId] = useState(false);
   const { navigateToBack, navigateToRegisterMember, navigateToMainPlanet } =
     useNavigation();
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("savedEmail");
+    if (savedEmail) {
+      setEmail(savedEmail);
+      setRememberId(true);
+    }
+  }, []);
 
   const handleLogin = async () => {
     const member = {
@@ -43,6 +51,11 @@ const LoginMember = () => {
     try {
       const response = await useMemberApi.membersPostLogin(member);
       if (response.status === 200) {
+        if (rememberId) {
+          localStorage.setItem("savedEmail", email);
+        } else {
+          localStorage.removeItem("savedEmail");
+        }
         sessionStorage.setItem("accessToken", response.resultData.accessToken);
         setBoardSize(response.resultData.purchasedBoard);
         setNickname(response.resultData.nickname);
@@ -104,6 +117,8 @@ const LoginMember = () => {
             password={password}
             setPassword={setPassword}
             onKeyDown={handleKeyDown}
+            rememberId={rememberId}
+            setRememberId={setRememberId}
           />
         </form>
       </div>

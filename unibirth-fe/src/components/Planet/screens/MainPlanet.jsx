@@ -9,8 +9,6 @@ import {
   currentplanetState,
 } from "../../../recoil/atoms";
 import Footer from "../../../common/blocks/Footer";
-import HelpCarousel from "../atoms/HelpCarousel";
-import SpaceBackground from "../atoms/help1.png";
 
 const MainPlanet = () => {
   const [, setBackgroundflag] = useRecoilState(backgroundflagState);
@@ -28,14 +26,6 @@ const MainPlanet = () => {
   // 행성 처음 위치
   const currentPlanetId = useRecoilValue(currentplanetState);
   const [currentPlanet, setCurrentPlanet] = useState(currentPlanetId % 8);
-
-  // 도움말 List.png
-  const HelpList = [
-    SpaceBackground,
-    SpaceBackground,
-    SpaceBackground,
-    SpaceBackground,
-  ];
 
   const nickname = useRecoilValue(nicknameState);
 
@@ -71,15 +61,12 @@ const MainPlanet = () => {
         currentPlanet={currentPlanet}
         // setPlanetPosition={setPlanetPosition} 삭제 해야 할 것
       />
-      <div>
-        <HelpCarousel HelpList={HelpList} />
-      </div>
       <CanvasPlanet
         currentPlanet={currentPlanet}
         setCurrentPlanet={setCurrentPlanet}
         navigateToDetailPlanet={navigateToDetailPlanet}
       />
-      <div className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2 space-x-4">
+      <div className="fixed bottom-3 left-1/2 z-10 -translate-x-1/2 space-x-4">
         <Footer buttons={buttonsFooter} />
       </div>
     </div>

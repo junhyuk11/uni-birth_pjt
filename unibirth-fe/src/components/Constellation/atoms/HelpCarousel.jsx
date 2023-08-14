@@ -9,10 +9,11 @@ const Carousel = ({ HelpList }) => {
     slidesToScroll: 1,
   };
   const [isActive, setIsActive] = useState(false);
+  console.log(HelpList);
   return (
     <div>
       <button
-        className="absolute bottom-52 right-4 z-20 h-16 rounded-lg text-white"
+        className="absolute bottom-64 right-4 z-20 h-16 rounded-lg text-white"
         onClick={() => setIsActive(!isActive)}
       >
         <div className="text-5xl">

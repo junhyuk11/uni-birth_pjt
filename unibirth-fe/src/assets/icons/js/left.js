@@ -2,21 +2,22 @@ import React from "react";
 
 const Left = () => (
   <svg
-    width="105"
-    height="61"
-    viewBox="0 0 105 61"
+    width="103"
+    height="47"
+    viewBox="0 0 103 47"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M29 0.5H28.5V0.565609C12.8639 1.59478 0.5 14.6035 0.5 30.5C0.5 46.3965 12.8639 59.4052 28.5 60.4344V60.5H29H30.5H66.5H104H104.5V60V1V0.5H104H66.5H30.5H29Z"
+      d="M24 0.5H23.5C10.7975 0.5 0.5 10.7975 0.5 23.5C0.5 36.2025 10.7975 46.5 23.5 46.5H24H102H102.5V46V1V0.5H102H24Z"
       stroke="#E337FF"
     />
+
     <svg
       x="46"
-      y="20"
-      width="19"
-      height="19"
+      y="15"
+      width="18"
+      height="18"
       viewBox="0 0 22 23"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

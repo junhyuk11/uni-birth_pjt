@@ -1,5 +1,14 @@
 export const Jodiac = [
   {
+    name: "염소자리",
+    start_date: "12.22",
+    end_date: "1.19",
+    content:
+      "지구에서 태어난 거인 티폰이 신들을 공포에 떨게 하자 아프로디테와 그녀의 아들 에로스는 물고기로 변해 탈출하기 위해 유프라테스 강으로 뛰어들었습니다. 그들의 안전에 대한 감사의 마음으로 그들은 별자리로 하늘에 놓였습니다.",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/uni-birth.appspot.com/o/Zordiac%2F12_%EC%97%BC%EC%86%8C%EC%9E%90%EB%A6%AC.png?alt=media&token=4b2af018-a202-4ee0-b2ab-db597f559e17",
+  },
+  {
     name: "물병자리",
     start_date: "1-20",
     end_date: "2-18",
@@ -98,14 +107,5 @@ export const Jodiac = [
 
     image:
       "https://firebasestorage.googleapis.com/v0/b/uni-birth.appspot.com/o/Zordiac%2F11_%EC%82%AC%EC%88%98%EC%9E%90%EB%A6%AC.png?alt=media&token=1b45b820-f9d1-4d6e-b7bb-647e3f251fd7",
-  },
-  {
-    name: "염소자리",
-    start_date: "12.22",
-    end_date: "1.19",
-    content:
-      "지구에서 태어난 거인 티폰이 신들을 공포에 떨게 하자 아프로디테와 그녀의 아들 에로스는 물고기로 변해 탈출하기 위해 유프라테스 강으로 뛰어들었습니다. 그들의 안전에 대한 감사의 마음으로 그들은 별자리로 하늘에 놓였습니다.",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/uni-birth.appspot.com/o/Zordiac%2F12_%EC%97%BC%EC%86%8C%EC%9E%90%EB%A6%AC.png?alt=media&token=4b2af018-a202-4ee0-b2ab-db597f559e17",
   },
 ];

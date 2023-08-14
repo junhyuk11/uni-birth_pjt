@@ -8,26 +8,24 @@ const QurationStar = ({ data }) => {
   return (
     <div className="flex w-full flex-col items-center justify-center">
       {/* 이미지 */}
-      <div className="w-full" onClick={() => navigateToDetailStar(data.starId)}>
+      <div
+        className="w-full cursor-pointer"
+        onClick={() => navigateToDetailStar(data.starId)}
+      >
         <img
           src={data.imageUrl}
           alt="별 이미지"
-          className="h-auto max-h-96 w-full object-cover"
+          className="mb-4 h-auto max-h-96 w-full object-cover"
         />
       </div>
 
-      {/* 닉네임 */}
-      <div className="mt-2 w-full text-center font-bold">{data.nickname}</div>
+      <div className="mb-2 w-full px-4 text-xl font-bold">{data.title}</div>
 
-      {/* 제목, 내용 및 버튼 */}
-      <div className="mt-2 flex w-full items-center justify-between px-4">
-        <div className="flex flex-col">
-          <div className="font-bold">
-            {data.title} data.title나오는 공간임ㅇㅇ
-          </div>
-          <div>{data.content}</div>
-        </div>
+      {/* 닉네임, 내용 및 버튼 */}
+      <div className="mb-4 flex w-full justify-between px-4">
+        <div className="text-gray-300">{data.content}</div>
         <div>
+          <div className="mb-2">{data.nickname}</div>
           <Button1
             value="별 보기"
             onClick={() => navigateToDetailStar(data.starId)}

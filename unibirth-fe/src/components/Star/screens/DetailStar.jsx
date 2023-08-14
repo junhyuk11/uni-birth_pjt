@@ -5,12 +5,15 @@ import { useNavigation } from "../../../hooks/useNavigation";
 import useStarApi from "../../../api/useStarApi";
 import useMemberApi from "../../../api/useMemberApi";
 import { useParams } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import { backgroundflagState } from "../../../recoil/atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { backgroundflagState, nicknameState } from "../../../recoil/atoms";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import CustomAlert from "../../../common/atoms/CustomAlert";
 import useConstellationApi from "../../../api/useConstellationApi";
+import Close from "../../../assets/icons/js/close";
+import CustomConfirm from "../../../common/atoms/CustomConfirm";
+
 const DetailStar = () => {
   const setBackgroundflag = useSetRecoilState(backgroundflagState);
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
@@ -21,6 +24,8 @@ const DetailStar = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const [constellation, setConstellation] = useState("");
   const [content, setContent] = useState("");
+  const [showConfirm, setShowConfirm] = useState(false);
+  const nickname = useRecoilValue(nicknameState);
   const [star, setStar] = useState({
     brightness: "",
     content: "",
@@ -177,6 +182,27 @@ const DetailStar = () => {
     }
   };
 
+  const handleCommentDelete = async (commentId) => {
+    if (!isSubmitting) {
+      setIsSubmitting(true);
+      try {
+        const response = await useStarApi.commentDeleteStar(commentId);
+        if (response.status === 200) {
+          getStar(starId);
+        } else {
+          setIsAlertVisible(true);
+          setAlertMessage(response.message);
+        }
+      } catch (error) {
+        setIsAlertVisible(true);
+        setAlertMessage("오류 발생");
+      } finally {
+        setIsSubmitting(false);
+        setShowConfirm(false);
+      }
+    }
+  };
+
   const buttonsHeader = [
     {
       component: Button2,
@@ -306,6 +332,8 @@ const DetailStar = () => {
                   placeholder="댓글을 남겨보세요"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
+                  maxLength={50}
+                  minLength={1}
                 ></input>
               </div>
               <button
@@ -327,28 +355,55 @@ const DetailStar = () => {
                   return (
                     <li
                       key={commentId}
-                      className="flex flex-row border-b border-gray-600 py-4"
+                      className="border-b border-gray-600 py-4"
                     >
-                      <img
-                        className="h-8 w-8 rounded-full object-cover"
-                        src={comment.imageUrl}
-                      ></img>
-                      <div
-                        className="ml-2 flex flex-col"
-                        style={{ maxWidth: "100%", wordWrap: "break-word" }}
-                      >
-                        <strong className="text-base text-white">
-                          {comment.nickname}
-                        </strong>
-                        <p
-                          className="text-white"
-                          style={{ maxWidth: "90%", wordWrap: "break-word" }}
+                      <div className="flex flex-row items-start justify-between">
+                        <img
+                          className="h-8 w-8 rounded-full object-cover"
+                          src={comment.imageUrl}
+                          onClick={() =>
+                            navigateToMemberProfile(memberInfo.nickname)
+                          }
+                        ></img>
+                        <div
+                          className="ml-2 flex flex-grow flex-col"
+                          style={{ maxWidth: "100%", wordWrap: "break-word" }}
                         >
-                          {comment.content}
-                        </p>
-                        <span className="text-xs text-gray-400">
-                          {formatDate(comment.createdAt)}
-                        </span>
+                          <strong
+                            className="text-base text-white"
+                            onClick={() =>
+                              navigateToMemberProfile(memberInfo.nickname)
+                            }
+                          >
+                            {comment.nickname}
+                          </strong>
+                          <p
+                            className="text-white"
+                            style={{ maxWidth: "90%", wordWrap: "break-word" }}
+                          >
+                            {comment.content}
+                          </p>
+                          <span className="text-xs text-gray-400">
+                            {formatDate(comment.createdAt)}
+                          </span>
+                        </div>
+                        {comment.nickname === nickname && (
+                          <button
+                            className=" flex flex-grow items-end justify-end self-start"
+                            onClick={() => setShowConfirm(true)}
+                          >
+                            <Close />
+                          </button>
+                        )}
+
+                        <CustomConfirm
+                          isVisible={showConfirm}
+                          message="정말로 삭제하시겠습니까?"
+                          onClose={() => setShowConfirm(false)} // 취소 버튼을 누를 때
+                          onConfirm={() =>
+                            handleCommentDelete(comment.commentId)
+                          } // 확인 버튼을 누를 때
+                        />
                       </div>
                     </li>
                   );

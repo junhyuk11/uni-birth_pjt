@@ -102,8 +102,9 @@ const DetailConstellation = () => {
           <div className="text-md">&nbsp;자리</div>
         </div>
       </div>
+
       <ListSectionStar className="relative left-0 top-0 z-0 h-full w-full" />
-      <div className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2 space-x-4">
+      <div className="fixed bottom-3 left-1/2 z-10 -translate-x-1/2 space-x-4">
         <Footer buttons={buttonsFooter} />
       </div>
     </div>

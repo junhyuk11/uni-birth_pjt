@@ -40,7 +40,7 @@ const SearchHeader = ({ buttons, category, setCategory, query, setQuery }) => {
       <div className="flex flex-grow"></div>
       <div className="flex items-center justify-end space-x-4 px-2">
         <input
-          className="w-1/2 border-b bg-transparent font-Pretendard"
+          className="w-1/2 border-b bg-transparent font-Pretendard text-white"
           type="text"
           placeholder={query}
           value={query}
