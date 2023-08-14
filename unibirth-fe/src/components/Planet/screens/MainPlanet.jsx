@@ -9,10 +9,6 @@ import {
   currentplanetState,
 } from "../../../recoil/atoms";
 import Footer from "../../../common/blocks/Footer";
-import HelpCarousel from "../atoms/HelpCarousel";
-import SpaceBackground1 from "../atoms/help1.png";
-import SpaceBackground2 from "../atoms/help2.png";
-import SpaceBackground3 from "../atoms/help3.png";
 
 const MainPlanet = () => {
   const [, setBackgroundflag] = useRecoilState(backgroundflagState);
@@ -30,9 +26,6 @@ const MainPlanet = () => {
   // 행성 처음 위치
   const currentPlanetId = useRecoilValue(currentplanetState);
   const [currentPlanet, setCurrentPlanet] = useState(currentPlanetId % 8);
-
-  // 도움말 List.png
-  const HelpList = [SpaceBackground1, SpaceBackground2, SpaceBackground3];
 
   const nickname = useRecoilValue(nicknameState);
 
@@ -68,9 +61,6 @@ const MainPlanet = () => {
         currentPlanet={currentPlanet}
         // setPlanetPosition={setPlanetPosition} 삭제 해야 할 것
       />
-      <div>
-        <HelpCarousel HelpList={HelpList} />
-      </div>
       <CanvasPlanet
         currentPlanet={currentPlanet}
         setCurrentPlanet={setCurrentPlanet}

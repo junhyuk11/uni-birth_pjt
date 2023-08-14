@@ -72,7 +72,7 @@ const InviteFollowStar = () => {
   };
 
   return (
-    <div className="p-4 text-sky-500">
+    <div className="p-4 text-purple-400">
       <CustomAlert
         message={alertMessage}
         isVisible={isAlertVisible}
@@ -83,31 +83,33 @@ const InviteFollowStar = () => {
           }
         }}
       />
-      {followList.map((item) => {
-        return (
-          <div
-            key={item.nickname}
-            className="mb-3 flex items-center space-x-4 p-2 hover:bg-gray-100"
-          >
-            <img
-              src={item.imageUrl}
-              alt={`${item.nickname}'s profile`}
-              className="h-12 w-12 rounded-full"
-            />
-            <div className="font-semibold">{item.nickname}</div>
-            <button
-              onClick={() => handleInvite(item.nickname)}
-              className="text-blue-500 hover:text-blue-700"
+      <div className="h-[calc(3*4rem)] overflow-y-auto">
+        {followList.map((item) => {
+          return (
+            <div
+              key={item.nickname}
+              className="mb-3 flex items-center space-x-4 p-2 hover:bg-gray-100"
             >
-              {invitedUsers[item.nickname] ? (
-                <BsCheck className="h-6 w-6" />
-              ) : (
-                <HiPaperAirplane className="h-6 w-6" />
-              )}
-            </button>
-          </div>
-        );
-      })}
+              <img
+                src={item.imageUrl}
+                alt={`${item.nickname}'s profile`}
+                className="h-12 w-12 rounded-full"
+              />
+              <div className="font-semibold">{item.nickname}</div>
+              <button
+                onClick={() => handleInvite(item.nickname)}
+                className="text-purple-500 hover:text-purple-700"
+              >
+                {invitedUsers[item.nickname] ? (
+                  <BsCheck className="h-6 w-6" />
+                ) : (
+                  <HiPaperAirplane className="h-6 w-6" />
+                )}
+              </button>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

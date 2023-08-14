@@ -11,8 +11,6 @@ import { useParams } from "react-router-dom";
 import useConstellationApi from "../../../api/useConstellationApi";
 import Header1 from "../../../common/blocks/Header1";
 import CustomAlert from "../../../common/atoms/CustomAlert";
-import HelpCarousel from "../atoms/HelpCarousel";
-import SpaceBackground6 from "../atoms/help6.png";
 
 const DetailConstellation = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -23,7 +21,6 @@ const DetailConstellation = () => {
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [constellationContent, setConstellationConstent] = useState([]);
-  const HelpList = [SpaceBackground6];
   useEffect(() => {
     getConstellationContent(constellationId);
   }, [constellationId]);
@@ -104,9 +101,6 @@ const DetailConstellation = () => {
           </p>
           <div className="text-md">&nbsp;자리</div>
         </div>
-      </div>
-      <div>
-        <HelpCarousel HelpList={HelpList} />
       </div>
 
       <ListSectionStar className="relative left-0 top-0 z-0 h-full w-full" />
