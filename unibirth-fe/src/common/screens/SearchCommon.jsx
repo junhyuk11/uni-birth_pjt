@@ -58,12 +58,16 @@ const SearchCommon = () => {
       setAlertMessage("검색 결과를 불러오는데 실패하였습니다.");
     }
   };
-  const formatDate = (dateStr) => {
-    const date = new Date(dateStr);
-    return `${date.getDate()}/${
-      date.getMonth() + 1
-    }/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
-  };
+  function formatDate(dateString) {
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
 
   const handleConstellationClick = (constellationId) => {
     navigateToDetailConstellation(constellationId);
