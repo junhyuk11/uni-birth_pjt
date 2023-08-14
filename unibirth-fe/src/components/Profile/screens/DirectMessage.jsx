@@ -14,12 +14,19 @@ import { useLocation } from "react-router-dom";
 
 const DirectMessage = () => {
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
   const nickname = useRecoilValue(nicknameState);
   const location = useLocation();
   const locationNickname = location.state;
+  const [newMessage, setNewMessage] = useState("");
 
   const { navigateToBack } = useNavigation();
+
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+    if (inputValue.length <= 50) {
+      setNewMessage(inputValue);
+    }
+  };
 
   const backClick = () => {
     navigateToBack(); // 화면 이동을 처리하는 함수를 호출합니다.
@@ -114,11 +121,11 @@ const DirectMessage = () => {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 mx-auto flex w-full max-w-screen-sm items-center border-t border-gray-200 bg-slate-200 p-4 ">
+      <div className="sticky bottom-0 mx-auto flex w-full max-w-screen-sm items-center border-t border-gray-200 px-4 py-2 ">
         <input
-          className="mr-4 flex-grow rounded-md border p-2"
+          className="mr-4 h-10 flex-grow rounded-full border p-2"
           value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
+          onChange={handleInputChange}
           onKeyDown={(event) => {
             if (event.key === "Enter") {
               handleSend();
@@ -127,7 +134,7 @@ const DirectMessage = () => {
           placeholder="메시지 입력..."
         />
         <button
-          className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
+          className="h-10 rounded-full bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
           onClick={handleSend}
         >
           전송
