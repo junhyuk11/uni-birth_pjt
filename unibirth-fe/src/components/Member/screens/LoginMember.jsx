@@ -95,7 +95,6 @@ const LoginMember = () => {
         isVisible={isAlertVisible}
         onClose={() => setIsAlertVisible(false)}
       />
-      ;
       <div>
         <Header1 buttons={buttonsHeader} />
         <form className="justify-center">
