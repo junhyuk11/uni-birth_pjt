@@ -13,7 +13,7 @@ const DrawingBackButton = ({ value, onClick, className, icon }) => {
         viewBox="0 0 24 24"
         fill="none"
         stroke="#FDFFB1"
-        stroke-width="2"
+        strokeWidth="2"
         stroke-linecap="round"
         stroke-linejoin="round"
       >
