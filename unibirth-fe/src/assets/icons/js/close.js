@@ -14,7 +14,7 @@ const Close = () => (
       y2="-1"
       transform="matrix(0.707076 -0.707138 0.707076 0.707138 2.00195 27)"
       stroke="white"
-      stroke-width="2"
+      strokeWidth="2"
     />
     <line
       y1="-1"
@@ -22,7 +22,7 @@ const Close = () => (
       y2="-1"
       transform="matrix(-0.707076 -0.707138 -0.707076 0.707138 26.998 27)"
       stroke="white"
-      stroke-width="2"
+      strokeWidth="2"
     />
   </svg>
 );
