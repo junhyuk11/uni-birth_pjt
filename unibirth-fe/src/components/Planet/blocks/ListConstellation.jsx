@@ -28,7 +28,6 @@ function CameraController({
   ConstellationPosition,
   zoomed,
   setRotateFlag,
-  startDirection,
 }) {
   const { camera } = useThree();
   const cameraRef = useRef(camera);
@@ -91,9 +90,6 @@ function CameraController({
 const Scene = ({ constellationList }) => {
   // 화면 회전
   const [enabledFlag, setEnableFlag] = useState(true);
-  const startDirection = { x: -200, y: -300, z: -100 };
-  // 배경화면 flag
-  console.log("starDrection:", startDirection);
   const setBackgroundflag = useSetRecoilState(backgroundflagState);
   useEffect(() => {
     setBackgroundflag(false);
@@ -183,13 +179,7 @@ const Scene = ({ constellationList }) => {
         }
         currentconstellationList={currentconstellationList}
       />
-      <Canvas
-        camera={{
-          position: startDirection
-            ? [startDirection.x, startDirection.y, startDirection.z]
-            : [100, 500, 0],
-        }}
-      >
+      <Canvas>
         <PerspectiveCamera
           makeDefault
           position={[0, -500, 0]}
@@ -243,7 +233,6 @@ const Scene = ({ constellationList }) => {
           zoomed={zoomed}
           setRotateFlag={setRotateFlag}
           setEnableFlag={setEnableFlag}
-          startDirection={startDirection}
         />
       </Canvas>
     </>
