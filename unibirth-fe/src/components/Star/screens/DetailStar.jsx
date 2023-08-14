@@ -119,6 +119,7 @@ const DetailStar = () => {
       try {
         const response = await useStarApi.starsDeleteBrightness(starId);
         if (response.status === 200) {
+          getStar(starId);
           setStar({
             ...star,
             alreadyLiked: false,
@@ -135,6 +136,7 @@ const DetailStar = () => {
       try {
         const response = await useStarApi.starsGetBrightness(starId);
         if (response.status === 200) {
+          getStar(starId);
           setStar({
             ...star,
             alreadyLiked: true,
@@ -233,24 +235,27 @@ const DetailStar = () => {
         </div>
       </div>
       <div className="px-4">
-        <div className="flex flex-row items-center border-b-2 border-gray-300 py-2">
-          <img
-            src={memberInfo.imageUrl}
-            alt="멤버 이미지"
-            className="h-10 w-10 rounded-full object-cover" // 이미지 둥글게, 크기 조정
-            style={{ alignSelf: "flex-start" }}
-          />
-          <div className="ml-3 mt-0 flex flex-col">
-            <div
-              className="text-md font-bold text-white"
-              onClick={() => navigateToMemberProfile(memberInfo.nickname)}
-            >
-              {memberInfo.nickname}
+        <div className="flex flex-row justify-between  border-b-2 border-gray-300 py-2">
+          <div className="flex flex-row items-center">
+            <img
+              src={memberInfo.imageUrl}
+              alt="멤버 이미지"
+              className="h-10 w-10 rounded-full object-cover" // 이미지 둥글게, 크기 조정
+              style={{ alignSelf: "flex-start" }}
+            />
+            <div className="ml-3 mt-0 flex flex-col">
+              <div
+                className="text-md font-bold text-white"
+                onClick={() => navigateToMemberProfile(memberInfo.nickname)}
+              >
+                {memberInfo.nickname}
+              </div>
+              <span className="text-xs text-white">
+                {formatDate(star.updatedAt)}
+              </span>
             </div>
-            <span className="text-xs text-white">
-              {formatDate(star.updatedAt)}
-            </span>
           </div>
+          <div className="my-auto text-white ">좋아요 {star.brightness}</div>
         </div>
       </div>
       <div className="mt-4 w-full">
@@ -261,9 +266,9 @@ const DetailStar = () => {
         />
         {/* 이미지 크기 조정 */}
       </div>
-      <div className="px-4">
+      <div>
         <div className="flex flex-col items-center py-4">
-          <div className="flex-grow self-start py-5 text-xl text-white">
+          <div className="flex-grow self-start px-4 py-5 text-xl text-white">
             {star.content.split("\n").map((line, index) => (
               <React.Fragment key={index}>
                 {line}
@@ -271,18 +276,23 @@ const DetailStar = () => {
               </React.Fragment>
             ))}
           </div>
-          <button
-            className={
-              "flex  scale-100 transform justify-center text-3xl text-yellow-500 transition-transform focus:outline-none"
-            }
-            onClick={() => handleLikeClick(star.starId)}
-          >
-            {star.alreadyLiked ? <AiFillStar /> : <AiOutlineStar />}
-          </button>
-          <div className="mt-4 w-screen border-t px-4 pb-4 pt-2 text-white">
-            댓글
+          <div className="flex flex-row">
+            <button
+              className={
+                "flex  scale-100 transform justify-center text-3xl text-yellow-500 transition-transform focus:outline-none"
+              }
+              onClick={() => handleLikeClick(star.starId)}
+            >
+              {star.alreadyLiked ? <AiFillStar /> : <AiOutlineStar />}
+            </button>
+            <div className="ml-1 mt-auto items-center justify-center text-white ">
+              {star.brightness}
+            </div>
           </div>
-          <div className="flex w-full flex-col">
+          <div className="mt-4 w-full border-t  px-4 pb-4 pt-2 text-white">
+            댓글 {star.commentList.length}
+          </div>
+          <div className="flex w-full flex-col px-4">
             <div className="flex flex-row justify-between border-y py-2">
               <div className="flex flex-row">
                 <img
@@ -307,7 +317,7 @@ const DetailStar = () => {
             </div>
             {star.commentList.length === 0 ? (
               <div className="text-center">
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+                <div className="pt-10">
                   <p className="text-white text-opacity-60">댓글이 없습니다.</p>
                 </div>
               </div>
@@ -315,16 +325,27 @@ const DetailStar = () => {
               <ul className="w-full">
                 {star.commentList.map((comment, commentId) => {
                   return (
-                    <li key={commentId} className="flex flex-row border-b py-4">
+                    <li
+                      key={commentId}
+                      className="flex flex-row border-b border-gray-600 py-4"
+                    >
                       <img
                         className="h-8 w-8 rounded-full object-cover"
                         src={comment.imageUrl}
                       ></img>
-                      <div className="ml-2 flex flex-col">
+                      <div
+                        className="ml-2 flex flex-col"
+                        style={{ maxWidth: "100%", wordWrap: "break-word" }}
+                      >
                         <strong className="text-base text-white">
                           {comment.nickname}
                         </strong>
-                        <p className="text-white">{comment.content}</p>
+                        <p
+                          className="text-white"
+                          style={{ maxWidth: "90%", wordWrap: "break-word" }}
+                        >
+                          {comment.content}
+                        </p>
                         <span className="text-xs text-gray-400">
                           {formatDate(comment.createdAt)}
                         </span>
