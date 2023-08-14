@@ -51,6 +51,16 @@ function checkMessage(target, time) {
   set(checkRef, `${time}`);
 }
 
+function updateAlarm(target, time) {
+  const updateRef = ref(database, `updateAlarm/${target}`);
+  set(updateRef, `${time}`);
+}
+
+function checkAlarm(target, time) {
+  const checkRef = ref(database, `checkAlarm/${target}`);
+  set(checkRef, `${time}`);
+}
+
 function listenForMessages(callback, sender, target) {
   const chatRoomId = [sender, target].sort().join("_");
   const chatRef = ref(database, `chats/${chatRoomId}`);
@@ -96,4 +106,6 @@ export {
   listenForMessages,
   updateMessage,
   checkMessage,
+  updateAlarm,
+  checkAlarm,
 };

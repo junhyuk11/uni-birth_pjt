@@ -6,10 +6,10 @@ const CustomConfirm = ({ message, isVisible, onClose, onConfirm }) => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-black bg-opacity-40">
+    <div className="fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-black opacity-40">
       <div
         ref={ref}
-        className="flex flex-col rounded-md border-2 border-yellow-300 bg-transparent p-5 shadow-lg"
+        className="flex flex-col rounded-md border-2 border-yellow-300 bg-slate-800 bg-opacity-70 p-5 shadow-lg"
       >
         <p className="mb-3 flex items-center justify-center text-center text-white">
           {message}
