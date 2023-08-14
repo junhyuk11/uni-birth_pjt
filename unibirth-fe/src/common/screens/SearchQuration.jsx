@@ -20,7 +20,7 @@ const SearchQuration = () => {
   const [alertMessage, setAlertMessage] = useState("");
 
   const { navigateToBack } = useNavigation();
-  const [category, setCategory] = useState("all");
+  const [category, setCategory] = useState("전체");
   const [query, setQuery] = useState("");
   const [currentState, setCurrentState] = useState("팔로우");
   const [followingData, setFollowingData] = useState([]);
@@ -30,8 +30,8 @@ const SearchQuration = () => {
   const getQurationStar = async () => {
     try {
       const response = await useSearchApi.searchGetMemberCuration(nickname);
-      console.log(response);
       if (response.status === 200) {
+        console.log(response);
         setFollowingData(response.resultData[0]);
         setInterestData(response.resultData[1]);
       } else if (response.status === 403) {
