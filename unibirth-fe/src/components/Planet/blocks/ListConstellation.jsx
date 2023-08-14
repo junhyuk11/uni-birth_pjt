@@ -41,7 +41,7 @@ function CameraController({
       const targetPosition = zoomed
         ? {
             x: ConstellationPosition.x * multiFactor + 3500,
-            y: ConstellationPosition.y * multiFactor - 3000,
+            y: ConstellationPosition.y * multiFactor - 10000,
             z: ConstellationPosition.z * multiFactor + 3500,
           }
         : {
@@ -200,7 +200,7 @@ const Scene = ({ constellationList }) => {
         <Stars
           radius={2300}
           depth={30}
-          count={12000}
+          count={3000}
           factor={4}
           saturation={1}
           fade
