@@ -14,6 +14,9 @@ import earth from "../../../assets/images/earth.png";
 import CustomAlert from "../../../common/atoms/CustomAlert";
 import { useRecoilValue } from "recoil";
 import { memberProfileImageState } from "../../../recoil/atoms";
+import Inputdropdown from "../../Constellation/atoms/InputDropdown";
+import { PLANET_LIST } from "../../../constants/constants";
+
 const ModifyProfile = () => {
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
   const [introduction, setIntro] = useState("");
@@ -23,6 +26,7 @@ const ModifyProfile = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const memberProfileImage = useRecoilValue(memberProfileImageState);
   const [imageUrl, setImageUrl] = useState(memberProfileImage);
+  const [planetId, setPlanetId] = useState(1);
 
   const saveImgFile = (event) => {
     const file = event.target.files[0];
@@ -41,6 +45,10 @@ const ModifyProfile = () => {
         setAlertMessage("회원정보를 가져오는데 오류가 발생했습니다.");
         return;
       }
+      console.log("asjdbasjd:", response);
+      setPlanetId(response.resultData.planetId + 1);
+      console.log(planetId);
+      console.log(PLANET_LIST[planetId - 1].name);
       setImageUrl(response.resultData.imageUrl);
       setThumbUrl(response.resultData.imageUrl);
       setIntro(response.resultData.introduction);
@@ -98,6 +106,7 @@ const ModifyProfile = () => {
     const member = {
       introduction,
       imageUrl: finalImageUrl,
+      planetId: planetId - 1,
     };
 
     try {
@@ -147,6 +156,7 @@ const ModifyProfile = () => {
           setThumbUrl={setThumbUrl}
           onChange={saveImgFile}
         />
+        <Inputdropdown planetId={planetId} setPlanetId={setPlanetId} />
         <div className="w-full flex-initial items-center justify-center font-Pretendard">
           <div className="w-full flex-row">
             <label

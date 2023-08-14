@@ -190,7 +190,7 @@ const SearchCommon = () => {
                 <img
                   src={star.imageUrl}
                   alt={star.content}
-                  className="glow mr-4 h-20 w-20 rounded-lg object-cover"
+                  className="mr-4 h-20 w-20 rounded-lg object-cover"
                 />
                 <div className="flex flex-col justify-between space-y-2">
                   <div className="text-lg font-semibold">{star.title}</div>
@@ -213,8 +213,6 @@ const SearchCommon = () => {
                   <div className="font-bold text-yellow-400">
                     {star.nickname}
                   </div>
-                  <div className="text-lg font-semibold">{star.title}</div>
-                  <p className="text-sm">{star.content}</p>
                   <span className="mt-2 text-xs text-yellow-300">
                     {formatDate(star.createdAt)}
                   </span>

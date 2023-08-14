@@ -1,10 +1,7 @@
 import React, { useRef, useEffect, useState, useMemo } from "react";
-// import SpreadConstellation from "./MeshConstellation";
-import { Line } from "@react-three/drei";
 import { useSetRecoilState } from "recoil";
 import { currentconstellationListState } from "../../../recoil/atoms";
 import * as THREE from "three";
-
 const MeshCons = ({
   constellationList,
   ConstellationIndex,
@@ -98,28 +95,27 @@ const MeshCons = ({
           {constellationList.constellationList[i].lineList.map(
             (line, index) => {
               const [x1, y1, z1, x2, y2, z2] = line;
+              const geometry = new THREE.BufferGeometry();
+              geometry.setFromPoints([
+                new THREE.Vector3(
+                  x1 * constellationGap + xyz.x,
+                  y1 * constellationGap + xyz.y,
+                  z1 * constellationGap * correctionZ + xyz.z,
+                ),
+                new THREE.Vector3(
+                  x2 * constellationGap + xyz.x,
+                  y2 * constellationGap + xyz.y,
+                  z2 * constellationGap * correctionZ + xyz.z,
+                ),
+              ]);
               return (
-                <mesh key={`line_${i}_${index}`}>
-                  <Line
-                    points={[
-                      [
-                        x1 * constellationGap + xyz.x,
-                        y1 * constellationGap + xyz.y,
-                        z1 * constellationGap * correctionZ + xyz.z,
-                      ],
-                      [
-                        x2 * constellationGap + xyz.x,
-                        y2 * constellationGap + xyz.y,
-                        z2 * constellationGap * correctionZ + xyz.z,
-                      ],
-                    ]}
-                    // color="#F2F5A9"
+                <line key={`line_${i}_${index}`} geometry={geometry}>
+                  <lineBasicMaterial
+                    color="white"
                     transparent={true}
                     opacity={0.5}
-                    color={("color", "white")}
-                    // vertexColors={colors}
                   />
-                </mesh>
+                </line>
               );
             },
           )}

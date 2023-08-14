@@ -52,7 +52,7 @@ const App = () => {
           </Canvas>
         </div>
       )}
-      <div className="absolute w-screen font-Pretendard">
+      <div className="absolute h-screen w-screen font-Pretendard">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/members/login" element={<LoginMember />} />

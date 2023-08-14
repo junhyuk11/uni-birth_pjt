@@ -159,6 +159,12 @@ const GridCustomConstellation = ({
   const handleSaveClick = () => {
     setLoading(true); // 로딩 상태 시작
     const [uniquePoints, uniqueLines] = removeDuplicate(lines);
+    if (uniquePoints.length === 0 || uniqueLines.length === 0) {
+      setIsAlertVisible(true);
+      setAlertMessage("별자리를 그려주세요.");
+      setLoading(false);
+      return;
+    }
     const imageUrl = linesAndPointsLayerRef.current.toDataURL();
     const [header, data] = imageUrl.split(",");
     const mimeType = header.split(";")[0].split(":")[1];

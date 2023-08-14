@@ -333,7 +333,7 @@ const DetailStar = () => {
                   style={{ alignSelf: "flex-start" }}
                 />
                 <input
-                  className="ml-2 bg-transparent text-white"
+                  className="ml-2 w-3/5 bg-transparent text-white"
                   placeholder="댓글을 남겨보세요"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
@@ -342,7 +342,7 @@ const DetailStar = () => {
                 ></input>
               </div>
               <button
-                className="ml-2  rounded-xl border border-yellow-500 bg-transparent px-4 py-1 text-white"
+                className="w-16 rounded-xl border border-yellow-500 bg-transparent py-1 text-white"
                 onClick={handleCommentClick}
               >
                 등록
