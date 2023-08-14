@@ -6,6 +6,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { nicknameState, memberProfileImageState } from "../../../recoil/atoms";
 import Button5 from "../../../common/atoms/Button5";
 import CustomAlert from "../../../common/atoms/CustomAlert";
+import { PLANET_LIST } from "../../../constants/constants";
 
 const MemberSectionProfile = ({ locationNickname }) => {
   const {
@@ -23,7 +24,6 @@ const MemberSectionProfile = ({ locationNickname }) => {
   const [alertStatus, setAlertStatus] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const nickname = useRecoilValue(nicknameState);
-
   useEffect(() => {
     fetchMemberData();
   }, []);
@@ -67,6 +67,7 @@ const MemberSectionProfile = ({ locationNickname }) => {
       const response = await useMemberApi.membersGetDetail(locationNickname);
       setAlertStatus(response.status);
       if (response.status === 200) {
+        console.log("repsonse:", response);
         setMemberData(response);
         setIsFollowing(response?.resultData?.follow);
         setMemberProfileImage(response?.resultData?.imageUrl);
@@ -115,30 +116,38 @@ const MemberSectionProfile = ({ locationNickname }) => {
             alt="Round image"
           />
           <div className="flex flex-grow flex-col justify-center space-y-10 font-Pretendard">
-            <div className="flex justify-end space-x-4">
-              <div className="flex flex-col items-center">
-                <p
-                  onClick={() => handleToFollow(locationNickname, "팔로잉")}
-                  className="text-center text-yellow-100"
-                >
-                  팔로잉: {memberData.resultData.followingCount}
-                </p>
+            <div className="flex flex-col">
+              <div className="flex justify-end space-x-4">
+                <div className="flex flex-row items-center">
+                  <p
+                    onClick={() => handleToFollow(locationNickname, "팔로잉")}
+                    className="text-center text-yellow-100"
+                  >
+                    팔로잉: {memberData.resultData.followingCount}
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <p
+                    onClick={() => handleToFollow(locationNickname, "팔로워")}
+                    className="text-center text-yellow-100"
+                  >
+                    팔로워: {memberData.resultData.followerCount}
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <p
+                    onClick={() => navigateToMyStars(locationNickname)}
+                    className="text-center text-yellow-100"
+                  >
+                    띄운별: {memberData.resultData.starCount}
+                  </p>
+                </div>
               </div>
-              <div className="flex flex-col items-center">
-                <p
-                  onClick={() => handleToFollow(locationNickname, "팔로워")}
-                  className="text-center text-yellow-100"
-                >
-                  팔로워: {memberData.resultData.followerCount}
-                </p>
-              </div>
-              <div className="flex flex-col items-center">
-                <p
-                  onClick={() => navigateToMyStars(locationNickname)}
-                  className="text-center text-yellow-100"
-                >
-                  띄운별: {memberData.resultData.starCount}
-                </p>
+              <div className="flex justify-end text-center text-yellow-100">
+                <div>관심행성: </div>
+                <div className="w-20">
+                  {PLANET_LIST[memberData.resultData.planetId].name}
+                </div>
               </div>
             </div>
             <div className="text-right text-lg font-bold text-white">
@@ -147,7 +156,6 @@ const MemberSectionProfile = ({ locationNickname }) => {
           </div>
         </div>
       )}
-
       <div className="flex items-center justify-end space-x-4 bg-slate-950 bg-opacity-60 font-Pretendard">
         {nickname === locationNickname ? (
           <Button5

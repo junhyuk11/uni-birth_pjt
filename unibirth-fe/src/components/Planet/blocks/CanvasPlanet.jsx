@@ -72,7 +72,6 @@ const ListSectionPlanet = ({
   useEffect(() => {
     setBackgroundflag(false);
   }, []);
-
   const [zoomed, setZoomed] = useState(false);
 
   useEffect(() => {
@@ -85,24 +84,16 @@ const ListSectionPlanet = ({
       prevIndex === 0 ? PLANET_LIST.length - 1 : prevIndex - 1,
     );
   };
-
   // 오른쪽 버튼
   const handleRightClick = () => {
     setCurrentPlanet((prevIndex) =>
       prevIndex === PLANET_LIST.length - 1 ? 0 : prevIndex + 1,
     );
   };
-
   // 확대축소 버튼
   const handleZoomClick = () => {
     setZoomed(!zoomed);
   };
-
-  // axesHelper커스텀 가능
-  // import * as THREE from "three";
-  // const axesHelperMaterial = new THREE.MeshBasicMaterial({ color: "red" });
-  // const axesHelper = new THREE.AxesHelper(0.2);
-  // axesHelper.material = axesHelperMaterial;
 
   return (
     <div className="absolute flex h-full w-full flex-row flex-wrap justify-center">
@@ -129,23 +120,14 @@ const ListSectionPlanet = ({
           enabled={true}
           rotateSpeed={-0.5}
           enablePan={false}
-
           // autoRotate={true}
           // autoRotateSpeed={0.5}
         />
         <CameraController planet={PLANET_LIST[currentPlanet]} zoomed={zoomed} />
-        {/* <axesHelper scale={0.2} /> */}
-        {/* <primitive object={axesHelper} /> */}
         <EffectComposer>
-          <Bloom
-            luminanceThreshold={0}
-            luminanceSmoothing={0.5}
-            height={500}
-            // intensity={2}
-          />
+          <Bloom luminanceThreshold={0} luminanceSmoothing={0.5} height={200} />
         </EffectComposer>
         <GradientBackground />
-        {/* <color attach="background" args={["black"]} /> */}
         <MeshPlanet navigateToDetailPlanet={navigateToDetailPlanet} />
         <Stars
           radius={100}

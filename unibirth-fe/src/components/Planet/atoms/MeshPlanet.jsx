@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useMemo } from "react";
 import { Html } from "@react-three/drei";
 import earth1 from "../../../assets/images/planet01.jpg";
 import earth2 from "../../../assets/images/planet02.jpg";
@@ -44,6 +44,8 @@ const MeshPlanet = ({ navigateToDetailPlanet }) => {
       }
     });
   });
+  // Geometry Reuse
+  const geometry = useMemo(() => new THREE.SphereGeometry(3, 32, 32), []);
 
   return (
     <>
@@ -58,7 +60,7 @@ const MeshPlanet = ({ navigateToDetailPlanet }) => {
               setCurrentplanet(planet.planetId - 1);
             }}
           >
-            <sphereGeometry args={[3, 32, 32]} />
+            <primitive object={geometry} />
             <meshStandardMaterial
               color="#00ffff"
               emissive="#00ffff"

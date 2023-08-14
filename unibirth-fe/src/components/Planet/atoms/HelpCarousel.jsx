@@ -9,7 +9,6 @@ const Carousel = ({ HelpList }) => {
     slidesToScroll: 1,
   };
   const [isActive, setIsActive] = useState(false);
-  console.log(HelpList);
   return (
     <div>
       <button

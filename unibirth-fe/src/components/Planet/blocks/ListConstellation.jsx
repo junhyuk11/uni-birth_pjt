@@ -28,7 +28,6 @@ function CameraController({
   ConstellationPosition,
   zoomed,
   setRotateFlag,
-  startDirection,
 }) {
   const { camera } = useThree();
   const cameraRef = useRef(camera);
@@ -37,12 +36,19 @@ function CameraController({
   const multiFactor = 1.5;
   // console.log("ConstellationPosition:", ConstellationPosition);
   useEffect(() => {
+    console.log(
+      "ConstellationPosition has been updated:",
+      ConstellationPosition,
+    );
+    console.log(zoomed);
+  }, [ConstellationPosition]);
+  useEffect(() => {
     if (ConstellationPosition) {
       // console.log("제[발!!ㅣ", ConstellationPosition);
       const targetPosition = zoomed
         ? {
             x: ConstellationPosition.x * multiFactor + 3500,
-            y: ConstellationPosition.y * multiFactor - 3000,
+            y: ConstellationPosition.y * multiFactor - 10000,
             z: ConstellationPosition.z * multiFactor + 3500,
           }
         : {
@@ -75,6 +81,7 @@ function CameraController({
         onUpdate: updateCameraPosition,
         ease: "Power1.inOut",
         onComplete: () => {
+          console.log(startPosition, targetPosition);
           setEnableFlag(true);
           if (zoomed) {
             setRotateFlag(true);
@@ -91,9 +98,6 @@ function CameraController({
 const Scene = ({ constellationList }) => {
   // 화면 회전
   const [enabledFlag, setEnableFlag] = useState(true);
-  const startDirection = { x: -200, y: -300, z: -100 };
-  // 배경화면 flag
-  console.log("starDrection:", startDirection);
   const setBackgroundflag = useSetRecoilState(backgroundflagState);
   useEffect(() => {
     setBackgroundflag(false);
@@ -114,9 +118,6 @@ const Scene = ({ constellationList }) => {
   const [zoomed, setZoomed] = useState(false);
   // 별자리 보정계수
   // const moveNum = 50;
-  const num = 60; // 별자리 간격
-  const starmultiple = 3; // 별간격
-  const xdamper = -10; // x축+- 보정계수
 
   // 별자리 인덱스
   const [currentConstellation, setCurrentConstellation] = useState(
@@ -183,13 +184,7 @@ const Scene = ({ constellationList }) => {
         }
         currentconstellationList={currentconstellationList}
       />
-      <Canvas
-        camera={{
-          position: startDirection
-            ? [startDirection.x, startDirection.y, startDirection.z]
-            : [100, 500, 0],
-        }}
-      >
+      <Canvas>
         <PerspectiveCamera
           makeDefault
           position={[0, -500, 0]}
@@ -210,16 +205,13 @@ const Scene = ({ constellationList }) => {
         <Stars
           radius={2300}
           depth={30}
-          count={12000}
+          count={3000}
           factor={4}
           saturation={1}
           fade
         />
         <MeshCons
           constellationList={constellationList}
-          num={num}
-          starmultiple={starmultiple}
-          xdamper={xdamper}
           ConstellationIndex={ConstellationIndex}
           setConstellationIndex={setConstellationIndex}
           setCurrentConstellation={setCurrentConstellation}
@@ -243,7 +235,6 @@ const Scene = ({ constellationList }) => {
           zoomed={zoomed}
           setRotateFlag={setRotateFlag}
           setEnableFlag={setEnableFlag}
-          startDirection={startDirection}
         />
       </Canvas>
     </>

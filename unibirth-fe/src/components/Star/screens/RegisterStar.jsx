@@ -23,14 +23,6 @@ const RegisterStar = () => {
     backgroundflag(true);
   }, []);
 
-  const saveImgFile = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setThumbUrl(e.target.result);
-    };
-    reader.readAsDataURL(file);
-  };
   const backgroundflag = useSetRecoilState(backgroundflagState);
   const constellationId = useRecoilValue(StellaIdState);
   const { navigateToBack, navigateToDetailConstellation } = useNavigation(); // navigateToDetailConstellation
@@ -101,7 +93,6 @@ const RegisterStar = () => {
         setLoading(false); // 로딩 상태 종료
       },
     );
-    setLoading(false);
   };
 
   const buttonsHeader = [
@@ -141,11 +132,7 @@ const RegisterStar = () => {
             alt="이미지"
             className="h-32 w-32 rounded-full object-cover"
           />
-          <InputImage
-            setImageUrl={setImageUrl}
-            setThumbUrl={setThumbUrl}
-            onChange={saveImgFile}
-          />
+          <InputImage setImageUrl={setImageUrl} setThumbUrl={setThumbUrl} />
           <BodyRegisterStar
             title={title}
             setTitle={setTitle}
