@@ -3,17 +3,17 @@ import React from "react";
 const Home = () => (
   <svg
     width="115"
-    height="61"
-    viewBox="0 0 115 61"
+    height="47"
+    viewBox="0 0 115 47"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect x="0.5" y="0.5" width="114" height="60" stroke="#E337FF" />
+    <rect x="0.5" y="0.5" width="114" height="46" stroke="#E337FF" />
     <svg
       x="47.5"
-      y="20"
-      width="22"
-      height="20"
+      y="14"
+      width="21"
+      height="19"
       viewBox="0 0 29 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

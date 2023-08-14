@@ -184,7 +184,7 @@ const MemberProfile = () => {
             </div>
           </div>
         )}
-        <div className="fixed bottom-10 left-1/2 z-10 -translate-x-1/2 space-x-4">
+        <div className="fixed bottom-5 left-1/2 z-10 -translate-x-1/2 space-x-4">
           <Footer buttons={buttonsFooter} />
         </div>
       </div>
