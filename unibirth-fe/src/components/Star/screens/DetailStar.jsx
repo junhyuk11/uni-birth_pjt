@@ -5,8 +5,8 @@ import { useNavigation } from "../../../hooks/useNavigation";
 import useStarApi from "../../../api/useStarApi";
 import useMemberApi from "../../../api/useMemberApi";
 import { useParams } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import { backgroundflagState } from "../../../recoil/atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { backgroundflagState, nicknameState } from "../../../recoil/atoms";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import CustomAlert from "../../../common/atoms/CustomAlert";
@@ -25,6 +25,7 @@ const DetailStar = () => {
   const [constellation, setConstellation] = useState("");
   const [content, setContent] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
+  const nickname = useRecoilValue(nicknameState);
   const [star, setStar] = useState({
     brightness: "",
     content: "",
@@ -384,7 +385,7 @@ const DetailStar = () => {
                             {formatDate(comment.createdAt)}
                           </span>
                         </div>
-                        {comment.nickname === memberInfo.nickname && (
+                        {comment.nickname === nickname && (
                           <button
                             className=" flex flex-grow items-end justify-end self-start"
                             onClick={() => setShowConfirm(true)}
