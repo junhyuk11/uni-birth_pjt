@@ -10,7 +10,9 @@ import {
 } from "../../../recoil/atoms";
 import Footer from "../../../common/blocks/Footer";
 import HelpCarousel from "../atoms/HelpCarousel";
-import SpaceBackground from "../atoms/help1.png";
+import SpaceBackground1 from "../atoms/help1.png";
+import SpaceBackground2 from "../atoms/help2.png";
+import SpaceBackground3 from "../atoms/help3.png";
 
 const MainPlanet = () => {
   const [, setBackgroundflag] = useRecoilState(backgroundflagState);
@@ -30,12 +32,7 @@ const MainPlanet = () => {
   const [currentPlanet, setCurrentPlanet] = useState(currentPlanetId % 8);
 
   // 도움말 List.png
-  const HelpList = [
-    SpaceBackground,
-    SpaceBackground,
-    SpaceBackground,
-    SpaceBackground,
-  ];
+  const HelpList = [SpaceBackground1, SpaceBackground2, SpaceBackground3];
 
   const nickname = useRecoilValue(nicknameState);
 

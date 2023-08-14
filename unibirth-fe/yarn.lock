@@ -12683,7 +12683,7 @@ thenify-all@^1.0.0:
   dependencies:
     any-promise "^1.0.0"
 
-three-mesh-bvh@^0.6.0:
+three-mesh-bvh@^0.6.0, three-mesh-bvh@^0.6.3:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.6.3.tgz#c387d6ae7faf1c5a1caf0643c19535dab27d707b"
   integrity sha512-xjuGLSI9nBATIsWcT/DnnNma5xXYyvBiXfUbhGLAFqItOlOKYF5JWsUOX+cuSAnSWovEoHzd5Emx23qKiByrlw==

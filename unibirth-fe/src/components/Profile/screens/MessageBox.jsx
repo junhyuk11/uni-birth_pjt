@@ -98,7 +98,7 @@ const MessageBox = () => {
               return (
                 <li
                   key={chatId}
-                  className="border-t px-4 py-4"
+                  className="border-t px-4 py-4 text-white"
                   onClick={() => handleNavigateToChat(chatId)}
                 >
                   <strong className="text-base">닉네임 :</strong>{" "}
