@@ -117,7 +117,7 @@ const DetailPlanet = () => {
         <div>
           <HelpCarousel HelpList={HelpList} />
         </div>
-        <div className="fixed bottom-10 left-1/2 z-10 -translate-x-1/2">
+        <div className="fixed bottom-5 left-1/2 z-10 -translate-x-1/2">
           <Footer buttons={buttonsFooter} />
         </div>
       </div>

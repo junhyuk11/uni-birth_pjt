@@ -178,7 +178,7 @@ const MemberProfile = () => {
         <ConstellationSectionProfile locationNickname={locationNickname} />
         {isModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center">
-            <div className="absolute inset-0 bg-gray-800 opacity-50"></div>
+            <div className="absolute inset-0 bg-black opacity-40"></div>
             <div className="z-10 rounded border-2 border-yellow-200 border-opacity-25 bg-slate-800 p-4 shadow-md">
               <Header4 buttons={modalButtons} />
             </div>
