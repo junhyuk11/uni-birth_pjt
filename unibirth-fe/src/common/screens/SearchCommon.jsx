@@ -167,7 +167,7 @@ const SearchCommon = () => {
             starList.map((star) => (
               <li
                 key={star.starId}
-                className="animate-sparkle flex items-center px-4 py-4"
+                className="animate-sparkle flex items-start px-4 py-4"
                 onClick={() => handleStarClick(star.starId)}
               >
                 <img
@@ -175,10 +175,13 @@ const SearchCommon = () => {
                   alt={star.content}
                   className="glow mr-4 h-20 w-20 rounded-lg object-cover"
                 />
-                <div>
-                  {star.nickname}
-                  <p className="mt-2 text-sm text-yellow-400">{star.content}</p>
-                  <span className="text-xs text-yellow-300">
+                <div className="flex flex-col justify-between space-y-2">
+                  <div className="font-bold text-yellow-400">
+                    {star.nickname}
+                  </div>
+                  <div className="text-lg font-semibold">{star.title}</div>
+                  <p className="text-sm">{star.content}</p>
+                  <span className="mt-2 text-xs text-yellow-300">
                     {formatDate(star.createdAt)}
                   </span>
                 </div>
