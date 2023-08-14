@@ -109,7 +109,7 @@ const DetailPlanet = () => {
         <div className="w- absolute top-0 h-screen w-screen">
           <ListConstellation constellationList={constellationList} />
         </div>
-        <div className="fixed bottom-5 left-1/2 z-10 -translate-x-1/2">
+        <div className="fixed bottom-3 left-1/2 z-10 -translate-x-1/2">
           <Footer buttons={buttonsFooter} />
         </div>
       </div>
