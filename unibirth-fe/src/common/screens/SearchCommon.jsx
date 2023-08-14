@@ -173,7 +173,7 @@ const SearchCommon = () => {
                 <img
                   src={star.imageUrl}
                   alt={star.content}
-                  className="glow my-atuo mr-4 h-20 w-20 rounded-lg object-cover"
+                  className="mr-4 h-20 w-20 rounded-lg object-cover"
                 />
                 <div className="flex flex-col justify-between space-y-2">
                   <div className="text-lg font-semibold">{star.title}</div>
