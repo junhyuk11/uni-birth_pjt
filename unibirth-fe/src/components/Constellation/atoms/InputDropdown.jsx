@@ -33,6 +33,7 @@ const CustomDropdown = ({ planetId, setPlanetId }) => {
     >
       <div className="relative flex w-40 justify-center text-white">
         <button
+          type="button"
           className=" flex w-32 flex-row justify-center rounded-lg border bg-transparent p-2"
           onClick={() => setIsOpen(!isOpen)}
         >
