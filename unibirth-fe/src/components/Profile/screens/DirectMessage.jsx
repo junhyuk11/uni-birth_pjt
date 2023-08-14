@@ -11,6 +11,7 @@ import {
 } from "../../../api/useFirebaseApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import { useLocation } from "react-router-dom";
+import MessageSend from "../../../assets/icons/js/messageSend";
 
 const DirectMessage = () => {
   const [messages, setMessages] = useState([]);
@@ -121,9 +122,9 @@ const DirectMessage = () => {
           </div>
         </div>
       </div>
-      <div className="sticky bottom-0 mx-auto flex w-full max-w-screen-sm items-center border-t border-gray-200 px-4 py-2 ">
+      <div className="fixed bottom-0 mx-auto flex w-full max-w-screen-sm items-center border-t border-gray-200 px-4 py-2 ">
         <input
-          className="mr-4 h-10 flex-grow rounded-full border p-2"
+          className="mr-2 h-10 w-full rounded-full border p-2"
           value={newMessage}
           onChange={handleInputChange}
           onKeyDown={(event) => {
@@ -137,7 +138,7 @@ const DirectMessage = () => {
           className="h-10 rounded-full bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
           onClick={handleSend}
         >
-          전송
+          <MessageSend />
         </button>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 const Header1 = ({ buttons }) => {
   return (
-    <div className=" h-flex flex-row space-x-4 px-4 py-4">
+    <div className=" h-flex flex-row space-x-4 px-2 py-4">
       {buttons &&
         buttons.map((button, index) => {
           const ButtonComponent = button.component;

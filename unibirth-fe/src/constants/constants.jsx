@@ -35,8 +35,8 @@ export const PLANET_LIST = [
 ];
 
 export const SEARTCH_LIST = [
-  { name: "전체" },
-  { name: "별자리" },
-  { name: "별" },
-  { name: "닉네임" },
+  { sub: "all", name: "전체" },
+  { sub: "constellation", name: "별자리" },
+  { sub: "star", name: "별" },
+  { sub: "nickname", name: "닉네임" },
 ];
