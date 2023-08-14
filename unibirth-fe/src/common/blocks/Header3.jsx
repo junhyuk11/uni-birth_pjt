@@ -4,7 +4,7 @@ const Header3 = ({ buttons }) => {
   const ButtonComponent = buttons[0] && buttons[0].component;
 
   return (
-    <div className="flex justify-between space-x-4 px-4 py-4">
+    <div className="flex justify-between space-x-4 px-2 py-4">
       <div className="flex items-center">
         {ButtonComponent && (
           <ButtonComponent

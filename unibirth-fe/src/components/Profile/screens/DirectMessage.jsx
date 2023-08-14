@@ -121,7 +121,7 @@ const DirectMessage = () => {
           </div>
         </div>
       </div>
-      <div className="sticky bottom-0 mx-auto flex w-full max-w-screen-sm items-center border-t border-gray-200 px-4 py-2 ">
+      <div className="fixed bottom-0 mx-auto flex w-full max-w-screen-sm items-center border-t border-gray-200 px-4 py-2 ">
         <input
           className="mr-4 h-10 flex-grow rounded-full border p-2"
           value={newMessage}

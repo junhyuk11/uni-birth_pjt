@@ -94,7 +94,7 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
         {images.map((img) => (
           <div
             key={img.constellationId}
-            className="w-1/3 p-2"
+            className="w-1/3  p-4"
             onClick={() => navigateToDetailConstellation(img.constellationId)}
           >
             {" "}
