@@ -181,11 +181,12 @@ const SearchCommon = () => {
                 />
                 <div className="flex flex-col justify-between space-y-2">
                   <div className="text-lg font-semibold">{star.title}</div>
-                  <div className="max-h-10 overflow-ellipsis">
+                  <div className="max-h-10 overflow-hidden">
                     <p
-                      className="text-sm"
+                      className="text-md"
                       style={{
-                        maxHeight: "3em",
+                        maxHeight: "4em",
+                        maxWidth: "14em",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         display: "-webkit-box",
