@@ -10,6 +10,7 @@ import { backgroundflagState } from "../../../recoil/atoms";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import CustomAlert from "../../../common/atoms/CustomAlert";
+import useConstellationApi from "../../../api/useConstellationApi";
 const DetailStar = () => {
   const setBackgroundflag = useSetRecoilState(backgroundflagState);
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
@@ -17,6 +18,7 @@ const DetailStar = () => {
   const [memberInfo, setMemberInfo] = useState([]);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [constellation, setConstellation] = useState("");
   const [star, setStar] = useState({
     brightness: "",
     content: "",
@@ -44,12 +46,38 @@ const DetailStar = () => {
     }
   }, [star.nickname]);
 
+  useEffect(() => {
+    if (star.constellationId) {
+      getConstellation(star.constellationId);
+    }
+  }, [star]);
+
   const getStar = async (starId) => {
     try {
       const response = await useStarApi.starsGetStar(starId);
       console.log(response);
       if (response.status === 200) {
         setStar(response.resultData);
+      } else if (response.status === 404) {
+        setIsAlertVisible(true);
+        setAlertMessage("존재하지 않는 별입니다.");
+      } else if (response.status === 403) {
+        setIsAlertVisible(true);
+        setAlertMessage("로그인이 필요한 서비스입니다.");
+      }
+    } catch (error) {
+      setIsAlertVisible(true);
+      setAlertMessage("별을 불러오는데 실패하였습니다.");
+    }
+  };
+
+  const getConstellation = async (constellationId) => {
+    try {
+      const response = await useConstellationApi.constellationsGetDetail(
+        constellationId,
+      );
+      if (response.status === 200) {
+        setConstellation(response.resultData);
       } else if (response.status === 404) {
         setIsAlertVisible(true);
         setAlertMessage("존재하지 않는 별입니다.");
@@ -127,8 +155,9 @@ const DetailStar = () => {
     },
     {
       component: () => (
-        // <span className="ml-4 text-2xl text-white">{constellation}</span>
-        <span className="ml-4 text-2xl text-white">별자리 이름</span>
+        <span className="ml-4 text-2xl text-white">
+          {constellation?.constellationTitle}&nbsp;자리
+        </span>
       ),
     },
   ];
@@ -170,7 +199,7 @@ const DetailStar = () => {
             className="mt-0 flex flex-col"
             style={{ maxWidth: "100%", wordWrap: "break-word" }}
           >
-            <div className="text-md w-full overflow-hidden font-bold text-white">
+            <div className="w-full overflow-hidden text-2xl font-bold text-white">
               {star.title}
             </div>
           </div>

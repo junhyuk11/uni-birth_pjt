@@ -67,7 +67,7 @@ const ListSectionStar = () => {
     setBoxnickname(starListIndex[index]?.nickname);
     setBoxurl(starListIndex[index]?.imageUrl);
     setBoxid(starListIndex[index]?.starId);
-    setBoxtitle(starListIndex[index]?.starTitle);
+    setBoxtitle(starListIndex[index]?.title);
     setBoxcreated(starListIndex[index]?.createdAt);
     setBrightness(starListIndex[index]?.brightness);
     console.log("boxid:", boxid);
@@ -86,6 +86,7 @@ const ListSectionStar = () => {
       );
       setResponseState(response.status);
       if (response.status === 200) {
+        console.log(response);
         setStarList(response.resultData);
         setStarListIndex(response.resultData.starList);
         setAlreadyPined(response.resultData.alreadyPined);
