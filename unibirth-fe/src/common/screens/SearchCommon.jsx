@@ -213,8 +213,6 @@ const SearchCommon = () => {
                   <div className="font-bold text-yellow-400">
                     {star.nickname}
                   </div>
-                  <div className="text-lg font-semibold">{star.title}</div>
-                  <p className="text-sm">{star.content}</p>
                   <span className="mt-2 text-xs text-yellow-300">
                     {formatDate(star.createdAt)}
                   </span>
