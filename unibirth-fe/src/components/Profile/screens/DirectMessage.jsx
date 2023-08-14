@@ -11,6 +11,7 @@ import {
 } from "../../../api/useFirebaseApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import { useLocation } from "react-router-dom";
+import MessageSend from "../../../assets/icons/js/messageSend";
 
 const DirectMessage = () => {
   const [messages, setMessages] = useState([]);
@@ -137,7 +138,7 @@ const DirectMessage = () => {
           className="h-10 rounded-full bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
           onClick={handleSend}
         >
-          전송
+          <MessageSend />
         </button>
       </div>
     </div>
