@@ -27,7 +27,6 @@ const DirectMessage = () => {
   const buttonsHeader = [
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
       onClick: () => backClick(nickname),
       icon: <LeftArrow />,
     },
