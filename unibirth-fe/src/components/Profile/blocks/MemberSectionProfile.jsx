@@ -6,6 +6,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { nicknameState, memberProfileImageState } from "../../../recoil/atoms";
 import Button5 from "../../../common/atoms/Button5";
 import CustomAlert from "../../../common/atoms/CustomAlert";
+// import { PLANET_LIST } from "../../../constants/constants";
 
 const MemberSectionProfile = ({ locationNickname }) => {
   const {
@@ -114,6 +115,9 @@ const MemberSectionProfile = ({ locationNickname }) => {
             className="mx-auto h-32 w-32 rounded-full object-cover"
             alt="Round image"
           />
+          <div className="text-center text-yellow-100">
+            {/* 관심행성: {PLANET_LIST[memberData.resultDate?.planetId].title} */}
+          </div>
           <div className="flex flex-grow flex-col justify-center space-y-10 font-Pretendard">
             <div className="flex justify-end space-x-4">
               <div className="flex flex-col items-center">
