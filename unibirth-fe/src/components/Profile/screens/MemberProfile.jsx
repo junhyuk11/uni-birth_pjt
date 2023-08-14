@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import { useNavigation } from "../../../hooks/useNavigation";
 import MemberSectionProfile from "../blocks/MemberSectionProfile";
@@ -18,6 +17,8 @@ import Star from "../../../assets/icons/js/star";
 import { useLocation } from "react-router-dom";
 import Footer from "../../../common/blocks/Footer";
 import CustomAlert from "../../../common/atoms/CustomAlert";
+import CustomConfirm from "../../../common/atoms/CustomConfirm";
+import Button11 from "../../../common/atoms/Button11";
 
 const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -38,6 +39,7 @@ const MemberProfile = () => {
   } = useNavigation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const handleMessageClick = () => {
     if (nickname === locationNickname) {
@@ -53,22 +55,25 @@ const MemberProfile = () => {
   };
 
   const handleSignout = async () => {
-    const confirmSignOut = window.confirm("정말로 회원을 탈퇴하시겠습니까?");
-    if (confirmSignOut) {
-      try {
-        const response = await useMemberApi.membersDeleteMember();
-        if (response.status === 200) {
-          setIsAlertVisible(true);
-          setAlertMessage("회원탈퇴가 완료되었습니다.");
-          sessionStorage.clear();
-        } else {
-          setIsAlertVisible(true);
-          setAlertMessage(response.message);
-        }
-      } catch (e) {
+    setIsModalOpen(false);
+    setShowConfirm(true);
+  };
+
+  const confirmSignout = async () => {
+    setShowConfirm(false);
+    try {
+      const response = await useMemberApi.membersDeleteMember();
+      if (response.status === 200) {
+        sessionStorage.clear();
         setIsAlertVisible(true);
-        setAlertMessage("회원탈퇴에 실패하였습니다.");
+        setAlertMessage("회원탈퇴가 완료되었습니다.");
+      } else {
+        setIsAlertVisible(true);
+        setAlertMessage(response.message);
       }
+    } catch (e) {
+      setIsAlertVisible(true);
+      setAlertMessage("회원탈퇴에 실패하였습니다.");
     }
   };
 
@@ -81,7 +86,9 @@ const MemberProfile = () => {
     },
     {
       component: () => (
-        <span className="ml-4 text-2xl text-white">{locationNickname}</span>
+        <span className="ml-4 font-Pretendard text-2xl text-white">
+          {locationNickname}
+        </span>
       ),
     },
     {
@@ -91,7 +98,7 @@ const MemberProfile = () => {
     },
     {
       component: Button2,
-      className: "font-TAEBAEKmilkyway",
+      className: "font-Pretendard",
       onClick: handleMessageClick,
       icon: nickname === locationNickname ? <Mail /> : <Message />,
     },
@@ -120,26 +127,26 @@ const MemberProfile = () => {
 
   const modalButtons = [
     {
-      component: Button1,
-      className: "font-TAEBAEKmilkyway m-10 p-10",
+      component: Button11,
+      className: "font-Pretendard m-10 p-10",
       value: "회원정보 수정",
       onClick: navigateToModifyMember,
     },
     {
-      component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      component: Button11,
+      className: "font-Pretendard",
       value: "로그아웃",
       onClick: handleLogout,
     },
     {
-      component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      component: Button11,
+      className: "font-Pretendard",
       value: "회원 탈퇴",
       onClick: handleSignout,
     },
     {
-      component: Button1,
-      className: "font-TAEBAEKmilkyway h-10 w-10",
+      component: Button11,
+      className: "font-Pretendard h-10 w-10",
       onClick: handleCloseModal,
       icon: <Close />,
     },
@@ -156,6 +163,12 @@ const MemberProfile = () => {
             navigateToMainPlanet();
           }
         }}
+      />
+      <CustomConfirm
+        message="정말로 회원을 탈퇴하시겠습니까?"
+        isVisible={showConfirm}
+        onClose={() => setShowConfirm(false)}
+        onConfirm={confirmSignout}
       />
       <div>
         <header className="sticky top-0 z-10">

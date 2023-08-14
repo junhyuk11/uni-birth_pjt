@@ -23,12 +23,12 @@ const CustomDropdown = ({ value, onChange, searchList }) => {
 
   return (
     <div
-      className="flex flex-col items-center justify-center rounded-lg border-double bg-transparent font-TAEBAEKmilkyway text-white"
+      className="flex w-16 flex-col items-center justify-end rounded-lg border-double bg-transparent font-Pretendard text-white"
       ref={toggleContainer}
     >
-      <div className="relative w-40 text-white">
+      <div className="relative w-full text-white">
         <button
-          className="bg-transparent p-2"
+          className="w-16 bg-transparent p-2"
           onClick={() => setIsOpen(!isOpen)}
         >
           {value}
@@ -41,7 +41,7 @@ const CustomDropdown = ({ value, onChange, searchList }) => {
           }`}
         >
           {isOpen && (
-            <div className="absolute mt-2 rounded-lg border ">
+            <div className="absolute mt-2 w-16 rounded-lg border bg-slate-800 bg-opacity-100 ">
               {searchList.map(
                 (option) =>
                   option.name !== value && (

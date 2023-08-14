@@ -155,7 +155,6 @@ const DetailStar = () => {
             alertMessage === "멤버 정보를 불러오는데 실패하였습니다." ||
             alertMessage === "오류 발생" ||
             alertMessage === "존재하지 않는 별입니다." ||
-            alertMessage === "존재하지 않는 회원입니다." ||
             alertMessage === "로그인이 필요한 서비스입니다."
           ) {
             navigateToBack();

@@ -12,6 +12,7 @@ import {
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { nicknameState, targetNicknameState } from "../../../recoil/atoms";
+import MessageBig from "../../../assets/icons/js/messageBig";
 
 const MessageBox = () => {
   const nickname = useRecoilValue(nicknameState);
@@ -75,31 +76,44 @@ const MessageBox = () => {
     <div className="mx-auto h-screen max-w-screen-sm bg-slate-100 bg-opacity-50">
       <div>
         <Header2 buttons={buttonsHeader} />
-        <ul>
-          {chatRooms.map(([chatId, chatData]) => {
-            const [sender, target] = chatId.split("_");
-            const otherNickname = sender === nickname ? target : sender;
+        {chatRooms.length === 0 ? (
+          <div className="text-center">
+            <p className="border-t"></p>
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+              <MessageBig className="mx-auto" />
+              <p className="text-white text-opacity-60">
+                메시지 내역이 없습니다.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <ul>
+            {chatRooms.map(([chatId, chatData]) => {
+              const [sender, target] = chatId.split("_");
+              const otherNickname = sender === nickname ? target : sender;
 
-            const messages = Object.values(chatData);
-            const lastMessage = messages[messages.length - 1];
+              const messages = Object.values(chatData);
+              const lastMessage = messages[messages.length - 1];
 
-            return (
-              <li
-                key={chatId}
-                className="border-t px-4 py-4"
-                onClick={() => handleNavigateToChat(chatId)}
-              >
-                <strong className="text-base">닉네임 :</strong> {otherNickname}
-                {lastMessage && (
-                  <div className="text-xs">
-                    <strong className="text-base"></strong> {lastMessage.text}
-                  </div>
-                )}
-              </li>
-            );
-          })}
-          <li className="border-t"></li>
-        </ul>
+              return (
+                <li
+                  key={chatId}
+                  className="border-t px-4 py-4"
+                  onClick={() => handleNavigateToChat(chatId)}
+                >
+                  <strong className="text-base">닉네임 :</strong>{" "}
+                  {otherNickname}
+                  {lastMessage && (
+                    <div className="text-xs">
+                      <strong className="text-base"></strong> {lastMessage.text}
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+            <li className="border-t"></li>
+          </ul>
+        )}
       </div>
     </div>
   );

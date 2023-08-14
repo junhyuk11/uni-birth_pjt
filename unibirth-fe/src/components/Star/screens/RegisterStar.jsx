@@ -47,14 +47,17 @@ const RegisterStar = () => {
     if (title.trim() === "") {
       setIsAlertVisible(true);
       setAlertMessage("제목을 입력해주세요.");
+      setLoading(false);
       return;
     } else if (content.trim() === "") {
       setIsAlertVisible(true);
       setAlertMessage("내용을 입력해주세요.");
+      setLoading(false);
       return;
     } else if (!imageUrl) {
       setIsAlertVisible(true);
       setAlertMessage("이미지를 넣어주세요.");
+      setLoading(false);
       return;
     }
 
@@ -93,6 +96,7 @@ const RegisterStar = () => {
         setLoading(false); // 로딩 상태 종료
       },
     );
+    setLoading(false);
   };
 
   const buttonsHeader = [
