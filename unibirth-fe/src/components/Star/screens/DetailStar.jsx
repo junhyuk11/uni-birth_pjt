@@ -10,6 +10,7 @@ import { backgroundflagState } from "../../../recoil/atoms";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import CustomAlert from "../../../common/atoms/CustomAlert";
+
 const DetailStar = () => {
   const setBackgroundflag = useSetRecoilState(backgroundflagState);
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
@@ -17,6 +18,7 @@ const DetailStar = () => {
   const [memberInfo, setMemberInfo] = useState([]);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+
   const [star, setStar] = useState({
     brightness: "",
     content: "",

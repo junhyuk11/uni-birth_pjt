@@ -10,6 +10,9 @@ import Footer from "../../../common/blocks/Footer";
 import { useRecoilValue } from "recoil";
 import { nicknameState } from "../../../recoil/atoms";
 import CustomAlert from "../../../common/atoms/CustomAlert";
+import HelpCarousel from "../atoms/HelpCarousel";
+import SpaceBackground4 from "../atoms/help4.png";
+import SpaceBackground5 from "../atoms/help5.png";
 
 const DetailPlanet = () => {
   const { planetId } = useParams();
@@ -19,6 +22,9 @@ const DetailPlanet = () => {
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [responseState, setResponseState] = useState();
+
+  const HelpList = [SpaceBackground4, SpaceBackground5];
+
   const {
     navigateToMainPlanet,
     navigateToSearchQuration,
@@ -107,6 +113,9 @@ const DetailPlanet = () => {
       <div className="h-screen w-screen">
         <div className="w- absolute top-0 h-screen w-screen">
           <ListConstellation constellationList={constellationList} />
+        </div>
+        <div>
+          <HelpCarousel HelpList={HelpList} />
         </div>
         <div className="fixed bottom-10 left-1/2 z-10 -translate-x-1/2">
           <Footer buttons={buttonsFooter} />
