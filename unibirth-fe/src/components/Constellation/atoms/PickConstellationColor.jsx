@@ -27,7 +27,7 @@ const PickConstellationColor = ({
         className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full"
         style={{ backgroundColor: constellationColor }}
       >
-        Click!
+        색상
       </div>
     </div>
   );

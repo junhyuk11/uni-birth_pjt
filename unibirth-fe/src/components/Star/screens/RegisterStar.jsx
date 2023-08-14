@@ -87,7 +87,6 @@ const RegisterStar = () => {
             content,
           };
           const response = await useStarApi.starsPostStar(data);
-          console.log(response);
           if (response.status === 200) {
             setConstellationLimitState(response.resultData.constellationLimit);
             navigateToDetailConstellation(constellationId);

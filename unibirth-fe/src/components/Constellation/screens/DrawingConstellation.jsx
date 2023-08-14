@@ -19,7 +19,7 @@ const DrawingConstellation = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pointList, setPointList] = useState([]);
   const [lineList, setLineList] = useState([]);
-  const [constellationColor, setconstellationColor] = useState("#00ffff");
+  const [constellationColor, setconstellationColor] = useState("#291531");
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
