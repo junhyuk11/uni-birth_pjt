@@ -13,8 +13,6 @@ import Header1 from "../../../common/blocks/Header1";
 import CustomAlert from "../../../common/atoms/CustomAlert";
 import HelpCarousel from "../atoms/HelpCarousel";
 import SpaceBackground6 from "../atoms/help6.png";
-import Button1 from "../../../common/atoms/Button1";
-import InviteFollowStar from "../blocks/InviteFollowStar";
 
 const DetailConstellation = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -26,7 +24,6 @@ const DetailConstellation = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const [constellationContent, setConstellationConstent] = useState([]);
   const HelpList = [SpaceBackground6];
-  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     getConstellationContent(constellationId);
   }, [constellationId]);
@@ -46,9 +43,6 @@ const DetailConstellation = () => {
       setIsAlertVisible(true);
       setAlertMessage("별자리 정보를 불러오는데 실패했습니다.");
     }
-  };
-  const toggleModal = () => {
-    setShowModal(!showModal);
   };
   console.log("", constellationContent);
   const {
@@ -114,25 +108,7 @@ const DetailConstellation = () => {
       <div>
         <HelpCarousel HelpList={HelpList} />
       </div>
-      {/* dd */}
-      <div className="mt-20 flex justify-center ">
-        <Button1 value="별자리 초대하기" onClick={toggleModal} />
-        {showModal && (
-          <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-40">
-            <div className="max-h-2/4 overflow-y-auto rounded-lg bg-white">
-              <button
-                onClick={toggleModal}
-                className="float-right p-2 hover:bg-gray-200"
-              >
-                X
-              </button>
-              <InviteFollowStar />
-            </div>
-          </div>
-        )}
-        <Button1 value="별 생성" onClick={createStar} />
-      </div>
-      {/* dd */}
+
       <ListSectionStar className="relative left-0 top-0 z-0 h-full w-full" />
       <div className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2 space-x-4">
         <Footer buttons={buttonsFooter} />

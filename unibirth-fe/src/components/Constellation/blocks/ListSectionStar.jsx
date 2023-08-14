@@ -22,6 +22,7 @@ import Close2 from "../../../assets/icons/js/close2";
 import Star2 from "../../../assets/icons/js/star2";
 import LineDrawing from "../atoms/LineDrawing";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
+import InviteFollowStar from "../../Star/blocks/InviteFollowStar";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -45,6 +46,8 @@ const ListSectionStar = () => {
   const [alertMessage, setAlertMessage] = useState("");
   // tooltip
   const [tooltipStyle, setTooltipStyle] = useState({ display: "none" });
+  const [showModal, setShowModal] = useState(false);
+
   const { navigateToRegisterStar, navigateToBack } = useNavigation();
   const handleBoxClick = ({ event, index }) => {
     console.log(index);
@@ -78,6 +81,10 @@ const ListSectionStar = () => {
     setStellaId(constellationId);
     console.log("ref:", ref);
   }, [constellationId]);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   const getStarList = async (constellationId) => {
     try {
@@ -181,6 +188,26 @@ const ListSectionStar = () => {
           <Plus />
         </button>
       )}
+
+      <button
+        className="absolute bottom-36 right-4 z-10 flex flex-col text-4xl text-white opacity-100"
+        onClick={toggleModal}
+      >
+        이거누르면 팔로우 목록 뜸
+        {showModal && (
+          <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-40">
+            <div className="max-h-2/4 overflow-y-auto rounded-lg bg-white">
+              <button
+                onClick={toggleModal}
+                className="float-right p-2 hover:bg-gray-200"
+              >
+                X
+              </button>
+              <InviteFollowStar />
+            </div>
+          </div>
+        )}
+      </button>
       <div className="absolute right-5 top-5 z-10 text-white">
         <div
           className="mt-1 flex"

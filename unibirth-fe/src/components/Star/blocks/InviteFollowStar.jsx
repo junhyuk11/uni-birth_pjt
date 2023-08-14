@@ -7,7 +7,7 @@ import { BsCheck } from "react-icons/bs";
 import { sendInvite } from "../../../api/useFirebaseApi";
 import useConstellationApi from "../../../api/useConstellationApi";
 import CustomAlert from "../../../common/atoms/CustomAlert";
-
+import { useNavigation } from "../../../hooks/useNavigation";
 const InviteFollowStar = () => {
   const nickname = useRecoilValue(nicknameState);
   const [followList, setFollowList] = useState([]);
@@ -15,6 +15,7 @@ const InviteFollowStar = () => {
   const constellationId = useRecoilValue(StellaIdState);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const { navigateToBack } = useNavigation();
   useEffect(() => {
     getFollowList(nickname);
   }, [nickname]);
