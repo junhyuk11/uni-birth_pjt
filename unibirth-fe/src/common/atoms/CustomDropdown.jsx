@@ -46,11 +46,10 @@ const CustomDropdown = ({ value, onChange, searchList }) => {
                 (option) =>
                   option.name !== value && (
                     <div
-                      className="cursor-pointer p-2 hover:bg-gray-200
-                      hover:text-black"
+                      className="cursor-pointer p-2 hover:bg-gray-200 hover:text-black"
                       key={option.name}
                       onClick={() => {
-                        onChange(option.name); // 선택된 값을 부모 컴포넌트에 전달
+                        onChange(option.sub); // 선택된 sub 값을 부모 컴포넌트에 전달
                         setIsOpen(false);
                       }}
                     >
