@@ -54,6 +54,11 @@ export const boxcontentState = atom({
   default: "",
   effects_UNSTABLE: [persistAtom],
 });
+export const boxtitleState = atom({
+  key: "boxtitleState",
+  default: "",
+  effects_UNSTABLE: [persistAtom],
+});
 export const boxnicknameState = atom({
   key: "boxnicknameState",
   default: "",
