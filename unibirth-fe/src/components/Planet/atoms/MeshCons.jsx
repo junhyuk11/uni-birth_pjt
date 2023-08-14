@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState, useMemo } from "react";
 import { useSetRecoilState } from "recoil";
 import { currentconstellationListState } from "../../../recoil/atoms";
 import * as THREE from "three";
-
 const MeshCons = ({
   constellationList,
   ConstellationIndex,

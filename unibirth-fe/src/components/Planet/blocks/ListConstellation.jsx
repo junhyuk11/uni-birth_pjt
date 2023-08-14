@@ -189,7 +189,7 @@ const Scene = ({ constellationList }) => {
           makeDefault
           position={[0, -500, 0]}
           near={0.1}
-          far={7000}
+          far={10000}
         />
         <GradientBackground />
         <EffectComposer>

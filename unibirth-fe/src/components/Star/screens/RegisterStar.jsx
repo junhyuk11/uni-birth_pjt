@@ -93,7 +93,6 @@ const RegisterStar = () => {
         setLoading(false); // 로딩 상태 종료
       },
     );
-    setLoading(false);
   };
 
   const buttonsHeader = [
