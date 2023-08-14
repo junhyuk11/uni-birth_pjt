@@ -36,6 +36,13 @@ function CameraController({
   const multiFactor = 1.5;
   // console.log("ConstellationPosition:", ConstellationPosition);
   useEffect(() => {
+    console.log(
+      "ConstellationPosition has been updated:",
+      ConstellationPosition,
+    );
+    console.log(zoomed);
+  }, [ConstellationPosition]);
+  useEffect(() => {
     if (ConstellationPosition) {
       // console.log("제[발!!ㅣ", ConstellationPosition);
       const targetPosition = zoomed
@@ -74,6 +81,7 @@ function CameraController({
         onUpdate: updateCameraPosition,
         ease: "Power1.inOut",
         onComplete: () => {
+          console.log(startPosition, targetPosition);
           setEnableFlag(true);
           if (zoomed) {
             setRotateFlag(true);
@@ -110,9 +118,6 @@ const Scene = ({ constellationList }) => {
   const [zoomed, setZoomed] = useState(false);
   // 별자리 보정계수
   // const moveNum = 50;
-  const num = 60; // 별자리 간격
-  const starmultiple = 3; // 별간격
-  const xdamper = -10; // x축+- 보정계수
 
   // 별자리 인덱스
   const [currentConstellation, setCurrentConstellation] = useState(
@@ -184,7 +189,7 @@ const Scene = ({ constellationList }) => {
           makeDefault
           position={[0, -500, 0]}
           near={0.1}
-          far={10000}
+          far={7000}
         />
         <GradientBackground />
         <EffectComposer>
@@ -207,9 +212,6 @@ const Scene = ({ constellationList }) => {
         />
         <MeshCons
           constellationList={constellationList}
-          num={num}
-          starmultiple={starmultiple}
-          xdamper={xdamper}
           ConstellationIndex={ConstellationIndex}
           setConstellationIndex={setConstellationIndex}
           setCurrentConstellation={setCurrentConstellation}
