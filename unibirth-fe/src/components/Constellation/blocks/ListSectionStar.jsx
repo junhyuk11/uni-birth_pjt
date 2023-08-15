@@ -227,7 +227,6 @@ const ListSectionStar = () => {
         </div>
       </div>
       <Canvas camera={{ position: [0, 0, 90] }}>
-        <axesHelper />
         <Background />
         <EffectComposer>
           <Bloom
