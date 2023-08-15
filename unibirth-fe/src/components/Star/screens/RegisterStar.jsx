@@ -27,7 +27,10 @@ const RegisterStar = () => {
   const constellationId = useRecoilValue(StellaIdState);
   const { navigateToBack, navigateToDetailConstellation } = useNavigation(); // navigateToDetailConstellation
   const [title, setTitle] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const defaultImageUrl =
+    "https://firebasestorage.googleapis.com/v0/b/uni-birth.appspot.com/o/Zordiac%2Fearth.png?alt=media&token=0ecc42f5-7022-4197-827b-751ecb92c983";
+
+  const [imageUrl, setImageUrl] = useState(defaultImageUrl);
   const [thumbUrl, setThumbUrl] = useState("");
   const [content, setContent] = useState("");
   const [isAlertVisible, setIsAlertVisible] = useState(false);
@@ -37,8 +40,6 @@ const RegisterStar = () => {
 
   const createStar = () => {
     setLoading(true); // 로딩 상태 시작
-    const storageRef = ref(storage, `images/${imageUrl.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, imageUrl);
 
     if (title.trim() === "") {
       setIsAlertVisible(true);
@@ -50,49 +51,58 @@ const RegisterStar = () => {
       setAlertMessage("내용을 입력해주세요.");
       setLoading(false);
       return;
-    } else if (!imageUrl) {
-      setIsAlertVisible(true);
-      setAlertMessage("이미지를 넣어주세요.");
-      setLoading(false);
-      return;
     }
 
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(`Upload is ${progress}% done.`);
-      },
-      () => {
-        setIsAlertVisible(true);
-        setAlertMessage("이미지 업로드에 실패하였습니다.");
-      },
-      async () => {
-        try {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          setImageUrl(downloadURL);
-          const data = {
-            constellationId,
-            title,
-            imageUrl: downloadURL,
-            content,
-          };
-          const response = await useStarApi.starsPostStar(data);
-          if (response.status === 200) {
-            setConstellationLimitState(response.resultData.constellationLimit);
-            navigateToDetailConstellation(constellationId);
-          } else if (response.status === 400) {
-            setIsAlertVisible(true);
-            setAlertMessage("이미 완성된 별자리입니다.");
-          }
-        } catch (error) {
+    if (imageUrl === defaultImageUrl) {
+      saveStarData(imageUrl); // 기본 이미지 URL 사용
+    } else {
+      const storageRef = ref(storage, `images/${imageUrl.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, imageUrl);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Upload is ${progress}% done.`);
+        },
+        () => {
           setIsAlertVisible(true);
-          setAlertMessage("별 생성에 실패하였습니다.");
-        }
-        setLoading(false); // 로딩 상태 종료
-      },
-    );
+          setAlertMessage("이미지 업로드에 실패하였습니다.");
+        },
+        async () => {
+          try {
+            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+            saveStarData(downloadURL);
+          } catch (error) {
+            setIsAlertVisible(true);
+            setAlertMessage("별 생성에 실패하였습니다.");
+          }
+          setLoading(false); // 로딩 상태 종료
+        },
+      );
+    }
+  };
+  const saveStarData = async (imageUrlToSave) => {
+    const data = {
+      constellationId,
+      title,
+      imageUrl: imageUrlToSave,
+      content,
+    };
+
+    try {
+      const response = await useStarApi.starsPostStar(data);
+      if (response.status === 200) {
+        setConstellationLimitState(response.resultData.constellationLimit);
+        navigateToDetailConstellation(constellationId);
+      } else if (response.status === 400) {
+        setIsAlertVisible(true);
+        setAlertMessage("이미 완성된 별자리입니다.");
+      }
+    } catch (error) {
+      setIsAlertVisible(true);
+      setAlertMessage("별 생성에 실패하였습니다.");
+    }
   };
 
   const buttonsHeader = [

@@ -112,13 +112,13 @@ const SearchCommon = () => {
     {
       component: Button1,
       className: "font-TAEBAEKmilkyway",
-      value: "멤버",
+      value: "닉네임",
       onClick: () => setActiveTab("member"),
     },
     {
       component: Button1,
       className: "font-TAEBAEKmilkyway",
-      value: "스타",
+      value: "별",
       onClick: () => setActiveTab("star"),
     },
   ];
@@ -149,75 +149,108 @@ const SearchCommon = () => {
         </div>
         <ul className="divide-nebula-blue space-y-4 divide-y overflow-y-auto">
           {activeTab === "constellation" &&
-            constellationList.map((constellation) => (
-              <li
-                key={constellation.constellationId}
-                className="animate-sparkle flex items-center px-4 py-4"
-                onClick={() =>
-                  handleConstellationClick(constellation.constellationId)
-                }
-              >
-                <img
-                  src={constellation.imageUrl}
-                  alt={constellation.title}
-                  className="glow mr-4 h-20 w-20 rounded-lg object-cover"
-                />
-                {constellation.title}
-              </li>
+            (constellationList.length === 0 ? (
+              <div className="text-center">
+                <p className="border-t"></p>
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+                  <p className="text-white text-opacity-60">
+                    검색된 별자리 목록이 없습니다.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              constellationList.map((constellation) => (
+                <li
+                  key={constellation.constellationId}
+                  className="animate-sparkle flex items-center px-4 py-4"
+                  onClick={() =>
+                    handleConstellationClick(constellation.constellationId)
+                  }
+                >
+                  <img
+                    src={constellation.imageUrl}
+                    alt={constellation.title}
+                    className="glow mr-4 h-20 w-20 rounded-lg object-cover"
+                  />
+                  {constellation.title}
+                </li>
+              ))
             ))}
           {activeTab === "member" &&
-            memberList.map((member) => (
-              <li
-                key={member.nickname}
-                className="animate-sparkle flex items-center px-4 py-4"
-                onClick={() => handleMemberClick(member.nickname)}
-              >
-                <img
-                  src={member.imageUrl}
-                  alt={member.nickname}
-                  className="glow mr-4 h-20 w-20 rounded-full object-cover"
-                />
-                {member.nickname}
-              </li>
+            (memberList.length === 0 ? (
+              <div className="text-center">
+                <p className="border-t"></p>
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+                  <p className="text-white text-opacity-60">
+                    검색된 닉네임 목록이 없습니다.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              memberList.map((member) => (
+                <li
+                  key={member.nickname}
+                  className="animate-sparkle flex items-center px-4 py-4"
+                  onClick={() => handleMemberClick(member.nickname)}
+                >
+                  <img
+                    src={member.imageUrl}
+                    alt={member.nickname}
+                    className="glow mr-4 h-20 w-20 rounded-full object-cover"
+                  />
+                  {member.nickname}
+                </li>
+              ))
             ))}
           {activeTab === "star" &&
-            starList.map((star) => (
-              <li
-                key={star.starId}
-                className="animate-sparkle flex items-start px-4 py-4"
-                onClick={() => handleStarClick(star.starId)}
-              >
-                <img
-                  src={star.imageUrl}
-                  alt={star.content}
-                  className="my-auto mr-4 h-20 w-20 rounded-lg object-cover"
-                />
-                <div className="flex flex-col justify-between space-y-2">
-                  <div className="text-lg font-semibold">{star.title}</div>
-                  <div className="max-h-10 overflow-hidden">
-                    <p
-                      className="text-md"
-                      style={{
-                        maxHeight: "4em",
-                        maxWidth: "14em",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 1,
-                        WebkitBoxOrient: "vertical",
-                      }}
-                    >
-                      {star.content}
-                    </p>
-                  </div>
-                  <div className="font-bold text-yellow-400">
-                    {star.nickname}
-                  </div>
-                  <span className="mt-2 text-xs text-yellow-300">
-                    {formatDate(star.createdAt)}
-                  </span>
+            (starList.length === 0 ? (
+              <div className="text-center">
+                <p className="border-t"></p>
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+                  <p className="text-white text-opacity-60">
+                    검색된 별 목록이 없습니다.
+                  </p>
                 </div>
-              </li>
+              </div>
+            ) : (
+              starList.map((star) => (
+                <li
+                  key={star.starId}
+                  className="animate-sparkle flex items-start px-4 py-4"
+                  onClick={() => handleStarClick(star.starId)}
+                >
+                  <img
+                    src={star.imageUrl}
+                    alt={star.content}
+                    className="my-auto mr-4 h-20 w-20 rounded-lg object-cover"
+                  />
+                  <div className="flex flex-col justify-between space-y-2">
+                    <div className="text-lg font-semibold">{star.title}</div>
+                    <div className="max-h-10 overflow-hidden">
+                      <p
+                        className="text-md"
+                        style={{
+                          maxHeight: "4em",
+                          maxWidth: "14em",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          display: "-webkit-box",
+                          WebkitLineClamp: 1,
+                          WebkitBoxOrient: "vertical",
+                        }}
+                      >
+                        {star.content}
+                      </p>
+                    </div>
+                    <div className="font-bold text-yellow-400">
+                      {star.nickname}
+                    </div>
+                    <span className="mt-2 text-xs text-yellow-300">
+                      {formatDate(star.createdAt)}
+                    </span>
+                  </div>
+                </li>
+              ))
             ))}
         </ul>
       </div>

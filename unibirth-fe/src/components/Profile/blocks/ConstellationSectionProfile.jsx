@@ -91,16 +91,22 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
         />
       </div>
       <div className="flex flex-row flex-wrap">
-        {images.map((img) => (
-          <div
-            key={img.constellationId}
-            className="w-1/3  p-4"
-            onClick={() => navigateToDetailConstellation(img.constellationId)}
-          >
-            {" "}
-            <img src={img.imageUrl} className="avatar" />
+        {images.length === 0 ? (
+          <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 transform py-4 text-center">
+            <p className="text-white text-opacity-60">별자리가 없습니다.</p>
           </div>
-        ))}
+        ) : (
+          images.map((img) => (
+            <div
+              key={img.constellationId}
+              className="w-1/3  p-4"
+              onClick={() => navigateToDetailConstellation(img.constellationId)}
+            >
+              {" "}
+              <img src={img.imageUrl} className="avatar" />
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
