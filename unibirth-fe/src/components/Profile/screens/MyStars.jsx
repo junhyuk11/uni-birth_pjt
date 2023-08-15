@@ -93,7 +93,7 @@ const MyStars = () => {
             <img
               src={star.imageUrl}
               alt={star.content}
-              className="mr-4 h-20 w-20 rounded-lg object-cover"
+              className="my-auto mr-4 h-20 w-20 rounded-lg object-cover"
             />
             <div className="flex flex-col justify-between space-y-2">
               <div className="text-lg font-semibold">{star.title} 자리</div>

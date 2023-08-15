@@ -114,64 +114,81 @@ const Follow = () => {
           }}
         />
         <div className="flex flex-col items-center px-4 text-white">
-          {currentList === "팔로워" &&
-            followerList.map((user) => (
-              <div
-                key={user.nickname}
-                className="mx-4 flex w-full items-center border-b border-yellow-200 px-4 py-6"
-              >
+          {currentList === "팔로워" ? (
+            followerList.length === 0 ? (
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+                <p className="text-white text-opacity-60">
+                  팔로워 목록이 비어있습니다.
+                </p>
+              </div>
+            ) : (
+              followerList.map((user) => (
                 <div
-                  className="flex flex-grow cursor-pointer items-center"
-                  onClick={() => nicknameClick(user.nickname)}
+                  key={user.nickname}
+                  className="mx-4 flex w-full items-center border-b border-yellow-200 px-4 py-6"
                 >
-                  <img
-                    src={user.imageUrl}
-                    className="avatar mr-2 h-16 w-16"
-                    alt="User Avatar"
-                  />
-                  <div className="py-5">
-                    <p>{user.nickname}</p>
+                  <div
+                    className="flex flex-grow cursor-pointer items-center"
+                    onClick={() => nicknameClick(user.nickname)}
+                  >
+                    <img
+                      src={user.imageUrl}
+                      className="avatar mr-2 h-16 w-16"
+                      alt="User Avatar"
+                    />
+                    <div className="py-5">
+                      <p>{user.nickname}</p>
+                    </div>
+                  </div>
+                  <div className="flex">
+                    <button
+                      className="flex items-center"
+                      onClick={() => messageClick(user.nickname)}
+                    >
+                      <Message />
+                    </button>
                   </div>
                 </div>
-                <div className="flex">
-                  <button
-                    className="flex items-center"
-                    onClick={() => messageClick(user.nickname)}
-                  >
-                    <Message />
-                  </button>
-                </div>
+              ))
+            )
+          ) : currentList === "팔로잉" ? (
+            followingList.length === 0 ? (
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+                <p className="text-white text-opacity-60">
+                  팔로잉 목록이 비어있습니다.
+                </p>
               </div>
-            ))}
-          {currentList === "팔로잉" &&
-            followingList.map((user) => (
-              <div
-                key={user.nickname}
-                className="mx-4 flex w-full items-center border-b border-yellow-200 px-4 py-6"
-              >
+            ) : (
+              followingList.map((user) => (
                 <div
-                  className="flex flex-grow cursor-pointer items-center"
-                  onClick={() => nicknameClick(user.nickname)} // Event attached here
+                  key={user.nickname}
+                  className="mx-4 flex w-full items-center border-b border-yellow-200 px-4 py-6"
                 >
-                  <img
-                    src={user.imageUrl}
-                    className="avatar mr-2 h-16 w-16"
-                    alt="User Avatar"
-                  />
-                  <div className="py-5">
-                    <p>{user.nickname}</p>
+                  <div
+                    className="flex flex-grow cursor-pointer items-center"
+                    onClick={() => nicknameClick(user.nickname)} // Event attached here
+                  >
+                    <img
+                      src={user.imageUrl}
+                      className="avatar mr-2 h-16 w-16"
+                      alt="User Avatar"
+                    />
+                    <div className="py-5">
+                      <p>{user.nickname}</p>
+                    </div>
+                  </div>
+                  <div className="flex">
+                    <button
+                      className="flex items-center"
+                      onClick={() => messageClick(user.nickname)}
+                    >
+                      <Message />
+                    </button>
                   </div>
                 </div>
-                <div className="flex">
-                  <button
-                    className="flex items-center"
-                    onClick={() => messageClick(user.nickname)}
-                  >
-                    <Message />
-                  </button>
-                </div>
-              </div>
-            ))}
+              ))
+            )
+          ) : null}
         </div>
       </div>
     </div>
