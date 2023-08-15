@@ -133,7 +133,9 @@ const Follow = () => {
                   >
                     <img
                       src={user.imageUrl}
-                      className="avatar mr-2 h-16 w-16"
+                      // className="avatar mr-2 h-16 w-16"
+                      // className="avatar mr-2 h-16 w-16 rounded-full object-cover"
+                      className="glow mr-4 h-20 w-20 rounded-full object-cover"
                       alt="User Avatar"
                     />
                     <div className="py-5">
@@ -170,7 +172,9 @@ const Follow = () => {
                   >
                     <img
                       src={user.imageUrl}
-                      className="avatar mr-2 h-16 w-16"
+                      // className="glow mr-4 h-20 w-20 "
+                      // className="avatar mr-2 h-16 w-16 rounded-full object-cover"
+                      className="glow mr-4 h-20 w-20 rounded-full object-cover"
                       alt="User Avatar"
                     />
                     <div className="py-5">
