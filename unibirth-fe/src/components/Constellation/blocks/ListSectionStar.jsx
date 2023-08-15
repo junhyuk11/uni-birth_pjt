@@ -16,7 +16,6 @@ import {
 import { useRecoilState, useSetRecoilState } from "recoil";
 import * as THREE from "three";
 import Background from "../../../common/atoms/Background";
-import Plus from "../../../assets/icons/js/plus";
 import CustomAlert from "../../../common/atoms/CustomAlert";
 import Close2 from "../../../assets/icons/js/close2";
 import Star2 from "../../../assets/icons/js/star2";
@@ -24,6 +23,7 @@ import LineDrawing from "../atoms/LineDrawing";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 import InviteFollowStar from "../../Star/blocks/InviteFollowStar";
 import { LiaUserFriendsSolid } from "react-icons/lia";
+import DrawingIcon from "../../../assets/icons/js/DrawingIcon";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -198,7 +198,7 @@ const ListSectionStar = () => {
           className="fixed bottom-36 right-4 z-10 flex flex-col text-4xl text-white"
           onClick={navigateToRegisterStar}
         >
-          <Plus />
+          <DrawingIcon />
         </button>
       )}
 
