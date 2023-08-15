@@ -41,8 +41,6 @@ const RegisterMember = () => {
 
   const joinMember = async (e) => {
     e.preventDefault();
-    console.log(birthdate);
-    console.log("test");
     if (!nickname) {
       setIsAlertVisible(true);
       setAlertMessage("닉네임을 입력해주세요.");

@@ -31,7 +31,6 @@ const SearchQuration = () => {
     try {
       const response = await useSearchApi.searchGetMemberCuration(nickname);
       if (response.status === 200) {
-        console.log(response);
         setFollowingData(response.resultData[0]);
         setInterestData(response.resultData[1]);
       } else if (response.status === 403) {

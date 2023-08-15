@@ -128,7 +128,7 @@ const GridCustomConstellation = ({
     });
     const uniqueLines = [];
     const duplicateLines = [];
-    console.log(lines);
+    // console.log(lines);
     for (const line of lines) {
       const reversedLine = [line[2], line[3], line[0], line[1]];
       const isDuplicate = duplicateLines.some(
@@ -175,13 +175,12 @@ const GridCustomConstellation = ({
     const uploadTask = uploadBytesResumable(storageRef, array, {
       contentType: mimeType,
     });
-    console.log(uploadTask);
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(`Upload is ${progress}% done`);
+        // const progress =
+        //   (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        // console.log(`Upload is ${progress}% done`);
       },
       () => {
         setIsAlertVisible(true);
@@ -190,7 +189,6 @@ const GridCustomConstellation = ({
       async () => {
         try {
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          console.log("다운로드:", downloadURL);
           const constellation = {
             planetId,
             title: constellationName,
@@ -205,10 +203,10 @@ const GridCustomConstellation = ({
             await useConstellationApi.constellationsPostConstellation(
               constellation,
             );
-          console.log(response);
-          console.log(constellation);
+          // console.log(response);
+          // console.log(constellation);
           if (response.status === 200) {
-            console.log("받은 리스폰스:", response);
+            // console.log("받은 리스폰스:", response);
             setConstellationLimit((prevLimit) => prevLimit - 1);
             navigateToDetailConstellation(response.resultData.constellationId);
           } else if (response.status === 400) {

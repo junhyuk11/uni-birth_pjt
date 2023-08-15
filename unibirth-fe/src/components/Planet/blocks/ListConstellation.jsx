@@ -34,11 +34,11 @@ function CameraController({
   const multiFactor = 1.5;
   // console.log("ConstellationPosition:", ConstellationPosition);
   useEffect(() => {
-    console.log(
-      "ConstellationPosition has been updated:",
-      ConstellationPosition,
-    );
-    console.log(zoomed);
+    // console.log(
+    //   "ConstellationPosition has been updated:",
+    //   ConstellationPosition,
+    // );
+    // console.log(zoomed);
   }, [ConstellationPosition]);
   useEffect(() => {
     if (ConstellationPosition) {
@@ -79,7 +79,7 @@ function CameraController({
         onUpdate: updateCameraPosition,
         ease: "Power1.inOut",
         onComplete: () => {
-          console.log(startPosition, targetPosition);
+          // console.log(startPosition, targetPosition);
           setEnableFlag(true);
           if (zoomed) {
             setRotateFlag(true);

@@ -88,7 +88,6 @@ const constellationsPostConstellation = async (constellation) => {
     const response = await useAxiosInstance
       .authApiClient(jwt)
       .post(`/constellations/register`, constellation);
-    console.log(response);
     return response.data;
   } catch (e) {
     if (e.response.data.status === 404) {

@@ -25,8 +25,6 @@ const MeshCons = ({
 
   useEffect(() => {}, [ConstellationIndex]);
 
-  console.log("메쉬에서 받은 리스트:", constellationList);
-
   // 별자리 간격 조정
   const constellationGap = 30;
   // 처음 밝기 조정
@@ -186,8 +184,6 @@ const MeshCons = ({
     setCurrentList(StarsIndexList);
     return meshModels;
   }, [constellationList]);
-
-  console.log(meshRef);
 
   return (
     <>

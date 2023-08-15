@@ -58,7 +58,6 @@ const SearchCommon = () => {
         query,
       );
       if (response.status === 200) {
-        console.log(response.resultData);
         setConstellationList(response.resultData.constellationList || []);
         setMemberList(response.resultData.memberList || []);
         setStarList(response.resultData.starList || []);
