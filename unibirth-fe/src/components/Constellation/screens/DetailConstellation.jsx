@@ -41,7 +41,6 @@ const DetailConstellation = () => {
       setAlertMessage("별자리 정보를 불러오는데 실패했습니다.");
     }
   };
-  console.log("", constellationContent);
   const {
     navigateToBack,
     navigateToMainPlanet,

@@ -7,20 +7,11 @@ const MeshConstellation = ({
   starmultiple,
   xdamper,
 }) => {
-  const handleBoxClick = (constellationId, title) => {
-    console.log(
-      `Clicked on constellation: ${constellationId}, title: ${title}`,
-    );
-    console.log("event:", event);
-  };
-
   const constellationMeshes = useMemo(
     () =>
       constellationList?.constellationList.flatMap((constellation, index) => {
         const { boardSize, constellationId, imageUrl, lineList, title, color } =
           constellation;
-
-        console.log(constellation);
 
         return lineList.flatMap((line) => {
           const [y1, x1, z1, y2, x2, z2] = line;

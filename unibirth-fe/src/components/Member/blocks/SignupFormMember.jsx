@@ -78,10 +78,7 @@ const MemberRegistrationForm = ({
   const debouncedSetImage = useCallback(
     debounce((value) => {
       setImage(value);
-      console.log(value);
-      console.log({ Jodiac });
-      const [year, month, day] = value.split("-");
-      console.log(year);
+      const [, month, day] = value.split("-");
       const birthdateAsNumber = parseInt(month + day, 10);
       if (birthdateAsNumber <= 120) {
         setImage(Jodiac[0].image);
@@ -152,7 +149,6 @@ const MemberRegistrationForm = ({
           onChange={(e) => {
             setBirthdate(e.target.value);
             debouncedSetImage(e.target.value);
-            console.log({ zodiac });
           }}
           zodiac={zodiac}
           setZodiac={setZodiac}

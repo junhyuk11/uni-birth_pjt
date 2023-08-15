@@ -42,7 +42,6 @@ import { backgroundflagState } from "./recoil/atoms";
 
 const App = () => {
   const backgroundflag = useRecoilValue(backgroundflagState);
-  console.log("App플래그:", backgroundflag);
   return (
     <div className="">
       {backgroundflag && (

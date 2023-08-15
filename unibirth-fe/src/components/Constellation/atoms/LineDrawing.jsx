@@ -6,7 +6,6 @@ const Line = ({ start, end, rotation }) => {
   const startPoint = new THREE.Vector3(...start);
   const endPoint = new THREE.Vector3(...end);
   const currentPoint = new THREE.Vector3().copy(startPoint);
-  console.log("몇번하는건데 그래서");
   useFrame(() => {
     if (lineRef.current) {
       const lineGeometry = lineRef.current.geometry;

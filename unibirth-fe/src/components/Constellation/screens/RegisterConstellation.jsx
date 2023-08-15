@@ -75,7 +75,7 @@ const RegistConstellation = () => {
       />
       <div>
         <Header1 buttons={buttonsHeader} />
-        <div className="mt-24 flex flex-col items-center justify-center space-y-10">
+        <div className="mt-24 flex flex-col items-center justify-center space-y-5">
           <img
             src={planet1}
             alt="행성1 이미지 예시"
@@ -92,12 +92,14 @@ const RegistConstellation = () => {
             setConstellationDescp={setConstellationDescp}
           />
         </div>
-        <Footer1
-          buttons={buttonsFooter}
-          planetId={planetId}
-          constellationDescp={constellationDescp}
-          constellationName={constellationName}
-        />
+        <div>
+          <Footer1
+            buttons={buttonsFooter}
+            planetId={planetId}
+            constellationDescp={constellationDescp}
+            constellationName={constellationName}
+          />
+        </div>
       </div>
     </div>
   );

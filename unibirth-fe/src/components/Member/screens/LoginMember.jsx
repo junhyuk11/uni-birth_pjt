@@ -61,7 +61,6 @@ const LoginMember = () => {
         setNickname(response.resultData.nickname);
         setStarCount(response.resultData.starCount);
         setConstellationLimit(response.resultData.constellationLimit);
-        console.log(response.resultData);
         navigateToMainPlanet();
       } else {
         setIsAlertVisible(true);

@@ -51,14 +51,11 @@ const ListSectionStar = () => {
 
   const { navigateToRegisterStar, navigateToBack } = useNavigation();
   const handleBoxClick = ({ event, index }) => {
-    console.log(index);
     const mouse = new THREE.Vector2();
     mouse.x = event.clientX + 100;
     mouse.y = event.clientY - 100;
-    console.log(mouse.x);
     // mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     // mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    console.log(mouse);
     // const rect = event.target.getBoundingClientRect();
     setTooltipStyle({
       left: `${mouse.x}px`,
@@ -67,20 +64,16 @@ const ListSectionStar = () => {
     });
 
     // Set StarBox Content
-    console.log("index:", starListIndex[index]);
     setBoxnickname(starListIndex[index]?.nickname);
     setBoxurl(starListIndex[index]?.imageUrl);
     setBoxid(starListIndex[index]?.starId);
     setBoxtitle(starListIndex[index]?.title);
     setBoxcreated(starListIndex[index]?.createdAt);
     setBrightness(starListIndex[index]?.brightness);
-    console.log("boxid:", boxid);
-    console.log("boxurl:", boxurl);
   };
   useEffect(() => {
     getStarList(constellationId);
     setStellaId(constellationId);
-    console.log("ref:", ref);
   }, [constellationId]);
 
   const toggleModal = () => {
@@ -94,7 +87,6 @@ const ListSectionStar = () => {
       );
       setResponseState(response.status);
       if (response.status === 200) {
-        console.log(response);
         setStarList(response.resultData);
         setStarListIndex(response.resultData.starList);
         setAlreadyPined(response.resultData.alreadyPined);
@@ -111,8 +103,6 @@ const ListSectionStar = () => {
       setAlertMessage("오류가 발생했습니다.");
     }
   };
-
-  console.log("isFulledStar:", isFulledStar);
 
   // starPotisions recoil 저장
   const starPoint = starList?.pointList;
@@ -161,9 +151,7 @@ const ListSectionStar = () => {
         );
         setResponseState(response.status);
         setAlreadyPined(true);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
   };
 

@@ -34,20 +34,20 @@ function CameraController({
   const multiFactor = 1.5;
   // console.log("ConstellationPosition:", ConstellationPosition);
   useEffect(() => {
-    console.log(
-      "ConstellationPosition has been updated:",
-      ConstellationPosition,
-    );
-    console.log(zoomed);
+    // console.log(
+    //   "ConstellationPosition has been updated:",
+    //   ConstellationPosition,
+    // );
+    // console.log(zoomed);
   }, [ConstellationPosition]);
   useEffect(() => {
     if (ConstellationPosition) {
       // console.log("제[발!!ㅣ", ConstellationPosition);
       const targetPosition = zoomed
         ? {
-            x: ConstellationPosition.x * multiFactor + 3500,
-            y: ConstellationPosition.y * multiFactor - 10000,
-            z: ConstellationPosition.z * multiFactor + 3500,
+            x: ConstellationPosition.x * multiFactor + 4000,
+            y: ConstellationPosition.y * multiFactor - 9000,
+            z: ConstellationPosition.z * multiFactor + 4000,
           }
         : {
             x: ConstellationPosition.x * zoomFactor,
@@ -79,7 +79,7 @@ function CameraController({
         onUpdate: updateCameraPosition,
         ease: "Power1.inOut",
         onComplete: () => {
-          console.log(startPosition, targetPosition);
+          // console.log(startPosition, targetPosition);
           setEnableFlag(true);
           if (zoomed) {
             setRotateFlag(true);
@@ -187,7 +187,7 @@ const Scene = ({ constellationList }) => {
           makeDefault
           position={[0, -500, 0]}
           near={0.1}
-          far={10000}
+          far={11000}
         />
         <GradientBackground />
         <EffectComposer>

@@ -55,7 +55,6 @@ const membersPostLogin = async (member) => {
       "/members/login",
       member,
     );
-    console.log(response);
     return response.data;
   } catch (e) {
     if (e.response.data.status === 404) {
@@ -116,7 +115,6 @@ const membersPutBoard = async () => {
 
 const membersPutProfiles = async (data) => {
   try {
-    console.log(data);
     const jwt = sessionStorage.getItem("accessToken");
     const response = await useAxiosInstance
       .authApiClient(jwt)

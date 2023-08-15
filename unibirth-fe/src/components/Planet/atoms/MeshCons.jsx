@@ -8,6 +8,14 @@ const MeshCons = ({
   setCurrentConstellation,
 }) => {
   const meshRef = useRef();
+  // frustumCulled 속성 false
+  useEffect(() => {
+    // meshRef.current에 접근하여 frustumCulled 속성을 false로 설정합니다.
+    if (meshRef.current) {
+      meshRef.current.frustumCulled = false;
+    }
+  }, []);
+
   // 별자리 반경
   const radius = 3000;
   // 별 개수 에 따라 segment 변경
@@ -16,8 +24,6 @@ const MeshCons = ({
   const [vertices, setVertices] = useState([]);
 
   useEffect(() => {}, [ConstellationIndex]);
-
-  console.log("메쉬에서 받은 리스트:", constellationList);
 
   // 별자리 간격 조정
   const constellationGap = 30;
@@ -96,6 +102,7 @@ const MeshCons = ({
             (line, index) => {
               const [x1, y1, z1, x2, y2, z2] = line;
               const geometry = new THREE.BufferGeometry();
+              delete geometry.attributes.uv;
               geometry.setFromPoints([
                 new THREE.Vector3(
                   x1 * constellationGap + xyz.x,
@@ -108,8 +115,14 @@ const MeshCons = ({
                   z2 * constellationGap * correctionZ + xyz.z,
                 ),
               ]);
+              geometry.deleteAttribute("uv");
               return (
-                <line key={`line_${i}_${index}`} geometry={geometry}>
+                <line
+                  frustumCulled={false}
+                  ref={meshRef}
+                  key={`line_${i}_${index}`}
+                  geometry={geometry}
+                >
                   <lineBasicMaterial
                     color="white"
                     transparent={true}
@@ -125,6 +138,8 @@ const MeshCons = ({
               return (
                 <>
                   <mesh
+                    frustumCulled={false}
+                    ref={meshRef}
                     key={`point_${i}_${index}`}
                     position={[
                       point.x * constellationGap + xyz.x,
@@ -151,6 +166,7 @@ const MeshCons = ({
             },
           )}
           <mesh
+            frustumCulled={false}
             key={`position_${groupKey}`}
             position={[
               AllSphereList[i].x,

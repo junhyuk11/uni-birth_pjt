@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer1 = ({ buttons }) => {
   return (
-    <footer className="mt-10 flex flex-row items-center justify-between">
+    <footer className="flex flex-row items-center justify-between">
       {buttons &&
         buttons.map((button, index) => {
           const ButtonComponent = button.component;
