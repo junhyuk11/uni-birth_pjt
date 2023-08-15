@@ -72,7 +72,10 @@ const MeshPlanet = ({ navigateToDetailPlanet }) => {
               map={useLoader(THREE.TextureLoader, planetImage[index])}
             />
           </mesh>
-          <Html position={[planet.x, planet.y + 5, planet.z]}>
+          <Html
+            zIndexRange={[40, 0]}
+            position={[planet.x, planet.y + 5, planet.z]}
+          >
             <div
               className="w-20"
               style={{

@@ -9,6 +9,8 @@ import {
   currentplanetState,
 } from "../../../recoil/atoms";
 import Footer from "../../../common/blocks/Footer";
+import HelpCarousel from "../atoms/HelpCarousel";
+import { BsFillQuestionCircleFill } from "react-icons/bs";
 
 const MainPlanet = () => {
   const [, setBackgroundflag] = useRecoilState(backgroundflagState);
@@ -52,6 +54,8 @@ const MainPlanet = () => {
     });
   }
 
+  const [isActive, setIsActive] = useState(false);
+
   return (
     <div className="relative h-screen w-screen">
       <div className="absolute left-1/2 top-20 z-10 -translate-x-1/2 -translate-y-1/2 transform">
@@ -69,6 +73,15 @@ const MainPlanet = () => {
       <div className="fixed bottom-3 left-1/2 z-10 -translate-x-1/2 space-x-4">
         <Footer buttons={buttonsFooter} />
       </div>
+      <button
+        className="absolute bottom-52 right-4 z-20 h-16 rounded-lg text-white"
+        onClick={() => setIsActive(!isActive)}
+      >
+        <div className="text-5xl">
+          <BsFillQuestionCircleFill />
+        </div>
+      </button>
+      {isActive && <HelpCarousel setIsActive={setIsActive} />}
     </div>
   );
 };

@@ -62,7 +62,7 @@ function Scene() {
       <Stars
         radius={100}
         depth={50}
-        count={4000}
+        count={3000}
         factor={4}
         saturation={3}
         fade

@@ -6,7 +6,6 @@ import ConstellationSectionProfile from "../blocks/ConstellationSectionProfile";
 import useMemberApi from "../../../api/useMemberApi";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import ThreeDots from "../../../assets/icons/js/threeDots";
-import Close from "../../../assets/icons/js/close";
 import Header4 from "../../../common/blocks/Header4";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { backgroundflagState, nicknameState } from "../../../recoil/atoms";
@@ -19,6 +18,7 @@ import Footer from "../../../common/blocks/Footer";
 import CustomAlert from "../../../common/atoms/CustomAlert";
 import CustomConfirm from "../../../common/atoms/CustomConfirm";
 import Button11 from "../../../common/atoms/Button11";
+import HelpCarousel from "../../Planet/atoms/HelpCarousel";
 
 const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
@@ -121,8 +121,10 @@ const MemberProfile = () => {
 
   buttonsFooter.push({});
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const [isActive, setIsActive] = useState(false);
+
+  const helpCarousel = () => {
+    setIsActive(true);
   };
 
   const modalButtons = [
@@ -147,8 +149,8 @@ const MemberProfile = () => {
     {
       component: Button11,
       className: "font-Pretendard h-10 w-10",
-      onClick: handleCloseModal,
-      icon: <Close />,
+      onClick: helpCarousel,
+      value: "도움말",
     },
   ];
 
@@ -177,10 +179,16 @@ const MemberProfile = () => {
         <MemberSectionProfile locationNickname={locationNickname} />
         <ConstellationSectionProfile locationNickname={locationNickname} />
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center">
-            <div className="absolute inset-0 bg-black opacity-40"></div>
+          <div className="fixed inset-0 z-50 flex flex flex-col items-center justify-center">
             <div className="z-10 rounded border-2 border-yellow-200 border-opacity-25 bg-slate-800 p-4 shadow-md">
-              <Header4 buttons={modalButtons} />
+              <Header4
+                buttons={modalButtons}
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
+              />
+            </div>
+            <div className="w-32">
+              {isActive && <HelpCarousel setIsActive={setIsActive} />}
             </div>
           </div>
         )}

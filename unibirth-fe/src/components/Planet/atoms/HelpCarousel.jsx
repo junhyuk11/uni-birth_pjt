@@ -1,41 +1,42 @@
-import React, { useState } from "react";
+import React from "react";
 import Slider from "react-slick";
-import { BsFillQuestionCircleFill } from "react-icons/bs";
+import { BsX } from "react-icons/bs";
+import help1 from "../atoms/help1.png";
+import help2 from "../atoms/help2.png";
+import help3 from "../atoms/help3.png";
+import help4 from "../atoms/help4.png";
 
-const Carousel = ({ HelpList }) => {
+const Carousel = ({ setIsActive }) => {
   const settings = {
     dots: true,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4000,
   };
-  const [isActive, setIsActive] = useState(false);
+
+  const HelpList = [help1, help2, help3, help4];
+
   return (
     <div>
-      <button
-        className="absolute bottom-52 right-4 z-20 h-16 rounded-lg text-white"
-        onClick={() => setIsActive(!isActive)}
-      >
-        <div className="text-5xl">
-          <BsFillQuestionCircleFill />
+      <div className="absolute bottom-60 left-1/2 z-50 w-96 -translate-x-1/2 rounded-lg">
+        <div className="relative">
+          <button
+            className="absolute right-0 top-4 z-20 text-white" // 닫기 버튼의 위치와 z-index 설정
+            onClick={() => setIsActive(false)}
+          >
+            <BsX size={30} /> {/* 닫기 아이콘 */}
+          </button>
+          <Slider {...settings}>
+            {HelpList?.map((List, index) => (
+              <div key={index} className="overflow-hidden rounded-lg">
+                <img className="rounded-lg" src={List} alt={`Slide ${index}`} />
+              </div>
+            ))}
+          </Slider>
         </div>
-      </button>
-      {isActive && (
-        <div className="absolute bottom-60 left-1/2 z-20 w-60 -translate-x-1/2 rounded-lg">
-          <div className="relative rounded-lg">
-            <Slider {...settings}>
-              {HelpList?.map((List, index) => (
-                <div key={index} className="overflow-hidden rounded-lg">
-                  <img
-                    className="rounded-lg "
-                    src={List}
-                    alt={`Slide ${index}`}
-                  />
-                </div>
-              ))}
-            </Slider>
-          </div>
-          <style>
-            {`
+        <style>
+          {`
    .slick-dots li button:before {
      color: gray;
    }
@@ -44,9 +45,8 @@ const Carousel = ({ HelpList }) => {
      color: white;
    }
 `}
-          </style>
-        </div>
-      )}
+        </style>
+      </div>
     </div>
   );
 };

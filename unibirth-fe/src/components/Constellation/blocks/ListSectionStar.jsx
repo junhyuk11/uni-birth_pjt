@@ -165,6 +165,8 @@ const ListSectionStar = () => {
     }
   };
 
+  console.log(ref);
+
   return (
     <div className="relative bottom-0 h-screen w-screen">
       <CustomAlert
