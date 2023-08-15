@@ -288,7 +288,20 @@ const GridCustomConstellation = ({
               행성명: {PLANET_LIST[planetId - 1].name}
             </p>
             <p className="font-Pretendard">별자리명: {constellationName}</p>
-            <p className="font-Pretendard">별자리설명: {constellationDescp}</p>
+            <p
+              className="font-Pretendard"
+              style={{
+                maxWidth: "200px", // 원하는 최대 너비를 설정합니다. 필요에 따라 조절하세요.
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              별자리설명:{" "}
+              {constellationDescp.length > 8
+                ? `${constellationDescp.slice(0, 8)}...`
+                : constellationDescp}
+            </p>
             {/* <p className="font-Pretendard">보드사이즈: {boardSize}</p> */}
           </div>
         </div>
