@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import HomeFooter from "../../../common/blocks/HomeFooter";
 import Button1 from "../../../common/atoms/Button1";
 import { useNavigation } from "../../../hooks/useNavigation";
 import { useRecoilState } from "recoil";
 import { backgroundflagState } from "../../../recoil/atoms";
+import HelpCarousel from "../../Planet/atoms/HelpCarousel";
 
 const Home = () => {
   const [, setBackgroundflag] = useRecoilState(backgroundflagState);
@@ -27,6 +28,8 @@ const Home = () => {
     },
   ];
 
+  const [isActive, setIsActive] = useState(false);
+
   return (
     <div className="relative h-screen w-screen">
       <p className="absolute left-1/2 top-10 z-10 w-56 -translate-x-1/2 font-TAEBAEKmilkyway text-2xl text-white">
@@ -41,6 +44,13 @@ const Home = () => {
       <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform">
         <HomeFooter buttons={buttons} />
       </div>
+      <button
+        className="bold-text absolute left-1/2 top-72 z-10 mt-10 flex -translate-x-1/2 transform flex-row items-center justify-between space-x-3 text-xl text-white"
+        onClick={() => setIsActive(!isActive)}
+      >
+        이용 방법
+      </button>
+      {isActive && <HelpCarousel setIsActive={setIsActive} className="W-60" />}
     </div>
   );
 };

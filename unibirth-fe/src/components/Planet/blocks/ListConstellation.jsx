@@ -45,9 +45,9 @@ function CameraController({
       // console.log("제[발!!ㅣ", ConstellationPosition);
       const targetPosition = zoomed
         ? {
-            x: ConstellationPosition.x * multiFactor + 3500,
-            y: ConstellationPosition.y * multiFactor - 10000,
-            z: ConstellationPosition.z * multiFactor + 3500,
+            x: ConstellationPosition.x * multiFactor + 4000,
+            y: ConstellationPosition.y * multiFactor - 9000,
+            z: ConstellationPosition.z * multiFactor + 4000,
           }
         : {
             x: ConstellationPosition.x * zoomFactor,
@@ -187,7 +187,7 @@ const Scene = ({ constellationList }) => {
           makeDefault
           position={[0, -500, 0]}
           near={0.1}
-          far={10000}
+          far={11000}
         />
         <GradientBackground />
         <EffectComposer>
