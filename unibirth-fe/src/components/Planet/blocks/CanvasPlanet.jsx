@@ -120,6 +120,8 @@ const ListSectionPlanet = ({
           enabled={true}
           rotateSpeed={-0.5}
           enablePan={false}
+          minDistance={0}
+          maxDistance={100}
           // autoRotate={true}
           // autoRotateSpeed={0.5}
         />

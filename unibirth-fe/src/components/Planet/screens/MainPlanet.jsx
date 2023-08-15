@@ -74,7 +74,7 @@ const MainPlanet = () => {
         <Footer buttons={buttonsFooter} />
       </div>
       <button
-        className="absolute bottom-52 right-4 z-20 h-16 rounded-lg text-white"
+        className="absolute bottom-52 right-4 z-50 h-16 rounded-lg text-white"
         onClick={() => setIsActive(!isActive)}
       >
         <div className="text-5xl">

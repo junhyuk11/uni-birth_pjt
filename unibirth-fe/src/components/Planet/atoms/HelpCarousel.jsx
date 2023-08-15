@@ -21,7 +21,7 @@ const Carousel = ({ setIsActive }) => {
 
   return (
     <div>
-      <div className="absolute bottom-60 left-1/2 z-50 w-96 -translate-x-1/2 rounded-lg">
+      <div className="absolute left-1/2 top-20 z-40 w-96 -translate-x-1/2 rounded-lg">
         <div className="relative">
           <button
             className="absolute right-0 top-4 z-20 text-white" // 닫기 버튼의 위치와 z-index 설정

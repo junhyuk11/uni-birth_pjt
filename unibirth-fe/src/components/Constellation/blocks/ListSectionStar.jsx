@@ -195,7 +195,7 @@ const ListSectionStar = () => {
 
       {!isFulledStar && (
         <button
-          className="fixed bottom-36 right-4 z-10 flex flex-col text-4xl text-white"
+          className="fixed bottom-40 left-1/2 z-10 flex -translate-x-1/2 flex-col text-4xl text-white"
           onClick={navigateToRegisterStar}
         >
           <DrawingIcon />
@@ -226,7 +226,7 @@ const ListSectionStar = () => {
           )}
         </div>
       </div>
-      <Canvas camera={{ position: [0, 0, 80] }}>
+      <Canvas camera={{ position: [0, 0, 85] }}>
         <Background />
         <EffectComposer>
           <Bloom
