@@ -83,26 +83,46 @@ const MyStars = () => {
       <header className="sticky top-0 z-10">
         <Header2 buttons={buttonsHeader} />
       </header>
-      <div className="flex flex-col items-center">
+      <ul className="flex flex-col items-center px-4 text-white">
         {starList.map((star) => (
-          <div
+          <li
             key={star.starId}
-            className="my-4 flex items-center"
+            className="animate-sparkle flex w-full items-start border-b border-yellow-200 px-4 py-4"
             onClick={() => handleToDetailStar(star.starId)}
           >
             <img
               src={star.imageUrl}
-              className="avatar mr-4 h-32 w-32 object-cover"
-              alt="User Avatar"
+              alt={star.content}
+              className="mr-4 h-20 w-20 rounded-lg object-cover"
             />
-            <div className="text-white">
-              <p>{star.title} 자리</p>
-              <p>{star.content}</p>
-              <p>{formatDate(star.createdAt)}</p>
+            <div className="flex flex-col justify-between space-y-2">
+              <div className="text-lg font-semibold">{star.title} 자리</div>
+              <div className="max-h-10 overflow-hidden">
+                <p
+                  className="text-md"
+                  style={{
+                    maxHeight: "4em",
+                    maxWidth: "14em",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 1,
+                    WebkitBoxOrient: "vertical",
+                  }}
+                >
+                  {star.content}
+                </p>
+              </div>
+              <div className="font-bold text-yellow-400">
+                {locationNickname}
+              </div>
+              <span className="mt-2 text-xs text-yellow-300">
+                {formatDate(star.createdAt)}
+              </span>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
