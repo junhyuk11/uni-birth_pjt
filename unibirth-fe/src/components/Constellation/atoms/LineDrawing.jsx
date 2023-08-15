@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-const Line = ({ start, end }) => {
+const Line = ({ start, end, rotation }) => {
   const lineRef = useRef();
   const startPoint = new THREE.Vector3(...start);
   const endPoint = new THREE.Vector3(...end);
@@ -18,28 +18,29 @@ const Line = ({ start, end }) => {
   });
 
   return (
-    <line ref={lineRef}>
+    <line ref={lineRef} rotation={rotation}>
       <bufferGeometry attach="geometry" />
       <lineBasicMaterial attach="material" color="white" />
     </line>
   );
 };
 
-const LineDrawing = ({ lines, num, zero, zDamping }) => {
+const LineDrawing = ({ lines, num, zero, zDamping, rotation, xDamping }) => {
   if (lines) {
     return (
       <>
         {lines.map((line, index) => (
           <Line
+            rotation={rotation}
             key={index}
             start={[
               line[0] * num - zero,
-              line[1] * num,
+              line[1] * num - xDamping,
               (line[2] * num) / zDamping,
             ]}
             end={[
               line[3] * num - zero,
-              line[4] * num,
+              line[4] * num - xDamping,
               (line[5] * num) / zDamping,
             ]}
           />

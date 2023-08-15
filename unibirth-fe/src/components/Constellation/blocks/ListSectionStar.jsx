@@ -117,12 +117,14 @@ const ListSectionStar = () => {
   // starPotisions recoil 저장
   const starPoint = starList?.pointList;
   const num = 10; // 별 거리 조절
-  const zero = 20;
+  const zero = 40;
+  const xDamping = 20;
   const zDamping = 3;
+  const rotation = [0, 0, -Math.PI / 2]; // 별 회전
   // const znum = (Math.floor(Math.random() * 11) - 5) * num;
   const starPotisions = starPoint?.map((star) => ({
     x: star[0] * num - zero,
-    y: star[1] * num,
+    y: star[1] * num - xDamping,
     z: (star[2] * num) / zDamping,
     // brightness: starList?.Star.brightness,
     // starId: starList?.Star.starId,
@@ -164,8 +166,6 @@ const ListSectionStar = () => {
       }
     }
   };
-
-  console.log(ref);
 
   return (
     <div className="relative bottom-0 h-screen w-screen">
@@ -227,6 +227,7 @@ const ListSectionStar = () => {
         </div>
       </div>
       <Canvas camera={{ position: [0, 0, 90] }}>
+        <axesHelper />
         <Background />
         <EffectComposer>
           <Bloom
@@ -236,9 +237,8 @@ const ListSectionStar = () => {
           />
         </EffectComposer>
         {starPotisions?.map((star, index) => (
-          <group key={index}>
+          <group key={index} rotation={rotation}>
             <mesh
-              rotation={[0, Math.PI / 2, 0]}
               ref={ref}
               position={[star.x, star.y, star.z]}
               onClick={(event) => {
@@ -259,7 +259,14 @@ const ListSectionStar = () => {
             </mesh>
           </group>
         ))}
-        <LineDrawing lines={lines} num={num} zero={zero} zDamping={zDamping} />
+        <LineDrawing
+          lines={lines}
+          num={num}
+          zero={zero}
+          zDamping={zDamping}
+          rotation={rotation}
+          xDamping={xDamping}
+        />
       </Canvas>
       <div>
         {/* 별을 클릭했을 때 위치 조정 필요 */}
