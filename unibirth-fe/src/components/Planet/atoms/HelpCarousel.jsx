@@ -5,6 +5,7 @@ import help1 from "../atoms/help1.png";
 import help2 from "../atoms/help2.png";
 import help3 from "../atoms/help3.png";
 import help4 from "../atoms/help4.png";
+import help5 from "../atoms/help5.png";
 
 const Carousel = ({ setIsActive }) => {
   const settings = {
@@ -13,9 +14,10 @@ const Carousel = ({ setIsActive }) => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 4000,
+    Infinity: true,
   };
 
-  const HelpList = [help1, help2, help3, help4];
+  const HelpList = [help1, help5, help2, help3, help4];
 
   return (
     <div>
