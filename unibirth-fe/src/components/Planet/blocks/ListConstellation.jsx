@@ -1,11 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { OrbitControls, Stars, PerspectiveCamera } from "@react-three/drei";
 import { Canvas, useThree } from "@react-three/fiber";
-import {
-  BiSolidRightArrow,
-  BiSolidLeftArrow,
-  BiMoveHorizontal,
-} from "react-icons/bi";
+import { BiSolidRightArrow, BiSolidLeftArrow } from "react-icons/bi";
 // import MeshConstellation from "../atoms/MeshConstellation";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import GradientBackground from "../../../common/atoms/GradientBackground";
@@ -20,7 +16,9 @@ import MeshCons from "../atoms/MeshCons";
 import { gsap } from "gsap";
 import HtmlConstellation from "../atoms/HtmlConstellation";
 import { useNavigation } from "../../../hooks/useNavigation";
-import Plus from "../../../assets/icons/js/plus";
+import DrawingIcon from "../../../assets/icons/js/DrawingIcon";
+import Zoomout from "../../../assets/icons/js/zoomout";
+import Zoomin from "../../../assets/icons/js/zoomin";
 
 // R3F 훅 카메라 컨트롤러 컴포넌트
 function CameraController({
@@ -165,17 +163,17 @@ const Scene = ({ constellationList }) => {
         <BiSolidRightArrow />
       </button>
       <button
-        className="absolute bottom-36 right-4 z-10 flex flex-col text-4xl text-white opacity-100"
+        className="absolute bottom-36 right-4 z-10 flex flex-col text-lg text-white opacity-100"
         onClick={navigateToRegisterConstellation}
       >
-        <Plus />
+        <DrawingIcon />
       </button>
       <button
         className="absolute bottom-24 right-4
         z-10 flex -translate-x-1/2 flex-col text-6xl text-white"
         onClick={handleZoomClick}
       >
-        <BiMoveHorizontal style={{ color: zoomed ? "red" : "white" }} />
+        {zoomed ? <Zoomin /> : <Zoomout />}
       </button>
 
       <HtmlConstellation
