@@ -2,10 +2,10 @@ import React, { useCallback, useState } from "react";
 import InputPassword from "../../../common/atoms/InputPassword";
 import Inputnickname from "../atoms/Inputnickname";
 import InputPasswordConfirm from "../atoms/InputPasswordConfirm";
-import InputEmail from "../../../common/atoms/InputEmail";
+import InputEmail2 from "../../../common/atoms/InputEmail2";
 import Button1 from "../../../common/atoms/Button1";
 import useMemberApi from "../../../api/useMemberApi";
-import InPutZodiac from "../atoms/InputZodiac";
+import InputZodiac from "../atoms/InputZodiac";
 import { debounce } from "lodash";
 import { Jodiac } from "../../../constants/zodiac";
 // import { PLANET_LIST } from "../../../constants/constants";
@@ -141,26 +141,29 @@ const MemberRegistrationForm = ({
   );
 
   return (
-    <div className="mx-10 flex-col items-center justify-center space-y-5">
+    <div className="mx-10 flex flex-col justify-center space-y-5">
       <CustomAlert
         message={alertMessage}
         isVisible={isAlertVisible}
         onClose={() => setIsAlertVisible(false)}
       />
-      <InPutZodiac
-        onChange={(e) => {
-          setBirthdate(e.target.value);
-          debouncedSetImage(e.target.value);
-          console.log({ zodiac });
-        }}
-        zodiac={zodiac}
-        setZodiac={setZodiac}
-        image={image}
-        setImage={setImage}
-        content={content}
-        setContent={setContent}
-        jodiacname={jodiacname}
-      />
+      <div className="flex items-end justify-center space-x-10">
+        <InputZodiac
+          onChange={(e) => {
+            setBirthdate(e.target.value);
+            debouncedSetImage(e.target.value);
+            console.log({ zodiac });
+          }}
+          zodiac={zodiac}
+          setZodiac={setZodiac}
+          image={image}
+          setImage={setImage}
+          content={content}
+          setContent={setContent}
+          jodiacname={jodiacname}
+        />
+        <Inputdropdown planetId={interest} setPlanetId={setInterest} />
+      </div>
       <div className="flex">
         <Inputnickname
           value={nickname}
@@ -186,12 +189,7 @@ const MemberRegistrationForm = ({
         />
       </div>
       <div className="flex">
-        <InputEmail
-          type="email"
-          className="w-100"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <InputEmail2 value={email} onChange={(e) => setEmail(e.target.value)} />
         <Button1
           value="확인"
           className="w-16 font-Pretendard"
@@ -205,21 +203,6 @@ const MemberRegistrationForm = ({
             duplicateCheck("Email", email);
           }}
         />
-        {/* <div className="flex flex-col items-center justify-center rounded-lg border-double font-TAEBAEKmilkyway">
-          <select
-            value={interest}
-            onChange={(e) => setInterest(e.target.value)}
-          >
-            {PLANET_LIST.map((interest) => (
-              <option key={interest.name} value={interest.name}>
-                {interest.name}
-              </option>
-            ))}
-          </select>
-        </div> */}
-        <div>
-          <Inputdropdown planetId={interest} setPlanetId={setInterest} />
-        </div>
       </div>
       <div className="flex flex-row">
         <InputPassword
