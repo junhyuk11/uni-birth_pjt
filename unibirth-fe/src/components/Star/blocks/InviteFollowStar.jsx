@@ -84,31 +84,37 @@ const InviteFollowStar = () => {
         }}
       />
       <div className="h-[calc(3*4rem)] overflow-y-auto">
-        {followList.map((item) => {
-          return (
-            <div
-              key={item.nickname}
-              className="mb-3 flex items-center space-x-4 p-2 hover:bg-gray-100"
-            >
-              <img
-                src={item.imageUrl}
-                alt={`${item.nickname}'s profile`}
-                className="h-12 w-12 rounded-full"
-              />
-              <div className="font-semibold">{item.nickname}</div>
-              <button
-                onClick={() => handleInvite(item.nickname)}
-                className="text-purple-500 hover:text-purple-700"
+        {followList.length === 0 ? (
+          <div className="py-4 text-center">
+            <p>팔로우 목록이 비어있습니다.</p>
+          </div>
+        ) : (
+          followList.map((item) => {
+            return (
+              <div
+                key={item.nickname}
+                className="mb-3 flex items-center space-x-4 p-2 hover:bg-gray-100"
               >
-                {invitedUsers[item.nickname] ? (
-                  <BsCheck className="h-6 w-6" />
-                ) : (
-                  <HiPaperAirplane className="h-6 w-6" />
-                )}
-              </button>
-            </div>
-          );
-        })}
+                <img
+                  src={item.imageUrl}
+                  alt={`${item.nickname}'s profile`}
+                  className="glow mr-4 h-12 w-12 rounded-full object-cover"
+                />
+                <div className="font-semibold">{item.nickname}</div>
+                <button
+                  onClick={() => handleInvite(item.nickname)}
+                  className="text-purple-500 hover:text-purple-700"
+                >
+                  {invitedUsers[item.nickname] ? (
+                    <BsCheck className="h-6 w-6" />
+                  ) : (
+                    <HiPaperAirplane className="h-6 w-6" />
+                  )}
+                </button>
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );
