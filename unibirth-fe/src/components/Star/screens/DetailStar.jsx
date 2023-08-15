@@ -367,7 +367,7 @@ const DetailStar = () => {
                           className="h-8 w-8 rounded-full object-cover"
                           src={comment.imageUrl}
                           onClick={() =>
-                            navigateToMemberProfile(memberInfo.nickname)
+                            navigateToMemberProfile(comment.nickname)
                           }
                         ></img>
                         <div
@@ -377,7 +377,7 @@ const DetailStar = () => {
                           <strong
                             className="text-base text-white"
                             onClick={() =>
-                              navigateToMemberProfile(memberInfo.nickname)
+                              navigateToMemberProfile(comment.nickname)
                             }
                           >
                             {comment.nickname}
@@ -394,7 +394,7 @@ const DetailStar = () => {
                         </div>
                         {comment.nickname === nickname ? (
                           <button
-                            className=" flex flex-grow items-end justify-end self-start"
+                            className="flex flex-grow items-end justify-end self-start"
                             onClick={() => setShowConfirm(true)}
                           >
                             <Close />

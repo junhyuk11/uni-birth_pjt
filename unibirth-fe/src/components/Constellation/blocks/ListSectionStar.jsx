@@ -226,7 +226,7 @@ const ListSectionStar = () => {
           )}
         </div>
       </div>
-      <Canvas camera={{ position: [0, 0, 85] }}>
+      <Canvas camera={{ position: [0, 0, 90] }}>
         <Background />
         <EffectComposer>
           <Bloom
@@ -235,10 +235,10 @@ const ListSectionStar = () => {
             height={1000}
           />
         </EffectComposer>
-        {/* <color attach="background" args={["black"]} /> */}
         {starPotisions?.map((star, index) => (
           <group key={index}>
             <mesh
+              rotation={[0, Math.PI / 2, 0]}
               ref={ref}
               position={[star.x, star.y, star.z]}
               onClick={(event) => {
