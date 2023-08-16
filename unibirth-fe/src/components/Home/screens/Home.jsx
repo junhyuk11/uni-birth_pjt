@@ -45,10 +45,10 @@ const Home = () => {
         <HomeFooter buttons={buttons} />
       </div>
       <button
-        className="bold-text absolute left-1/2 top-72 z-10 mt-10 flex -translate-x-1/2 transform flex-row items-center justify-between space-x-3 text-xl text-white"
+        className="bold-text absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 transform items-center text-xl text-white"
         onClick={() => setIsActive(!isActive)}
       >
-        이용 방법
+        도움말
       </button>
       {isActive && <HelpCarousel setIsActive={setIsActive} className="W-60" />}
     </div>
