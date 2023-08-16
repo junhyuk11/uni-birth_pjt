@@ -24,7 +24,7 @@ const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
   backgroundflag(true);
   const location = useLocation();
-  let locationNickname = location.state;
+  const locationNickname = location.state;
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const nickname = useRecoilValue(nicknameState);
@@ -58,11 +58,6 @@ const MemberProfile = () => {
   const handleSignout = async () => {
     setIsModalOpen(false);
     setShowConfirm(true);
-  };
-
-  const handleMyProfile = () => {
-    locationNickname = nickname;
-    navigateToMemberProfile();
   };
 
   const confirmSignout = async () => {
@@ -124,7 +119,7 @@ const MemberProfile = () => {
       onClick: navigateToMainPlanet,
     },
     {
-      onClick: handleMyProfile,
+      onClick: () => navigateToMemberProfile(nickname),
     },
   ];
 
@@ -186,7 +181,7 @@ const MemberProfile = () => {
         <MemberSectionProfile locationNickname={locationNickname} />
         <ConstellationSectionProfile locationNickname={locationNickname} />
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex flex flex-col items-center justify-center">
+          <div className="fixed inset-0 z-50 flex flex-col items-center justify-center">
             <div className="z-10 rounded border-2 border-yellow-200 border-opacity-25 bg-slate-800 p-4 shadow-md">
               <Header4
                 buttons={modalButtons}

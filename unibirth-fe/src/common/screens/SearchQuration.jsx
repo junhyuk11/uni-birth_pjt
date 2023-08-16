@@ -37,7 +37,7 @@ const SearchQuration = () => {
       onClick: navigateToMainPlanet,
     },
     {
-      onClick: navigateToMemberProfile,
+      onClick: () => navigateToMemberProfile(nickname),
     },
   ];
 
