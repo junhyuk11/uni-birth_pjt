@@ -38,7 +38,7 @@ const CustomAlert = ({ message, isVisible, onClose }) => {
           {message}
         </p>
         <button
-          className="mx-auto my-auto inline-flex w-16 items-center justify-center rounded-full border border p-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2"
+          className="mx-auto my-auto inline-flex w-16 items-center justify-center rounded-full border border p-2 text-white "
           onClick={onClose}
         >
           닫기

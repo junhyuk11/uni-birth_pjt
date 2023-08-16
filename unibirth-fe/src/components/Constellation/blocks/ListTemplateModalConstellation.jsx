@@ -76,7 +76,7 @@ const ListTemplateModalConstellation = ({
           ))}
         </Slider>
         <button
-          className="mx-auto mt-4 inline-flex w-24 items-center justify-center rounded-full border  p-2 text-yellow-100 focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2"
+          className="mx-auto mt-4 inline-flex w-24 items-center justify-center rounded-full border  p-2 text-white "
           onClick={handleCloseModal}
         >
           창 닫기

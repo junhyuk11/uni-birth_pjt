@@ -16,13 +16,13 @@ const CustomConfirm = ({ message, isVisible, onClose, onConfirm }) => {
         </p>
         <div className="flex flex-row justify-center space-x-4">
           <button
-            className="my-auto inline-flex w-12 items-center justify-center rounded-xl border  p-2 text-yellow-100  focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2"
+            className="my-auto inline-flex w-12 items-center justify-center rounded-xl border  p-2 text-white  "
             onClick={onConfirm}
           >
             확인
           </button>
           <button
-            className="my-auto inline-flex w-12 items-center justify-center rounded-xl border  p-2 text-yellow-100 focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2"
+            className="my-auto inline-flex w-12 items-center justify-center rounded-xl border  p-2 text-white "
             onClick={onClose}
           >
             취소

@@ -25,9 +25,9 @@ const Inputnickname = ({ onChange }) => {
         </label>
         <div className="mt-2 flex-row">
           <input
-            className="flex-1 flex-row border-b-2 border-gray-400 bg-transparent py-2 text-yellow-200 
+            className="flex-1 flex-row border-b-2 border-gray-400 bg-transparent py-2 text-white 
         placeholder-gray-400 outline-none
-        focus:border-yellow-200"
+        focus:border-purple-400"
             type="text"
             name="nickname"
             onChange={handleNicknameChange}

@@ -113,10 +113,8 @@ const MyStars = () => {
                   {star.content}
                 </p>
               </div>
-              <div className="font-bold text-yellow-400">
-                {locationNickname}
-              </div>
-              <span className="mt-2 text-xs text-yellow-300">
+              <div className="font-bold text-white">{locationNickname}</div>
+              <span className="mt-2 text-xs text-white">
                 {formatDate(star.createdAt)}
               </span>
             </div>

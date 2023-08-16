@@ -60,7 +60,7 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
 
   return (
     <div>
-      <div className="mx-auto flex flex-row items-center justify-between border-y-2 border-yellow-100 bg-slate-950 bg-opacity-70 font-Pretendard text-yellow-50">
+      <div className="mx-auto flex flex-row items-center justify-between border-y-2 border-yellow-100 bg-slate-950 bg-opacity-70 font-Pretendard text-white">
         <CustomAlert
           message={alertMessage}
           isVisible={isAlertVisible}
@@ -77,14 +77,14 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
         />
         <Button3
           value="참여한 별자리"
-          className="mx-auto  w-full border-r border-yellow-100 font-Pretendard text-yellow-50"
+          className="mx-auto  w-full border-r border-yellow-100 font-Pretendard text-white"
           selectedValue={selectedButton}
           onSelect={handleButtonClick}
           onClick={handleParticipateClick}
         />
         <Button3
           value="핀한 별자리"
-          className="mx-auto w-full border-l font-Pretendard text-yellow-50"
+          className="mx-auto w-full border-l font-Pretendard text-white"
           selectedValue={selectedButton}
           onSelect={handleButtonClick}
           onClick={handlePinClick}

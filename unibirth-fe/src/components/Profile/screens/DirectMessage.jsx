@@ -135,7 +135,7 @@ const DirectMessage = () => {
           placeholder="메시지 입력..."
         />
         <button
-          className="h-10 rounded-full bg-blue-500 px-4 py-2 text-white focus:bg-blue-600 focus:outline-none"
+          className="h-10 rounded-full bg-purple-600 px-4 py-2 text-white"
           onClick={handleSend}
         >
           <MessageSend />

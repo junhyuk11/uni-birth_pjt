@@ -17,8 +17,8 @@ const Button3 = ({
   };
   return (
     <button
-      className={`items-center p-2 text-black   ${
-        isSelected ? "border border-b-4" : ""
+      className={`items-center p-2 text-white   ${
+        isSelected ? "border-b-4" : ""
       } ${className}`}
       onClick={handleClick}
     >

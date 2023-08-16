@@ -123,7 +123,7 @@ const SearchCommon = () => {
   ];
 
   return (
-    <div className="bg-space-black mx-auto flex h-screen max-w-screen-sm flex-col text-yellow-100">
+    <div className="bg-space-black mx-auto flex h-screen max-w-screen-sm flex-col text-white">
       <CustomAlert
         message={alertMessage}
         isVisible={isAlertVisible}
@@ -146,11 +146,11 @@ const SearchCommon = () => {
         <div className="my-4">
           <Header5 buttons={buttonsHeader2} />
         </div>
+        <p className="border-t"></p>
         <ul className="divide-nebula-blue space-y-4 divide-y overflow-y-auto">
           {activeTab === "constellation" &&
             (constellationList.length === 0 ? (
               <div className="text-center">
-                <p className="border-t"></p>
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
                   <p className="text-white text-opacity-60">
                     검색된 별자리 목록이 없습니다.
@@ -178,7 +178,6 @@ const SearchCommon = () => {
           {activeTab === "member" &&
             (memberList.length === 0 ? (
               <div className="text-center">
-                <p className="border-t"></p>
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
                   <p className="text-white text-opacity-60">
                     검색된 닉네임 목록이 없습니다.
@@ -204,7 +203,6 @@ const SearchCommon = () => {
           {activeTab === "star" &&
             (starList.length === 0 ? (
               <div className="text-center">
-                <p className="border-t"></p>
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
                   <p className="text-white text-opacity-60">
                     검색된 별 목록이 없습니다.
@@ -241,10 +239,8 @@ const SearchCommon = () => {
                         {star.content}
                       </p>
                     </div>
-                    <div className="font-bold text-yellow-400">
-                      {star.nickname}
-                    </div>
-                    <span className="mt-2 text-xs text-yellow-300">
+                    <div className="font-bold text-white">{star.nickname}</div>
+                    <span className="mt-2 text-xs text-white">
                       {formatDate(star.createdAt)}
                     </span>
                   </div>

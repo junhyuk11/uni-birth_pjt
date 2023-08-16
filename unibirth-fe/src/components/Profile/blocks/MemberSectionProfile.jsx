@@ -121,7 +121,7 @@ const MemberSectionProfile = ({ locationNickname }) => {
                 <div className="flex flex-row items-center">
                   <p
                     onClick={() => handleToFollow(locationNickname, "팔로잉")}
-                    className="text-center text-yellow-100"
+                    className="text-center text-white"
                   >
                     팔로잉: {memberData.resultData.followingCount}
                   </p>
@@ -129,7 +129,7 @@ const MemberSectionProfile = ({ locationNickname }) => {
                 <div className="flex items-center">
                   <p
                     onClick={() => handleToFollow(locationNickname, "팔로워")}
-                    className="text-center text-yellow-100"
+                    className="text-center text-white"
                   >
                     팔로워: {memberData.resultData.followerCount}
                   </p>
@@ -137,13 +137,13 @@ const MemberSectionProfile = ({ locationNickname }) => {
                 <div className="flex items-center">
                   <p
                     onClick={() => navigateToMyStars(locationNickname)}
-                    className="text-center text-yellow-100"
+                    className="text-center text-white"
                   >
                     띄운별: {memberData.resultData.starCount}
                   </p>
                 </div>
               </div>
-              <div className="flex justify-end text-center text-yellow-100">
+              <div className="flex justify-end text-center text-white">
                 <div>관심행성: </div>
                 <div className="w-20">
                   {PLANET_LIST[memberData.resultData.planetId].name}

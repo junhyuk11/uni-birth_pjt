@@ -12,7 +12,7 @@ const InputEmail = ({ value, onChange, rememberId, setRememberId }) => {
         </label>
         <div className="flex flex-row">
           <input
-            className=" text-yellow-200"
+            className=" text-white"
             type="checkbox"
             checked={rememberId}
             onChange={(e) => setRememberId(e.target.checked)}
@@ -22,9 +22,9 @@ const InputEmail = ({ value, onChange, rememberId, setRememberId }) => {
       </div>
       <div className="mt-2 flex w-full">
         <input
-          className="w-full border-b-2 border-gray-400 bg-transparent py-2 text-yellow-200 
+          className="w-full border-b-2 border-gray-400 bg-transparent py-2 text-white 
           placeholder-gray-400 outline-none
-          focus:border-yellow-200"
+          focus:border-purple-400"
           type="email"
           id="email"
           name="email"

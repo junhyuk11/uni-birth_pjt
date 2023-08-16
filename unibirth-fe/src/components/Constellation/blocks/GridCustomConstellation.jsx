@@ -324,8 +324,8 @@ const GridCustomConstellation = ({
                 numPoints={5}
                 innerRadius={10}
                 outerRadius={5}
-                fill="#FFD700"
-                shadowColor="#FFD700"
+                fill={constellationColor}
+                shadowColor="#EEE5FF"
                 shadowBlur={5}
                 shadowOpacity={0.6}
               />
@@ -335,9 +335,10 @@ const GridCustomConstellation = ({
               <Line
                 key={y}
                 points={[line[1], line[0], line[3], line[2]]}
-                stroke="#ffe970"
+                stroke="#FFFFFF"
                 shadowColor="#FFFFFF"
                 shadowBlur={5}
+                opacity={0.5}
                 tension={1}
               />
             ))}
