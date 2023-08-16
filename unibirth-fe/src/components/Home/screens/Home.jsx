@@ -45,7 +45,7 @@ const Home = () => {
         <HomeFooter buttons={buttons} />
       </div>
       <button
-        className="bold-text absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 transform items-center text-xl text-white"
+        className="bold-text fixed bottom-8 left-1/2 z-10 flex -translate-x-1/2 transform items-center text-xl text-white"
         onClick={() => setIsActive(!isActive)}
       >
         도움말

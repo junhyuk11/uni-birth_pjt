@@ -168,7 +168,7 @@ const Scene = ({ constellationList }) => {
         className="absolute bottom-52 right-4 z-10 flex flex-col text-lg text-white opacity-100"
         onClick={navigateToRegisterConstellation}
       >
-        <DrawingIcon />
+        <DrawingIconRe />
       </button>
       <Button1
         className="absolute bottom-36 right-4 z-10 flex flex-col text-4xl text-white opacity-100"

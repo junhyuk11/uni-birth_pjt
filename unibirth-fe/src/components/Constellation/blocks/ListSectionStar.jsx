@@ -22,8 +22,8 @@ import Star2 from "../../../assets/icons/js/star2";
 import LineDrawing from "../atoms/LineDrawing";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 import InviteFollowStar from "../../Star/blocks/InviteFollowStar";
-import DrawingIcon from "../../../assets/icons/js/DrawingIcon";
 import InviteFollow from "../../../assets/icons/js/InviteFollow";
+import DrawingIconRe from "../../../assets/icons/js/DrawingIconRe";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -174,7 +174,7 @@ const ListSectionStar = () => {
 
       {!isFulledStar && (
         <button
-          className="fixed bottom-56 right-4 z-10 flex flex-col text-4xl text-white"
+          className="fixed bottom-56 right-6 z-10 flex flex-col text-4xl text-white"
           onClick={toggleModal}
         >
           <InviteFollow />
@@ -183,10 +183,10 @@ const ListSectionStar = () => {
 
       {!isFulledStar && (
         <button
-          className="fixed bottom-40 left-1/2 z-10 flex -translate-x-1/2 flex-col text-4xl text-white"
+          className="absolute bottom-40 right-4 z-10 flex flex-col text-lg text-white opacity-100"
           onClick={navigateToRegisterStar}
         >
-          <DrawingIcon />
+          <DrawingIconRe />
         </button>
       )}
 

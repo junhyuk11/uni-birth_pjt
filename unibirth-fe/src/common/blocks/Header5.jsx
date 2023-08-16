@@ -10,7 +10,7 @@ const Header5 = ({ buttons }) => {
           return (
             <ButtonComponent
               key={index}
-              className="w-36 font-Pretendard"
+              className="font-Pretendard"
               value={button.value}
               onClick={button.onClick}
               icon={button.icon}

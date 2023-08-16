@@ -36,6 +36,7 @@ const MemberProfile = () => {
     navigateToModifyMember,
     navigateToSearchQuration,
     navigateToDirectMessage,
+    navigateToMemberProfile,
   } = useNavigation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -117,9 +118,10 @@ const MemberProfile = () => {
     {
       onClick: navigateToMainPlanet,
     },
+    {
+      onClick: () => navigateToMemberProfile(nickname),
+    },
   ];
-
-  buttonsFooter.push({});
 
   const [isActive, setIsActive] = useState(false);
 
@@ -179,8 +181,8 @@ const MemberProfile = () => {
         <MemberSectionProfile locationNickname={locationNickname} />
         <ConstellationSectionProfile locationNickname={locationNickname} />
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex flex flex-col items-center justify-center">
-            <div className="z-10 rounded border-2 border-purple-200 border-opacity-25 bg-slate-800 p-4 shadow-md">
+          <div className="fixed inset-0 z-50 flex flex-col items-center justify-center">
+            <div className="z-10 rounded border-2 border-yellow-200 border-opacity-25 bg-slate-800 p-4 shadow-md">
               <Header4
                 buttons={modalButtons}
                 isModalOpen={isModalOpen}
