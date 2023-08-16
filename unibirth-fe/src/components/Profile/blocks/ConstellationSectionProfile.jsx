@@ -92,7 +92,7 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
       </div>
       <div className="flex flex-row flex-wrap">
         {images.length === 0 ? (
-          <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 transform py-4 text-center">
+          <div className="absolute left-1/2 top-2/3 w-full -translate-x-1/2 -translate-y-1/2 transform py-4 text-center">
             <p className="text-white text-opacity-60">별자리가 없습니다.</p>
           </div>
         ) : (
