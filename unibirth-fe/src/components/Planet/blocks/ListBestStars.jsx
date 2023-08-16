@@ -38,7 +38,7 @@ const Carousel = ({ Lists }) => {
               <div>
                 <div className="flex justify-end">
                   <div className="text-1xl absolute top-2 mr-4 flex-none font-TAEBAEKmilkyway text-gray-300">
-                    <AiFillStar color="yellow" className="mr-1 inline" />
+                    <AiFillStar color="#BA97FF" className="mr-1 inline" />
                     {List.brightness}
                   </div>
                 </div>

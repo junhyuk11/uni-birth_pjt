@@ -12,10 +12,11 @@ const InputEmail = ({ value, onChange, rememberId, setRememberId }) => {
         </label>
         <div className="flex flex-row">
           <input
-            className=" text-white"
+            className=" text-white accent-purple-500"
             type="checkbox"
             checked={rememberId}
             onChange={(e) => setRememberId(e.target.checked)}
+            autoComplete="off"
           />
           <label className="text-md ml-2 text-white">이메일 저장</label>
         </div>

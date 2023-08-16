@@ -137,11 +137,7 @@ const RegisterStar = () => {
       <div>
         <Header1 buttons={buttonsHeader} />
         <div className="mt-24 flex flex-col items-center justify-center space-y-10">
-          <img
-            src={thumbUrl || earth}
-            alt="이미지"
-            className="h-32 w-32 rounded-full object-cover"
-          />
+          <img src={thumbUrl || earth} alt="이미지" className="w-1/2" />
           <InputImage setImageUrl={setImageUrl} setThumbUrl={setThumbUrl} />
           <BodyRegisterStar
             title={title}
@@ -150,7 +146,7 @@ const RegisterStar = () => {
             setContent={setContent}
           />
         </div>
-        <div className="mt-20 flex justify-center ">
+        <div className="flex justify-center py-20 ">
           <Button1 value="별 생성" onClick={createStar} disabled={isLoading} />
         </div>
       </div>

@@ -15,7 +15,7 @@ const BodyRegisterStar = ({ title, setTitle, content, setContent }) => {
             placeholder="이름"
             id="InputTitle"
             value={title}
-            maxLength={8}
+            maxLength={10}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>

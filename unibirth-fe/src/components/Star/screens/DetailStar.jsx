@@ -245,11 +245,11 @@ const DetailStar = () => {
           }
         }}
       />
-      <header className="sticky top-0 z-10">
+      <header className="fixed top-0 z-10  w-full bg-black bg-opacity-90">
         <Header1 buttons={buttonsHeader} />
       </header>
       <div className="px-4">
-        <div className="flex flex-row items-center py-2">
+        <div className="mt-10 flex flex-row items-center py-2 pt-10">
           <div
             className="mt-0 flex flex-col"
             style={{ maxWidth: "100%", wordWrap: "break-word" }}
@@ -322,7 +322,7 @@ const DetailStar = () => {
             <div className="flex flex-row justify-between border-y py-2">
               <div className="flex flex-row">
                 <input
-                  className="ml-2 w-3/5 bg-transparent text-white"
+                  className="ml-2 w-3/5 bg-transparent text-white focus:border-white focus:outline-none focus:ring-white"
                   placeholder="댓글을 남겨보세요"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}

@@ -31,10 +31,11 @@ const CustomDropdown = ({ planetId, setPlanetId }) => {
       className="flex flex-col items-center justify-center rounded-lg border-double bg-transparent text-white"
       ref={toggleContainer}
     >
+      <p className=" mb-1 font-Pretendard text-gray-100">관심 행성</p>
       <div className="relative flex w-40 justify-center text-white">
         <button
           type="button"
-          className=" flex w-32 flex-row justify-center rounded-lg border bg-transparent p-2"
+          className="flex w-full flex-row justify-center rounded-lg border bg-transparent px-2 py-1 text-sm"
           onClick={() => setIsOpen(!isOpen)}
         >
           <div>{PLANET_LIST[planetId]?.name}</div>

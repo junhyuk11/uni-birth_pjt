@@ -144,7 +144,7 @@ const SearchCommon = () => {
         />
       </header>
 
-      <div className="mt-16 flex  flex-1  flex-col p-4">
+      <div className=" flex  flex-1  flex-col p-4">
         <div className="my-4">
           <Header5 buttons={buttonsHeader2} />
         </div>

@@ -13,22 +13,29 @@ const InpuitDescription = ({ constellationDescp, setConstellationDescp }) => {
         설명
       </label>
       <div className="w-full">
-        <div className=" flex flex-row items-center justify-center">
+        <div className="flex flex-row items-center justify-center">
           <p className="inline-block text-sm text-white">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </p>
           <textarea
             style={{
               overflow: "hidden",
-              resize: "none", // 사용자가 크기를 조정할 수 없도록 함
+              resize: "none",
+              minHeight: "1.5rem",
             }}
+            rows="1"
             type="text"
             id="constellationDescp"
             name="constellationDescp"
             value={constellationDescp}
             maxLength={50}
-            className="w-44 bg-transparent text-center text-white outline-none "
-            onChange={(e) => setConstellationDescp(e.target.value)}
+            className="w-44 bg-transparent text-center text-white outline-none"
+            onChange={(e) => {
+              setConstellationDescp(e.target.value);
+              e.target.style.height = "inherit";
+              e.target.style.height = `${e.target.scrollHeight}px`;
+            }}
+            autoComplete="off"
           />
           <p className="inline-block text-sm text-white">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

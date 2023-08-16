@@ -60,7 +60,7 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
 
   return (
     <div>
-      <div className="mx-auto flex flex-row items-center justify-between border-y-2 border-yellow-100 bg-slate-950 bg-opacity-70 font-Pretendard text-white">
+      <div className="mx-auto flex flex-row items-center justify-between border-y-2 border-purple-100 bg-slate-950 bg-opacity-70 font-Pretendard text-white">
         <CustomAlert
           message={alertMessage}
           isVisible={isAlertVisible}
@@ -77,7 +77,7 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
         />
         <Button3
           value="참여한 별자리"
-          className="mx-auto  w-full border-r border-yellow-100 font-Pretendard text-white"
+          className="mx-auto  w-full border-r border-purple-100 font-Pretendard text-white"
           selectedValue={selectedButton}
           onSelect={handleButtonClick}
           onClick={handleParticipateClick}
@@ -92,7 +92,7 @@ const ConstellationSectionProfile = ({ locationNickname }) => {
       </div>
       <div className="flex flex-row flex-wrap">
         {images.length === 0 ? (
-          <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 transform py-4 text-center">
+          <div className="absolute left-1/2 top-2/3 w-full -translate-x-1/2 -translate-y-1/2 transform py-4 text-center">
             <p className="text-white text-opacity-60">별자리가 없습니다.</p>
           </div>
         ) : (

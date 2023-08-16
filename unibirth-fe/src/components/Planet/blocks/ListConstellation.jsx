@@ -16,7 +16,7 @@ import MeshCons from "../atoms/MeshCons";
 import { gsap } from "gsap";
 import HtmlConstellation from "../atoms/HtmlConstellation";
 import { useNavigation } from "../../../hooks/useNavigation";
-import DrawingIcon from "../../../assets/icons/js/DrawingIcon";
+import DrawingIconRe from "../../../assets/icons/js/DrawingIconRe";
 import Zoomout from "../../../assets/icons/js/zoomout";
 import Zoomin from "../../../assets/icons/js/zoomin";
 
@@ -166,7 +166,7 @@ const Scene = ({ constellationList }) => {
         className="absolute bottom-36 right-4 z-10 flex flex-col text-lg text-white opacity-100"
         onClick={navigateToRegisterConstellation}
       >
-        <DrawingIcon />
+        <DrawingIconRe />
       </button>
       <button
         className="absolute bottom-24 right-4

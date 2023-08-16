@@ -23,7 +23,7 @@ import LineDrawing from "../atoms/LineDrawing";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 import InviteFollowStar from "../../Star/blocks/InviteFollowStar";
 import { LiaUserFriendsSolid } from "react-icons/lia";
-import DrawingIcon from "../../../assets/icons/js/DrawingIcon";
+import DrawingIconRe from "../../../assets/icons/js/DrawingIconRe";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -186,7 +186,7 @@ const ListSectionStar = () => {
           className="fixed bottom-40 left-1/2 z-10 flex -translate-x-1/2 flex-col text-4xl text-white"
           onClick={navigateToRegisterStar}
         >
-          <DrawingIcon />
+          <DrawingIconRe />
         </button>
       )}
 
@@ -306,7 +306,7 @@ const ListSectionStar = () => {
                   }}
                 >
                   <Star2 />
-                  <p className="mb-0 ml-2">: {brightness}</p>
+                  <p className="mb-0 ml-2 text-purple-500">: {brightness}</p>
                 </div>
               </div>
               <div className="flex flex-col">
