@@ -72,7 +72,7 @@ const SearchQuration = () => {
 
   return (
     <div className="mx-auto h-full min-h-screen max-w-screen-sm">
-      <header className="sticky top-0 z-10">
+      <header className="fixed top-0 z-10 bg-black bg-opacity-90">
         <SearchHeader
           buttons={buttonsHeader}
           category={category}
@@ -81,7 +81,7 @@ const SearchQuration = () => {
           setQuery={setQuery}
         />
       </header>
-      <div className="bg-space-black mx-auto flex h-screen max-w-screen-sm flex-col text-white">
+      <div className="bg-space-black mx-auto mt-16 flex h-screen max-w-screen-sm flex-col text-white">
         <CustomAlert
           message={alertMessage}
           isVisible={isAlertVisible}
@@ -99,7 +99,7 @@ const SearchQuration = () => {
           <div className="my-4">
             <Header5 buttons={buttonsHeader2} />
           </div>
-          <div className="flex flex-col items-center justify-center"></div>
+          <div className="mt-30 flex flex-col items-center justify-center"></div>
           {currentState === "팔로우" && <QurationStar data={followingData} />}
           {currentState === "관심행성" && <QurationStar data={interestData} />}
         </div>

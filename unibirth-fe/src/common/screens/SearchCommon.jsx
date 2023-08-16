@@ -134,15 +134,17 @@ const SearchCommon = () => {
           }
         }}
       />
-      <SearchHeader
-        buttons={buttonsHeader}
-        category={searchCategory}
-        setCategory={setSearchCategory}
-        query={searchQuery}
-        setQuery={setSearchQuery}
-      />
+      <header className="fixed top-0 z-10 bg-black bg-opacity-90">
+        <SearchHeader
+          buttons={buttonsHeader}
+          category={searchCategory}
+          setCategory={setSearchCategory}
+          query={searchQuery}
+          setQuery={setSearchQuery}
+        />
+      </header>
 
-      <div className="flex flex-1 flex-col p-4">
+      <div className="mt-16 flex  flex-1  flex-col p-4">
         <div className="my-4">
           <Header5 buttons={buttonsHeader2} />
         </div>
