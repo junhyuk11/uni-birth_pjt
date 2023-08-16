@@ -163,13 +163,13 @@ const Scene = ({ constellationList }) => {
         <BiSolidRightArrow />
       </button>
       <button
-        className="absolute bottom-36 right-4 z-10 flex flex-col text-lg text-white opacity-100"
+        className="absolute bottom-40 right-4 z-10 flex flex-col text-lg text-white opacity-100"
         onClick={navigateToRegisterConstellation}
       >
         <DrawingIconRe />
       </button>
       <button
-        className="absolute bottom-24 right-4
+        className="absolute bottom-24 right-1
         z-10 flex -translate-x-1/2 flex-col text-6xl text-white"
         onClick={handleZoomClick}
       >

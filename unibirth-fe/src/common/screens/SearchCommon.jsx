@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import useSearchApi from "../../api/useSearchApi";
-import { useSetRecoilState } from "recoil";
-import { backgroundflagState } from "../../recoil/atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { backgroundflagState, nicknameState } from "../../recoil/atoms";
 import { useNavigation } from "../../hooks/useNavigation";
 import Button2 from "../atoms/Button2";
 import LeftArrow from "../../assets/icons/js/leftArrow";
@@ -10,12 +10,14 @@ import SearchHeader from "../blocks/SearchHeader";
 import CustomAlert from "../atoms/CustomAlert";
 import Button1 from "../atoms/Button1";
 import Header5 from "../blocks/Header5";
+import Footer from "../blocks/Footer";
 
 const SearchCommon = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
   useEffect(() => {
     backgroundflag(true);
   }, []);
+  const nickname = useRecoilValue(nicknameState);
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("constellation");
   const query = location.state.query;
@@ -35,6 +37,7 @@ const SearchCommon = () => {
     navigateToDetailStar,
     navigateToMemberProfile,
     navigateToBack,
+    navigateToMainPlanet,
   } = useNavigation();
 
   useEffect(() => {
@@ -122,6 +125,18 @@ const SearchCommon = () => {
     },
   ];
 
+  const buttonsFooter = [
+    {
+      onClick: () => {},
+    },
+    {
+      onClick: navigateToMainPlanet,
+    },
+    {
+      onClick: () => navigateToMemberProfile(nickname),
+    },
+  ];
+
   return (
     <div className="bg-space-black mx-auto flex h-screen max-w-screen-sm flex-col text-white">
       <CustomAlert
@@ -149,7 +164,7 @@ const SearchCommon = () => {
           <Header5 buttons={buttonsHeader2} />
         </div>
         <p className="border-t"></p>
-        <ul className="divide-nebula-blue space-y-4 divide-y overflow-y-auto">
+        <ul className="divide-nebula-blue mb-10 space-y-4 divide-y overflow-y-auto">
           {activeTab === "constellation" &&
             (constellationList.length === 0 ? (
               <div className="text-center">
@@ -250,6 +265,9 @@ const SearchCommon = () => {
               ))
             ))}
         </ul>
+        <div className="fixed bottom-3 left-1/2 z-10 -translate-x-1/2">
+          <Footer buttons={buttonsFooter} />
+        </div>
       </div>
     </div>
   );

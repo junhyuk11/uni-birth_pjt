@@ -174,7 +174,7 @@ const ListSectionStar = () => {
 
       {!isFulledStar && (
         <button
-          className="fixed bottom-56 right-4 z-10 flex flex-col text-4xl text-white"
+          className="fixed bottom-56 right-6 z-10 flex flex-col text-4xl text-white"
           onClick={toggleModal}
         >
           <LiaUserFriendsSolid />
@@ -183,7 +183,7 @@ const ListSectionStar = () => {
 
       {!isFulledStar && (
         <button
-          className="fixed bottom-40 left-1/2 z-10 flex -translate-x-1/2 flex-col text-4xl text-white"
+          className="absolute bottom-40 right-4 z-10 flex flex-col text-lg text-white opacity-100"
           onClick={navigateToRegisterStar}
         >
           <DrawingIconRe />
