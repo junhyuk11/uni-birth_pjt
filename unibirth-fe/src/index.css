@@ -27,19 +27,19 @@
 
 @layer components {
   .dropdown-enter {
-    @apply transform transition-transform ease-out duration-300;
+    @apply transform transition-transform duration-300 ease-out;
     transform: translateY(-100%);
   }
   .dropdown-enter-active {
-    @apply transform transition-transform ease-out duration-300;
+    @apply transform transition-transform duration-300 ease-out;
     transform: translateY(0);
   }
   .dropdown-leave {
-    @apply transform transition-transform ease-in duration-300;
+    @apply transform transition-transform duration-300 ease-in;
     transform: translateY(0);
   }
   .dropdown-leave-active {
-    @apply transform transition-transform ease-in duration-300;
+    @apply transform transition-transform duration-300 ease-in;
     transform: translateY(-100%);
   }
 }
@@ -74,11 +74,10 @@
   display: block;
 }
 
-.dropdown .options div:hover {
+.dropdown .options {
   background-color: #f1f1f1;
 }
 
-
 .custom-font {
-  font-family: 'Pretendard';
+  font-family: "Pretendard";
 }

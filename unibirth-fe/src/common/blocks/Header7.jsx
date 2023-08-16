@@ -11,7 +11,7 @@ const Header7 = ({ buttons }) => {
           const ButtonComponent = button.component;
           return (
             <ButtonComponent
-              className="w-10 font-Pretendard hover:bg-yellow-500"
+              className="w-10 font-Pretendard"
               key={index}
               onClick={button.onClick}
               icon={button.icon}
@@ -25,7 +25,7 @@ const Header7 = ({ buttons }) => {
           const ButtonComponent = button.component;
           return (
             <ButtonComponent
-              className="w-16 font-Pretendard hover:bg-yellow-500"
+              className="w-16 font-Pretendard"
               key={index}
               onClick={button.onClick}
               icon={button.icon}

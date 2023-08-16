@@ -93,7 +93,7 @@ const InviteFollowStar = () => {
             return (
               <div
                 key={item.nickname}
-                className="mb-3 flex items-center space-x-4 p-2 hover:bg-gray-100"
+                className="mb-3 flex items-center space-x-4 p-2"
               >
                 <img
                   src={item.imageUrl}
@@ -103,7 +103,7 @@ const InviteFollowStar = () => {
                 <div className="font-semibold">{item.nickname}</div>
                 <button
                   onClick={() => handleInvite(item.nickname)}
-                  className="text-purple-500 hover:text-purple-700"
+                  className="text-purple-500"
                 >
                   {invitedUsers[item.nickname] ? (
                     <BsCheck className="h-6 w-6" />

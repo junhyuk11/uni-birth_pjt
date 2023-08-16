@@ -9,7 +9,7 @@ const Header1 = ({ buttons }) => {
           return (
             <ButtonComponent
               key={index}
-              className="w-10 font-Pretendard hover:bg-yellow-500"
+              className="w-10 font-Pretendard text-white"
               value={button.value}
               onClick={button.onClick}
               icon={button.icon}

@@ -18,7 +18,7 @@ const Header4 = ({ buttons, isModalOpen, setIsModalOpen }) => {
               return (
                 <ButtonComponent
                   key={index}
-                  className="m-2 w-40 p-2 font-Pretendard hover:bg-yellow-500"
+                  className="m-2 w-40 p-2 font-Pretendard"
                   value={button.value}
                   onClick={button.onClick}
                   icon={button.icon}

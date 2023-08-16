@@ -3,7 +3,7 @@ import React from "react";
 const DrawingBackButton = ({ value, onClick, className, icon }) => {
   return (
     <button
-      className={`yellow mb-8 ml-6 flex flex-col items-center rounded-full border border-yellow-300 p-2.5 text-center text-sm font-medium text-white hover:bg-yellow-200 hover:fill-cyan-700`}
+      className={`yellow mb-8 ml-6 flex flex-col items-center rounded-full border  p-2.5 text-center text-sm font-medium text-white`}
       onClick={onClick}
     >
       <svg

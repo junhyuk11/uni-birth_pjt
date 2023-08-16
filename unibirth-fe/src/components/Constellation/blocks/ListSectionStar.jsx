@@ -194,7 +194,7 @@ const ListSectionStar = () => {
         <div className="fixed bottom-56 right-4 z-50 w-64 rounded-lg bg-white shadow-lg">
           <button
             onClick={toggleModal}
-            className="float-right rounded p-2 text-xl hover:bg-gray-200"
+            className="float-right rounded p-2 text-xl"
           >
             X
           </button>
