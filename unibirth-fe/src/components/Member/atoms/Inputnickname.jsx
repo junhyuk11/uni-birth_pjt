@@ -35,6 +35,7 @@ const Inputnickname = ({ onChange }) => {
             id="nickname"
             maxLength={8}
             minLength={2}
+            autoComplete="off"
           />
           <div className="mt-2 text-red-500">
             {error || <span style={{ opacity: 0 }}>Placeholder</span>}

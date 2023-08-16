@@ -3,11 +3,11 @@ import Button1 from "../../../common/atoms/Button1";
 import Button2 from "../../../common/atoms/Button2";
 import Header1 from "../../../common/blocks/Header1";
 import Footer1 from "../../../common/blocks/Footer1";
-import InputDropdown from "../atoms/InputDropdown";
+import InputDropdown2 from "../atoms/InputDropdown2";
 import InputStella from "../atoms/InputStella";
 import InputDescription from "../atoms/InputDescription";
 import { useNavigation } from "../../../hooks/useNavigation";
-import planet1 from "../../../assets/images/planet1.png";
+// import planet1 from "../../../assets/images/planet1.png";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { backgroundflagState, currentplanetState } from "../../../recoil/atoms";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
@@ -77,12 +77,12 @@ const RegistConstellation = () => {
         <Header1 buttons={buttonsHeader} />
         <div className="mt-24 flex flex-col items-center justify-center space-y-5">
           <img
-            src={planet1}
+            src={`/images/planet0${planetId}.jpg`}
             alt="행성1 이미지 예시"
-            className="flex items-center justify-center rounded-full"
+            className="h-32 w-32 rounded-full"
           />
           <p className="font-Pretendard text-white">행성 명</p>
-          <InputDropdown planetId={planetId} setPlanetId={setPlanetId} />
+          <InputDropdown2 planetId={planetId} setPlanetId={setPlanetId} />
           <InputStella
             constellationName={constellationName}
             setConstellationName={setConstellationName}

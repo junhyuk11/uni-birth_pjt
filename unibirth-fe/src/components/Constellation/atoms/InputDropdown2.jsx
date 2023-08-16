@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { PLANET_LIST } from "../../../constants/constants";
 
-const CustomDropdown = ({ planetId, setPlanetId }) => {
+const InputDropDown2 = ({ planetId, setPlanetId }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleContainer = useRef(null);
 
@@ -32,18 +32,13 @@ const CustomDropdown = ({ planetId, setPlanetId }) => {
       ref={toggleContainer}
     >
       <div className="relative flex w-40 justify-center text-white">
-        <div className="flex flex-col items-center">
-          <label className="mx-auto mb-2 items-center justify-center self-center">
-            관심행성
-          </label>
-          <button
-            type="button"
-            className=" flex w-32 flex-row justify-center rounded-lg border bg-transparent p-2"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <div>{PLANET_LIST[planetId - 1]?.name}</div>
-          </button>
-        </div>
+        <button
+          type="button"
+          className=" flex w-32 flex-row justify-center rounded-lg border bg-transparent p-2"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <div>{PLANET_LIST[planetId - 1]?.name}</div>
+        </button>
         <div
           className={`absolute mt-2 rounded-lg ${
             isOpen
@@ -74,4 +69,4 @@ const CustomDropdown = ({ planetId, setPlanetId }) => {
   );
 };
 
-export default CustomDropdown;
+export default InputDropDown2;

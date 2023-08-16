@@ -158,6 +158,7 @@ const ModifyProfile = () => {
           setThumbUrl={setThumbUrl}
           onChange={saveImgFile}
         />
+
         <Inputdropdown planetId={planetId} setPlanetId={setPlanetId} />
         <div className="w-full flex-initial items-center justify-center font-Pretendard">
           <div className="w-full flex-row">
