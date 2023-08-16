@@ -134,7 +134,7 @@ const SearchCommon = () => {
           }
         }}
       />
-      <header className="sticky top-0 z-10 bg-black bg-opacity-90">
+      <header className="fixed top-0 z-10 bg-black bg-opacity-90">
         <SearchHeader
           buttons={buttonsHeader}
           category={searchCategory}
