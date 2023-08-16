@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button2 from "../../../common/atoms/Button2";
 import { useNavigation } from "../../../hooks/useNavigation";
 import MemberSectionProfile from "../blocks/MemberSectionProfile";
@@ -49,6 +49,18 @@ const MemberProfile = () => {
       navigateToDirectMessage(locationNickname);
     }
   };
+  useEffect(() => {
+    // ESC 키를 누르면 모달 닫기
+    const handleEsc = (event) => {
+      if (event.keyCode === 27) {
+        setIsModalOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, []);
 
   const handleLogout = () => {
     sessionStorage.clear();
@@ -122,6 +134,11 @@ const MemberProfile = () => {
       onClick: () => navigateToMemberProfile(nickname),
     },
   ];
+  const handleOutsideClick = (event) => {
+    if (event.target.id === "modal-overlay") {
+      setIsModalOpen(false);
+    }
+  };
 
   const [isActive, setIsActive] = useState(false);
 
@@ -181,7 +198,11 @@ const MemberProfile = () => {
         <MemberSectionProfile locationNickname={locationNickname} />
         <ConstellationSectionProfile locationNickname={locationNickname} />
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex flex-col items-center justify-center">
+          <div
+            id="modal-overlay"
+            onClick={handleOutsideClick}
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black bg-opacity-50"
+          >
             <div className="z-10 rounded border-2 border-yellow-200 border-opacity-25 bg-slate-800 p-4 shadow-md">
               <Header4
                 buttons={modalButtons}
