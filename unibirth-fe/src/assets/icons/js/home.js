@@ -8,7 +8,7 @@ const Home = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect x="0.5" y="0.5" width="114" height="46" stroke="#E337FF" />
+    <rect x="0.5" y="0.5" width="114" height="46" stroke="#EEE5FF" />
     <svg
       x="47.5"
       y="14"

@@ -116,7 +116,7 @@ const DetailConstellation = () => {
         {isActive && (
           <div className="absolute flex w-44 flex-col justify-center">
             <div className="text-bold flex justify-center">설명</div>
-            <div>{constellationContent?.introduction}</div>
+            <div>{constellationContent?.description}</div>
           </div>
         )}
       </div>

@@ -5,7 +5,7 @@ import Left from "../../assets/icons/js/left";
 
 const Footer = ({ buttons }) => {
   return (
-    <footer className="flex flex-row items-center justify-between space-x-4">
+    <footer className="flex flex-row items-center justify-between space-x-4 border-yellow-400">
       <button
         className="flex items-center"
         value={buttons[0].value}
