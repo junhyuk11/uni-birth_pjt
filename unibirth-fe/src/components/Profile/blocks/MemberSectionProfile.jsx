@@ -162,9 +162,9 @@ const MemberSectionProfile = ({ locationNickname }) => {
             onClick={navigateToModifyProfile}
           />
         ) : isFollowing ? (
-          <Button5 value="언팔로우" onClick={handleUnfollow} />
+          <Button5 value="언팔로우" className="w-24" onClick={handleUnfollow} />
         ) : (
-          <Button5 value="팔로우" onClick={handleFollow} />
+          <Button5 value="팔로우" className="w-20" onClick={handleFollow} />
         )}
       </div>
     </div>
