@@ -4,7 +4,7 @@ import { nicknameState, StellaIdState } from "../../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 import { HiPaperAirplane } from "react-icons/hi";
 import { BsCheck } from "react-icons/bs";
-import { sendInvite } from "../../../api/useFirebaseApi";
+import { sendInvite, updateAlarm } from "../../../api/useFirebaseApi";
 import useConstellationApi from "../../../api/useConstellationApi";
 import CustomAlert from "../../../common/atoms/CustomAlert";
 import { useNavigation } from "../../../hooks/useNavigation";
@@ -63,9 +63,15 @@ const InviteFollowStar = () => {
       );
       const constellationTitle = response.resultData.constellationTitle;
 
-      sendInvite(nickname, targetNickname, constellationTitle, constellationId);
+      await sendInvite(
+        nickname,
+        targetNickname,
+        constellationTitle,
+        constellationId,
+      );
 
       setInvitedUsers({ ...invitedUsers, [targetNickname]: true });
+      await updateAlarm(targetNickname, Date.now());
     } catch (error) {
       // console.error("Error fetching constellation detail:", error);
     }
