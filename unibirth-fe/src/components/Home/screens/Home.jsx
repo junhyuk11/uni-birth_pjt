@@ -12,6 +12,13 @@ const Home = () => {
     setBackgroundflag(true);
   }, []);
   const { navigateToMainPlanet, navigateToLoginMember } = useNavigation();
+  const [isActive, setIsActive] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("accessToken");
+    setIsLoggedIn(!!token);
+  }, []);
 
   const buttons = [
     {
@@ -20,15 +27,13 @@ const Home = () => {
       value: "시작하기",
       onClick: navigateToMainPlanet,
     },
-    {
+    !isLoggedIn && {
       component: Button1,
       className: "font-TAEBAEKmilkyway",
       value: "로그인",
       onClick: navigateToLoginMember,
     },
-  ];
-
-  const [isActive, setIsActive] = useState(false);
+  ].filter(Boolean); // undefined 요소를 필터링하여 제거
 
   return (
     <div className="relative h-screen w-screen">
