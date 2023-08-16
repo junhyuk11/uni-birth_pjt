@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button2 from "../atoms/Button2";
 import { useNavigation } from "../../hooks/useNavigation";
-import Button1 from "../atoms/Button1";
+import Button7 from "../atoms/Button7";
 import SearchHeader from "../blocks/SearchHeader";
 import QurationStar from "../blocks/QurationStar";
 import Footer from "../blocks/Footer";
@@ -71,14 +71,14 @@ const SearchQuration = () => {
 
   const buttonsHeader2 = [
     {
-      component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      component: Button7,
+      className: "w-36",
       value: "팔로우",
       onClick: () => setCurrentState("팔로우"),
     },
     {
-      component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      component: Button7,
+      className: "w-36",
       value: "관심행성",
       onClick: () => setCurrentState("관심행성"),
     },

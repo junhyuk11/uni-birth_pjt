@@ -8,7 +8,7 @@ import Button2 from "../atoms/Button2";
 import LeftArrow from "../../assets/icons/js/leftArrow";
 import SearchHeader from "../blocks/SearchHeader";
 import CustomAlert from "../atoms/CustomAlert";
-import Button1 from "../atoms/Button1";
+import Button6 from "../atoms/Button6";
 import Header5 from "../blocks/Header5";
 import Footer from "../blocks/Footer";
 
@@ -106,20 +106,20 @@ const SearchCommon = () => {
 
   const buttonsHeader2 = [
     {
-      component: Button1,
-      className: "font-TAEBAEKmilkyway bg-white",
+      component: Button6,
+      className: "w-20",
       value: "별자리",
       onClick: () => setActiveTab("constellation"),
     },
     {
-      component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      component: Button6,
+      className: "w-20",
       value: "닉네임",
       onClick: () => setActiveTab("member"),
     },
     {
-      component: Button1,
-      className: "font-TAEBAEKmilkyway",
+      component: Button6,
+      className: "w-20",
       value: "별",
       onClick: () => setActiveTab("star"),
     },
