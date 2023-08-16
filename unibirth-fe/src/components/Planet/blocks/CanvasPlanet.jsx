@@ -1,7 +1,7 @@
 // import React from "react";
 import React, { useRef, useState, useEffect } from "react";
 // import usePlanetApi from "../../../api/usePlanetApi";
-import Button1 from "../../../common/atoms/Button1";
+// import Button1 from "../../../common/atoms/Button1";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
@@ -13,7 +13,7 @@ import GradientBackground from "../../../common/atoms/GradientBackground";
 import { useSetRecoilState } from "recoil";
 import { backgroundflagState } from "../../../recoil/atoms";
 import { PLANET_LIST } from "../../../constants/constants";
-
+import Button1 from "../../../common/atoms/Button1";
 // R3F 훅 카메라 컨트롤러 컴포넌트
 function CameraController({ planet, zoomed }) {
   const { camera } = useThree();
@@ -110,11 +110,10 @@ const ListSectionPlanet = ({
         <BiSolidRightArrow />
       </button>
       <Button1
-        className="absolute bottom-36 right-4 z-10 flex flex-col text-4xl text-white opacity-100"
+        className="absolute bottom-36 right-4 z-10 mx-auto my-auto flex inline-flex flex-col items-center justify-center rounded-full border p-2 text-4xl text-white opacity-100"
         onClick={handleZoomClick}
         icon={<PiCubeFocus size={30} />}
       />
-
       <Canvas camera={{ position: [0, 0, 0] }}>
         <OrbitControls
           enabled={true}
