@@ -22,8 +22,8 @@ import Star2 from "../../../assets/icons/js/star2";
 import LineDrawing from "../atoms/LineDrawing";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 import InviteFollowStar from "../../Star/blocks/InviteFollowStar";
-import { LiaUserFriendsSolid } from "react-icons/lia";
 import DrawingIcon from "../../../assets/icons/js/DrawingIcon";
+import InviteFollow from "../../../assets/icons/js/InviteFollow";
 
 const ListSectionStar = () => {
   const ref = useRef();
@@ -177,7 +177,7 @@ const ListSectionStar = () => {
           className="fixed bottom-56 right-4 z-10 flex flex-col text-4xl text-white"
           onClick={toggleModal}
         >
-          <LiaUserFriendsSolid />
+          <InviteFollow />
         </button>
       )}
 
