@@ -125,7 +125,7 @@ const Follow = () => {
               followerList.map((user) => (
                 <div
                   key={user.nickname}
-                  className="mx-4 flex w-full items-center border-b border-yellow-200 px-4 py-6"
+                  className="mx-4 flex w-full items-center border-b border-purple-200 px-4 py-6"
                 >
                   <div
                     className="flex flex-grow cursor-pointer items-center"
@@ -164,7 +164,7 @@ const Follow = () => {
               followingList.map((user) => (
                 <div
                   key={user.nickname}
-                  className="mx-4 flex w-full items-center border-b border-yellow-200 px-4 py-6"
+                  className="mx-4 flex w-full items-center border-b border-purple-200 px-4 py-6"
                 >
                   <div
                     className="flex flex-grow cursor-pointer items-center"

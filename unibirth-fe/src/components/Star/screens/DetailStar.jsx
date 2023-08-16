@@ -322,7 +322,7 @@ const DetailStar = () => {
             <div className="flex flex-row justify-between border-y py-2">
               <div className="flex flex-row">
                 <input
-                  className="ml-2 w-3/5 bg-transparent text-white"
+                  className="ml-2 w-3/5 bg-transparent text-white focus:border-white focus:outline-none focus:ring-white"
                   placeholder="댓글을 남겨보세요"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}

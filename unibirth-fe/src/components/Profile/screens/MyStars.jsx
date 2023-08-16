@@ -87,7 +87,7 @@ const MyStars = () => {
         {starList.map((star) => (
           <li
             key={star.starId}
-            className="animate-sparkle flex w-full items-start border-b border-yellow-200 px-4 py-4"
+            className="animate-sparkle flex w-full items-start border-b border-purple-200 px-4 py-4"
             onClick={() => handleToDetailStar(star.starId)}
           >
             <img
