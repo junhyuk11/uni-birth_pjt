@@ -35,7 +35,7 @@ const MyStars = () => {
     {
       component: () => (
         <span className="ml-4 text-2xl text-white" onClick={() => {}}>
-          띄운 별
+          띄운별
         </span>
       ),
     },
@@ -80,47 +80,49 @@ const MyStars = () => {
           }
         }}
       />
-      <header className="sticky top-0 z-10">
+      <header className="fixed top-0 z-10 w-full bg-black bg-opacity-90">
         <Header2 buttons={buttonsHeader} />
       </header>
-      <ul className="flex flex-col items-center px-4 text-white">
-        {starList.map((star) => (
-          <li
-            key={star.starId}
-            className="animate-sparkle flex w-full items-start border-b border-purple-200 px-4 py-4"
-            onClick={() => handleToDetailStar(star.starId)}
-          >
-            <img
-              src={star.imageUrl}
-              alt={star.content}
-              className="my-auto mr-4 h-20 w-20 rounded-lg object-cover"
-            />
-            <div className="flex flex-col justify-between space-y-2">
-              <div className="text-lg font-semibold">{star.title} 자리</div>
-              <div className="max-h-10 overflow-hidden">
-                <p
-                  className="text-md"
-                  style={{
-                    maxHeight: "4em",
-                    maxWidth: "14em",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    display: "-webkit-box",
-                    WebkitLineClamp: 1,
-                    WebkitBoxOrient: "vertical",
-                  }}
-                >
-                  {star.content}
-                </p>
+      <div className="pt-10">
+        <ul className="mt-10 flex flex-col items-center px-4 text-white">
+          {starList.map((star) => (
+            <li
+              key={star.starId}
+              className="animate-sparkle flex w-full items-start border-b border-purple-200 px-4 py-4"
+              onClick={() => handleToDetailStar(star.starId)}
+            >
+              <img
+                src={star.imageUrl}
+                alt={star.content}
+                className="my-auto mr-4 h-20 w-20 rounded-lg object-cover"
+              />
+              <div className="flex flex-col justify-between space-y-2">
+                <div className="text-lg font-semibold">{star.title} 자리</div>
+                <div className="max-h-10 overflow-hidden">
+                  <p
+                    className="text-md"
+                    style={{
+                      maxHeight: "4em",
+                      maxWidth: "14em",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      display: "-webkit-box",
+                      WebkitLineClamp: 1,
+                      WebkitBoxOrient: "vertical",
+                    }}
+                  >
+                    {star.content}
+                  </p>
+                </div>
+                <div className="font-bold text-white">{locationNickname}</div>
+                <span className="mt-2 text-xs text-white">
+                  {formatDate(star.createdAt)}
+                </span>
               </div>
-              <div className="font-bold text-white">{locationNickname}</div>
-              <span className="mt-2 text-xs text-white">
-                {formatDate(star.createdAt)}
-              </span>
-            </div>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

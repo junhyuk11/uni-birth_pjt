@@ -134,7 +134,9 @@ const ModifyProfile = () => {
 
   return (
     <div className="mx-auto h-screen max-w-screen-sm">
-      <Header1 buttons={buttonsHeader} />
+      <header className="fixed top-0 z-10">
+        <Header1 buttons={buttonsHeader} />
+      </header>
       <CustomAlert
         message={alertMessage}
         isVisible={isAlertVisible}

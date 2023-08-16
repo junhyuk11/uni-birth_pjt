@@ -148,13 +148,13 @@ const MemberSectionProfile = ({ locationNickname }) => {
                 <div>{PLANET_LIST[memberData.resultData.planetId].name}</div>
               </div>
             </div>
-            <div className="text-right text-lg font-bold text-white">
+            <div className=" text-right text-lg font-bold text-white">
               {memberData.resultData.introduction}
             </div>
           </div>
         </div>
       )}
-      <div className="flex items-center justify-end space-x-4 bg-slate-950 bg-opacity-60 font-Pretendard">
+      <div className="mt-4 flex items-center justify-end space-x-4 bg-slate-950 bg-opacity-60 font-Pretendard">
         {nickname === locationNickname ? (
           <Button5
             value="수정"

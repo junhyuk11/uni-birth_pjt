@@ -134,7 +134,7 @@ const SearchCommon = () => {
           }
         }}
       />
-      <header className="fixed top-0 z-10 bg-black bg-opacity-90">
+      <header className="sticky top-0 z-10 bg-black bg-opacity-90">
         <SearchHeader
           buttons={buttonsHeader}
           category={searchCategory}
@@ -144,7 +144,7 @@ const SearchCommon = () => {
         />
       </header>
 
-      <div className="mt-16 flex  flex-1  flex-col p-4">
+      <div className=" flex  flex-1  flex-col p-4">
         <div className="my-4">
           <Header5 buttons={buttonsHeader2} />
         </div>
