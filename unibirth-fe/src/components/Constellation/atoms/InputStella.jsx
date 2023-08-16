@@ -22,6 +22,7 @@ const InputStella = ({ constellationName, setConstellationName }) => {
             maxLength={8}
             className="bg-transparent py-2 text-center text-white outline-none "
             onChange={(e) => setConstellationName(e.target.value)}
+            autoComplete="off"
           />
           <p className="text-sm text-white">자리</p>
         </div>

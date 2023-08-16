@@ -146,7 +146,7 @@ const RegisterStar = () => {
             setContent={setContent}
           />
         </div>
-        <div className="mt-20 flex justify-center ">
+        <div className="flex justify-center py-20 ">
           <Button1 value="별 생성" onClick={createStar} disabled={isLoading} />
         </div>
       </div>

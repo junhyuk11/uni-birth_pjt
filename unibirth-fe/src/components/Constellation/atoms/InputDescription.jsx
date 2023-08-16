@@ -35,6 +35,7 @@ const InpuitDescription = ({ constellationDescp, setConstellationDescp }) => {
               e.target.style.height = "inherit";
               e.target.style.height = `${e.target.scrollHeight}px`;
             }}
+            autoComplete="off"
           />
           <p className="inline-block text-sm text-white">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

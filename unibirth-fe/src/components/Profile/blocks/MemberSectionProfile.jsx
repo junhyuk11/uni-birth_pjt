@@ -143,11 +143,9 @@ const MemberSectionProfile = ({ locationNickname }) => {
                   </p>
                 </div>
               </div>
-              <div className="flex justify-end text-center text-white">
-                <div>관심행성: </div>
-                <div className="w-20">
-                  {PLANET_LIST[memberData.resultData.planetId].name}
-                </div>
+              <div className="mt-2 flex justify-end pt-2 text-center text-white">
+                <div className="w-32">관심행성: </div>
+                <div>{PLANET_LIST[memberData.resultData.planetId].name}</div>
               </div>
             </div>
             <div className="text-right text-lg font-bold text-white">

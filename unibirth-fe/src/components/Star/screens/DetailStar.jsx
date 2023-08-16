@@ -245,11 +245,11 @@ const DetailStar = () => {
           }
         }}
       />
-      <header className="sticky top-0 z-10">
+      <header className="fixed top-0 z-10  w-full bg-black bg-opacity-90">
         <Header1 buttons={buttonsHeader} />
       </header>
       <div className="px-4">
-        <div className="flex flex-row items-center py-2">
+        <div className="mt-10 flex flex-row items-center py-2 pt-10">
           <div
             className="mt-0 flex flex-col"
             style={{ maxWidth: "100%", wordWrap: "break-word" }}

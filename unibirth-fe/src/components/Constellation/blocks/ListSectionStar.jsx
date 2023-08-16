@@ -306,7 +306,7 @@ const ListSectionStar = () => {
                   }}
                 >
                   <Star2 />
-                  <p className="mb-0 ml-2">: {brightness}</p>
+                  <p className="mb-0 ml-2 text-purple-500">: {brightness}</p>
                 </div>
               </div>
               <div className="flex flex-col">
