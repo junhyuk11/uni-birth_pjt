@@ -21,9 +21,12 @@ const DetailConstellation = () => {
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [constellationContent, setConstellationConstent] = useState([]);
+  // const [isActive, setIsActive] = useState(false);
   useEffect(() => {
     getConstellationContent(constellationId);
   }, [constellationId]);
+
+  const [isActive, setIsActive] = useState(false);
 
   const getConstellationContent = async (constellationId) => {
     try {
@@ -31,6 +34,7 @@ const DetailConstellation = () => {
         constellationId,
       );
       if (response.status === 200) {
+        console.log(response);
         setConstellationConstent(response.resultData);
       } else {
         setIsAlertVisible(true);
@@ -78,6 +82,7 @@ const DetailConstellation = () => {
       onClick: mypageClick,
     });
   }
+
   return (
     <div>
       <div className="absolute z-50 max-w-screen-sm">
@@ -100,6 +105,20 @@ const DetailConstellation = () => {
           </p>
           <div className="text-md">&nbsp;자리</div>
         </div>
+      </div>
+      <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-white">
+        <button
+          className="relative mx-8 my-3 mt-32 w-28 rounded-full border font-Pretendard"
+          onClick={() => setIsActive(!isActive)}
+        >
+          자세히 보기
+        </button>
+        {isActive && (
+          <div className="absolute flex w-44 flex-col justify-center">
+            <div className="text-bold flex justify-center">설명</div>
+            <div>{constellationContent?.introduction}</div>
+          </div>
+        )}
       </div>
 
       <ListSectionStar className="relative left-0 top-0 z-0 h-full w-full" />

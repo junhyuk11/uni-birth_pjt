@@ -27,6 +27,7 @@ const RegistConstellation = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const handleSubmit = () => {
     if (planetId && constellationName && constellationDescp) {
+      console.log(constellationDescp);
       navigateToDrawingConstellation({
         planetId,
         constellationName,

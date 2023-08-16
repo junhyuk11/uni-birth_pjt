@@ -199,6 +199,7 @@ const GridCustomConstellation = ({
             boardSize: boardSize[0],
             color: constellationColor,
           };
+          console.log("그리드 설명:", constellation);
           const response =
             await useConstellationApi.constellationsPostConstellation(
               constellation,
