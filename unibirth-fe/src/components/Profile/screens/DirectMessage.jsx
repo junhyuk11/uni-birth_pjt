@@ -86,39 +86,41 @@ const DirectMessage = () => {
 
   return (
     <div className="mx-auto h-full min-h-screen max-w-screen-sm bg-slate-100 bg-opacity-0">
-      <header className="fixed top-0 z-10">
+      <header className="fixed top-0 z-10 w-full bg-black bg-opacity-90">
         <Header1 buttons={buttonsHeader} />
       </header>
       <div className="px-4">
-        <div className="chat-container">
-          <div
-            className="messages flex flex-col"
-            style={{ paddingBottom: "100px" }}
-          >
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`
+        <div className="pt-10">
+          <div className="chat-container mt-10">
+            <div
+              className="messages flex flex-col"
+              style={{ paddingBottom: "100px" }}
+            >
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={`
               mt-2 flex justify-between rounded-md bg-gray-800 p-2 
               ${message.sender === nickname ? "ml-auto" : ""} 
               ${message.sender === locationNickname ? "mr-auto" : ""} 
             `}
-                style={{ maxWidth: "50%", wordWrap: "break-word" }}
-              >
-                <div
-                  className="flex-grow"
-                  style={{ maxWidth: "90%", wordWrap: "break-word" }}
+                  style={{ maxWidth: "50%", wordWrap: "break-word" }}
                 >
-                  <p className="text-white">{message.text}</p>
+                  <div
+                    className="flex-grow"
+                    style={{ maxWidth: "90%", wordWrap: "break-word" }}
+                  >
+                    <p className="text-white">{message.text}</p>
+                  </div>
+                  <div className="flex flex-col items-end justify-end">
+                    <span className="ml-2 text-xs text-gray-500">
+                      {formatDate(message.timestamp)}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex flex-col items-end justify-end">
-                  <span className="ml-2 text-xs text-gray-500">
-                    {formatDate(message.timestamp)}
-                  </span>
-                </div>
-              </div>
-            ))}
-            <div ref={messagesEndRef} />
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
           </div>
         </div>
       </div>
