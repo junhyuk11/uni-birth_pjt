@@ -30,6 +30,7 @@ const database = getDatabase(app);
 function sendMessage(message, sender, target) {
   const chatRoomId = [sender, target].sort().join("_");
   const chatRef = ref(database, `chats/${chatRoomId}`);
+
   const newMessageRef = push(chatRef);
 
   const messageData = {

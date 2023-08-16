@@ -4,6 +4,7 @@ import { useNavigation } from "../../hooks/useNavigation";
 import Button1 from "../atoms/Button1";
 import SearchHeader from "../blocks/SearchHeader";
 import QurationStar from "../blocks/QurationStar";
+import Footer from "../blocks/Footer";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { backgroundflagState, nicknameState } from "../../recoil/atoms";
 import LeftArrow from "../../assets/icons/js/leftArrow";
@@ -19,13 +20,26 @@ const SearchQuration = () => {
   const nickname = useRecoilValue(nicknameState);
   const [alertMessage, setAlertMessage] = useState("");
 
-  const { navigateToBack } = useNavigation();
+  const { navigateToBack, navigateToMainPlanet, navigateToMemberProfile } =
+    useNavigation();
   const [category, setCategory] = useState("전체");
   const [query, setQuery] = useState("");
   const [currentState, setCurrentState] = useState("팔로우");
   const [followingData, setFollowingData] = useState([]);
   const [interestData, setInterestData] = useState([]);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
+
+  const buttonsFooter = [
+    {
+      onClick: () => {},
+    },
+    {
+      onClick: navigateToMainPlanet,
+    },
+    {
+      onClick: navigateToMemberProfile,
+    },
+  ];
 
   const getQurationStar = async () => {
     try {
@@ -102,6 +116,9 @@ const SearchQuration = () => {
           <div className="mt-30 flex flex-col items-center justify-center"></div>
           {currentState === "팔로우" && <QurationStar data={followingData} />}
           {currentState === "관심행성" && <QurationStar data={interestData} />}
+        </div>
+        <div className="fixed bottom-3 left-1/2 z-10 -translate-x-1/2">
+          <Footer buttons={buttonsFooter} />
         </div>
       </div>
     </div>

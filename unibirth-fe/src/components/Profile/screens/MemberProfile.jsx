@@ -24,7 +24,7 @@ const MemberProfile = () => {
   const backgroundflag = useSetRecoilState(backgroundflagState);
   backgroundflag(true);
   const location = useLocation();
-  const locationNickname = location.state;
+  let locationNickname = location.state;
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const nickname = useRecoilValue(nicknameState);
@@ -36,6 +36,7 @@ const MemberProfile = () => {
     navigateToModifyMember,
     navigateToSearchQuration,
     navigateToDirectMessage,
+    navigateToMemberProfile,
   } = useNavigation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -57,6 +58,11 @@ const MemberProfile = () => {
   const handleSignout = async () => {
     setIsModalOpen(false);
     setShowConfirm(true);
+  };
+
+  const handleMyProfile = () => {
+    locationNickname = nickname;
+    navigateToMemberProfile();
   };
 
   const confirmSignout = async () => {
@@ -117,9 +123,10 @@ const MemberProfile = () => {
     {
       onClick: navigateToMainPlanet,
     },
+    {
+      onClick: handleMyProfile,
+    },
   ];
-
-  buttonsFooter.push({});
 
   const [isActive, setIsActive] = useState(false);
 
