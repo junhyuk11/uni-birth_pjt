@@ -2,8 +2,8 @@ import React from "react";
 
 const Question = () => (
   <svg
-    width="48"
-    height="48"
+    width="46"
+    height="46"
     viewBox="0 0 165 165"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

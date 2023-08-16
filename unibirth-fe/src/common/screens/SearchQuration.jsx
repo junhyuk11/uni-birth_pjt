@@ -109,7 +109,7 @@ const SearchQuration = () => {
             }
           }}
         />
-        <div className="flex flex-1 flex-col p-4">
+        <div className="mb-10 flex flex-1 flex-col p-4">
           <div className="my-4">
             <Header5 buttons={buttonsHeader2} />
           </div>

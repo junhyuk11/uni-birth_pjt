@@ -110,7 +110,7 @@ const ListSectionPlanet = ({
         <BiSolidRightArrow />
       </button>
       <Button1
-        className="absolute bottom-36 right-4 z-10 mx-auto my-auto flex inline-flex flex-col items-center justify-center rounded-full border p-2 text-4xl text-white opacity-100"
+        className="absolute bottom-24 right-4 z-10 mx-auto my-auto flex inline-flex flex-col items-center justify-center rounded-full border p-2 text-4xl text-white opacity-100"
         onClick={handleZoomClick}
         icon={<PiCubeFocus size={30} />}
       />
