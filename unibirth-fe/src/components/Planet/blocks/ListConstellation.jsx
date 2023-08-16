@@ -6,6 +6,7 @@ import { BiSolidRightArrow, BiSolidLeftArrow } from "react-icons/bi";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import GradientBackground from "../../../common/atoms/GradientBackground";
 // import MeshHtml from "../atoms/MeshHtml";
+import { PiCubeFocus } from "react-icons/pi";
 import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 import {
   backgroundflagState,
@@ -17,8 +18,9 @@ import { gsap } from "gsap";
 import HtmlConstellation from "../atoms/HtmlConstellation";
 import { useNavigation } from "../../../hooks/useNavigation";
 import DrawingIcon from "../../../assets/icons/js/DrawingIcon";
-import Zoomout from "../../../assets/icons/js/zoomout";
-import Zoomin from "../../../assets/icons/js/zoomin";
+import Button1 from "../../../common/atoms/Button1";
+// import Zoomout from "../../../assets/icons/js/zoomout";
+// import Zoomin from "../../../assets/icons/js/zoomin";
 
 // R3F 훅 카메라 컨트롤러 컴포넌트
 function CameraController({
@@ -163,18 +165,16 @@ const Scene = ({ constellationList }) => {
         <BiSolidRightArrow />
       </button>
       <button
-        className="absolute bottom-36 right-4 z-10 flex flex-col text-lg text-white opacity-100"
+        className="absolute bottom-52 right-4 z-10 flex flex-col text-lg text-white opacity-100"
         onClick={navigateToRegisterConstellation}
       >
         <DrawingIcon />
       </button>
-      <button
-        className="absolute bottom-24 right-4
-        z-10 flex -translate-x-1/2 flex-col text-6xl text-white"
+      <Button1
+        className="absolute bottom-36 right-4 z-10 flex flex-col text-4xl text-white opacity-100"
         onClick={handleZoomClick}
-      >
-        {zoomed ? <Zoomin /> : <Zoomout />}
-      </button>
+        icon={<PiCubeFocus size={30} />}
+      />
 
       <HtmlConstellation
         constellationId={

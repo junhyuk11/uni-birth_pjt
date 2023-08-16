@@ -15,7 +15,7 @@ const InpuitDescription = ({ constellationDescp, setConstellationDescp }) => {
       <div className="w-full">
         <div className="flex flex-row items-center justify-center">
           <p className="inline-block text-sm text-white">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </p>
           <textarea
             style={{
