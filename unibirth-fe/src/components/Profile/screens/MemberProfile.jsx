@@ -36,7 +36,6 @@ const MemberProfile = () => {
     navigateToModifyMember,
     navigateToSearchQuration,
     navigateToDirectMessage,
-    navigateToMemberProfile,
   } = useNavigation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -49,8 +48,8 @@ const MemberProfile = () => {
       navigateToDirectMessage(locationNickname);
     }
   };
+
   useEffect(() => {
-    // ESC 키를 누르면 모달 닫기
     const handleEsc = (event) => {
       if (event.keyCode === 27) {
         setIsModalOpen(false);
@@ -130,10 +129,9 @@ const MemberProfile = () => {
     {
       onClick: navigateToMainPlanet,
     },
-    {
-      onClick: () => navigateToMemberProfile(nickname),
-    },
   ];
+  buttonsFooter.push({});
+
   const handleOutsideClick = (event) => {
     if (event.target.id === "modal-overlay") {
       setIsModalOpen(false);
