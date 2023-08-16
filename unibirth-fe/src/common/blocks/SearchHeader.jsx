@@ -29,7 +29,7 @@ const SearchHeader = ({ buttons, category, setCategory, query, setQuery }) => {
             return (
               <ButtonComponent
                 key={index}
-                className="w-10 font-Pretendard hover:bg-yellow-500"
+                className="w-10 font-Pretendard"
                 value={button.value}
                 onClick={button.onClick}
                 icon={button.icon}

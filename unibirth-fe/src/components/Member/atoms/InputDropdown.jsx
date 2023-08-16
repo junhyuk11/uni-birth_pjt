@@ -51,7 +51,7 @@ const CustomDropdown = ({ planetId, setPlanetId }) => {
               {PLANET_LIST.map((planet) => (
                 <div
                   className="flex w-32 cursor-pointer
-                      justify-center p-2 hover:bg-gray-200 hover:text-black"
+                      justify-center p-2"
                   key={planet.planetId}
                   onClick={(e) => {
                     handleSelect(planet.planetId - 1);

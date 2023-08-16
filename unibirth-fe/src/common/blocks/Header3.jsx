@@ -8,7 +8,7 @@ const Header3 = ({ buttons }) => {
       <div className="flex items-center">
         {ButtonComponent && (
           <ButtonComponent
-            className="w-10 font-Pretendard hover:bg-yellow-500"
+            className="w-10 font-Pretendard"
             onClick={buttons[0].onClick}
             icon={buttons[0].icon}
             value={buttons[0].value}
@@ -20,7 +20,7 @@ const Header3 = ({ buttons }) => {
           const ButtonComponent = button.component;
           return (
             <ButtonComponent
-              className="w-10 font-Pretendard hover:bg-yellow-500"
+              className="w-10 font-Pretendard"
               key={index}
               onClick={button.onClick}
               icon={button.icon}

@@ -14,9 +14,9 @@ const InputEmail2 = ({ value, onChange }) => {
       </div>
       <div className="mt-2 flex w-full">
         <input
-          className="border-b-2 border-gray-400 bg-transparent py-2 text-yellow-200 
+          className="border-b-2 border-gray-400 bg-transparent py-2 text-white 
           placeholder-gray-400 outline-none
-          focus:border-yellow-200"
+          focus:border-purple-400"
           type="email"
           id="email"
           name="email"

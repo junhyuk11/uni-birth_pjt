@@ -12,9 +12,9 @@ const InputIntroduction = ({ value, onChange }) => {
         </label>
         <div className="mt-2 w-full">
           <input
-            className="w-full flex-1 border-b-2 border-gray-400 bg-transparent py-2 text-yellow-200 
+            className="w-full flex-1 border-b-2 border-gray-400 bg-transparent py-2 text-white 
             placeholder-gray-400 outline-none
-            focus:border-yellow-200"
+            focus:border-purple-400"
             type="text"
             id="introduction"
             name="introduction"

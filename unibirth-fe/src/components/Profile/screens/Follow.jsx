@@ -97,7 +97,7 @@ const Follow = () => {
   };
 
   return (
-    <div className="bg-space-black mx-auto flex h-screen max-w-screen-sm flex-col text-yellow-100">
+    <div className="bg-space-black mx-auto flex h-screen max-w-screen-sm flex-col text-white">
       <Header2 buttons={buttonsHeader} />
       <div className="flex flex-1 flex-col p-4">
         <div className="my-4">

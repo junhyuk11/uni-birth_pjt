@@ -81,7 +81,7 @@ const SearchQuration = () => {
           setQuery={setQuery}
         />
       </header>
-      <div className="bg-space-black mx-auto flex h-screen max-w-screen-sm flex-col text-yellow-100">
+      <div className="bg-space-black mx-auto flex h-screen max-w-screen-sm flex-col text-white">
         <CustomAlert
           message={alertMessage}
           isVisible={isAlertVisible}

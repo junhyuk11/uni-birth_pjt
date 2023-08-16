@@ -12,9 +12,9 @@ const InputPasswordConfirm = ({ onChange }) => {
         </label>
         <div className="mt-2">
           <input
-            className="w-full flex-1 border-b-2 border-gray-400 bg-transparent py-2 text-yellow-200  
+            className="w-full flex-1 border-b-2 border-gray-400 bg-transparent py-2 text-white  
         placeholder-gray-400 outline-none
-        focus:border-yellow-200"
+        focus:border-purple-400"
             type="password"
             id="confirmPassword"
             name="confirmPassword"

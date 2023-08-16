@@ -20,7 +20,7 @@ const InputStella = ({ constellationName, setConstellationName }) => {
             name="constellationName"
             value={constellationName}
             maxLength={8}
-            className="bg-transparent py-2 text-center text-yellow-200 outline-none "
+            className="bg-transparent py-2 text-center text-white outline-none "
             onChange={(e) => setConstellationName(e.target.value)}
           />
           <p className="text-sm text-white">자리</p>

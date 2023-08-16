@@ -6,11 +6,7 @@ import useStarApi from "../../../api/useStarApi";
 import useMemberApi from "../../../api/useMemberApi";
 import { useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  backgroundflagState,
-  nicknameState,
-  memberProfileImageState,
-} from "../../../recoil/atoms";
+import { backgroundflagState, nicknameState } from "../../../recoil/atoms";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import LeftArrow from "../../../assets/icons/js/leftArrow";
 import CustomAlert from "../../../common/atoms/CustomAlert";
@@ -22,7 +18,6 @@ const DetailStar = () => {
   const setBackgroundflag = useSetRecoilState(backgroundflagState);
   const { navigateToBack, navigateToMemberProfile } = useNavigation();
   const { starId } = useParams();
-  const imageUrl = useRecoilValue(memberProfileImageState);
   const [memberInfo, setMemberInfo] = useState([]);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -310,7 +305,7 @@ const DetailStar = () => {
           <div className="flex flex-row">
             <button
               className={
-                "flex  scale-100 transform justify-center text-3xl text-yellow-500 transition-transform focus:outline-none"
+                "flex  scale-100 transform justify-center text-3xl text-purple-400 transition-transform focus:outline-none"
               }
               onClick={() => handleLikeClick(star.starId)}
             >
@@ -326,12 +321,6 @@ const DetailStar = () => {
           <div className="flex w-full flex-col px-4">
             <div className="flex flex-row justify-between border-y py-2">
               <div className="flex flex-row">
-                <img
-                  src={imageUrl}
-                  alt="멤버 이미지"
-                  className="h-8 w-8 rounded-full object-cover"
-                  style={{ alignSelf: "flex-start" }}
-                />
                 <input
                   className="ml-2 w-3/5 bg-transparent text-white"
                   placeholder="댓글을 남겨보세요"
@@ -342,7 +331,7 @@ const DetailStar = () => {
                 ></input>
               </div>
               <button
-                className="w-16 rounded-xl border border-yellow-500 bg-transparent py-1 text-white"
+                className="w-16 rounded-xl border bg-transparent py-1 text-white"
                 onClick={handleCommentClick}
               >
                 등록
