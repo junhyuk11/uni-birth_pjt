@@ -25,6 +25,7 @@ const DetailStar = () => {
   const [constellation, setConstellation] = useState("");
   const [content, setContent] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showStarDeleteConfirm, setShowStarDeleteConfirm] = useState(false);
   const nickname = useRecoilValue(nicknameState);
   const [star, setStar] = useState({
     brightness: "",
@@ -157,6 +158,27 @@ const DetailStar = () => {
     }
   };
 
+  const handleRemoveClick = async (starId) => {
+    if (!isSubmitting) {
+      setIsSubmitting(true);
+      try {
+        const response = await useStarApi.starsDeleteStar(starId);
+        console.log(response);
+        if (response.status === 200) {
+          navigateToBack();
+        } else {
+          setIsAlertVisible(true);
+          setAlertMessage(response.message);
+        }
+      } catch (error) {
+        setIsAlertVisible(true);
+        setAlertMessage("오류 발생");
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
+  };
+
   const handleCommentClick = async () => {
     if (content && !isSubmitting) {
       setIsSubmitting(true);
@@ -251,17 +273,33 @@ const DetailStar = () => {
       <div className="px-4">
         <div className="mt-10 flex flex-row items-center py-2 pt-10">
           <div
-            className="mt-0 flex flex-col"
+            className="mt-0 flex items-center justify-between"
             style={{ maxWidth: "100%", wordWrap: "break-word" }}
           >
-            <div className="w-full overflow-hidden text-2xl font-bold text-white">
-              {star.title}
-            </div>
+            <div className="text-2xl font-bold text-white">{star.title}</div>
+            {memberInfo.nickname === nickname ? (
+              <button
+                className="ml-4 flex items-center justify-end"
+                onClick={() => setShowStarDeleteConfirm(true)}
+              >
+                <Close />
+              </button>
+            ) : (
+              <div className="flex items-center justify-end"></div>
+            )}
+
+            <CustomConfirm
+              isVisible={showStarDeleteConfirm}
+              message="정말로 삭제하시겠습니까?"
+              onClose={() => setShowStarDeleteConfirm(false)} // 취소 버튼을 누를 때
+              onConfirm={() => handleRemoveClick(star.starId)} // 확인 버튼을 누를 때
+            />
           </div>
         </div>
       </div>
+
       <div className="px-4">
-        <div className="flex flex-row justify-between  border-b-2 border-gray-300 py-2">
+        <div className="flex flex-row justify-between border-b-2 border-gray-300 py-2">
           <div className="flex flex-row items-center">
             <img
               src={memberInfo.imageUrl}
@@ -281,6 +319,7 @@ const DetailStar = () => {
               </span>
             </div>
           </div>
+
           <div className="my-auto text-white ">좋아요 {star.brightness}</div>
         </div>
       </div>
