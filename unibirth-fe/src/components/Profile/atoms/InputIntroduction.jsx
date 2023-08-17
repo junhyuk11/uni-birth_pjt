@@ -21,7 +21,7 @@ const InputIntroduction = ({ value, onChange }) => {
             onChange={onChange}
             autoComplete="off"
             value={value}
-            maxLength={50}
+            maxLength={14}
           />
         </div>
       </div>

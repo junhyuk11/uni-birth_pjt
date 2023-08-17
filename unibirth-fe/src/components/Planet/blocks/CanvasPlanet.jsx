@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 // import usePlanetApi from "../../../api/usePlanetApi";
 // import Button1 from "../../../common/atoms/Button1";
 import { Canvas, useThree } from "@react-three/fiber";
-import { OrbitControls, Stars } from "@react-three/drei";
+import { OrbitControls, Stars, PerspectiveCamera } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import MeshPlanet from "../atoms/MeshPlanet";
 import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
@@ -25,8 +25,8 @@ function CameraController({ planet, zoomed }) {
     const targetPosition = zoomed
       ? {
           x: planet.x * multiFactor + 50,
-          y: planet.y * multiFactor + 20,
-          z: planet.z * multiFactor,
+          y: planet.y * multiFactor - 50,
+          z: planet.z * multiFactor + 50,
         }
       : {
           x: planet.x * zoomFactor,
@@ -124,6 +124,7 @@ const ListSectionPlanet = ({
           // autoRotate={true}
           // autoRotateSpeed={0.5}
         />
+        <PerspectiveCamera makeDefault near={0.1} far={1000} fov={50} />
         <CameraController planet={PLANET_LIST[currentPlanet]} zoomed={zoomed} />
         <EffectComposer>
           <Bloom luminanceThreshold={0} luminanceSmoothing={0.5} height={200} />
