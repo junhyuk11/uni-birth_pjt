@@ -165,55 +165,44 @@ const MemberRegistrationForm = ({
         </div>
       </div>
       <div className="flex flex-row">
-        <div className="flex">
-          <Inputnickname2
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-          />
-        </div>
-        <div className="flex">
-          <Button1
-            value="확인"
-            className="flex w-16 font-Pretendard"
-            onClick={(event) => {
-              event.preventDefault();
-              if (!isNicknameValid(nickname)) {
-                setIsAlertVisible(true);
-                setAlertMessage("닉네임 형식을 확인해주세요.");
-                return;
-              }
-              if (nickname.length < 2) {
-                setIsAlertVisible(true);
-                setAlertMessage("닉네임은 최소 2자리 이상이어야 합니다.");
-                return;
-              }
-              duplicateCheck("Nickname", nickname);
-            }}
-          />
-        </div>
+        <Inputnickname2
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+        />
+        <Button1
+          value="확인"
+          className="flex w-16 font-Pretendard"
+          onClick={(event) => {
+            event.preventDefault();
+            if (!isNicknameValid(nickname)) {
+              setIsAlertVisible(true);
+              setAlertMessage("닉네임 형식을 확인해주세요.");
+              return;
+            }
+            if (nickname.length < 2) {
+              setIsAlertVisible(true);
+              setAlertMessage("닉네임은 최소 2자리 이상이어야 합니다.");
+              return;
+            }
+            duplicateCheck("Nickname", nickname);
+          }}
+        />
       </div>
       <div className="flex flex-row">
-        <div className="flex">
-          <InputEmail3
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="flex">
-          <Button1
-            value="확인"
-            className="flex w-16 font-Pretendard"
-            onClick={(event) => {
-              event.preventDefault();
-              if (!isEmailValid(email)) {
-                setIsAlertVisible(true);
-                setAlertMessage("이메일 형식을 확인해주세요.");
-                return;
-              }
-              duplicateCheck("Email", email);
-            }}
-          />
-        </div>
+        <InputEmail3 value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Button1
+          value="확인"
+          className="flex w-16 font-Pretendard"
+          onClick={(event) => {
+            event.preventDefault();
+            if (!isEmailValid(email)) {
+              setIsAlertVisible(true);
+              setAlertMessage("이메일 형식을 확인해주세요.");
+              return;
+            }
+            duplicateCheck("Email", email);
+          }}
+        />
       </div>
       <div className="flex flex-row">
         <InputPassword
