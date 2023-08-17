@@ -2,10 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import { OrbitControls, Stars, PerspectiveCamera } from "@react-three/drei";
 import { Canvas, useThree } from "@react-three/fiber";
 import { BiSolidRightArrow, BiSolidLeftArrow } from "react-icons/bi";
-// import MeshConstellation from "../atoms/MeshConstellation";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import GradientBackground from "../../../common/atoms/GradientBackground";
-// import MeshHtml from "../atoms/MeshHtml";
 import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 import {
   backgroundflagState,
@@ -28,6 +26,7 @@ function CameraController({
   ConstellationPosition,
   zoomed,
   setRotateFlag,
+  setIsVisible,
 }) {
   const { camera } = useThree();
   const cameraRef = useRef(camera);
@@ -47,9 +46,9 @@ function CameraController({
       // console.log("제[발!!ㅣ", ConstellationPosition);
       const targetPosition = zoomed
         ? {
-            x: ConstellationPosition.x * multiFactor + 5000,
+            x: ConstellationPosition.x * multiFactor + 4000,
             y: ConstellationPosition.y * multiFactor - 5000,
-            z: ConstellationPosition.z * multiFactor + 5000,
+            z: ConstellationPosition.z * multiFactor + 4000,
           }
         : {
             x: ConstellationPosition.x * zoomFactor,
@@ -77,7 +76,10 @@ function CameraController({
         x: -targetPosition.x,
         y: -targetPosition.y,
         z: -targetPosition.z,
-        onStart: () => setEnableFlag(false),
+        onStart: () => {
+          setEnableFlag(false);
+          // setIsVisible(true);
+        },
         onUpdate: updateCameraPosition,
         ease: "Power1.inOut",
         onComplete: () => {
@@ -199,10 +201,10 @@ const Scene = ({ constellationList }) => {
         <GradientBackground />
         <EffectComposer>
           <Bloom
-            luminanceThreshold={0.1}
-            luminanceSmoothing={0.1}
-            height={1000}
-            intensity={1}
+            luminanceThreshold={0.4}
+            luminanceSmoothing={0}
+            height={200}
+            intensity={0.5}
           />
         </EffectComposer>
         <Stars
@@ -227,10 +229,11 @@ const Scene = ({ constellationList }) => {
           enableDamping={true}
           rotateSpeed={-0.2}
           // minDistance={1} // minimum zoom distance
-          maxDistance={10000} // maximum zoom distance
+          maxDistance={9000} // maximum zoom distance
           dampingFactor={0.5}
           autoRotate={rotateFlag}
           autoRotateSpeed={0.3}
+          enablepen={false}
         />
         <CameraController
           ConstellationPosition={currentconstellationList[currentConstellation]}
@@ -238,6 +241,7 @@ const Scene = ({ constellationList }) => {
           zoomed={zoomed}
           setRotateFlag={setRotateFlag}
           setEnableFlag={setEnableFlag}
+          setIsVisible={setIsVisible}
         />
       </Canvas>
     </>
