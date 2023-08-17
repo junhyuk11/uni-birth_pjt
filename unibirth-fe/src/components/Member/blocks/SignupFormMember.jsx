@@ -144,25 +144,21 @@ const MemberRegistrationForm = ({
         isVisible={isAlertVisible}
         onClose={() => setIsAlertVisible(false)}
       />
-      <div className="flex flex-row items-end justify-center space-x-5">
-        <div className="flex w-1/2">
-          <InputZodiac
-            onChange={(e) => {
-              setBirthdate(e.target.value);
-              debouncedSetImage(e.target.value);
-            }}
-            zodiac={zodiac}
-            setZodiac={setZodiac}
-            image={image}
-            setImage={setImage}
-            content={content}
-            setContent={setContent}
-            jodiacname={jodiacname}
-          />
-        </div>
-        <div className="flex w-1/2">
-          <Inputdropdown planetId={interest} setPlanetId={setInterest} />
-        </div>
+      <div className="flex flex-row">
+        <InputZodiac
+          onChange={(e) => {
+            setBirthdate(e.target.value);
+            debouncedSetImage(e.target.value);
+          }}
+          zodiac={zodiac}
+          setZodiac={setZodiac}
+          image={image}
+          setImage={setImage}
+          content={content}
+          setContent={setContent}
+          jodiacname={jodiacname}
+        />
+        <Inputdropdown planetId={interest} setPlanetId={setInterest} />
       </div>
       <div className="flex flex-row">
         <Inputnickname2
