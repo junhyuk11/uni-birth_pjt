@@ -47,9 +47,9 @@ function CameraController({
       // console.log("제[발!!ㅣ", ConstellationPosition);
       const targetPosition = zoomed
         ? {
-            x: ConstellationPosition.x * multiFactor + 4000,
-            y: ConstellationPosition.y * multiFactor - 9000,
-            z: ConstellationPosition.z * multiFactor + 4000,
+            x: ConstellationPosition.x * multiFactor + 5000,
+            y: ConstellationPosition.y * multiFactor - 5000,
+            z: ConstellationPosition.z * multiFactor + 5000,
           }
         : {
             x: ConstellationPosition.x * zoomFactor,
@@ -127,6 +127,7 @@ const Scene = ({ constellationList }) => {
   const [rotateFlag, setRotateFlag] = useState(false);
 
   const handleRightClick = () => {
+    setIsVisible(true);
     setCurrentConstellation((prevIndex) =>
       prevIndex === 0 ? currentconstellationList.length - 1 : prevIndex - 1,
     );
@@ -137,6 +138,7 @@ const Scene = ({ constellationList }) => {
 
   // Handle left button click
   const handleLeftClick = () => {
+    setIsVisible(true);
     setCurrentConstellation((prevIndex) =>
       prevIndex === currentconstellationList.length - 1 ? 0 : prevIndex + 1,
     );
@@ -149,6 +151,8 @@ const Scene = ({ constellationList }) => {
   const handleZoomClick = () => {
     setZoomed(!zoomed);
   };
+
+  const [isVisible, setIsVisible] = useState(true);
 
   return (
     <>
@@ -181,19 +185,22 @@ const Scene = ({ constellationList }) => {
           currentconstellationList[currentConstellation]?.constellationId
         }
         currentconstellationList={currentconstellationList}
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
       />
       <Canvas>
         <PerspectiveCamera
           makeDefault
           position={[0, -500, 0]}
           near={0.1}
-          far={11000}
+          far={12000}
+          fov={40}
         />
         <GradientBackground />
         <EffectComposer>
           <Bloom
             luminanceThreshold={0.1}
-            luminanceSmoothing={0.5}
+            luminanceSmoothing={0.1}
             height={1000}
             intensity={1}
           />
@@ -201,7 +208,7 @@ const Scene = ({ constellationList }) => {
         <Stars
           radius={2300}
           depth={30}
-          count={3000}
+          count={1500}
           factor={4}
           saturation={1}
           fade
@@ -220,7 +227,7 @@ const Scene = ({ constellationList }) => {
           enableDamping={true}
           rotateSpeed={-0.2}
           // minDistance={1} // minimum zoom distance
-          maxDistance={8000} // maximum zoom distance
+          maxDistance={10000} // maximum zoom distance
           dampingFactor={0.5}
           autoRotate={rotateFlag}
           autoRotateSpeed={0.3}

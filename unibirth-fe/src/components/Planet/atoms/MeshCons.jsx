@@ -17,7 +17,7 @@ const MeshCons = ({
   }, []);
 
   // 별자리 반경
-  const radius = 3000;
+  const radius = 2000;
   // 별 개수 에 따라 segment 변경
   const segments = 11; // 세그먼트 수 변경 가능 갯수에 따라 달라져야 하는 로직 필요
   // count 변수

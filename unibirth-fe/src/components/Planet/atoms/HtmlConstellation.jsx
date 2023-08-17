@@ -4,7 +4,7 @@ import useConstellationApi from "../../../api/useConstellationApi";
 import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 import CustomAlert from "../../../common/atoms/CustomAlert";
 
-const HtmlConstellation = ({ constellationId }) => {
+const HtmlConstellation = ({ constellationId, isVisible, setIsVisible }) => {
   if (constellationId) {
     // naviigate  to detailconstellation
     const { navigateToDetailConstellation, navigateToBack } = useNavigation();
@@ -74,7 +74,6 @@ const HtmlConstellation = ({ constellationId }) => {
       }
     };
 
-    const [isVisible, setIsVisible] = useState(true);
     const toggleVisibility = () => {
       setIsVisible(!isVisible);
     };

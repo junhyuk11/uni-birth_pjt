@@ -217,11 +217,7 @@ const ListSectionStar = () => {
       <Canvas camera={{ position: [0, 0, 90] }}>
         <Background />
         <EffectComposer>
-          <Bloom
-            luminanceThreshold={0}
-            luminanceSmoothing={0.5}
-            height={1000}
-          />
+          <Bloom luminanceThreshold={0} luminanceSmoothing={0.5} height={800} />
         </EffectComposer>
         {starPotisions?.map((star, index) => (
           <group key={index} rotation={rotation}>

@@ -60,6 +60,7 @@ const SearchCommon = () => {
         submitCategory,
         query,
       );
+      console.log(response);
       if (response.status === 200) {
         setConstellationList(response.resultData.constellationList || []);
         setMemberList(response.resultData.memberList || []);
@@ -188,7 +189,8 @@ const SearchCommon = () => {
                     alt={constellation.title}
                     className="glow mr-4 h-20 w-20 rounded-lg object-cover"
                   />
-                  {constellation.title}
+                  <p>{constellation.title}</p>
+                  <div className="px-10">hello</div>
                 </li>
               ))
             ))}
