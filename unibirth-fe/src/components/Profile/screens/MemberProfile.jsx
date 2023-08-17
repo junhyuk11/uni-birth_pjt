@@ -103,11 +103,15 @@ const MemberProfile = () => {
         </span>
       ),
     },
-    {
-      component: Button2,
-      onClick: () => navigateToUserAlarm(locationNickname),
-      icon: <Star />,
-    },
+    ...(nickname === locationNickname
+      ? [
+          {
+            component: Button2,
+            onClick: () => navigateToUserAlarm(locationNickname),
+            icon: <Star />,
+          },
+        ]
+      : []),
     {
       component: Button2,
       className: "font-Pretendard",
