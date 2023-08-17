@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
 import InputPassword from "../../../common/atoms/InputPassword";
-import Inputnickname from "../atoms/Inputnickname";
+import Inputnickname2 from "../atoms/Inputnickname2";
 import InputPasswordConfirm from "../atoms/InputPasswordConfirm";
-import InputEmail2 from "../../../common/atoms/InputEmail2";
+import InputEmail3 from "../../../common/atoms/InputEmail3";
 import Button1 from "../../../common/atoms/Button1";
 import useMemberApi from "../../../api/useMemberApi";
 import InputZodiac from "../atoms/InputZodiac";
@@ -161,7 +161,7 @@ const MemberRegistrationForm = ({
         <Inputdropdown planetId={interest} setPlanetId={setInterest} />
       </div>
       <div className="flex">
-        <Inputnickname
+        <Inputnickname2
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
         />
@@ -185,7 +185,7 @@ const MemberRegistrationForm = ({
         />
       </div>
       <div className="flex">
-        <InputEmail2 value={email} onChange={(e) => setEmail(e.target.value)} />
+        <InputEmail3 value={email} onChange={(e) => setEmail(e.target.value)} />
         <Button1
           value="확인"
           className="w-16 font-Pretendard"
