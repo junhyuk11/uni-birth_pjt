@@ -26,7 +26,7 @@ const InputPassword = ({ onChange }) => {
         </label>
         <div className="mt-2">
           <input
-            className="w-full flex-1 border-b-2 border-gray-400 bg-transparent py-2 text-white 
+            className="w-full flex-1 flex-row border-b-2 border-gray-400 bg-transparent py-2 text-white 
           placeholder-gray-400 outline-none
           focus:border-purple-400"
             type="password"

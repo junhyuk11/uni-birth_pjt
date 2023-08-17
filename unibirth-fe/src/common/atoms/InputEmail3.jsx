@@ -2,8 +2,8 @@ import React from "react";
 
 const InputEmail2 = ({ value, onChange }) => {
   return (
-    <div className="flex w-full flex-col items-center justify-center font-Pretendard">
-      <div className="flex w-full flex-row items-center justify-between space-x-2">
+    <div className="mr-2 flex w-1/2 items-center justify-center font-Pretendard">
+      <div className="w-full">
         <label
           htmlFor="email"
           className="inline-block w-20 
@@ -12,9 +12,9 @@ const InputEmail2 = ({ value, onChange }) => {
           이메일
         </label>
       </div>
-      <div className="mt-2 flex w-full">
+      <div className="mt-2">
         <input
-          className="border-b-2 border-gray-400 bg-transparent py-2 text-white 
+          className="w-full flex-1 flex-row border-b-2 border-gray-400 bg-transparent py-2 text-white 
           placeholder-gray-400 outline-none
           focus:border-purple-400"
           type="email"
