@@ -275,16 +275,6 @@ const DetailStar = () => {
             style={{ maxWidth: "100%", wordWrap: "break-word" }}
           >
             <div className="text-2xl font-bold text-white">{star.title}</div>
-            {memberInfo.nickname === nickname ? (
-              <button
-                className="ml-4 flex items-center justify-end"
-                onClick={() => setShowStarDeleteConfirm(true)}
-              >
-                <Close />
-              </button>
-            ) : (
-              <div className="flex items-center justify-end"></div>
-            )}
 
             <CustomConfirm
               isVisible={showStarDeleteConfirm}
@@ -318,7 +308,19 @@ const DetailStar = () => {
             </div>
           </div>
 
-          <div className="my-auto text-white ">좋아요 {star.brightness}</div>
+          <div className="my-auto flex text-white ">
+            좋아요 {star.brightness} &nbsp;
+            {memberInfo.nickname === nickname ? (
+              <button
+                className="flex items-center justify-end"
+                onClick={() => setShowStarDeleteConfirm(true)}
+              >
+                <Close />
+              </button>
+            ) : (
+              <div className="flex items-center justify-end"></div>
+            )}
+          </div>
         </div>
       </div>
       <div className="mt-4 w-full">
