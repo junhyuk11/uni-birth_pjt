@@ -160,14 +160,14 @@ const MemberRegistrationForm = ({
         />
         <Inputdropdown planetId={interest} setPlanetId={setInterest} />
       </div>
-      <div className="flex">
+      <div className="flex flex-row">
         <Inputnickname2
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
         />
         <Button1
           value="확인"
-          className="w-16 font-Pretendard"
+          className="flex w-16 font-Pretendard"
           onClick={(event) => {
             event.preventDefault();
             if (!isNicknameValid(nickname)) {
@@ -184,11 +184,11 @@ const MemberRegistrationForm = ({
           }}
         />
       </div>
-      <div className="flex">
+      <div className="flex flex-row">
         <InputEmail3 value={email} onChange={(e) => setEmail(e.target.value)} />
         <Button1
           value="확인"
-          className="w-16 font-Pretendard"
+          className="flex w-16 font-Pretendard"
           onClick={(event) => {
             event.preventDefault();
             if (!isEmailValid(email)) {

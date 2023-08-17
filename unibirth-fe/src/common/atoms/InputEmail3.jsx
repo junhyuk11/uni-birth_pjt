@@ -12,7 +12,7 @@ const InputEmail2 = ({ value, onChange }) => {
           이메일
         </label>
       </div>
-      <div className="mt-2 flex w-full">
+      <div className="mt-2 flex w-1/2">
         <input
           className="border-b-2 border-gray-400 bg-transparent py-2 text-white 
           placeholder-gray-400 outline-none
