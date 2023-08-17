@@ -2,7 +2,7 @@ import React from "react";
 
 const InputImage = ({ image, content, jodiacname, onChange }) => {
   return (
-    <div className="mr-2 flex w-1/2 items-center justify-center font-Pretendard">
+    <div className="flex w-1/2 flex-col content-center items-center justify-center space-y-2 font-Pretendard text-white">
       <img
         src={image}
         className="h-32 w-32"
