@@ -23,7 +23,7 @@ const Inputnickname = ({ onChange }) => {
         >
           닉네임
         </label>
-        <div className="mt-2 flex-row">
+        <div className="mt-2 w-1/2 flex-row">
           <input
             className="flex-1 flex-row border-b-2 border-gray-400 bg-transparent py-2 text-white 
         placeholder-gray-400 outline-none
