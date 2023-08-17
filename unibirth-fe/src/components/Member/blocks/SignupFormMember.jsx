@@ -161,28 +161,32 @@ const MemberRegistrationForm = ({
         <Inputdropdown planetId={interest} setPlanetId={setInterest} />
       </div>
       <div className="flex flex-row">
-        <Inputnickname2
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
-        />
-        <Button1
-          value="확인"
-          className="flex w-16 font-Pretendard"
-          onClick={(event) => {
-            event.preventDefault();
-            if (!isNicknameValid(nickname)) {
-              setIsAlertVisible(true);
-              setAlertMessage("닉네임 형식을 확인해주세요.");
-              return;
-            }
-            if (nickname.length < 2) {
-              setIsAlertVisible(true);
-              setAlertMessage("닉네임은 최소 2자리 이상이어야 합니다.");
-              return;
-            }
-            duplicateCheck("Nickname", nickname);
-          }}
-        />
+        <div className="flex">
+          <Inputnickname2
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+          />
+        </div>
+        <div className="flex">
+          <Button1
+            value="확인"
+            className="flex w-16 font-Pretendard"
+            onClick={(event) => {
+              event.preventDefault();
+              if (!isNicknameValid(nickname)) {
+                setIsAlertVisible(true);
+                setAlertMessage("닉네임 형식을 확인해주세요.");
+                return;
+              }
+              if (nickname.length < 2) {
+                setIsAlertVisible(true);
+                setAlertMessage("닉네임은 최소 2자리 이상이어야 합니다.");
+                return;
+              }
+              duplicateCheck("Nickname", nickname);
+            }}
+          />
+        </div>
       </div>
       <div className="flex flex-row">
         <InputEmail3 value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -201,14 +205,18 @@ const MemberRegistrationForm = ({
         />
       </div>
       <div className="flex flex-row">
-        <InputPassword
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <InputPasswordConfirm
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
+        <div className="flex">
+          <InputPassword
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="flex">
+          <InputPasswordConfirm
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </div>
       </div>
     </div>
   );
