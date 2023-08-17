@@ -189,34 +189,37 @@ const MemberRegistrationForm = ({
         </div>
       </div>
       <div className="flex flex-row">
-        <InputEmail3 value={email} onChange={(e) => setEmail(e.target.value)} />
-        <Button1
-          value="확인"
-          className="flex w-16 font-Pretendard"
-          onClick={(event) => {
-            event.preventDefault();
-            if (!isEmailValid(email)) {
-              setIsAlertVisible(true);
-              setAlertMessage("이메일 형식을 확인해주세요.");
-              return;
-            }
-            duplicateCheck("Email", email);
-          }}
-        />
+        <div className="flex">
+          <InputEmail3
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="flex">
+          <Button1
+            value="확인"
+            className="flex w-16 font-Pretendard"
+            onClick={(event) => {
+              event.preventDefault();
+              if (!isEmailValid(email)) {
+                setIsAlertVisible(true);
+                setAlertMessage("이메일 형식을 확인해주세요.");
+                return;
+              }
+              duplicateCheck("Email", email);
+            }}
+          />
+        </div>
       </div>
       <div className="flex flex-row">
-        <div className="flex">
-          <InputPassword
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div className="flex">
-          <InputPasswordConfirm
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </div>
+        <InputPassword
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <InputPasswordConfirm
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
       </div>
     </div>
   );
