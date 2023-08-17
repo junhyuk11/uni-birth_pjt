@@ -15,7 +15,7 @@ const Inputnickname = ({ onChange }) => {
   };
 
   return (
-    <div className="w-1/2 flex-initial items-center justify-center font-Pretendard">
+    <div className="flex w-1/2 flex-initial items-center justify-center font-Pretendard">
       <div className="w-full flex-row">
         <label
           htmlFor="nickname"

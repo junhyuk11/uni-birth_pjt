@@ -3,7 +3,7 @@ import React from "react";
 const InputEmail2 = ({ value, onChange }) => {
   return (
     <div className="flex w-1/2 flex-col items-center justify-center font-Pretendard">
-      <div className="flex w-full flex-row items-center justify-between space-x-2">
+      <div className="flex w-full flex-col items-center justify-between space-x-2">
         <label
           htmlFor="email"
           className="inline-block w-20 
