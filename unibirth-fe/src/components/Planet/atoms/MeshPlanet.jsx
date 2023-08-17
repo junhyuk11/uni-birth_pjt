@@ -55,7 +55,6 @@ const MeshPlanet = ({ navigateToDetailPlanet }) => {
             ref={meshRefs.current[index]}
             position={[planet.x, planet.y, planet.z]}
             onClick={() => {
-              console.log(planet.planetId);
               navigateToDetailPlanet(planet.planetId);
               setCurrentplanet(planet.planetId - 1);
             }}

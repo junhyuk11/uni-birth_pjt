@@ -60,11 +60,7 @@ const RegisterStar = () => {
       const uploadTask = uploadBytesResumable(storageRef, imageUrl);
       uploadTask.on(
         "state_changed",
-        (snapshot) => {
-          // const progress =
-          //   (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          // console.log(`Upload is ${progress}% done.`);
-        },
+        (snapshot) => {},
         () => {
           setIsAlertVisible(true);
           setAlertMessage("이미지 업로드에 실패하였습니다.");

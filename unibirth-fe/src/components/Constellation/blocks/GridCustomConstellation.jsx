@@ -128,7 +128,6 @@ const GridCustomConstellation = ({
     });
     const uniqueLines = [];
     const duplicateLines = [];
-    // console.log(lines);
     for (const line of lines) {
       const reversedLine = [line[2], line[3], line[0], line[1]];
       const isDuplicate = duplicateLines.some(
@@ -177,11 +176,7 @@ const GridCustomConstellation = ({
     });
     uploadTask.on(
       "state_changed",
-      (snapshot) => {
-        // const progress =
-        //   (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        // console.log(`Upload is ${progress}% done`);
-      },
+      (snapshot) => {},
       () => {
         setIsAlertVisible(true);
         setAlertMessage("업로드에 실패했습니다.");
@@ -199,15 +194,11 @@ const GridCustomConstellation = ({
             boardSize: boardSize[0],
             color: constellationColor,
           };
-          console.log("그리드 설명:", constellation);
           const response =
             await useConstellationApi.constellationsPostConstellation(
               constellation,
             );
-          // console.log(response);
-          // console.log(constellation);
           if (response.status === 200) {
-            // console.log("받은 리스폰스:", response);
             setConstellationLimit((prevLimit) => prevLimit - 1);
             navigateToDetailConstellation(response.resultData.constellationId);
           } else if (response.status === 400) {

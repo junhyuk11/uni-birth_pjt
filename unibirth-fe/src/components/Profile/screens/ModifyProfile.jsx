@@ -45,10 +45,7 @@ const ModifyProfile = () => {
         setAlertMessage("회원정보를 가져오는데 오류가 발생했습니다.");
         return;
       }
-      // console.log("asjdbasjd:", response);
       setPlanetId(response.resultData.planetId + 1);
-      // console.log(planetId);
-      // console.log(PLANET_LIST[planetId - 1].name);
       setImageUrl(response.resultData.imageUrl);
       setThumbUrl(response.resultData.imageUrl);
       setIntro(response.resultData.introduction);
@@ -84,15 +81,10 @@ const ModifyProfile = () => {
       await new Promise((resolve, reject) => {
         uploadTask.on(
           "state_changed",
-          (snapshot) => {
-            // const progress =
-            //   (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            // console.log(`Upload is ${progress}% done.`);
-          },
+          (snapshot) => {},
           (error) => {
             setIsAlertVisible(true);
             setAlertMessage("회원정보 수정에 실패하였습니다.");
-            // console.log(error);
             reject(error); // 에러가 발생하면 Promise를 reject합니다.
           },
           async () => {

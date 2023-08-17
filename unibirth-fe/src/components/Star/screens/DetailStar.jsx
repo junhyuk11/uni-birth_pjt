@@ -64,7 +64,6 @@ const DetailStar = () => {
   const getStar = async (starId) => {
     try {
       const response = await useStarApi.starsGetStar(starId);
-      // console.log(response);
       if (response.status === 200) {
         setStar(response.resultData);
       } else if (response.status === 404) {
@@ -163,7 +162,6 @@ const DetailStar = () => {
       setIsSubmitting(true);
       try {
         const response = await useStarApi.starsDeleteStar(starId);
-        console.log(response);
         if (response.status === 200) {
           navigateToBack();
         } else {

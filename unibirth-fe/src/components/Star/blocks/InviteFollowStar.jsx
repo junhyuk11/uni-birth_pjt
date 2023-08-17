@@ -48,7 +48,6 @@ const InviteFollowStar = () => {
       ).map((nickname) => {
         return combinedResults.find((item) => item.nickname === nickname);
       });
-      // console.log(uniqueResults);
       setFollowList(uniqueResults);
     } catch (error) {
       setIsAlertVisible(true);
@@ -72,9 +71,7 @@ const InviteFollowStar = () => {
 
       setInvitedUsers({ ...invitedUsers, [targetNickname]: true });
       await updateAlarm(targetNickname, Date.now());
-    } catch (error) {
-      // console.error("Error fetching constellation detail:", error);
-    }
+    } catch (error) {}
   };
 
   return (
