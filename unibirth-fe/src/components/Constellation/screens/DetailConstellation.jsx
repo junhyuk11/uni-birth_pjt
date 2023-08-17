@@ -21,12 +21,10 @@ const DetailConstellation = () => {
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [constellationContent, setConstellationConstent] = useState([]);
-  // const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   useEffect(() => {
     getConstellationContent(constellationId);
   }, [constellationId]);
-
-  const [isActive, setIsActive] = useState(false);
 
   const getConstellationContent = async (constellationId) => {
     try {

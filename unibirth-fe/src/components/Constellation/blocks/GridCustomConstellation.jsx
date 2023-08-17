@@ -6,7 +6,7 @@ import { storage } from "../../../api/useFirebaseApi";
 import useConstellationApi from "../../../api/useConstellationApi";
 import { useRecoilState } from "recoil";
 import { boardSizeState, constellationLimitState } from "../../../recoil/atoms";
-// import { useNavigation } from "../../../hooks/useNavigation";
+import { useNavigation } from "../../../hooks/useNavigation";
 import PickConstellationColor from "../atoms/PickConstellationColor";
 import CustomAlert from "../../../common/atoms/CustomAlert";
 import { PLANET_LIST } from "../../../constants/constants";
@@ -37,7 +37,7 @@ const GridCustomConstellation = ({
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [isLoading, setLoading] = useState(false);
-  // const { navigateToDetailConstellation } = useNavigation();
+  const { navigateToDetailConstellation } = useNavigation();
   useEffect(() => {
     if (shouldDeduplicate) {
       deDuplication(lastPoints);
@@ -209,7 +209,7 @@ const GridCustomConstellation = ({
           if (response.status === 200) {
             // console.log("받은 리스폰스:", response);
             setConstellationLimit((prevLimit) => prevLimit - 1);
-            // navigateToDetailConstellation(response.resultData.constellationId);
+            navigateToDetailConstellation(response.resultData.constellationId);
           } else if (response.status === 400) {
             setIsAlertVisible(true);
             setAlertMessage(response.message);

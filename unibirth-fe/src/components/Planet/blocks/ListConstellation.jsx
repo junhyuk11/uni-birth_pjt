@@ -78,7 +78,7 @@ function CameraController({
         z: -targetPosition.z,
         onStart: () => {
           setEnableFlag(false);
-          // setIsVisible(true);
+          setIsVisible(true);
         },
         onUpdate: updateCameraPosition,
         ease: "Power1.inOut",
