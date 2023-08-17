@@ -44,13 +44,15 @@ const SearchQuration = () => {
   const getQurationStar = async () => {
     try {
       const response = await useSearchApi.searchGetMemberCuration(nickname);
-      console.log(response);
       if (response.status === 200) {
         setFollowingData(response.resultData[0]);
         setInterestData(response.resultData[1]);
       } else if (response.status === 403) {
         setIsAlertVisible(true);
         setAlertMessage("로그인이 필요한 서비스입니다.");
+      } else if (response.status === 404) {
+        setIsAlertVisible(true);
+        setAlertMessage(response.message);
       }
     } catch (e) {
       setIsAlertVisible(true);
@@ -104,7 +106,8 @@ const SearchQuration = () => {
             setIsAlertVisible(false);
             if (
               alertMessage === "로그인이 필요한 서비스입니다." ||
-              alertMessage === "오류가 발생했습니다."
+              alertMessage === "오류가 발생했습니다." ||
+              alertMessage === "아직 별이 없습니다."
             ) {
               navigateToBack();
             }

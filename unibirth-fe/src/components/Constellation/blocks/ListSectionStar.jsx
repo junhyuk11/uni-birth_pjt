@@ -191,14 +191,17 @@ const ListSectionStar = () => {
       )}
 
       {showModal && (
-        <div className="fixed bottom-56 right-4 z-50 w-64 rounded-lg bg-white shadow-lg">
-          <button
-            onClick={toggleModal}
-            className="float-right rounded p-2 text-xl"
-          >
-            X
-          </button>
-          <InviteFollowStar />
+        <div className="fixed bottom-56 right-4 z-50 w-64 rounded-lg shadow-lg">
+          <div className="absolute inset-0 rounded-lg bg-white opacity-70"></div>
+          <div className="relative rounded-lg bg-white">
+            <button
+              onClick={toggleModal}
+              className="float-right rounded p-2 text-xl"
+            >
+              X
+            </button>
+            <InviteFollowStar />
+          </div>
         </div>
       )}
 

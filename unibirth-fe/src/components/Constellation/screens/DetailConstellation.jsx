@@ -32,7 +32,6 @@ const DetailConstellation = () => {
         constellationId,
       );
       if (response.status === 200) {
-        console.log(response);
         setConstellationConstent(response.resultData);
       } else {
         setIsAlertVisible(true);

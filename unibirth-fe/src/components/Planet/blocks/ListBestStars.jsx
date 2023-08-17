@@ -62,7 +62,6 @@ const ListBestStars = ({ currentPlanet }) => {
   const [alertMessage, setAlertMessage] = useState("");
   useEffect(() => {
     getBestList(currentPlanet);
-    // console.log("BestList:", BestList);
   }, [currentPlanet]);
   useEffect(() => {}, [Lists]);
 

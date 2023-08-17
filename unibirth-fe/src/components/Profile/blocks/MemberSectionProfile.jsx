@@ -67,7 +67,6 @@ const MemberSectionProfile = ({ locationNickname }) => {
       const response = await useMemberApi.membersGetDetail(locationNickname);
       setAlertStatus(response.status);
       if (response.status === 200) {
-        // console.log("repsonse:", response);
         setMemberData(response);
         setIsFollowing(response?.resultData?.follow);
         setMemberProfileImage(response?.resultData?.imageUrl);

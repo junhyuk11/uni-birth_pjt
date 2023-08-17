@@ -17,7 +17,7 @@ const Carousel = ({ setIsActive }) => {
     Infinity: true,
   };
 
-  const HelpList = [help1, help5, help2, help3, help4];
+  const HelpList = [help5, help2, help1, help3, help4];
 
   return (
     <div>
