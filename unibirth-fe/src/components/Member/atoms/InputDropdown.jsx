@@ -28,7 +28,7 @@ const CustomDropdown = ({ planetId, setPlanetId }) => {
 
   return (
     <div
-      className="flex w-1/2 flex-col items-center justify-center rounded-lg border-double bg-transparent text-white"
+      className="ml-2 flex w-1/2 items-center justify-center font-Pretendard"
       ref={toggleContainer}
     >
       <p className=" mb-1 font-Pretendard text-gray-100">관심 행성</p>
