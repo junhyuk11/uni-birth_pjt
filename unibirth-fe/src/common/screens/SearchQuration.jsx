@@ -44,6 +44,7 @@ const SearchQuration = () => {
   const getQurationStar = async () => {
     try {
       const response = await useSearchApi.searchGetMemberCuration(nickname);
+      console.log(response);
       if (response.status === 200) {
         setFollowingData(response.resultData[0]);
         setInterestData(response.resultData[1]);

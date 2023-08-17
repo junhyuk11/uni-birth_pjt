@@ -60,6 +60,7 @@ const SearchCommon = () => {
         submitCategory,
         query,
       );
+      console.log(response);
       if (response.status === 200) {
         setConstellationList(response.resultData.constellationList || []);
         setMemberList(response.resultData.memberList || []);
@@ -188,10 +189,31 @@ const SearchCommon = () => {
                     alt={constellation.title}
                     className="glow mr-4 h-20 w-20 rounded-lg object-cover"
                   />
-                  {constellation.title}
+                  <div className="flex flex-col justify-between space-y-2">
+                    <div className="text-lg font-semibold">
+                      {constellation.title}
+                    </div>
+                    <div className="max-h-10 overflow-hidden">
+                      <p
+                        className="text-md"
+                        style={{
+                          maxHeight: "4em",
+                          maxWidth: "14em",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          display: "-webkit-box",
+                          WebkitLineClamp: 1,
+                          WebkitBoxOrient: "vertical",
+                        }}
+                      >
+                        {constellation.description}
+                      </p>
+                    </div>
+                  </div>
                 </li>
               ))
             ))}
+
           {activeTab === "member" &&
             (memberList.length === 0 ? (
               <div className="text-center">
