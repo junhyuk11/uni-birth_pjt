@@ -144,7 +144,7 @@ const MemberRegistrationForm = ({
         isVisible={isAlertVisible}
         onClose={() => setIsAlertVisible(false)}
       />
-      <div className="flex flex-col">
+      <div className="flex flex-col justify-center">
         <InputZodiac
           onChange={(e) => {
             setBirthdate(e.target.value);
