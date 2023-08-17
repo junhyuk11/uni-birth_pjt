@@ -33,7 +33,7 @@ const Star = () => {
   const fillColor = lastUpdate > checkUpdate ? "yellow" : "white";
 
   return (
-    <div>
+    <div className="relative">
       <svg
         width="30"
         height="28"
@@ -48,11 +48,11 @@ const Star = () => {
       </svg>
       {fillColor === "yellow" && (
         <div
-          className="rounded-full bg-red-600"
+          className="absolute rounded-full bg-red-600"
           style={{
-            position: "fixed",
-            right: "120px",
-            top: "24px",
+            position: "absolute",
+            right: "0px",
+            top: "0px",
             width: "8px",
             height: "8px",
           }}

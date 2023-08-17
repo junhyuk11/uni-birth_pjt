@@ -30,10 +30,10 @@ const Mail = () => {
   const fillColor = lastUpdate > checkUpdate ? "yellow" : "white";
 
   return (
-    <div>
+    <div className="relative">
       <svg
         width="24"
-        height="18"
+        height="24"
         viewBox="0 0 24 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -47,9 +47,9 @@ const Mail = () => {
         <div
           className="rounded-full bg-red-600"
           style={{
-            position: "fixed",
-            right: "65px",
-            top: "24px",
+            position: "absolute",
+            right: "-10px",
+            top: "-1px",
             width: "8px",
             height: "8px",
           }}
