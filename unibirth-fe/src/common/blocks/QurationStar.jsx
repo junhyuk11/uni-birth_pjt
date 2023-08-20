@@ -38,8 +38,19 @@ const QurationStar = ({ data }) => {
 
       {/* 닉네임, 내용 및 버튼 */}
       <div className="mb-4 flex w-full justify-between px-4">
-        <div className="text-gray-300">{data.content}</div>
-        <div className="mb-2 ml-4 font-bold">{data.nickname}</div>
+        <div
+          className="flex-grow self-start text-xl text-white"
+          style={{ wordBreak: "break-all" }}
+        >
+          {data?.content?.split("\n").map((line, index) => (
+            <React.Fragment key={index}>
+              {line}
+              <br />
+            </React.Fragment>
+          ))}
+        </div>
+
+        <div className="mb-2 ml-4 w-24 font-bold">{data.nickname}</div>
       </div>
     </div>
   );
